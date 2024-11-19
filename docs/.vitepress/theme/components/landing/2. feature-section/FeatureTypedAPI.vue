@@ -26,7 +26,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
     @mouseover.stop.prevent="startAnimation"
   >
     <div class="feature__visualization" :class="{ active: isCardActive }">
-      <div class="ide">
+      <div dir="ltr" class="ide">
         <span class="code code__inactive">
           <span class="code--red">import</span> { createServer }
           <span class="code--red">from</span>
@@ -49,7 +49,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
           >
         </span>
       </div>
-      <div class="tooltip">
+      <div dir="ltr" class="tooltip">
         <span class="code">
           (method) ViteDevServer.<span class="code--blue">listen</span
           >(port<span class="code--blue">?:</span> number
@@ -68,8 +68,8 @@ const { isCardActive, startAnimation } = useCardAnimation(
       </div>
     </div>
     <div class="feature__meta meta--center">
-      <div class="meta__title">Fully typed API</div>
-      <div class="meta__description">Designed to be built on top of.</div>
+      <div class="meta__title">API با پشتیبانی کامل از تایپ</div>
+      <div class="meta__description">طراحی شده برای ساخت بر روی آن.</div>
     </div>
   </div>
 </template>

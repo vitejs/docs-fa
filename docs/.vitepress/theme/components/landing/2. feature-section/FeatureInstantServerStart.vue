@@ -182,9 +182,9 @@ onUnmounted(() => {
       <div class="connection-line" :class="{ active: commandTriggered }" />
     </div>
     <div class="feature__meta">
-      <div class="meta__title">Instant server start</div>
+      <div class="meta__title">راه‌اندازی فوری سرور</div>
       <div class="meta__description">
-        On demand file serving over native ESM, no bundling required!
+        سرویس دهی فایل درخواستی از طریق ESM بومی، بدون نیاز به پردازش اضافی!
       </div>
     </div>
   </div>
@@ -376,7 +376,7 @@ onUnmounted(() => {
   .connection-line {
     position: absolute;
     top: 203px;
-    right: 40px;
+    left: 60px;
     width: 1px;
     height: calc(100% - 170px - 33px);
     background: url('/noise.png'), #13b351;

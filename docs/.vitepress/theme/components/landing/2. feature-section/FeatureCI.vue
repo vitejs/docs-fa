@@ -319,10 +319,10 @@ const { startAnimation, isCardActive } = useCardAnimation(
       </div>
     </div>
     <div class="feature__meta meta--center">
-      <div class="meta__title">Continuous ecosystem integration</div>
+      <div class="meta__title">یکپارچگی مداوم در اکوسیستم</div>
       <div class="meta__description">
-        Our CI continuously tests Vite changes against downstream projects,
-        allowing us to improve Vite with stability and confidence.
+        تیم ما به طور مداوم تغییرات Vite را در پروژه‌های بالادستی آزمایش می‌کند،
+        که به ما اجازه می‌دهد Vite را با ثبات و اعتماد به نفس بهبود بخشیم.
       </div>
     </div>
   </div>
@@ -360,10 +360,10 @@ const { startAnimation, isCardActive } = useCardAnimation(
 
   .camera-container {
     width: 720px;
-    left: 50%;
+    right: 50%;
     position: relative;
     transition: transform 3s ease;
-    transform: translate3d(-50%, 80px, 0) scale(1.05);
+    transform: translate3d(50%, 80px, 0) scale(1.05);
   }
 
   .grid {
@@ -496,7 +496,7 @@ const { startAnimation, isCardActive } = useCardAnimation(
 
     .camera-container {
       transition: transform 1.5s ease 1s;
-      transform: translate3d(-50%, -100px, 0) scale(1.05);
+      transform: translate3d(50%, -100px, 0) scale(1.05);
     }
   }
 }

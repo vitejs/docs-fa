@@ -440,7 +440,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="hero__diagram" id="hero-diagram">
+  <div dir='ltr' class="hero__diagram" id="hero-diagram">
     <!-- Input Lines -->
     <SvgInputs :input-lines="inputLines" />
 
@@ -480,13 +480,13 @@ onMounted(() => {
   margin: -100px auto 0;
 
   @media (max-width: 1630px) {
-    left: 50%;
-    transform: translate3d(-50%, 0, 0);
+    right: 50%;
+    transform: translate3d(50%, 0, 0);
   }
 
   @media (max-width: 768px) {
-    left: 50%;
-    transform: translate3d(-50%, 0, 0) scale(0.9);
+    right: 50%;
+    transform: translate3d(50%, 0, 0) scale(0.9);
   }
 }
 

@@ -349,10 +349,10 @@ const { isCardActive, startAnimation } = useCardAnimation(
       </div>
     </div>
     <div class="feature__meta">
-      <div class="meta__title">Flexible plugin system</div>
+      <div class="meta__title">سیستم پلاگین انعطاف پذیر</div>
       <div class="meta__description">
-        Vite plugins extends Rollup's well-designed plugin interface with a few
-        extra Vite-specific options.
+        پلاگین‌های Vite رابط پلاگین Rollup را
+        با چند آپشن اضافی ویژه Vite گسترش می‌دهد.
       </div>
     </div>
   </div>

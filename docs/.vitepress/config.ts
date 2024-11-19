@@ -70,6 +70,8 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
 export default defineConfig({
   title: `Vite${additionalTitle}`,
   description: 'Next Generation Frontend Tooling',
+  dir: 'rtl',
+  lang: 'fa',
 
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
@@ -163,16 +165,16 @@ export default defineConfig({
     },
 
     footer: {
-      message: `Released under the MIT License. (${commitRef})`,
-      copyright: 'Copyright © 2019-present VoidZero Inc. & Vite Contributors',
+      message: `تحت مجوز MIT منتشر شده. (${commitRef})`,
+      copyright: 'کپی‌رایت © ۲۰۱۹ تا کنون متعلق به VoidZero Inc و مشارکت‌کنندگان vite.',
     },
 
     nav: [
-      { text: 'Guide', link: '/guide/', activeMatch: '/guide/' },
-      { text: 'Config', link: '/config/', activeMatch: '/config/' },
-      { text: 'Plugins', link: '/plugins/', activeMatch: '/plugins/' },
+      { text: 'راهنما', link: '/guide/', activeMatch: '/guide/' },
+      { text: 'کانفیگ', link: '/config/', activeMatch: '/config/' },
+      { text: 'پلاگین‌ها', link: '/plugins/', activeMatch: '/plugins/' },
       {
-        text: 'Resources',
+        text: 'منابع',
         items: [
           { text: 'Team', link: '/team' },
           { text: 'Blog', link: '/blog' },
@@ -220,7 +222,7 @@ export default defineConfig({
         ],
       },
       {
-        text: 'Version',
+        text: 'نسخه',
         items: versionLinks,
       },
     ],

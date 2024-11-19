@@ -86,13 +86,13 @@ SolidJS in mind, they should scale from our simplest template to opinionated sta
 
 <template>
   <section class="community-section">
-    <h2>Loved by the community</h2>
+    <h2>محبوب در میان جامعه</h2>
     <h3>
-      Don't take our word for it - listen to what Vite community members have to
-      say.
+      حرف ما را قبول نکنید،
+      به آنچه اعضای انجمن Vite می‌گویند گوش دهید.
     </h3>
     <div class="community-grid-container">
-      <div class="community-grid">
+      <div dir="ltr" class="community-grid">
         <CommunityCard
           :testimonial="testimonial"
           v-for="testimonial in testimonials"

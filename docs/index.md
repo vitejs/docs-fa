@@ -28,13 +28,13 @@ import FeatureCI from './.vitepress/theme/components/landing/2. feature-section/
 
 <div class="VPHome">
   <Hero/>
-  <FeatureSection title="Redefining developer experience" description="Vite makes web development simple again" type="blue">
+  <FeatureSection title="تعریف مجدد تجربه توسعه‌دهنده" description="Vite توسعه وب را دوباره ساده می‌کند" type="blue">
     <FeatureInstantServerStart />
     <FeatureHMR />
     <FeatureRichFeatures />
     <FeatureOptimizedBuild />
   </FeatureSection>
-  <FeatureSection title="A shared foundation to build upon" type="pink" class="feature-section--flip">
+  <FeatureSection title="یک پایه مشترک برای ساخت و توسعه" type="pink" class="feature-section--flip">
     <FeatureFlexiblePlugins />
     <FeatureTypedAPI />
     <FeatureSSRSupport />

@@ -25,7 +25,7 @@ const { isCardActive, startAnimation } = useCardAnimation(
     id="ssr-support"
     @mouseover.stop.prevent="startAnimation"
   >
-    <div class="feature__visualization" :class="{ active: isCardActive }">
+    <div dir="ltr" class="feature__visualization" :class="{ active: isCardActive }">
       <svg
         width="402"
         height="166"
@@ -417,10 +417,10 @@ const { isCardActive, startAnimation } = useCardAnimation(
       </svg>
     </div>
     <div class="feature__meta">
-      <div class="meta__title">First class SSR Support</div>
+      <div class="meta__title">پشتیبانی درجه یک از SSR</div>
       <div class="meta__description">
-        It's never been easier to setup custom SSR (Server-Side Rendering), or
-        build your own SSR framework.
+        هرگز راه‌اندازی SSR (رندرینگ سمت سرور) سفارشی
+        یا ساخت فریمورک SSR شخصی، این‌قدر آسان نبوده است.
       </div>
     </div>
   </div>

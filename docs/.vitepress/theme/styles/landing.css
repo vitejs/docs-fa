@@ -82,7 +82,7 @@ html:has(.landing) {
 
   h1 {
     text-align: center;
-    font-family: 'Manrope', sans-serif;
+    font-family: 'site-font', 'Manrope', sans-serif;
     font-style: normal;
     font-weight: 600;
     background: linear-gradient(
@@ -117,7 +117,7 @@ html:has(.landing) {
   h2 {
     display: block;
     width: fit-content;
-    font-family: Manrope, sans-serif;
+    font-family: 'site-font', Manrope, sans-serif;
     font-size: 32px;
     font-style: normal;
     font-weight: 600;
@@ -136,7 +136,7 @@ html:has(.landing) {
   h3 {
     color: #a9a9a9;
     text-align: center;
-    font-family: Inter, sans-serif;
+    font-family: 'site-font', Inter, sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 400;
@@ -161,7 +161,7 @@ html:has(.landing) {
     gap: 8px;
     border-radius: 8px;
     color: #fff;
-    font-family: Inter, sans-serif;
+    font-family: 'site-font', Inter, sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 500;

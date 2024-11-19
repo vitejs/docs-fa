@@ -156,6 +156,7 @@ const startAnimation = () => {
 
   h2 {
     --text-color: #404040;
+    line-height: 150%;
     background: radial-gradient(
       circle 300px at 30% -180%,
       var(--text-color) 0%,
@@ -220,7 +221,7 @@ const startAnimation = () => {
 
       .meta__title {
         color: #fff;
-        font-family: Manrope, sans-serif;
+        font-family: 'site-font', Manrope, sans-serif;
         font-size: 20px;
         font-style: normal;
         font-weight: 600;
@@ -232,7 +233,7 @@ const startAnimation = () => {
 
       .meta__description {
         color: #a3a3a3;
-        font-family: Inter, sans-serif;
+        font-family: 'site-font', Inter, sans-serif;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;

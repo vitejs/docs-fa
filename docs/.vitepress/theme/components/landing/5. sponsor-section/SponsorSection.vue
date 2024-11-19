@@ -46,13 +46,13 @@ const { data } = useSponsor()
       width="58"
       height="55"
     />
-    <h2>Free &amp; open source</h2>
+    <h2>رایگان و متن‌باز</h2>
     <h4>
-      Vite is MIT Licensed and will always be free and open source. This is made
-      possible by our contributors and these companies:
+      Vite دارای مجوز MIT است و همیشه رایگان و منبع باز خواهد بود.
+      این توسط مشارکت کنندگان ما و این شرکت‌ها ممکن شده است:
     </h4>
 
-    <h4>Brought to you by</h4>
+    <h4>ارائه شده توسط</h4>
     <div class="voidzero">
       <a href="https://voidzero.dev" target="_blank">
         <img src="./voidzero.svg" />
@@ -70,7 +70,7 @@ const { data } = useSponsor()
         href="https://github.com/sponsors/vitejs"
         target="_blank"
         class="btn btn--outline btn--rounded"
-        >Become a Sponsor</a
+        >حامی ما شوید</a
       >
     </div>
   </div>
@@ -127,7 +127,7 @@ const { data } = useSponsor()
   h4 {
     color: #a3a3a3;
     text-align: center;
-    font-family: Inter, sans-serif;
+    font-family: 'site-font', Inter, sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;

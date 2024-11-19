@@ -16,23 +16,23 @@ import HeroDiagram from './HeroDiagram.vue'
       </a>
 
       <!-- Heading -->
-      <h1>The Build Tool<br />for the Web</h1>
+      <h1>ابزار ساخت<br />برای وب</h1>
       <!-- Tagline -->
       <h3>
-        Vite is a blazing fast frontend build tool powering the next generation
-        of web applications.
+        Vite ابزار ساخت برای frontend و فوق‌العاده سریع است
+        که نسل بعدی برنامه‌های وب را توانمند می‌سازد.
       </h3>
 
       <!-- CTA Buttons -->
       <div class="hero__actions">
-        <a href="/guide/" class="btn btn--primary">Get started</a>
+        <a href="/guide/" class="btn btn--primary">شروع کنید</a>
         <a
           href="https://github.com/vitejs/vite"
           target="_blank"
           class="btn btn--outline"
         >
           <img src="/github.svg" alt="GitHub logo" width="20" height="20" />
-          GitHub
+          گیت‌هاب
         </a>
       </div>
     </div>
