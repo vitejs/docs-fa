@@ -1,0 +1,53 @@
+name: Sync with upstream vite docs
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout vite-docs-template
+        uses: actions/checkout@v4
+        with:
+          path: vite-docs-template
+          ref: main
+
+      - name: Checkout vite
+        uses: actions/checkout@v4
+        with:
+          repository: vitejs/vite
+          path: vite
+
+      - name: Setup GitHub user
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Sync with upstream vite
+        run: |
+          set -ex
+          rsync -rdv --delete ./vite/docs/ ./vite-docs-template/docs
+          cp -v ./vite/README.md ./vite-docs-template/.
+
+          pushd vite
+          VITE_SHA1=$(git rev-parse --short HEAD)
+          popd
+
+          cd vite-docs-template
+          function patchReadme() {
+            preamble=$(echo -e "<!-- You can remove the following notice from your fork -->\n## This repo is a template for [Vite.js docs translation repositories](https://github.com/vitejs?q=docs). See [guide](/.github/CONTRIBUTING.md).\n\n---\n")
+            { echo "$preamble"; cat README.md; } > temp.md && mv temp.md README.md
+          }
+          patchReadme
+
+          git add .
+          if git diff --cached --quiet; then
+            echo "✔️ No changes"
+          else
+            git commit -m "merge vite@${VITE_SHA1}"
+            git push origin main
+            echo "✅ Synced main with vite@${VITE_SHA1}"
+          fi

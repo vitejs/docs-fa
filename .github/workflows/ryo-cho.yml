@@ -1,0 +1,27 @@
+name: ryu-cho
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  ryu-cho:
+    name: Ryu Cho
+    runs-on: ubuntu-latest
+    steps:
+      - uses: vuejs-translations/ryu-cho@v1
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+          username: github-actions
+          email: "action@github.com"
+
+          # TODO: Replace this with your own repo URL
+          upstream-repo: https://github.com/tony19/vite-docs-template.git
+          # TODO: Replace this with your own repo's branch name
+          upstream-repo-branch: main
+
+          head-repo: https://github.com/vitejs/vite
+          head-repo-branch: main
+          track-from: 344642ad630d8658308dbf707ed805cb04b49d58
+          path-starts-with: docs/
+          workflow-name: ryu-cho
