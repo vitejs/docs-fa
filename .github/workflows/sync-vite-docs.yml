@@ -1,0 +1,49 @@
+name: Sync Vite Docs Updates
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: upstream-sync
+          token: ${{github.token}}
+
+      - name: Configure Git
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
+      - name: Create or reset upstream-sync branch
+        run: |
+          git checkout upstream-sync 2>/dev/null || git checkout -b upstream-sync
+
+          git fetch origin main
+          git reset --soft origin/main
+
+          git rm -rf docs/ || true
+          git commit -m "reset: Clean state before sync" || true
+
+      - name: Sync Vite docs
+        run: |
+          git remote add upstream https://github.com/vitejs/vite.git || true
+          git fetch upstream
+
+          git checkout upstream/main -- docs
+
+          if [[ -n $(git status -s) ]]; then
+            git add docs/
+            git commit -m "sync: Update Vite docs from upstream
+
+            git push origin upstream-sync --force
+          fi
