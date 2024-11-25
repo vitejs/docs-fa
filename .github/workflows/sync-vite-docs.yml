@@ -1,8 +1,8 @@
-name: Sync Vite Docs Updates
+name: Sync Vite Docs
 
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: '0 1 * * *'
   workflow_dispatch:
 
 permissions:
@@ -16,34 +16,27 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: upstream-sync
-          token: ${{github.token}}
+          token: ${{ github.token }}
 
       - name: Configure Git
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Create or reset upstream-sync branch
-        run: |
-          git checkout upstream-sync 2>/dev/null || git checkout -b upstream-sync
-
-          git fetch origin main
-          git reset --soft origin/main
-
-          git rm -rf docs/ || true
-          git commit -m "reset: Clean state before sync" || true
-
       - name: Sync Vite docs
         run: |
-          git remote add upstream https://github.com/vitejs/vite.git || true
+          DATE=$(date +%Y%m%d)
+          BRANCH_NAME="upstream-sync"
+
+          git remote add upstream https://github.com/vitejs/vite.git
           git fetch upstream
+
+          git checkout $BRANCH_NAME
 
           git checkout upstream/main -- docs
 
           if [[ -n $(git status -s) ]]; then
-            git add docs/
-            git commit -m "sync: Update Vite docs from upstream
-
-            git push origin upstream-sync --force
+            git add docs
+            git commit -m "sync: Update Vite docs from upstream $DATE"
+            git push origin $BRANCH_NAME
           fi
