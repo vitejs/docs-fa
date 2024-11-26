@@ -107,7 +107,7 @@ There are other breaking changes which only affect few users.
     <details>
     <summary>Click to expand example</summary>
 
-    ```ts twoslash
+    ```ts
     import type { Plugin, EnvironmentModuleNode } from 'vite'
 
     function hmrReload(): Plugin {
