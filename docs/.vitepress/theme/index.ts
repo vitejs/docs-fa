@@ -8,6 +8,7 @@ import './styles/landing.css'
 import './styles/overrides.css'
 import AsideSponsors from './components/AsideSponsors.vue'
 import SvgImage from './components/SvgImage.vue'
+import YouTubeVideo from './components/YouTubeVideo.vue'
 import 'virtual:group-icons.css'
 
 export default {
@@ -19,6 +20,7 @@ export default {
   },
   enhanceApp({ app }) {
     app.component('SvgImage', SvgImage)
+    app.component('YouTubeVideo', YouTubeVideo)
     app.use(TwoslashFloatingVue)
   },
 } satisfies Theme
