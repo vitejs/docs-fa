@@ -13,3 +13,90 @@
   --vp-font-family-mono: Menlo, Monaco, Consolas, 'site-font', 'Courier New',
     monospace !important;
 }
+
+.VPSidebar {
+  right: 0 !important;
+  left: unset !important;
+}
+.VPNavBar.has-sidebar .title {
+  right: 0 !important;
+  left: unset !important;
+}
+@media (min-width: 1440px) {
+  .VPNavBar.has-sidebar .content {
+    padding-left: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + 32px
+    ) !important;
+    padding-right: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
+    ) !important;
+  }
+}
+@media (min-width: 960px) {
+  .VPNavBarSearch {
+    padding-right: 32px;
+    padding-left: unset !important;
+  }
+}
+@media (min-width: 768px) {
+  .VPNavBarSearch {
+    padding-right: 24px;
+    padding-left: unset !important;
+  }
+}
+@media (min-width: 1440px) {
+  .VPContent.has-sidebar {
+    padding-left: calc((100vw - var(--vp-layout-max-width)) / 2) !important;
+    padding-right: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
+    ) !important;
+  }
+}
+@media (min-width: 960px) {
+  .VPContent.has-sidebar {
+    margin: var(--vp-layout-top-height, 0px) 0 0;
+    padding-right: var(--vp-sidebar-width) !important;
+    padding-left: unset !important;
+  }
+}
+@media (min-width: 960px) {
+  .VPNavBar.has-sidebar .divider {
+    padding-right: var(--vp-sidebar-width) !important;
+    padding-left: unset !important;
+  }
+}
+@media (min-width: 1440px) {
+  .VPNavBar.has-sidebar .divider {
+    padding-right: calc(
+      (100vw - var(--vp-layout-max-width)) / 2 + var(--vp-sidebar-width)
+    ) !important;
+    padding-left: unset !important;
+  }
+}
+.DocSearch-Button .DocSearch-Button-Placeholder {
+  padding: 0 0 0 16px !important;
+}
+@media (min-width: 768px) {
+  .DocSearch-Button .DocSearch-Search-Icon {
+    margin-left: 8px;
+    margin-right: auto !important;
+  }
+}
+@media (min-width: 1440px) {
+  .VPSidebar {
+    padding-right: max(
+      32px,
+      calc((100% - (var(--vp-layout-max-width) - 64px)) / 2)
+    ) !important;
+    padding-left: auto !important;
+  }
+}
+@media (min-width: 1440px) {
+  .VPNavBar.has-sidebar .title {
+    padding-right: max(
+      32px,
+      calc((100% - (var(--vp-layout-max-width) - 64px)) / 2)
+    );
+    padding-left: auto !important;
+  }
+}
