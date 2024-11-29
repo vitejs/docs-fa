@@ -129,7 +129,7 @@ export default defineConfig({
   ],
 
   locales: {
-    root: { label: 'English' },
+    root: { label: 'فارسی' },
     zh: { label: '简体中文', link: 'https://cn.vite.dev' },
     ja: { label: '日本語', link: 'https://ja.vite.dev' },
     es: { label: 'Español', link: 'https://es.vite.dev' },
@@ -141,9 +141,14 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.svg',
 
+    docFooter: {
+      prev: 'قبلی',
+      next: 'بعدی'
+    },
+
     editLink: {
-      pattern: 'https://github.com/vitejs/vite/edit/main/docs/:path',
-      text: 'Suggest changes to this page',
+      pattern: 'https://github.com/mostafa-nematpour/vite-docs-fa/edit/main/docs/:path',
+      text: 'اصلاح ترجمه این صفحه در گیت‌هاب',
     },
 
     socialLinks: [
@@ -237,11 +242,11 @@ export default defineConfig({
           text: 'Guide',
           items: [
             {
-              text: 'Why Vite',
+              text: 'چرا Vite',
               link: '/guide/why',
             },
             {
-              text: 'Getting Started',
+              text: 'شروع',
               link: '/guide/',
             },
             {
