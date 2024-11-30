@@ -126,7 +126,8 @@
   right: -28px;
 }
 
-.menu + .appearance::before, .translations + .appearance::before {
+.menu + .appearance::before,
+.translations + .appearance::before {
   margin-right: 8px !important;
   margin-left: 16px !important;
 }
@@ -134,4 +135,8 @@
 .appearance + .social-links::before {
   margin-right: 16px !important;
   margin-left: 8px !important;
+}
+
+.vp-doc th {
+  text-align: center !important;
 }

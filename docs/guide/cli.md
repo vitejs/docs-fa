@@ -1,126 +1,128 @@
-# Command Line Interface
+# رابط خط فرمان - CLI
 
-## Dev server
+## سرور توسعه
 
 ### `vite`
 
-Start Vite dev server in the current directory. `vite dev` and `vite serve` are aliases for `vite`.
+سرور توسعه Vite را در دایرکتوری فعلی شروع کنید. `vite dev` و `vite serve` نام‌های مستعار برای `vite` هستند.
 
-#### Usage
+#### استفاده
 
 ```bash
 vite [root]
 ```
 
-#### Options
+استفاده از فایل پیکربندی مشخص شده
 
-| Options                  |                                                                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `--host [host]`          | Specify hostname (`string`)                                                                                        |
-| `--port <port>`          | Specify port (`number`)                                                                                            |
-| `--open [path]`          | Open browser on startup (`boolean \| string`)                                                                      |
-| `--cors`                 | Enable CORS (`boolean`)                                                                                            |
-| `--strictPort`           | Exit if specified port is already in use (`boolean`)                                                               |
-| `--force`                | Force the optimizer to ignore the cache and re-bundle (`boolean`)                                                  |
-| `-c, --config <file>`    | Use specified config file (`string`)                                                                               |
-| `--base <path>`          | Public base path (default: `/`) (`string`)                                                                         |
-| `-l, --logLevel <level>` | info \| warn \| error \| silent (`string`)                                                                         |
-| `--clearScreen`          | Allow/disable clear screen when logging (`boolean`)                                                                |
-| `--profile`              | Start built-in Node.js inspector (check [Performance bottlenecks](/guide/troubleshooting#performance-bottlenecks)) |
-| `-d, --debug [feat]`     | Show debug logs (`string \| boolean`)                                                                              |
-| `-f, --filter <filter>`  | Filter debug logs (`string`)                                                                                       |
-| `-m, --mode <mode>`      | Set env mode (`string`)                                                                                            |
-| `-h, --help`             | Display available CLI options                                                                                      |
-| `-v, --version`          | Display version number                                                                                             |
+#### گزینه‌ها
 
-## Build
+| گزینه‌ها                   |                                                                                                            |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `‎--host [host]`           | مشخص کردن نام هاست (`string`)                                                                              |
+| `‎--port <port>‎`          | مشخص کردن پورت (`number`)                                                                                  |
+| `‎--open [path]‎`          | باز کردن مرورگر در هنگام راه‌اندازی (`boolean \| string`)                                                              |
+| `‎--cors`                  | فعال کردن CORS ؛(`boolean`)                                                                               |
+| `‎--strictPort`            | خروج اگر پورت مشخص شده در حال استفاده باشد (`boolean`)                                                     |
+| `‎--force`               | مجبور کردن بهینه‌ساز برای نادیده گرفتن کش و دوباره بیلد گرفتن (`boolean`)                                  |
+| `‎-c, --config <file>‎`    | استفاده از فایل کانفیگ مشخص شده (`string`)                                                                 |
+| `‎--base <path>‎`          | مسیر پایه public (پیش‌فرض: `/`) (`string`)                                                                 |
+| `‎-l, --logLevel <level>‎` | info \| warn \| error \| silent (`string`)                                                                 |
+| `‎--clearScreen`           | اجازه/غیرفعال کردن پاک کردن صفحه هنگام لاگ‌گیری (`boolean`)                                                |
+| `‎--profile`               | شروع inspector داخلی Node.js ؛([Performance bottlenecks](/guide/troubleshooting#performance-bottlenecks)) |
+| `‎-d, --debug [feat]‎`     | نمایش لاگ‌های دیباگ (`string \| boolean`)                                                                  |
+| `‎-f, --filter <filter>‎`  | فیلتر کردن لاگ‌های دیباگ (`string`)                                                                        |
+| `‎-m, --mode <mode>‎`      | تنظیم حالت env ؛(`string`)                                                                                |
+| `‎-h, --help`              | نمایش گزینه‌های موجود CLI                                                                                  |
+| `‎-v, --version`           | نمایش شماره نسخه                                                                                           |
+
+## بیلد
 
 ### `vite build`
 
-Build for production.
+بیلد برای پروداکشن
 
-#### Usage
+#### استفاده
 
 ```bash
 vite build [root]
 ```
 
-#### Options
+#### گزینه‌ها
 
-| Options                        |                                                                                                                     |
-| ------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
-| `--target <target>`            | Transpile target (default: `"modules"`) (`string`)                                                                  |
-| `--outDir <dir>`               | Output directory (default: `dist`) (`string`)                                                                       |
-| `--assetsDir <dir>`            | Directory under outDir to place assets in (default: `"assets"`) (`string`)                                          |
-| `--assetsInlineLimit <number>` | Static asset base64 inline threshold in bytes (default: `4096`) (`number`)                                          |
-| `--ssr [entry]`                | Build specified entry for server-side rendering (`string`)                                                          |
-| `--sourcemap [output]`         | Output source maps for build (default: `false`) (`boolean \| "inline" \| "hidden"`)                                 |
-| `--minify [minifier]`          | Enable/disable minification, or specify minifier to use (default: `"esbuild"`) (`boolean \| "terser" \| "esbuild"`) |
-| `--manifest [name]`            | Emit build manifest json (`boolean \| string`)                                                                      |
-| `--ssrManifest [name]`         | Emit ssr manifest json (`boolean \| string`)                                                                        |
-| `--emptyOutDir`                | Force empty outDir when it's outside of root (`boolean`)                                                            |
-| `-w, --watch`                  | Rebuilds when modules have changed on disk (`boolean`)                                                              |
-| `-c, --config <file>`          | Use specified config file (`string`)                                                                                |
-| `--base <path>`                | Public base path (default: `/`) (`string`)                                                                          |
-| `-l, --logLevel <level>`       | Info \| warn \| error \| silent (`string`)                                                                          |
-| `--clearScreen`                | Allow/disable clear screen when logging (`boolean`)                                                                 |
-| `--profile`                    | Start built-in Node.js inspector (check [Performance bottlenecks](/guide/troubleshooting#performance-bottlenecks))  |
-| `-d, --debug [feat]`           | Show debug logs (`string \| boolean`)                                                                               |
-| `-f, --filter <filter>`        | Filter debug logs (`string`)                                                                                        |
-| `-m, --mode <mode>`            | Set env mode (`string`)                                                                                             |
-| `-h, --help`                   | Display available CLI options                                                                                       |
-| `--app`                        | Build all environments, same as `builder: {}` (`boolean`, experimental)                                             |
+| گزینه‌ها                         |                                                                                                                     |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| `‎--target <target>‎`            | هدف ترنسپایل (پیش‌فرض: `"modules"`) (`string`)                                                                      |
+| `‎--outDir <dir>‎`               | دایرکتوری خروجی (پیش‌فرض: `dist`) (`string`)                                                                        |
+| `‎--assetsDir <dir>‎`            | دایرکتوری زیر outDir برای قرار دادن asset ها (پیش‌فرض: `"assets"`) (`string`)                                       |
+| `‎--assetsInlineLimit <number>‎` | حد آستانه inline دارایی‌های استاتیک به صورت base64 بر حسب بایت (پیش‌فرض: `4096`) (`number`)                         |
+| `‎--ssr [entry]‎`                | ورودی مشخص شده برای رندرینگ سمت سرور (SSR) (`string`)                                                          |
+| `‎--sourcemap [output]‎`         | خروجی source map برای بیلد (پیش‌فرض: `false`) (`boolean \| "inline" \| "hidden"`)                                 |
+| `‎--minify [minifier]‎`          | فعال/غیرفعال کردن فشرده‌سازی، یا مشخص کردن فشرده‌سازی برای استفاده (پیش‌فرض: `"esbuild"`) (`boolean \| "terser" \| "esbuild"`) |
+| `‎--manifest [name]‎`            | تولید فایل json مانیفست بیلد (`boolean \| string`)                                                                  |
+| `‎--ssrManifest [name]‎`         | تولید فایل json مانیفست ssr ؛(`boole   an \| string`)                                                                  |
+| `‎--emptyOutDir‎`                | خالی کردن اجباری outDir وقتی که خارج از root است (`boolean`)                                                        |
+| `‎-w, --watch`                   | اجرای مجدد بیلد هنگام تغییر در فایل‌ها یا ماژول‌ها (`boolean`)                                                              |
+| `‎-c, --config <file>‎`          | استفاده از فایل کانفیگ مشخص شده (`string`)                                                                          |
+| `‎--base <path>‎`                | مسیر پایه عمومی (پیش‌فرض: `/`) (`string`)                                                                           |
+| `‎-l, --logLevel <level>‎`       | Info \| warn \| error \| silent (`string`)                                                                          |
+| `‎--clearScreen`                 | اجازه/غیرفعال کردن پاک کردن صفحه هنگام لاگ‌گیری (`boolean`)                                                         |
+| `‎--profile`               | شروع inspector داخلی Node.js ؛([Performance bottlenecks](/guide/troubleshooting#performance-bottlenecks)) |
+| `‎-d, --debug [feat]‎`           | نمایش لاگ‌های دیباگ (`string \| boolean`)                                                                           |
+| `‎-f, --filter <filter>‎`        | فیلتر کردن لاگ‌های دیباگ (`string`)                                                                                 |
+| `‎-m, --mode <mode>‎`            | تنظیم حالت env ؛(`string`)                                                                                          |
+| `‎-h, --help`                    | نمایش گزینه‌های موجود CLI                                                                                           |
+| `‎--app`                         | بیلد همه محیط‌ها، مشابه `builder: {}` (`boolean`, آزمایشی)                                             |
 
-## Others
+## سایر موارد
 
 ### `vite optimize`
 
-Pre-bundle dependencies.
+پیش‌باندل وابستگی‌ها.
 
-#### Usage
+#### استفاده
 
 ```bash
 vite optimize [root]
 ```
 
-#### Options
+#### گزینه‌ها
 
-| Options                  |                                                                   |
-| ------------------------ | ----------------------------------------------------------------- |
-| `--force`                | Force the optimizer to ignore the cache and re-bundle (`boolean`) |
-| `-c, --config <file>`    | Use specified config file (`string`)                              |
-| `--base <path>`          | Public base path (default: `/`) (`string`)                        |
-| `-l, --logLevel <level>` | Info \| warn \| error \| silent (`string`)                        |
-| `--clearScreen`          | Allow/disable clear screen when logging (`boolean`)               |
-| `-d, --debug [feat]`     | Show debug logs (`string \| boolean`)                             |
-| `-f, --filter <filter>`  | Filter debug logs (`string`)                                      |
-| `-m, --mode <mode>`      | Set env mode (`string`)                                           |
-| `-h, --help`             | Display available CLI options                                     |
+| گزینه‌ها                   | توضیحات                                                                   |
+| -------------------------- | ------------------------------------------------------------------------- |
+| `‎--force`                 | مجبور کردن بهینه‌ساز برای نادیده گرفتن کش و دوباره بیلد گرفتن (`boolean`) |
+| `‎-c, --config <file>‎`    | استفاده از فایل کانفیگ مشخص شده (`string`)                                |
+| `‎--base <path>‎`          | مسیر پایه public (پیش‌فرض: `/`) (`string`)                                |
+| `‎-l, --logLevel <level>‎` | Info \| warn \| error \| silent (`string`)                                |
+| `‎--clearScreen`           | اجازه/غیرفعال کردن پاک کردن صفحه هنگام لاگ‌گیری (`boolean`)               |
+| `‎-d, --debug [feat]‎`     | نمایش لاگ‌های دیباگ (`string \| boolean`)                                 |
+| `‎-f, --filter <filter>‎`  | فیلتر کردن لاگ‌های دیباگ (`string`)                                       |
+| `‎-m, --mode <mode>‎`      | تنظیم حالت env ؛(`string`)                                                |
+| `‎-h, --help`              | نمایش گزینه‌های موجود CLI                                                 |
 
 ### `vite preview`
 
-Locally preview the production build. Do not use this as a production server as it's not designed for it.
+پیش‌نمایش محلی بیلد پروداکشن. از این به عنوان سرور پروداکشن استفاده نکنید زیرا برای این منظور طراحی نشده است.
 
-#### Usage
+#### استفاده
 
 ```bash
 vite preview [root]
 ```
 
-#### Options
+#### گزینه‌ها
 
-| Options                  |                                                      |
-| ------------------------ | ---------------------------------------------------- |
-| `--host [host]`          | Specify hostname (`string`)                          |
-| `--port <port>`          | Specify port (`number`)                              |
-| `--strictPort`           | Exit if specified port is already in use (`boolean`) |
-| `--open [path]`          | Open browser on startup (`boolean \| string`)        |
-| `--outDir <dir>`         | Output directory (default: `dist`)(`string`)         |
-| `-c, --config <file>`    | Use specified config file (`string`)                 |
-| `--base <path>`          | Public base path (default: `/`) (`string`)           |
-| `-l, --logLevel <level>` | Info \| warn \| error \| silent (`string`)           |
-| `--clearScreen`          | Allow/disable clear screen when logging (`boolean`)  |
-| `-d, --debug [feat]`     | Show debug logs (`string \| boolean`)                |
-| `-f, --filter <filter>`  | Filter debug logs (`string`)                         |
-| `-m, --mode <mode>`      | Set env mode (`string`)                              |
-| `-h, --help`             | Display available CLI options                        |
+| گزینه‌ها                   |                                                             |
+| -------------------------- | ----------------------------------------------------------- |
+| `‎--host [host]`           | مشخص کردن نام هاست (`string`)                               |
+| `‎--port <port>‎`          | مشخص کردن پورت (`number`)                                   |
+| `‎--strictPort`            | خروج اگر پورت مشخص شده در حال استفاده باشد (`boolean`)      |
+| `‎--open [path]‎`          | باز کردن مرورگر در هنگام راه‌اندازی (`boolean \| string`)                                                              |
+| `‎--outDir <dir>‎`         | دایرکتوری خروجی (پیش‌فرض: `dist`) (`string`)                |
+| `‎-c, --config <file>‎`    | استفاده از فایل کانفیگ مشخص شده (`string`)                  |
+| `‎--base <path>‎`          | مسیر پایه عمومی (پیش‌فرض: `/`) (`string`)                   |
+| `‎-l, --logLevel <level>‎` | Info \| warn \| error \| silent (`string`)                  |
+| `‎--clearScreen`           | اجازه/غیرفعال کردن پاک کردن صفحه هنگام لاگ‌گیری (`boolean`) |
+| `‎-d, --debug [feat]‎`     | نمایش لاگ‌های دیباگ (`string \| boolean`)                   |
+| `‎-f, --filter <filter>‎`  | فیلتر کردن لاگ‌های دیباگ (`string`)                         |
+| `‎-m, --mode <mode>‎`      | تنظیم حالت env ؛(`string`)                                  |
+| `‎-h, --help`              | نمایش گزینه‌های موجود CLI                                   |
