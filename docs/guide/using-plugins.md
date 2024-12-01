@@ -1,10 +1,10 @@
-# Using Plugins
+# استفاده از پلاگین‌ها
 
-Vite can be extended using plugins, which are based on Rollup's well-designed plugin interface with a few extra Vite-specific options. This means that Vite users can rely on the mature ecosystem of Rollup plugins, while also being able to extend the dev server and SSR functionality as needed.
+Vite می‌تواند با استفاده از پلاگین‌ها گسترش یابد. این پلاگین‌ها بر اساس رابط پلاگین‌های طراحی‌شده برای Rollup ساخته شده‌اند، با این تفاوت که چند گزینه اضافی مخصوص Vite به آن‌ها اضافه شده است. به این ترتیب، کاربران Vite می‌توانند از اکوسیستم بالغ پلاگین‌های Rollup بهره ببرند و در عین حال قادر خواهند بود سرور توسعه و عملکرد SSR را به دلخواه خود گسترش دهند.
 
-## Adding a Plugin
+## اضافه کردن یک پلاگین
 
-To use a plugin, it needs to be added to the `devDependencies` of the project and included in the `plugins` array in the `vite.config.js` config file. For example, to provide support for legacy browsers, the official [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) can be used:
+برای استفاده از یک پلاگین، باید آن را به `devDependencies` پروژه اضافه کرده و در آرایه `plugins` در فایل کانفیگ `vite.config.js` قرار دهید. به عنوان مثال، برای پشتیبانی از مرورگرهای قدیمی، می‌توان از پلاگین رسمی [‎@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) استفاده کرد:
 
 ```
 $ npm add -D @vitejs/plugin-legacy
@@ -23,27 +23,27 @@ export default defineConfig({
 })
 ```
 
-`plugins` also accepts presets including several plugins as a single element. This is useful for complex features (like framework integration) that are implemented using several plugins. The array will be flattened internally.
+آرایه `plugins` همچنین می‌تواند پیش‌تنظیماتی را بپذیرد که شامل چندین پلاگین به عنوان یک عنصر واحد هستند. این ویژگی برای موارد پیچیده‌تر (مثل یکپارچه‌سازی فریم‌ورک‌ها) که با استفاده از چندین پلاگین پیاده‌سازی می‌شوند، مفید است. آرایه‌ی پلاگین‌ها به طور داخلی به صورت تخت (flat) پردازش خواهد شد.
 
-Falsy plugins will be ignored, which can be used to easily activate or deactivate plugins.
+پلاگین‌های نادرست نادیده گرفته خواهند شد. این ویژگی می‌تواند برای فعال یا غیرفعال کردن راحت پلاگین‌ها مورد استفاده قرار گیرد.
 
-## Finding Plugins
+## یافتن پلاگین‌ها
 
-:::tip NOTE
-Vite aims to provide out-of-the-box support for common web development patterns. Before searching for a Vite or compatible Rollup plugin, check out the [Features Guide](../guide/features.md). A lot of the cases where a plugin would be needed in a Rollup project are already covered in Vite.
+:::tip نکته
+Vite هدف دارد تا پشتیبانی آماده از الگوهای رایج توسعه وب را فراهم کند. قبل از جستجو برای یک پلاگین Vite یا پلاگین سازگار با Rollup، پیشنهاد می‌شود راهنمای [ویژگی‌ها](../guide/features.md) را بررسی کنید. بسیاری از قابلیت‌هایی که در پروژه‌های Rollup نیاز به پلاگین دارند، در Vite به طور پیش‌فرض پشتیبانی می‌شوند.
 :::
 
-Check out the [Plugins section](../plugins/) for information about official plugins. Community plugins are listed in [awesome-vite](https://github.com/vitejs/awesome-vite#plugins).
+بخش [پلاگین‌ها](../plugins/) را برای اطلاعات بیشتر درباره پلاگین‌های رسمی بررسی کنید. پلاگین‌های جامعه (community) در [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) لیست شده‌اند.
 
-You can also find plugins that follow the [recommended conventions](./api-plugin.md#conventions) using a [npm search for vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) for Vite plugins or a [npm search for rollup-plugin](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) for Rollup plugins.
+همچنین می‌توانید پلاگین‌هایی که از [کنوانسیون‌های توصیه‌شده](./api-plugin.md#conventions) پیروی می‌کنند را با استفاده از [جستجوی npm برای vite-plugin](https://www.npmjs.com/search?q=vite-plugin&ranking=popularity) برای پلاگین‌های Vite یا [جستجوی npm برای rollup-plugin](https://www.npmjs.com/search?q=rollup-plugin&ranking=popularity) برای پلاگین‌های Rollup پیدا کنید.
 
-## Enforcing Plugin Ordering
+## ترتیب اعمال پلاگین
 
-For compatibility with some Rollup plugins, it may be needed to enforce the order of the plugin or only apply at build time. This should be an implementation detail for Vite plugins. You can enforce the position of a plugin with the `enforce` modifier:
+برای سازگاری با برخی از پلاگین‌های Rollup، ممکن است نیاز باشد ترتیب پلاگین‌ها را تغییر دهید یا آن‌ها را فقط در زمان بیلد اعمال کنید. این باید جزئیات پیاده‌سازی در سطح پلاگین‌های Vite باشد. شما می‌توانید موقعیت یک پلاگین را با استفاده از اصلاح‌کننده `enforce` تنظیم کنید:
 
-- `pre`: invoke plugin before Vite core plugins
-- default: invoke plugin after Vite core plugins
-- `post`: invoke plugin after Vite build plugins
+- `pre`: اجرای پلاگین قبل از پلاگین‌های اصلی Vite
+- پیش‌فرض: اجرای پلاگین بعد از پلاگین‌های اصلی Vite
+- `post`: اجرای پلاگین بعد از پلاگین‌های build Vite
 
 ```js twoslash [vite.config.js]
 import image from '@rollup/plugin-image'
@@ -59,11 +59,11 @@ export default defineConfig({
 })
 ```
 
-Check out [Plugins API Guide](./api-plugin.md#plugin-ordering) for detailed information.
+برای اطلاعات دقیق، راهنمای [API پلاگین‌ها](./api-plugin.md#plugin-ordering) را بررسی کنید.
 
-## Conditional Application
+## فراخوانی شرطی
 
-By default, plugins are invoked for both serve and build. In cases where a plugin needs to be conditionally applied only during serve or build, use the `apply` property to only invoke them during `'build'` or `'serve'`:
+به طور پیش‌فرض، پلاگین‌ها برای هر دو حالت serve و build فراخوانی می‌شوند. در مواردی که نیاز است یک پلاگین به صورت شرطی فقط در زمان serve یا build اعمال شود، از ویژگی `apply` استفاده کنید تا فقط در زمان `'build'` یا `'serve'` فراخوانی شوند:
 
 ```js twoslash [vite.config.js]
 import typescript2 from 'rollup-plugin-typescript2'
@@ -79,6 +79,6 @@ export default defineConfig({
 })
 ```
 
-## Building Plugins
+## بیلد پلاگین‌ها
 
-Check out the [Plugins API Guide](./api-plugin.md) for documentation about creating plugins.
+برای مشاهده مستندات مربوط به ایجاد پلاگین‌ها، راهنمای [API پلاگین‌ها](./api-plugin.md) را بررسی کنید.
