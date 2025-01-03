@@ -1,50 +1,52 @@
-# Features
+# ویژگی‌ها
 
-At the very basic level, developing using Vite is not that different from using a static file server. However, Vite provides many enhancements over native ESM imports to support various features that are typically seen in bundler-based setups.
+در ابتدایی‌ترین سطح، توسعه با Vite تفاوت زیادی با استفاده از یک سرور فایل استاتیک ندارد. اما Vite امکانات متعددی فراتر از ایمپورت ESM بومی ارائه می‌دهد تا از ویژگی‌های مختلفی که معمولاً در راه‌اندازی مبتنی بر باندلر دیده می‌شوند، پشتیبانی کند.
 
-## npm Dependency Resolving and Pre-Bundling
+## حل وابستگی‌های npm و پیش‌باندل کردن
 
-Native ES imports do not support bare module imports like the following:
+ایمپورت ES بومی از ایمپورت ماژول‌های بدون مسیر مشخص مانند نمونه زیر پشتیبانی نمی‌کند:
 
 ```js
 import { someMethod } from 'my-dep'
 ```
 
-The above will throw an error in the browser. Vite will detect such bare module imports in all served source files and perform the following:
+کد بالا در مرورگر خطا ایجاد می‌کند. Vite ایمپورت ماژول‌های بدون مسیر مانند این را در تمامی فایل‌های منبع شناسایی کرده و اقدامات زیر را انجام می‌دهد:
 
-1. [Pre-bundle](./dep-pre-bundling) them to improve page loading speed and convert CommonJS / UMD modules to ESM. The pre-bundling step is performed with [esbuild](http://esbuild.github.io/) and makes Vite's cold start time significantly faster than any JavaScript-based bundler.
+1. **[پیش‌باندل](./dep-pre-bundling):** این فرآیند سرعت بارگذاری صفحه را بهبود می‌بخشد و ماژول‌های CommonJS/UMD را به ESM تبدیل می‌کند. مرحله پیش‌باندل با استفاده از ابزار [esbuild](http://esbuild.github.io/) انجام می‌شود که زمان  زمان راه‌اندازی اولیه (cold start) ابزار Vite را به طور قابل توجهی سریع‌تر از هر باندلر جاوااسکریپتی دیگر می‌کند.
 
-2. Rewrite the imports to valid URLs like `/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` so that the browser can import them properly.
+2. بازنویسی ایمپورت‌های به آدرس‌های معتبر مانند `‎/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` تا مرورگر بتواند آنها را به درستی ایمپورت کند.
 
-**Dependencies are Strongly Cached**
+**وابستگی‌ها به‌شدت در کش ذخیره می‌شوند**
 
-Vite caches dependency requests via HTTP headers, so if you wish to locally edit/debug a dependency, follow the steps [here](./dep-pre-bundling#browser-cache).
+Vite درخواست‌های مربوط به وابستگی‌ها را از طریق هدرهای HTTP کش می‌کند، بنابراین اگر بخواهید یک وابستگی را به‌صورت محلی ویرایش یا دیباگ کنید، مراحل ذکر شده [اینجا](./dep-pre-bundling#browser-cache) را دنبال کنید.
 
-## Hot Module Replacement
+## جایگزینی سریع ماژول (Hot Module Replacement)
 
-Vite provides an [HMR API](./api-hmr) over native ESM. Frameworks with HMR capabilities can leverage the API to provide instant, precise updates without reloading the page or blowing away application state. Vite provides first-party HMR integrations for [Vue Single File Components](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue) and [React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react). There are also official integrations for Preact via [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
+Vite یک **[API جایگزینی سریع ماژول (HMR)](./api-hmr)** بر پایه ESM بومی ارائه می‌دهد. فریمورک‌هایی که از قابلیت HMR پشتیبانی می‌کنند، می‌توانند از این API استفاده کنند تا به‌روزرسانی‌های فوری و دقیق را بدون نیاز به بارگذاری مجدد صفحه یا از دست رفتن وضعیت برنامه ارائه دهند. Vite یکپارچه‌سازی‌های HMR اختصاصی برای **[کامپوننت‌های تک‌فایلی Vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)** و **[React Fast Refresh](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)** فراهم می‌کند. همچنین یکپارچه‌سازی‌های رسمی برای **Preact** از طریق **[‎@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite)** وجود دارد.
 
-Note you don't need to manually set these up - when you [create an app via `create-vite`](./), the selected templates would have these pre-configured for you already.
+توجه داشته باشید که نیازی به تنظیم دستی این موارد ندارید. زمانی که یک برنامه را از طریق **[`create-vite`](./)** ایجاد می‌کنید، قالب‌های انتخابی این تنظیمات را از پیش برای شما پیکربندی کرده‌اند.
 
-## TypeScript
+## تایپ‌اسکریپت
 
-Vite supports importing `.ts` files out of the box.
+Vite به‌طور پیش‌فرض از ایمپورت کردن فایل‌های `‎.ts` پشتیبانی می‌کند.
 
-### Transpile Only
+### فقط تبدیل (Transpile Only)
 
-Note that Vite only performs transpilation on `.ts` files and does **NOT** perform type checking. It assumes type checking is taken care of by your IDE and build process.
+توجه داشته باشید که Vite تنها عملیات **تبدیل (transpilation)** را روی فایل‌های `‎.ts` انجام می‌دهد و **هیچ‌گونه بررسی تایپ (type checking)** انجام نمی‌دهد. این ابزار فرض می‌کند که بررسی تایپ توسط IDE یا فرآیند ساخت شما مدیریت می‌شود.
 
-The reason Vite does not perform type checking as part of the transform process is because the two jobs work fundamentally differently. Transpilation can work on a per-file basis and aligns perfectly with Vite's on-demand compile model. In comparison, type checking requires knowledge of the entire module graph. Shoe-horning type checking into Vite's transform pipeline will inevitably compromise Vite's speed benefits.
+دلیل اینکه Vite بررسی تایپ را به‌عنوان بخشی از فرآیند تبدیل انجام نمی‌دهد این است که این دو وظیفه به‌صورت بنیادی متفاوت عمل می‌کنند. تبدیل (Transpilation) می‌تواند به‌صورت مستقل برای هر فایل انجام شود و کاملاً با مدل کامپایل در لحظه Vite هماهنگ است. در مقایسه، بررسی تایپ به اطلاعات کامل از کل گراف ماژول نیاز دارد. گنجاندن بررسی تایپ در مراحل تبدیل Vite به‌ناچار مزایای سرعتی آن را کاهش می‌دهد.
 
-Vite's job is to get your source modules into a form that can run in the browser as fast as possible. To that end, we recommend separating static analysis checks from Vite's transform pipeline. This principle applies to other static analysis checks such as ESLint.
+وظیفه Vite این است که ماژول‌های منبع شما را به شکلی درآورد که بتوانند در سریع‌ترین زمان ممکن در مرورگر اجرا شوند. به همین منظور، پیشنهاد می‌شود که بررسی‌های تحلیلی استاتیک را از مراحل تبدیل Vite جدا کنید. این اصل برای سایر بررسی‌های تحلیلی استاتیک مانند ESLint نیز صادق است.
 
-- For production builds, you can run `tsc --noEmit` in addition to Vite's build command.
+- برای بیلد‌های پروداکش، می‌توانید دستور `tsc --noEmit` را علاوه بر دستور بیلد Vite اجرا کنید.
 
-- During development, if you need more than IDE hints, we recommend running `tsc --noEmit --watch` in a separate process, or use [vite-plugin-checker](https://github.com/fi3ework/vite-plugin-checker) if you prefer having type errors directly reported in the browser.
+- در طول توسعه، اگر به اطلاعات بیشتری فراتر از پیشنهادات IDE نیاز دارید، پیشنهاد می‌شود که دستور `tsc --noEmit --watch` را در یک فرآیند جداگانه اجرا کنید، یا اگر ترجیح می‌دهید که خطاهای تایپ مستقیماً در مرورگر گزارش شوند، از [vite-plugin-checker](https://github.com/fi3ework/vite-plugin-checker) استفاده کنید.
 
-Vite uses [esbuild](https://github.com/evanw/esbuild) to transpile TypeScript into JavaScript which is about 20~30x faster than vanilla `tsc`, and HMR updates can reflect in the browser in under 50ms.
+Vite از [esbuild](https://github.com/evanw/esbuild) برای تبدیل تایپ‌اسکریپت به جاوااسکریپت استفاده می‌کند که حدود ۲۰ تا ۳۰ برابر سریع‌تر از `tsc` معمولی است و به‌روزرسانی‌های HMR می‌توانند در کمتر از ۵۰ میلی‌ثانیه در مرورگر منعکس شوند.
 
-Use the [Type-Only Imports and Export](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) syntax to avoid potential problems like type-only imports being incorrectly bundled, for example:
+برای جلوگیری از مشکلات احتمالی مانند باندل نادرست ایمپورت فقط تایپ (type-only imports)، از سینتکس [Type-Only Imports and Export](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) استفاده کنید. به‌عنوان مثال:
+
+برای جلوگیری از مشکلات احتمالی مانند ایمپورت کردن تایپ به تنهایی (type-only imports) که به‌طور نادرست در بسته نهایی گنجانده می‌شوند، از سینتکس [Type-Only Imports and Export](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) استفاده کنید. به‌عنوان مثال:
 
 ```ts
 import type { T } from 'only/types'
