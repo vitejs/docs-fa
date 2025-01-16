@@ -146,6 +146,8 @@ export default defineConfig({
       next: 'بعدی'
     },
 
+    outlineTitle: 'در این صفحه',
+
     editLink: {
       pattern: 'https://github.com/mostafa-nematpour/vite-docs-fa/edit/main/docs/:path',
       text: 'اصلاح ترجمه این صفحه در گیت‌هاب',
