@@ -19,7 +19,7 @@ import HeroDiagram from './HeroDiagram.vue'
       <h1>ابزار ساخت<br />برای وب</h1>
       <!-- Tagline -->
       <h3>
-        Vite ابزار ساخت برای frontend و فوق‌العاده سریع است
+        Vite ابزار ساخت فوق‌العاده سریع برای frontend است
         که نسل بعدی برنامه‌های وب را توانمند می‌سازد.
       </h3>
 

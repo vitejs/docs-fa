@@ -252,7 +252,7 @@ export default defineConfig({
               link: '/guide/',
             },
             {
-              text: 'Features',
+              text: 'ویژگی‌ها',
               link: '/guide/features',
             },
             {

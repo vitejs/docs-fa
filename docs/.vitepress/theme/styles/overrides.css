@@ -75,6 +75,11 @@
   text-align: end !important;
   direction: ltr !important;
 }
+@media (min-width: 768px) {
+  .VPNavBarMenu {
+    flex-direction: row-reverse;
+  }
+}
 @media (min-width: 1280px) {
   .VPDoc .container {
     flex-direction: row-reverse;

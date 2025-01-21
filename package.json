@@ -8,6 +8,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "dev": "vitepress dev docs --host",
     "docs:dev": "vitepress dev docs --host",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
