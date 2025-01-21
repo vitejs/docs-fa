@@ -1,63 +1,63 @@
-<!-- You can remove the following notice from your fork -->
-## This repo is a template for [Vite.js docs translation repositories](https://github.com/vitejs?q=docs). See [guide](/.github/CONTRIBUTING.md).
+<h1 dir="rtl" style="display: flex;"> ترجمه مستندات <a href="https://vite.dev" target="_blank">Vite</a> به فارسی 🩷  
+</h1>
 
----
-<p align="center">
-  <a href="https://vite.dev" target="_blank" rel="noopener noreferrer">
-    <img width="180" src="https://vite.dev/logo.svg" alt="Vite logo">
-  </a>
+
+<p dir="rtl">
+ما توی این پروژه گروه کوچیکی از اکوسیستم بزرگ Vue هستیم که روی ترجمه‌ی مستندات Vite کار می‌کنیم، تا کسی که حتی زبان انگلیسی رو خوب بلد نیست بتونه توسعه‌ی فرانت‌اند با این ابزار رو همراه داکیومنت رسمی و فارسی خودش کاملا اصولی و درست یاد بگیره.
 </p>
-<br/>
-<p align="center">
-  <a href="https://npmjs.com/package/vite"><img src="https://img.shields.io/npm/v/vite.svg" alt="npm package"></a>
-  <a href="https://nodejs.org/en/about/previous-releases"><img src="https://img.shields.io/node/v/vite.svg" alt="node compatibility"></a>
-  <a href="https://github.com/vitejs/vite/actions/workflows/ci.yml"><img src="https://github.com/vitejs/vite/actions/workflows/ci.yml/badge.svg?branch=main" alt="build status"></a>
-  <a href="https://pr.new/vitejs/vite"><img src="https://developer.stackblitz.com/img/start_pr_dark_small.svg" alt="Start new PR in StackBlitz Codeflow"></a>
-  <a href="https://chat.vite.dev"><img src="https://img.shields.io/badge/chat-discord-blue?style=flat&logo=discord" alt="discord chat"></a>
+
+<h2 dir="rtl">راهنمای مشارکت🌱</h2>
+
+<p dir="rtl">
+ اول از همه مشارکت شما باعث دلگرمی ماست و به شدت از علاقه‌مندی شما به پیشرفت مستندات فارسی Vite حمایت می‌کنیم. شما می‌تونید با ترجمه‌ی صفحات و بهبود کیفیت صفحات ترجمه‌شده به توسعه‌ی این پروژه کمک کنید.
 </p>
-<br/>
 
-# Vite ⚡
+<p dir="rtl">
+قبل از شروع بهتره که این چند نکته رو درنظر داشته باشید:
+</p>
 
-> Next Generation Frontend Tooling
+<ul dir="rtl">
+  <li>⚙️ مستندات با <a href="https://github.com/vuejs/vitepress">VitePress</a> ساخته شده.</li>
+  
+  <li>⚡ محتوای سایت با فرمت Markdown توی مسیر <code>docs</code> قرار داره.</li>
 
-- 💡 Instant Server Start
-- ⚡️ Lightning Fast HMR
-- 🛠️ Rich Features
-- 📦 Optimized Build
-- 🔩 Universal Plugin Interface
-- 🔑 Fully Typed APIs
+  <li>📦 برای توسعه به صورت local، از <a href="https://pnpm.io/" target="_blank">pnpm</a> به عنوان Package Manager استفاده کنید.</li>
 
-Vite (French word for "quick", pronounced [`/vit/`](https://cdn.jsdelivr.net/gh/vitejs/vite@main/docs/public/vite.mp3), like "veet") is a new breed of frontend build tooling that significantly improves the frontend development experience. It consists of two major parts:
+  <li>🌿 این پروژه نیاز به Node.js نسخه <code>v18.0.0</code> یا بالاتر داره، چون ما از ویژگی‌های جدیدی مثل optional chaining داخل کدها استفاده می‌کنیم.</li>
 
-- A dev server that serves your source files over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), with [rich built-in features](https://vite.dev/guide/features.html) and astonishingly fast [Hot Module Replacement (HMR)](https://vite.dev/guide/features.html#hot-module-replacement).
+  <li>🌻 ترجیحا فقط روی ترجمه مشارکت کنید و مشکلات مربوط به RTL یا از این قبیل رو توی issue اطلاع بدید.</li>
+  
+  <li>🪼 توی مستندات VitePress، می‌تونید در مورد <a href="https://vitepress.dev/guide/markdown">Markdown Extentions</a>هایی که پشتیبانی میشه و استفاده از <a href="https://vitepress.dev/guide/using-vue"> سینتکس Vue داخل Markdown</a> مطالعه کنید و یاد بگیرید (که البته برای مشارکت توی ترجمه لازم نیست).</li>
 
-- A [build command](https://vite.dev/guide/build.html) that bundles your code with [Rollup](https://rollupjs.org), pre-configured to output highly optimized static assets for production.
+  <li>🧠 برای توصیه‌های رسمی Vue درباره نوشتن و حفظ محتوای مستندات، به <a href="https://github.com/vuejs/docs/blob/main/.github/contributing/writing-guide.md">این صفحه</a> مراجعه کنید (اختیاری).</li>
 
-In addition, Vite is highly extensible via its [Plugin API](https://vite.dev/guide/api-plugin.html) and [JavaScript API](https://vite.dev/guide/api-javascript.html) with full typing support.
+  <li>🍄 برای افزایش کیفیت ترجمه مستندات حتما بخش <a href="https://github.com/the-pesar/docs-fa/blob/main/GLOSSARY.md">واژه‌نامه</a> و شیوه نگارش رو با دقت مطالعه کنید.</li>
+</ul>
 
-[Read the Docs to Learn More](https://vite.dev).
+<p dir="rtl">
+برای مشارکت کردن توی پروژه باید این مراحل ساده رو طی کنید:
+</p>
 
-## Packages
+<p dir="rtl">
+<strong>مرحله اول: </strong> اول از همه از این ریپازیتوری یه <code>fork</code> رو بگیرید و اون رو روی سیستم خودتون <code>pull</code> کنید. بعد می‌تونید یه نگاه جزئی به پروژه برای آشنایی با ساختار اون داشته باشید. با دستور <code>pnpm install</code> وابستگی‌ها رو نصب و با <code>pnpm run docs:dev</code> هم پروژه رو اجرا کنید.
+</p>
+  
+<p dir="rtl">
+<strong>مرحله دوم: </strong> از توی مستندات یه صفحه‌ که تا به حال به فارسی ترجمه نشده رو پیدا کنید و از این <a href="https://github.com/mostafa-nematpour/vite-docs-fa/issues/5">لیست</a> مطمئن بشید که کسی درحال ترجمه اون صفحه نباشه. بعد با اعلام کردن این صفحه توی گروه تلگرام و بعد از هماهنگی می‌تونید ترجمه صفحه‌ی جدید رو شروع کنید.
+</p>
 
-| Package                                         | Version (click for changelogs)                                                                                                    |
-| ----------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------- |
-| [vite](packages/vite)                           | [![vite version](https://img.shields.io/npm/v/vite.svg?label=%20)](packages/vite/CHANGELOG.md)                                    |
-| [@vitejs/plugin-legacy](packages/plugin-legacy) | [![plugin-legacy version](https://img.shields.io/npm/v/@vitejs/plugin-legacy.svg?label=%20)](packages/plugin-legacy/CHANGELOG.md) |
-| [create-vite](packages/create-vite)             | [![create-vite version](https://img.shields.io/npm/v/create-vite.svg?label=%20)](packages/create-vite/CHANGELOG.md)               |
+<p dir="rtl">
+<strong>مرحله سوم: </strong>بعد از اتمام کامل ترجمه‌ی صفحه، می‌تونید یه <code>PR</code> بسازید تا بعد از بررسی <code>merge</code> بشه.
+</p>
 
-## Contribution
+<p dir="rtl">پی‌نوشت: برای اصلاح یا بهبود صفحات ترجمه شده نیاز به هماهنگی نیست ولی در صورتی که سوالی دارید پیشنهاد میشه تو گروه تلگرام <a href="https://t.me/Vue_Docs_Fa">Vue_Docs_Fa</a> بپرسید.</p>
 
-See [Contributing Guide](CONTRIBUTING.md).
+<h2 dir="rtl">مشارکت‌کنندگان🪴</h2>
 
-## License
+<p dir="rtl">به زودی...</p>
 
-[MIT](LICENSE).
+<h3 dir="rtl">ارتباط با مشارکت‌کنندگان</h3>
 
-## Sponsors
-
-<p align="center">
-  <a target="_blank" href="https://github.com/sponsors/yyx990803">
-    <img alt="sponsors" src="https://sponsors.vuejs.org/vite.svg?v2">
-  </a>
+<p dir="rtl">
+توی گروه تلگرامی <a href="https://t.me/Vue_Docs_Fa">@Vue_Docs_Fa</a> یا بخش <a href="https://github.com/the-pesar/docs-fa/issues">issues</a> می‌تونید با مشارکت‌کنندگان به طور مستقیم در ارتباط باشید.
 </p>
