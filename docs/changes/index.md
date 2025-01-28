@@ -1,27 +1,27 @@
-# Breaking Changes
+# تغییرات اساسی
 
-List of breaking changes in Vite including API deprecations, removals, and changes. Most of the changes below can be opt-in using the [`future` option](/config/shared-options.html#future) in your Vite config.
+لیست تغییرات اساسی در Vite شامل منسوخ شدن API‌ها، حذف‌ها، و تغییرات. بیشتر تغییرات زیر را می‌توانید با استفاده از [گزینه `آینده`](/config/shared-options.html#future) در تنظیمات Vite خود به‌صورت اختیاری فعال کنید.
 
-## Planned
+## برنامه‌ریزی شده
 
-These changes are planned for the next major version of Vite. The deprecation or usage warnings will guide you where possible, and we're reaching out to framework, plugin authors, and users to apply these changes.
+این تغییرات برای نسخه اصلی بعدی Vite برنامه‌ریزی شده‌اند. هشدارهای مربوط به منسوخ شدن یا استفاده در صورت امکان شما را راهنمایی خواهند کرد و ما با نویسندگان فریم‌ورک‌ها، افزونه‌ها و کاربران در ارتباط هستیم تا این تغییرات را اعمال کنیم.
 
-- _No planned changes yet_
+- _هنوز هیچ تغییر برنامه‌ریزی شده‌ای وجود ندارد_
 
-## Considering
+## قابل توجه
 
-These changes are being considered and are often experimental APIs that intend to improve upon current usage patterns. As not all changes are listed here, please check out the [Experimental Label in Vite GitHub Discussions](https://github.com/vitejs/vite/discussions/categories/feedback?discussions_q=label%3Aexperimental+category%3AFeedback) for the full list.
+این تغییرات در حال بررسی هستند و اغلب شامل API‌های آزمایشی می‌باشند که هدف آن‌ها بهبود الگوهای استفاده فعلی است. از آنجا که تمامی تغییرات در اینجا ذکر نشده‌اند، لطفاً برای مشاهده لیست کامل به [Experimental Label in Vite GitHub Discussions](https://github.com/vitejs/vite/discussions/categories/feedback?discussions_q=label%3Aexperimental+category%3AFeedback) مراجعه کنید.
 
-We don't recommend switching to these APIs yet. They are included in Vite to help us gather feedback. Please check these proposals and let us know how they work in your use case in each's linked GitHub Discussions.
+ما توصیه نمی‌کنیم که هنوز به این API‌ها سوئیچ کنید. این API‌ها در Vite گنجانده شده‌اند تا به ما در جمع‌آوری بازخورد کمک کنند. لطفاً این پیشنهادها را بررسی کنید و در بحث‌های مرتبط در GitHub به ما اطلاع دهید که چگونه در موارد استفاده شما کار می‌کنند.
 
-- [`this.environment` in Hooks](/changes/this-environment-in-hooks)
-- [HMR `hotUpdate` Plugin Hook](/changes/hotupdate-hook)
-- [Move to per-environment APIs](/changes/per-environment-apis)
-- [SSR using `ModuleRunner` API](/changes/ssr-using-modulerunner)
-- [Shared plugins during build](/changes/shared-plugins-during-build)
+- [`this.environment` در هوک‌ها](/changes/this-environment-in-hooks)
+- [هوک پلاگین `hotUpdate`برای HMR](/changes/hotupdate-hook)
+- [انتقال به API‌های مخصوص هر محیط](/changes/per-environment-apis)
+- [SSR با استفاده از `ModuleRunner` API](/changes/ssr-using-modulerunner)
+- [اشتراک‌گذاری پلاگین‌ها در حین ساخت (build)](/changes/shared-plugins-during-build)
 
-## Past
+## گذشته
 
-The changes below has been done or reverted. They are no longer relevant in the current major version.
+تغییرات زیر اعمال شده یا لغو گردیده‌اند. این تغییرات در نسخه اصلی فعلی دیگر مرتبط نیستند.
 
-- _No past changes yet_
+- _هنوز هیچ تغییر گذشته‌ای وجود ندارد_

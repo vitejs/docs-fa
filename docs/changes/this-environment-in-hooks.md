@@ -1,24 +1,24 @@
-# `this.environment` in Hooks
+# `this.environment` در هوک‌ها
 
-::: tip Feedback
-Give us feedback at [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)
+::: tip بازخورد
+به ما در [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358) بازخورد دهید
 :::
 
-Before Vite 6, only two environments were available: `client` and `ssr`. A single `options.ssr` plugin hook argument in `resolveId`, `load` and `transform` allowed plugin authors to differentiate between these two environments when processing modules in plugin hooks. In Vite 6, a Vite application can define any number of named environments as needed. We're introducing `this.environment` in the plugin context to interact with the environment of the current module in hooks.
+پیش از Vite 6، فقط دو محیط موجود بود: `client` و `ssr`. یک آرگومان هوک پلاگین `options.ssr` در `resolveId`، `load` و `transform` به نویسندگان پلاگین این امکان را می‌داد که هنگام پردازش ماژول‌ها در هوک‌های پلاگین، این دو محیط را از هم تمایز دهند. در Vite 6، یک برنامه Vite می‌تواند هر تعداد محیط نام‌گذاری‌شده را طبق نیاز تعریف کند. ما `this.environment` را در زمینه پلاگین معرفی می‌کنیم تا با محیط ماژول جاری در هوک‌ها تعامل داشته باشیم.
 
-Affect scope: `Vite Plugin Authors`
+دامنه تاثیر: `نویسندگان پلاگین Vite`
 
-::: warning Future Deprecation
-`this.environment` was introduced in `v6.0`. The deprecation of `options.ssr` is planned for `v7.0`. At that point we'll start recommending migrating your plugins to use the new API. To identify your usage, set `future.removePluginHookSsrArgument` to `"warn"` in your vite config.
+::: warning منسوخ‌شدن در آینده
+`this.environment` در نسخه `v6.0` معرفی‌شد. منسوخ شدن `options.ssr` برای نسخه `v7.0` برنامه‌ریزی شده است. در آن زمان، شروع به توصیه به مهاجرت پلاگین‌ها به استفاده از API جدید خواهیم کرد. برای شناسایی استفاده از این ویژگی، می‌توانید `future.removePluginHookSsrArgument` را در تنظیمات Vite خود به مقدار `"warn"` تنظیم کنید.
 :::
 
-## Motivation
+## انگیزه
 
-`this.environment` not only allow the plugin hook implementation to know the current environment name, it also gives access to the environment config options, module graph information, and transform pipeline (`environment.config`, `environment.moduleGraph`, `environment.transformRequest()`). Having the environment instance available in the context allows plugin authors to avoid the dependency of the whole dev server (typically cached at startup through the `configureServer` hook).
+`this.environment` نه تنها به پیاده‌سازی هوک پلاگین اجازه می‌دهد که نام محیط جاری را بداند، بلکه دسترسی به گزینه‌های پیکربندی محیط، اطلاعات گراف ماژول، و خط لوله تبدیل (transform pipeline) را نیز فراهم می‌کند (`environment.config`، `environment.moduleGraph`، `environment.transformRequest `). در دسترس بودن نمونه محیط در زمینه پلاگین به نویسندگان پلاگین این امکان را می‌دهد که از وابستگی به سرور توسعه کامل (که معمولاً از طریق هوک `configureServer` در ابتدای راه‌اندازی کش می‌شود) جلوگیری کنند.
 
-## Migration Guide
+## راهنمای مهاجرت
 
-For the existing plugin to do a quick migration, replace the `options.ssr` argument with `this.environment.name !== 'client'` in the `resolveId`, `load` and `transform` hooks:
+برای انجام یک مهاجرت سریع در پلاگین‌های موجود، آرگومان `options.ssr` را با `this.environment.name !== 'client'` در هوک‌های `resolveId`، `load` و `transform` جایگزین کنید:
 
 ```ts
 import { Plugin } from 'vite'
@@ -31,13 +31,13 @@ export function myPlugin(): Plugin {
       const isSSR = this.environment.name !== 'client' // [!code ++]
 
       if (isSSR) {
-        // SSR specific logic
+        // منطق خاص SSR
       } else {
-        // Client specific logic
+        // منطق خاص Client
       }
     },
   }
 }
 ```
 
-For a more robust long term implementation, the plugin hook should handle for [multiple environments](/guide/api-environment.html#accessing-the-current-environment-in-hooks) using fine-grained environment options instead of relying on the environment name.
+برای یک پیاده‌سازی پایدارتر در بلندمدت، هوک پلاگین باید به جای تکیه بر نام محیط، به‌طور دقیق برای [چندین محیط](/guide/api-environment.html#accessing-the-current-environment-in-hooks)  از گزینه‌های محیطی ریزدانه استفاده کند.
