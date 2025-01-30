@@ -256,11 +256,11 @@ export default defineConfig({
               link: '/guide/features',
             },
             {
-              text: 'CLI',
+              text: 'رابط خط فرمان - CLI',
               link: '/guide/cli',
             },
             {
-              text: 'Using Plugins',
+              text: 'استفاده از پلاگین‌ها ',
               link: '/guide/using-plugins',
             },
             {

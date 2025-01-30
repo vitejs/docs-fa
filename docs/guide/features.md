@@ -53,15 +53,22 @@ import type { T } from 'only/types'
 export type { T }
 ```
 
-### TypeScript Compiler Options
+### گزینه‌های کامپایلر TypeScript
 
-Some configuration fields under `compilerOptions` in `tsconfig.json` require special attention.
+برخی از فیلدهای پیکربندی در `compilerOptions` در فایل `tsconfig.json` نیاز به توجه ویژه دارند.
 
 #### `isolatedModules`
 
-- [TypeScript documentation](https://www.typescriptlang.org/tsconfig#isolatedModules)
+- [مستندات TypeScript](https://www.typescriptlang.org/tsconfig#isolatedModules)
 
-Should be set to `true`.
+باید به `true` تنظیم شود.
+
+این به این دلیل است که `esbuild` فقط ترنسپایل را بدون اطلاع از تایپ‌ها انجام می‌دهد و از ویژگی‌هایی مانند const enum و ایمپورت تایپ ضمنی پشتیبانی نمی‌کند.
+
+باید `‎"isolatedModules": true` را در `tsconfig.json` زیر `compilerOptions` تنظیم کنید تا TypeScript به شما در مورد ویژگی‌هایی که با ترنسپایل ایزوله کار نمی‌کنند، هشدار دهد.
+
+اگر یک وابستگی با `‎"isolatedModules": true` به خوبی کار نمی‌کند، می‌توانید از `‎"skipLibCheck": true` استفاده کنید تا به طور موقت خطاها را تا زمانی که در بالادست رفع شوند، نادیده بگیرید.
+
 
 It is because `esbuild` only performs transpilation without type information, it doesn't support certain features like const enum and implicit type-only imports.
 

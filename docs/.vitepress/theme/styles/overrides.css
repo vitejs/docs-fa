@@ -24,7 +24,9 @@
   left: auto !important;
 }
 .vp-doc :not(pre) > code {
-  padding: 0px 6px !important;
+  padding: 0px 5px !important;
+  margin-right: 1px;
+  margin-left: 1px;
 }
 .vp-code-block-title-bar {
   direction: ltr !important;
@@ -74,6 +76,10 @@
 .VPSidebar{
   text-align: end !important;
   direction: ltr !important;
+}
+.VPSidebarItem .text{
+  text-align: start !important;
+  direction: rtl !important;
 }
 @media (min-width: 768px) {
   .VPNavBarMenu {
