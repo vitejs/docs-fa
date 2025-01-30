@@ -22,7 +22,7 @@ Vite همچنین از طریق [API پلاگین](./api-plugin) و [API جاو�
 
 در طول توسعه، Vite مقدار [`esnext` را به target](https://esbuild.github.io/api/#target) تنظیم می‌کند، زیرا ما فرض می‌کنیم که از یک مرورگر مدرن استفاده می‌شود که تمام ویژگی‌های جدید جاوااسکریپت و CSS را پشتیبانی می‌کند. این از کاهش سطح سینتکس جلوگیری می‌کند و به Vite اجازه می‌دهد ماژول‌ها را تا حد امکان نزدیک به سورس کد اصلی سِرو کند.
 
-برای بیلد پروداکشن، به طور پیش‌فرض Vite مرورگرهایی را هدف قرار می‌دهد که از [ماژول‌های ES بومی](https://caniuse.com/es6-module)، [ایمپورت داینامیک ESM بومی](https://caniuse.com/es6-module-dynamic-import) و [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) پشتیبانی می‌کنند. مرورگرهای قدیمی می‌توانند از طریق پلاگین رسمی [‎@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) پشتیبانی شوند. برای جزئیات بیشتر می‌توانید به بخش [بیلد برای پروداکشن](./build) مراجعه کنید.
+در فرآیند بیلد برای پروداکشن، Vite به‌طور پیش‌فرض مرورگرهایی را هدف قرار می‌دهد که از ویژگی‌های مدرن جاوااسکریپت پشتیبانی می‌کنند. این ویژگی‌ها شامل [ماژول‌های ES بومی](https://caniuse.com/es6-module) ، [ایمپورت داینامیک ESM](https://caniuse.com/es6-module-dynamic-import) ، [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) ، [Nullish Coalescing](https://caniuse.com/mdn-javascript_operators_nullish_coalescing) و [BigInt](https://caniuse.com/bigint) هستند. در صورت نیاز به پشتیبانی از مرورگرهای قدیمی، می‌توان از پلاگین رسمی [‎@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) استفاده کرد. برای اطلاعات بیشتر، به بخش [بیلد برای پروداکشن](./build) مراجعه کنید.
 
 ## امتحان Vite به صورت آنلاین
 

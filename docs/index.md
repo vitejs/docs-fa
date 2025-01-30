@@ -1,6 +1,6 @@
 ---
 title: Vite
-titleTemplate: Next Generation Frontend Tooling
+titleTemplate: ابزار نسل بعدی فرانت‌اند
 pageClass: landing dark
 
 layout: home

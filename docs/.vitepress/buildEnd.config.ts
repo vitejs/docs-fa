@@ -10,7 +10,7 @@ const blogUrl = `${siteUrl}/blog`
 export const buildEnd = async (config: SiteConfig): Promise<void> => {
   const feed = new Feed({
     title: 'Vite',
-    description: 'Next Generation Frontend Tooling',
+    description: 'ابزار نسل بعدی فرانت‌اند',
     id: blogUrl,
     link: blogUrl,
     language: 'en',
