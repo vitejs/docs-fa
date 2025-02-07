@@ -264,7 +264,7 @@ export default defineConfig({
               link: '/guide/using-plugins',
             },
             {
-              text: 'Dependency Pre-Bundling',
+              text: 'پیش‌بسته‌بندی وابستگی',
               link: '/guide/dep-pre-bundling',
             },
             {
