@@ -1,10 +1,12 @@
-# Deploying a Static Site
+# دیپلوی یک سایت استاتیک
 
-The following guides are based on some shared assumptions:
+راهنماهای زیر بر اساس برخی فرضیات مشترک نوشته شده‌اند:
 
-- You are using the default build output location (`dist`). This location [can be changed using `build.outDir`](/config/build-options.md#build-outdir), and you can extrapolate instructions from these guides in that case.
-- You are using npm. You can use equivalent commands to run the scripts if you are using Yarn or other package managers.
-- Vite is installed as a local dev dependency in your project, and you have setup the following npm scripts:
+- شما از مسیر پیش‌فرض برای خروجی فایل‌های بیلد شده (`dist`) استفاده می‌کنید. این مسیر را می‌توانید با استفاده از گزینه `build.outDir` تغییر دهید. اگر مسیر خروجی را تغییر داده‌اید، می‌توانید دستورالعمل‌های زیر را بر اساس نیاز خود تنظیم و تطبیق دهید.
+
+- شما از npm به عنوان پکیج منیجر استفاده می‌کنید. اگر از Yarn یا دیگر پکیج منیجرها استفاده می‌کنید، می‌توانید از دستورات معادل برای اجرای اسکریپت‌ها استفاده کنید.
+
+- Vite به عنوان یک وابستگی توسعه (dev dependency) به صورت محلی در پروژه شما نصب شده است و شما اسکریپت‌های npm زیر را در پروژه خود تنظیم کرده‌اید:
 
 ```json [package.json]
 {
@@ -15,33 +17,33 @@ The following guides are based on some shared assumptions:
 }
 ```
 
-It is important to note that `vite preview` is intended for previewing the build locally and not meant as a production server.
+توجه داشته باشید که دستور `vite preview` فقط برای پیش‌نمایش فایل‌های build شده به کار می‌رود و نمی‌توان از آن به عنوان یک پروداکشن سرور استفاده کرد.
 
-::: tip NOTE
-These guides provide instructions for performing a static deployment of your Vite site. Vite also supports Server Side Rendering. SSR refers to front-end frameworks that support running the same application in Node.js, pre-rendering it to HTML, and finally hydrating it on the client. Check out the [SSR Guide](./ssr) to learn about this feature. On the other hand, if you are looking for integration with traditional server-side frameworks, check out the [Backend Integration guide](./backend-integration) instead.
+::: tip توجه
+این راهنماها دستورالعمل‌هایی برای انجام پیاده سازی استاتیک (Static Deployment) سایت شما با استفاده از Vite ارائه می‌دهند. Vite همچنین از رندرینگ سمت سرور (Server-Side Rendering یا SSR) پشتیبانی می‌کند. SSR به فریم‌ورک‌های فرانت‌اندی اشاره دارد که قابلیت اجرای یک برنامه یکسان در Node.js، پیش‌رندر کردن آن به HTML و در نهایت Hydrate آن در سمت کلاینت را فراهم می‌کنند. برای یادگیری بیشتر درباره این قابلیت، به [راهنمای SSR](./ssr) مراجعه کنید. از طرف دیگر، اگر به دنبال ادغام با فریم‌ورک‌های سنتی سمت سرور هستید، به جای آن [راهنمای ادغام با backend](./backend-integration) را بررسی کنید.
 :::
 
-## Building the App
+## بیلد برنامه
 
-You may run `npm run build` command to build the app.
+می‌توانید از دستور `npm run build` برای بیلد برنامه استفاده کنید.
 
 ```bash
 $ npm run build
 ```
 
-By default, the build output will be placed at `dist`. You may deploy this `dist` folder to any of your preferred platforms.
+به طور پیش‌فرض، خروجی بیلد در پوشه `dist` ذخیره می‌شود. شما می‌توانید این پوشه `dist` را روی هر پلتفرم دلخواهی که مدنظر دارید، دیپلوی کنید.
 
-### Testing the App Locally
+### تست برنامه به صورت لوکال
 
-Once you've built the app, you may test it locally by running `npm run preview` command.
+پس از بیلد کردن برنامه، می‌توانید آن را به صورت لوکال با استفاده از دستور `npm run preview` تست کنید.
 
 ```bash
 $ npm run preview
 ```
 
-The `vite preview` command will boot up a local static web server that serves the files from `dist` at `http://localhost:4173`. It's an easy way to check if the production build looks OK in your local environment.
+دستور `vite preview`،این دستور یک وب سرور استاتیک لوکال راه‌اندازی می‌کند که فایل‌های داخل پوشه `dist` را در آدرس `http://localhost:4173` سرو می‌دهد. این روشی ساده برای بررسی این است که production build در محیط لوکال شما به درستی نمایش داده می‌شود.
 
-You may configure the port of the server by passing the `--port` flag as an argument.
+می‌توانید پورت سرور را با استفاده از فلگ `--port` به عنوان آرگومان تنظیم کنید.
 
 ```json [package.json]
 {
@@ -51,17 +53,17 @@ You may configure the port of the server by passing the `--port` flag as an argu
 }
 ```
 
-Now the `preview` command will launch the server at `http://localhost:8080`.
+اکنون دستور `preview` سرور را در آدرس `http://localhost:8080` راه‌اندازی می‌کند.
 
 ## GitHub Pages
 
-1. Set the correct `base` in `vite.config.js`.
+1. مقدار `base` را در فایل `vite.config.js` به درستی تنظیم کنید.
 
-   If you are deploying to `https://<USERNAME>.github.io/`, or to a custom domain through GitHub Pages (eg. `www.example.com`), set `base` to `'/'`. Alternatively, you can remove `base` from the configuration, as it defaults to `'/'`.
+   - اگر قصد دارید پروژه را در `https://<USERNAME>.github.io/` یا روی یک دامنه سفارشی از طریق GitHub Pages (مثلاً `www.example.com`) مستقر کنید، `base` را روی `'/'` تنظیم کنید. همچنین می‌توانید `base` را از تنظیمات حذف کنید، زیرا به طور پیش‌فرض مقدار آن `'/'` است.
 
-   If you are deploying to `https://<USERNAME>.github.io/<REPO>/` (eg. your repository is at `https://github.com/<USERNAME>/<REPO>`), then set `base` to `'/<REPO>/'`.
+   - اگر قصد دارید پروژه را در `https://<USERNAME>.github.io/<REPO>/` مستقر کنید (مثلاً اگر مخزن شما در آدرس `https://github.com/<USERNAME>/<REPO>` قرار دارد)، `base` را روی `'/<REPO>/'` تنظیم کنید.
 
-2. Go to your GitHub Pages configuration in the repository settings page and choose the source of deployment as "GitHub Actions", this will lead you to create a workflow that builds and deploys your project, a sample workflow that installs dependencies and builds using npm is provided:
+2. به بخش تنظیمات GitHub Pages در صفحه تنظیمات مخزن بروید و منبع استقرار را به عنوان **GitHub Actions** انتخاب کنید. این کار شما را به ایجاد یک workflow هدایت می‌کند که پروژه شما را بیلد و مستقر می‌کند. یک workflow نمونه که وابستگی‌ها را نصب کرده و با استفاده از npm پروژه را بیلد می‌کند، ارائه شده است:
 
    ```yml
    # Simple workflow for deploying static content to GitHub Pages
@@ -117,15 +119,15 @@ Now the `preview` command will launch the server at `http://localhost:8080`.
            uses: actions/deploy-pages@v4
    ```
 
-## GitLab Pages and GitLab CI
+## GitLab Pages و GitLab CI
 
-1. Set the correct `base` in `vite.config.js`.
+1. مقدار `base` را در فایل `vite.config.js` به درستی تنظیم کنید.
 
-   If you are deploying to `https://<USERNAME or GROUP>.gitlab.io/`, you can omit `base` as it defaults to `'/'`.
+   - اگر قصد دارید پروژه خود را در آدرس `https://<USERNAME یا GROUP>.gitlab.io/` دیپلوی کنید، می‌توانید `base` را نادیده بگیرید، زیرا به طور پیش‌فرض مقدار آن `'/'` است.
 
-   If you are deploying to `https://<USERNAME or GROUP>.gitlab.io/<REPO>/`, for example your repository is at `https://gitlab.com/<USERNAME>/<REPO>`, then set `base` to `'/<REPO>/'`.
+   - اگر قصد دارید پروژه خود را در آدرس `https://<USERNAME یا GROUP>.gitlab.io/<REPO>/` دیپلوی کنید (مثلاً اگر مخزن شما در آدرس `https://gitlab.com/<USERNAME>/<REPO>` قرار دارد)، باید `base` را به `'/<REPO>/'` تنظیم کنید.
 
-2. Create a file called `.gitlab-ci.yml` in the root of your project with the content below. This will build and deploy your site whenever you make changes to your content:
+2. در root پروژه خود، یک فایل با نام `.gitlab-ci.yml` ایجاد کنید و محتوای زیر را به آن اضافه کنید. این فایل باعث می‌شود هر زمان که تغییراتی در محتوای پروژه ایجاد کنید، به‌طور خودکار سایت شما ساخته شده (build) و دیپلوی شود:
 
    ```yaml [.gitlab-ci.yml]
    image: node:16.5.0
@@ -153,9 +155,9 @@ Now the `preview` command will launch the server at `http://localhost:8080`.
 
 ### Netlify CLI
 
-1. Install the [Netlify CLI](https://cli.netlify.com/).
-2. Create a new site using `ntl init`.
-3. Deploy using `ntl deploy`.
+1. [Netlify CLI](https://cli.netlify.com/) را نصب کنید.
+2. با استفاده از دستور `ntl init` یک سایت جدید ایجاد کنید.
+3. با دستور `ntl deploy` دیپلوی کنید.
 
 ```bash
 # Install the Netlify CLI
@@ -168,30 +170,30 @@ $ ntl init
 $ ntl deploy
 ```
 
-The Netlify CLI will share with you a preview URL to inspect. When you are ready to go into production, use the `prod` flag:
+CLI Netlify یک preview URL در اختیار شما قرار می‌دهد تا بتوانید آن را بررسی کنید. زمانی که آماده هستید به مرحله production بروید، از فلگ `prod` استفاده کنید:
 
 ```bash
 # Deploy the site into production
 $ ntl deploy --prod
 ```
 
-### Netlify with Git
+### Netlify با Git
 
-1. Push your code to a git repository (GitHub, GitLab, BitBucket, Azure DevOps).
-2. [Import the project](https://app.netlify.com/start) to Netlify.
-3. Choose the branch, output directory, and set up environment variables if applicable.
-4. Click on **Deploy**.
-5. Your Vite app is deployed!
+1. کد خود را به یک ریپازیتوری Git (مثل GitHub، GitLab، BitBucket، Azure DevOps) پوش کنید.
+2. [پروژه را به Netlify ایمپورت کنید](https://app.netlify.com/start).
+3. برنچ (Branch)، پوشه خروجی و متغیرهای محیطی را در صورت نیاز تنظیم کنید.
+4. روی **Deploy** کلیک کنید.
+5. اپلیکیشن Vite شما دیپلوی شد!
 
-After your project has been imported and deployed, all subsequent pushes to branches other than the production branch along with pull requests will generate [Preview Deployments](https://docs.netlify.com/site-deploys/deploy-previews/), and all changes made to the Production Branch (commonly “main”) will result in a [Production Deployment](https://docs.netlify.com/site-deploys/overview/#definitions).
+بعد از اینکه پروژه شما ایمپورت و دیپلوی شد، تمام پوش‌های بعدی به برنچ‌های غیر از برنچ اصلی (Production Branch) و همچنین Pull Request‌ها، [Preview Deployments](https://docs.netlify.com/site-deploys/deploy-previews/) ایجاد می‌کنند و تمام تغییرات اعمال شده روی برنچ اصلی (معمولاً “main”) منجر به یک [Production Deployment](https://docs.netlify.com/site-deploys/overview/#definitions) خواهند شد.
 
 ## Vercel
 
 ### Vercel CLI
 
-1. Install the [Vercel CLI](https://vercel.com/cli) and run `vercel` to deploy.
-2. Vercel will detect that you are using Vite and will enable the correct settings for your deployment.
-3. Your application is deployed! (e.g. [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
+1. [Vercel CLI](https://vercel.com/cli) را نصب کنید و دستور `vercel` را اجرا کنید تا دیپلوی انجام شود.
+2. Vercel تشخیص می‌دهد که شما از Vite استفاده می‌کنید و تنظیمات صحیح را برای دیپلوی فعال می‌کند.
+3. اپلیکیشن شما دیپلوی شد! (مثال: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
 
 ```bash
 $ npm i -g vercel
@@ -201,25 +203,25 @@ Vercel CLI
 - To deploy, `cd vite` and run `vercel`.
 ```
 
-### Vercel for Git
+### Vercel برای Git
 
-1. Push your code to your git repository (GitHub, GitLab, Bitbucket).
-2. [Import your Vite project](https://vercel.com/new) into Vercel.
-3. Vercel will detect that you are using Vite and will enable the correct settings for your deployment.
-4. Your application is deployed! (e.g. [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
+1. کد خود را به ریپازیتوری Git (مثل GitHub، GitLab، Bitbucket) پوش کنید.
+2. [پروژه Vite خود را به Vercel ایمپورت کنید](https://vercel.com/new).
+3. Vercel تشخیص می‌دهد که شما از Vite استفاده می‌کنید و تنظیمات صحیح را برای دیپلوی فعال می‌کند.
+4. اپلیکیشن شما دیپلوی شد! (مثال: [vite-vue-template.vercel.app](https://vite-vue-template.vercel.app/))
 
-After your project has been imported and deployed, all subsequent pushes to branches will generate [Preview Deployments](https://vercel.com/docs/concepts/deployments/environments#preview), and all changes made to the Production Branch (commonly “main”) will result in a [Production Deployment](https://vercel.com/docs/concepts/deployments/environments#production).
+بعد از اینکه پروژه شما ایمپورت و دیپلوی شد، تمام پوش‌های بعدی به برنچ‌ها، [Preview Deployments](https://vercel.com/docs/concepts/deployments/environments#preview) ایجاد می‌کنند و تمام تغییرات اعمال شده روی برنچ اصلی (معمولاً “main”) منجر به یک [Production Deployment](https://vercel.com/docs/concepts/deployments/environments#production) خواهند شد.
 
-Learn more about Vercel’s [Git Integration](https://vercel.com/docs/concepts/git).
+برای اطلاعات بیشتر، می‌توانید درباره [Git Integration در Vercel](https://vercel.com/docs/concepts/git) مطالعه کنید.
 
 ## Cloudflare Pages
 
-### Cloudflare Pages via Wrangler
+### Cloudflare Pages از طریق Wrangler
 
-1. Install [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/).
-2. Authenticate Wrangler with your Cloudflare account using `wrangler login`.
-3. Run your build command.
-4. Deploy using `npx wrangler pages deploy dist`.
+1. [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/get-started/) را نصب کنید.
+2. Wrangler را با حساب Cloudflare خود احراز هویت کنید. برای این کار از دستور `wrangler login` استفاده کنید.
+3. دستور build خود را اجرا کنید.
+4. با استفاده از دستور `npx wrangler pages deploy dist` دیپلوی کنید.
 
 ```bash
 # Install Wrangler CLI
@@ -235,27 +237,27 @@ $ npm run build
 $ npx wrangler pages deploy dist
 ```
 
-After your assets are uploaded, Wrangler will give you a preview URL to inspect your site. When you log into the Cloudflare Pages dashboard, you will see your new project.
+بعد از آپلود فایل‌ها، Wrangler یک preview URL در اختیار شما قرار می‌دهد تا سایت خود را بررسی کنید. وقتی وارد داشبورد Cloudflare Pages می‌شوید، پروژه جدید خود را مشاهده خواهید کرد.
 
-### Cloudflare Pages with Git
+### Cloudflare Pages با Git
 
-1. Push your code to your git repository (GitHub, GitLab).
-2. Log in to the Cloudflare dashboard and select your account in **Account Home** > **Pages**.
-3. Select **Create a new Project** and the **Connect Git** option.
-4. Select the git project you want to deploy and click **Begin setup**
-5. Select the corresponding framework preset in the build setting depending on the Vite framework you have selected.
-6. Then save and deploy!
-7. Your application is deployed! (e.g `https://<PROJECTNAME>.pages.dev/`)
+1. کد خود را به ریپازیتوری Git (مثل GitHub، GitLab) پوش کنید.
+2. وارد داشبورد Cloudflare شوید و حساب خود را در **Account Home** > **Pages** انتخاب کنید.
+3. **Create a new Project** و گزینه **Connect Git** را انتخاب کنید.
+4. پروژه Git که می‌خواهید دیپلوی کنید را انتخاب کرده و روی **Begin setup** کلیک کنید.
+5. در تنظیمات build، پریست فریم‌ورک مربوطه را بسته به فریم‌ورک Vite انتخاب‌شده تنظیم کنید.
+6. سپس ذخیره کرده و دیپلوی کنید!
+7. اپلیکیشن شما دیپلوی شد! (مثال: `https://<PROJECTNAME>.pages.dev/`)
 
-After your project has been imported and deployed, all subsequent pushes to branches will generate [Preview Deployments](https://developers.cloudflare.com/pages/platform/preview-deployments/) unless specified not to in your [branch build controls](https://developers.cloudflare.com/pages/platform/branch-build-controls/). All changes to the Production Branch (commonly “main”) will result in a Production Deployment.
+بعد از اینکه پروژه شما ایمپورت و دیپلوی شد، تمام پوش‌های بعدی به برنچ‌ها، [Preview Deployments](https://developers.cloudflare.com/pages/platform/preview-deployments/) ایجاد می‌کنند (مگر اینکه در [branch build controls](https://developers.cloudflare.com/pages/platform/branch-build-controls/) غیرفعال شده باشد). تمام تغییرات در برنچ اصلی (معمولاً “main”) منجر به یک Production Deployment خواهد شد.
 
-You can also add custom domains and handle custom build settings on Pages. Learn more about [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/get-started/#manage-your-site).
+همچنین می‌توانید دامنه‌های سفارشی اضافه کنید و تنظیمات build سفارشی را در Pages مدیریت کنید. برای اطلاعات بیشتر، [Cloudflare Pages Git Integration](https://developers.cloudflare.com/pages/get-started/#manage-your-site) را مطالعه کنید.
 
 ## Google Firebase
 
-1. Make sure you have [firebase-tools](https://www.npmjs.com/package/firebase-tools) installed.
+1. مطمئن شوید که [firebase-tools](https://www.npmjs.com/package/firebase-tools) نصب شده است.
 
-2. Create `firebase.json` and `.firebaserc` at the root of your project with the following content:
+2. در root پروژه خود فایل‌های `firebase.json` و `.firebaserc` را با محتوای زیر ایجاد کنید:
 
    ```json [firebase.json]
    {
@@ -280,54 +282,49 @@ You can also add custom domains and handle custom build settings on Pages. Learn
    }
    ```
 
-3. After running `npm run build`, deploy using the command `firebase deploy`.
+3. بعد از اجرای دستور `npm run build`، با استفاده از دستور `firebase deploy` دیپلوی کنید.
 
 ## Surge
 
-1. First install [surge](https://www.npmjs.com/package/surge), if you haven’t already.
+ابتدا اگر surge را نصب نکرده‌اید، آن را نصب کنید.
 
-2. Run `npm run build`.
+دستور `npm run build` را اجرا کنید.
 
-3. Deploy to surge by typing `surge dist`.
+برای دیپلوی روی surge، دستور `surge dist` را وارد کنید.
 
-You can also deploy to a [custom domain](http://surge.sh/help/adding-a-custom-domain) by adding `surge dist yourdomain.com`.
+همچنین می‌توانید با استفاده از دستور `surge dist yourdomain.com` روی یک دامنه سفارشی دیپلوی کنید.
 
 ## Azure Static Web Apps
 
-You can quickly deploy your Vite app with Microsoft Azure [Static Web Apps](https://aka.ms/staticwebapps) service. You need:
+می‌توانید اپلیکیشن Vite خود را به سرعت با سرویس [Static Web Apps](https://aka.ms/staticwebapps) مایکروسافت Azure دیپلوی کنید. برای این کار به موارد زیر نیاز دارید:
 
-- An Azure account and a subscription key. You can create a [free Azure account here](https://azure.microsoft.com/free).
-- Your app code pushed to [GitHub](https://github.com).
-- The [SWA Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps) in [Visual Studio Code](https://code.visualstudio.com).
+- یک حساب Azure و کلید اشتراک. می‌توانید [یک حساب Azure رایگان ایجاد کنید](https://azure.microsoft.com/free).
+- کد اپلیکیشن شما که به [GitHub](https://github.com) پوش شده باشد.
+- [افزونه SWA](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurestaticwebapps) در [Visual Studio Code](https://code.visualstudio.com).
 
-Install the extension in VS Code and navigate to your app root. Open the Static Web Apps extension, sign in to Azure, and click the '+' sign to create a new Static Web App. You will be prompted to designate which subscription key to use.
+افزونه را در VS Code نصب کنید و به root پروژه خود بروید. افزونه Static Web Apps را باز کنید، به Azure وارد شوید و روی علامت '+' کلیک کنید تا یک Static Web App جدید ایجاد کنید. از شما خواسته می‌شود که کلید اشتراک مورد نظر خود را انتخاب کنید.
 
-Follow the wizard started by the extension to give your app a name, choose a framework preset, and designate the app root (usually `/`) and built file location `/dist`. The wizard will run and will create a GitHub action in your repo in a `.github` folder.
+مراحل راهنمای ارائه‌شده توسط افزونه را دنبال کنید تا نام اپلیکیشن خود را انتخاب کنید، پریست فریم‌ورک را تنظیم کنید و مسیر root اپلیکیشن (معمولاً `/`) و مسیر فایل‌های ساخته‌شده (`/dist`) را مشخص کنید. راهنما اجرا می‌شود و یک GitHub Action در ریپازیتوری شما در پوشه `.github` ایجاد می‌کند.
 
-The action will work to deploy your app (watch its progress in your repo's Actions tab) and, when successfully completed, you can view your app in the address provided in the extension's progress window by clicking the 'Browse Website' button that appears when the GitHub action has run.
+این Action برای دیپلوی اپلیکیشن شما کار می‌کند (پیشرفت آن را در تب Actions ریپازیتوری خود مشاهده کنید) و پس از تکمیل موفقیت‌آمیز، می‌توانید اپلیکیشن خود را در آدرس ارائه‌شده در پنجره پیشرفت افزونه مشاهده کنید. برای این کار، روی دکمه 'Browse Website' که پس از اجرای GitHub Action ظاهر می‌شود، کلیک کنید.
 
 ## Render
 
-You can deploy your Vite app as a Static Site on [Render](https://render.com/).
+می‌توانید اپلیکیشن Vite خود را به عنوان یک سایت استاتیک در [Render](https://render.com/) دیپلوی کنید.
 
-1. Create a [Render account](https://dashboard.render.com/register).
-
-2. In the [Dashboard](https://dashboard.render.com/), click the **New** button and select **Static Site**.
-
-3. Connect your GitHub/GitLab account or use a public repository.
-
-4. Specify a project name and branch.
-
+1. یک [حساب Render](https://dashboard.render.com/register) ایجاد کنید.
+2. در [داشبورد](https://dashboard.render.com/)، روی دکمه **New** کلیک کنید و **Static Site** را انتخاب کنید.
+3. حساب GitHub/GitLab خود را متصل کنید یا از یک ریپازیتوری عمومی استفاده کنید.
+4. یک نام پروژه و برنچ مشخص کنید.
    - **Build Command**: `npm install && npm run build`
    - **Publish Directory**: `dist`
+5. روی **Create Static Site** کلیک کنید.
 
-5. Click **Create Static Site**.
+   اپلیکیشن شما باید در `https://<PROJECTNAME>.onrender.com/` دیپلوی شود.
 
-   Your app should be deployed at `https://<PROJECTNAME>.onrender.com/`.
+به طور پیش‌فرض، هر کامیت جدیدی که به برنچ مشخص‌شده پوش شود، به طور خودکار یک دیپلوی جدید ایجاد می‌کند. [Auto-Deploy](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) را می‌توان در تنظیمات پروژه پیکربندی کرد.
 
-By default, any new commit pushed to the specified branch will automatically trigger a new deployment. [Auto-Deploy](https://render.com/docs/deploys#toggling-auto-deploy-for-a-service) can be configured in the project settings.
-
-You can also add a [custom domain](https://render.com/docs/custom-domains) to your project.
+همچنین می‌توانید یک [دامنه سفارشی](https://render.com/docs/custom-domains) به پروژه خود اضافه کنید.
 
 <!--
   NOTE: The sections below are reserved for more deployment platforms not listed above.
@@ -345,12 +342,12 @@ You can also add a [custom domain](https://render.com/docs/custom-domains) to yo
 
 ## Flightcontrol
 
-Deploy your static site using [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite) by following these [instructions](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite).
+سایت استاتیک خود را با استفاده از [Flightcontrol](https://www.flightcontrol.dev/?ref=docs-vite) و با دنبال کردن این [دستورالعمل‌ها](https://www.flightcontrol.dev/docs/reference/examples/vite?ref=docs-vite) دیپلوی کنید.
 
 ## Kinsta Static Site Hosting
 
-Deploy your static site using [Kinsta](https://kinsta.com/static-site-hosting/) by following these [instructions](https://kinsta.com/docs/react-vite-example/).
+سایت استاتیک خود را با استفاده از [Kinsta](https://kinsta.com/static-site-hosting/) و با دنبال کردن این [دستورالعمل‌ها](https://kinsta.com/docs/react-vite-example/) دیپلوی کنید.
 
 ## xmit Static Site Hosting
 
-Deploy your static site using [xmit](https://xmit.co) by following this [guide](https://xmit.dev/posts/vite-quickstart/).
+سایت استاتیک خود را با استفاده از [xmit](https://xmit.co) و با دنبال کردن این [راهنما](https://xmit.dev/posts/vite-quickstart/) دیپلوی کنید.
