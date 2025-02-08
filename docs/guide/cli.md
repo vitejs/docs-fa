@@ -12,8 +12,6 @@
 vite [root]
 ```
 
-استفاده از فایل پیکربندی مشخص شده
-
 #### گزینه‌ها
 
 | گزینه‌ها                    |                                                                                                                |
@@ -28,7 +26,7 @@ vite [root]
 | `‎--base <path>‎`           | مسیر پایه public (پیش‌فرض: `/`) (`string`)                                                                     |
 | `‎-l, --logLevel <level>‎`  | info \| warn \| error \| silent (`string`)                                                                     |
 | `‎--clearScreen`            | اجازه/غیرفعال کردن پاک کردن صفحه هنگام لاگ‌گیری (`boolean`)                                                    |
-| `‎--configLoader <loader>‎` | استفاده از `bundle` برای باندل کردن کانفیگ با esbuild یا `runner` (آزمایشی) برای پردازش آن به صورت آنی (پیش‌فرض: `bundle`) |
+| `‎--configLoader <loader>‎` | استفاده از `bundle` برای باندل کردن کانفیگ با esbuild یا `runner` (آزمایشی) برای پردازش آن به صورت آنی، یا از `native` (آزمایشی) برای بارگذاری با استفاده از runtime بومی (پیش‌فرض: `bundle`) |
 | `‎--profile`                | شروع inspector داخلی Node.js ؛([گلوگاه‌های عملکرد](/guide/troubleshooting#performance-bottlenecks))     |
 | `‎-d, --debug [feat]‎`      | نمایش لاگ‌های دیباگ (`string \| boolean`)                                                                      |
 | `‎-f, --filter <filter>‎`   | فیلتر کردن لاگ‌های دیباگ (`string`)                                                                            |
@@ -80,6 +78,8 @@ vite build [root]
 ### `vite optimize`
 
 پیش‌باندل وابستگی‌ها.
+
+**منسوخ شده**: فرآیند پیش‌باندل به‌صورت خودکار اجرا می‌شود و نیازی به فراخوانی ندارد.
 
 #### استفاده
 
