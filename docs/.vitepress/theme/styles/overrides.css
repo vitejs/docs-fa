@@ -73,13 +73,18 @@
 .vp-doc th {
   text-align: center !important;
 }
-.VPSidebar{
+.VPSidebar {
   text-align: end !important;
   direction: ltr !important;
 }
-.VPSidebarItem .text{
+.VPSidebarItem .text {
   text-align: start !important;
   direction: rtl !important;
+}
+.vp-doc ul,
+.vp-doc ol {
+  padding-right: 1.25rem !important;
+  padding-left: unset !important;
 }
 @media (min-width: 768px) {
   .VPNavBarMenu {
