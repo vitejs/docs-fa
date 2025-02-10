@@ -280,7 +280,7 @@ export default defineConfig({
               link: '/guide/static-deploy',
             },
             {
-              text: 'Env Variables and Modes',
+              text: 'متغیرهای محیطی (Env Variables) و حالت‌ها ',
               link: '/guide/env-and-mode',
             },
             {
@@ -300,7 +300,7 @@ export default defineConfig({
               link: '/guide/troubleshooting',
             },
             {
-              text: 'Performance',
+              text: 'عملکرد',
               link: '/guide/performance',
             },
             {
