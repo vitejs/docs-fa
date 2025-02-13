@@ -268,7 +268,7 @@ export default defineConfig({
               link: '/guide/dep-pre-bundling',
             },
             {
-              text: 'Static Asset Handling',
+              text: 'مدیریت Assetهای استاتیک',
               link: '/guide/assets',
             },
             {
