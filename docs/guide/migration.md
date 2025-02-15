@@ -1,4 +1,4 @@
-# Migration from v5
+<!-- # Migration from v5
 
 ## Environment API
 
@@ -151,4 +151,147 @@ There are other breaking changes which only affect few users.
 
 ## Migration from v4
 
-Check the [Migration from v4 Guide](https://v5.vite.dev/guide/migration.html) in the Vite v5 docs first to see the needed changes to port your app to Vite 5, and then proceed with the changes on this page.
+Check the [Migration from v4 Guide](https://v5.vite.dev/guide/migration.html) in the Vite v5 docs first to see the needed changes to port your app to Vite 5, and then proceed with the changes on this page. -->
+
+
+
+
+
+
+
+
+
+
+
+
+# مهاجرت از نسخه v5
+
+## API محیط
+
+به عنوان بخشی از [API محیط آزمایشی](/guide/api-environment.md)، نیاز به بازسازی داخلی بزرگی بود. Vite 6 تلاش دارد تا تغییرات غیرقابل برگشتی را کاهش دهد تا پروژه‌ها بتوانند به راحتی به نسخه جدید ارتقا یابند. ما منتظریم تا بخش بزرگی از اکوسیستم به این نسخه مهاجرت کند و سپس استفاده از APIهای جدید را توصیه کنیم. ممکن است برخی موارد خاص وجود داشته باشد که بیشتر بر استفاده سطح پایین توسط فریم‌ورک‌ها و ابزارها تأثیر می‌گذارد. ما با نگهدارندگان در اکوسیستم همکاری کرده‌ایم تا این تفاوت‌ها قبل از انتشار کاهش یابند. اگر بازگشتی را مشاهده کردید، لطفاً [یک مشکل جدید باز کنید](https://github.com/vitejs/vite/issues/new?assignees=&labels=pending+triage&projects=&template=bug_report.yml).
+
+برخی از APIهای داخلی به دلیل تغییرات در پیاده‌سازی Vite حذف شده‌اند. اگر به یکی از آن‌ها وابسته بودید، لطفاً یک [درخواست ویژگی](https://github.com/vitejs/vite/issues/new?assignees=&labels=enhancement%3A+pending+triage&projects=&template=feature_request.yml) ایجاد کنید.
+
+## API زمان اجرا Vite
+
+API زمان اجرای آزمایشی Vite به API اجرایی ماژول تبدیل شد و در Vite 6 همراه با [API محیط آزمایشی](/guide/api-environment) منتشر شد. از آن‌جا که این ویژگی آزمایشی بود، حذف API قبلی که در Vite 5.1 معرفی شده بود، تغییر غیرقابل برگشتی نیست، اما کاربران باید برای مهاجرت به Vite 6، استفاده خود را به معادل‌های API اجرایی ماژول به‌روز کنند.
+
+## تغییرات عمومی
+
+### مقدار پیش‌فرض برای resolve.conditions
+
+این تغییر بر کاربرانی که تنظیمات [resolve.conditions](/config/shared-options#resolve-conditions) / [ssr.resolve.conditions](/config/ssr-options#ssr-resolve-conditions) / [ssr.resolve.externalConditions](/config/ssr-options#ssr-resolve-externalconditions) را پیکربندی نکرده‌اند تأثیر نمی‌گذارد.
+
+در Vite 5، مقدار پیش‌فرض برای resolve.conditions برابر [] بود و برخی شرایط به صورت داخلی اضافه می‌شدند. مقدار پیش‌فرض برای ssr.resolve.conditions همان مقدار resolve.conditions بود.
+
+از Vite 6 به بعد، برخی شرایط دیگر به صورت داخلی اضافه نمی‌شوند و باید در مقادیر پیکربندی گنجانده شوند.
+شرایطی که دیگر به صورت داخلی اضافه نمی‌شوند به شرح زیر است:
+
+- resolve.conditions: ['module', 'browser', 'development|production']
+- ssr.resolve.conditions: ['module', 'node', 'development|production']
+
+مقدار پیش‌فرض برای این گزینه‌ها به مقادیر معادل به‌روز شده است و ssr.resolve.conditions دیگر از resolve.conditions به عنوان مقدار پیش‌فرض استفاده نمی‌کند. توجه داشته باشید که development|production یک متغیر خاص است که با توجه به مقدار process.env.NODE_ENV به production یا development تبدیل می‌شود. این مقادیر پیش‌فرض از Vite به عنوان defaultClientConditions و defaultServerConditions صادر شده‌اند.
+
+اگر شما یک مقدار سفارشی برای resolve.conditions یا ssr.resolve.conditions مشخص کرده‌اید، باید آن را به‌روز کنید تا شرایط جدید را شامل شود.
+برای مثال، اگر قبلاً ['custom'] را برای resolve.conditions مشخص کرده‌اید، باید آن را به ['custom', ...defaultClientConditions] به‌روز کنید.
+
+### JSON stringify
+
+در Vite 5، زمانی که [json.stringify: true](/config/shared-options#json-stringify) تنظیم می‌شد، [json.namedExports](/config/shared-options#json-namedexports) غیرفعال می‌شد.
+
+از Vite 6 به بعد، حتی زمانی که json.stringify: true تنظیم شود، json.namedExports غیرفعال نمی‌شود و مقدار آن رعایت می‌شود. اگر می‌خواهید رفتار قبلی را داشته باشید، می‌توانید json.namedExports: false را تنظیم کنید.
+
+Vite 6 همچنین یک مقدار پیش‌فرض جدید برای json.stringify معرفی کرده است که به صورت 'auto' تنظیم شده است و فقط فایل‌های JSON بزرگ را رشته‌ای می‌کند. برای غیرفعال کردن این رفتار، json.stringify: false را تنظیم کنید.
+
+### پشتیبانی گسترش‌یافته از ارجاع‌های دارایی در عناصر HTML
+
+در Vite 5، تنها برخی از عناصر HTML پشتیبانی شده قادر به ارجاع به دارایی‌هایی بودند که توسط Vite پردازش و بسته‌بندی می‌شدند، مانند <link href>، <img src> و غیره.
+
+Vite 6 پشتیبانی را به سایر عناصر HTML گسترش می‌دهد. لیست کامل این عناصر را می‌توانید در مستندات [ویژگی‌های HTML](/guide/features.html#html) بیابید.
+
+برای جلوگیری از پردازش HTML روی برخی از عناصر، می‌توانید ویژگی vite-ignore را به آن‌ها اضافه کنید.
+
+### postcss-load-config
+
+[postcss-load-config](https://npmjs.com/package/postcss-load-config) از نسخه v4 به v6 به‌روز شده است. اکنون برای بارگذاری فایل‌های پیکربندی postcss تایپ‌اسکریپت، به [tsx](https://www.npmjs.com/package/tsx) یا [jiti](https://www.npmjs.com/package/jiti) نیاز دارید و دیگر از [ts-node](https://www.npmjs.com/package/ts-node) استفاده نمی‌شود. همچنین برای بارگذاری فایل‌های پیکربندی YAML postcss به [yaml](https://www.npmjs.com/package/yaml) نیاز دارید.
+
+### Sass اکنون به صورت پیش‌فرض از API مدرن استفاده می‌کند
+
+در Vite 5، به طور پیش‌فرض از API قدیمی برای Sass استفاده می‌شد. Vite 5.4 پشتیبانی از API مدرن را اضافه کرد.
+
+از Vite 6 به بعد، به طور پیش‌فرض از API مدرن برای Sass استفاده می‌شود. اگر همچنان می‌خواهید از API قدیمی استفاده کنید، می‌توانید تنظیمات [css.preprocessorOptions.sass.api: 'legacy' / css.preprocessorOptions.scss.api: 'legacy'](/config/shared-options#css-preprocessoroptions) را انجام دهید. اما توجه داشته باشید که پشتیبانی از API قدیمی در Vite 7 حذف خواهد شد.
+
+برای مهاجرت به API مدرن، به مستندات [Sass](https://sass-lang.com/documentation/breaking-changes/legacy-js-api/) مراجعه کنید.
+
+### سفارشی‌سازی نام فایل خروجی CSS در حالت کتابخانه
+
+در Vite 5، نام فایل CSS خروجی در حالت کتابخانه همیشه style.css بود و به راحتی نمی‌شد آن را از طریق پیکربندی Vite تغییر داد.
+
+از Vite 6 به بعد، نام فایل پیش‌فرض اکنون از "name" در فایل package.json استفاده می‌کند، مشابه با فایل‌های خروجی JS. اگر [build.lib.fileName](/config/build-options.md#build-lib) با یک رشته تنظیم شود، این مقدار همچنین برای نام فایل CSS خروجی استفاده خواهد شد. برای تنظیم نام فایل CSS به طور صریح، می‌توانید از [build.lib.cssFileName](/config/build-options.md#build-lib) استفاده کنید.
+
+برای مهاجرت، اگر به نام style.css وابسته بودید، باید مراجع به آن را به نام جدید براساس نام بسته خود به‌روز کنید. به عنوان مثال:
+
+json [package.json]
+```json
+{
+  "name": "my-lib",
+  "exports": {
+    "./style.css": "./dist/style.css" // [!code --]
+    "./style.css": "./dist/my-lib.css" // [!code ++]
+  }
+}
+```
+
+
+
+
+
+
+ 
+
+ - به‌روزرسانی‌های ماژول مخصوص SSR دیگر باعث بارگذاری کامل صفحه در کلاینت نمی‌شود. برای بازگشت به رفتار قبلی، می‌توان از یک پلاگین سفارشی Vite استفاده کرد:
+    <details>
+    <summary>برای مشاهده مثال کلیک کنید</summary>
+
+
+    ```ts
+    import type { Plugin, EnvironmentModuleNode } from 'vite'
+
+    function hmrReload(): Plugin {
+      return {
+        name: 'hmr-reload',
+        enforce: 'post',
+        hotUpdate: {
+          order: 'post',
+          handler({ modules, server, timestamp }) {
+            if (this.environment.name !== 'ssr') return
+
+            let hasSsrOnlyModules = false
+
+            const invalidatedModules = new Set<EnvironmentModuleNode>()
+            for (const mod of modules) {
+              if (mod.id == null) continue
+              const clientModule =
+                server.environments.client.moduleGraph.getModuleById(mod.id)
+              if (clientModule != null) continue
+
+              this.environment.moduleGraph.invalidateModule(
+                mod,
+                invalidatedModules,
+                timestamp,
+                true,
+              )
+              hasSsrOnlyModules = true
+            }
+
+            if (hasSsrOnlyModules) {
+              server.ws.send({ type: 'full-reload' })
+              return []
+            }
+          },
+        },
+      }
+    }
+    ```
+
+    </details>
