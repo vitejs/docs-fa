@@ -242,6 +242,33 @@ json [package.json]
 }
 ```
 
+اگر ترجیح می‌دهید که مانند Vite 5 از `style.css` استفاده کنید، می‌توانید به جای آن `build.lib.cssFileName: 'style'` را تنظیم کنید.
+
+## پیشرفته
+
+تغییرات شکستن دیگری وجود دارد که فقط بر تعداد کمی از کاربران تأثیر می‌گذارد.
+
+- [[#17922] fix(css)!: حذف واردات پیش‌فرض در SSR dev](https://github.com/vitejs/vite/pull/17922)
+  - پشتیبانی از واردات پیش‌فرض فایل‌های CSS در [Vite 4](https://v4.vite.dev/guide/migration.html#importing-css-as-a-string) منسوخ شد و در Vite 5 حذف شد، اما همچنان به طور تصادفی در حالت توسعه SSR پشتیبانی می‌شد. این پشتیبانی اکنون حذف شده است.
+- [[#15637] fix!: تنظیم پیش‌فرض `build.cssMinify` به `'esbuild'` برای SSR](https://github.com/vitejs/vite/pull/15637)
+  - [`build.cssMinify`](/config/build-options#build-cssminify) اکنون به طور پیش‌فرض حتی برای ساخت‌های SSR فعال است.
+- [[#18070] feat!: عبور از پراکسی با WebSocket](https://github.com/vitejs/vite/pull/18070)
+  - اکنون برای درخواست‌های ارتقاء WebSocket از `server.proxy[path].bypass` استفاده می‌شود و در این حالت، پارامتر `res` مقدار `undefined` خواهد داشت.
+- [[#18209] refactor!: افزایش نسخه حداقلی terser به 5.16.0](https://github.com/vitejs/vite/pull/18209)
+  - نسخه حداقلی terser برای [`build.minify: 'terser'`](/config/build-options#build-minify) از 5.4.0 به 5.16.0 افزایش یافت.
+- [[#18231] chore(deps): به‌روزرسانی وابستگی @rollup/plugin-commonjs به v28](https://github.com/vitejs/vite/pull/18231)
+  - [`commonjsOptions.strictRequires`](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#strictrequires) اکنون به طور پیش‌فرض `true` است (قبلاً `'auto'` بود).
+    - این ممکن است منجر به حجم‌های بزرگتر بسته‌ها شود، اما باعث می‌شود ساخت‌ها به‌طور دقیق‌تر انجام شوند.
+    - اگر یک فایل CommonJS را به عنوان نقطه ورودی مشخص کرده‌اید، ممکن است به اقدامات اضافی نیاز داشته باشید. برای جزئیات بیشتر، به [مستندات پلاگین commonjs](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#using-commonjs-files-as-entry-points) مراجعه کنید.
+- [[#18243] chore(deps)!: مهاجرت `fast-glob` به `tinyglobby`](https://github.com/vitejs/vite/pull/18243)
+  - براکت‌های بازه (`{01..03}` ⇒ `['01', '02', '03']`) و براکت‌های افزایشی (`{2..8..2}` ⇒ `['2', '4', '6', '8']`) دیگر در glob‌ها پشتیبانی نمی‌شوند.
+- [[#18395] feat(resolve)!: اجازه حذف شرایط](https://github.com/vitejs/vite/pull/18395)
+  - این PR نه تنها تغییر شکستن ذکر شده به عنوان "مقدار پیش‌فرض برای `resolve.conditions`" را معرفی می‌کند، بلکه باعث می‌شود `resolve.mainFields` برای وابستگی‌های بدون خروجی در SSR استفاده نشود. اگر از `resolve.mainFields` استفاده می‌کنید و می‌خواهید آن را برای وابستگی‌های بدون خروجی در SSR اعمال کنید، می‌توانید از [`ssr.resolve.mainFields`](/config/ssr-options#ssr-resolve-mainfields) استفاده کنید.
+- [[#18493] refactor!: حذف گزینه fs.cachedChecks](https://github.com/vitejs/vite/pull/18493)
+  - این بهینه‌سازی اختیاری به دلیل موارد خاص هنگام نوشتن یک فایل در یک پوشه کش‌شده و بلافاصله وارد کردن آن حذف شد.
+- ~~[[#18697] fix(deps)!: به‌روزرسانی وابستگی dotenv-expand به v12](https://github.com/vitejs/vite/pull/18697)~~
+  - ~~متغیرهایی که در جایگزینی استفاده می‌شوند باید قبل از جایگزینی اعلام شوند. برای جزئیات بیشتر، به [تغییرات changelog dotenv-expand](https://github.com/motdotla/dotenv-expand/blob/v12.0.1/CHANGELOG.md#1200-2024-11-16) مراجعه کنید.~~ این تغییر در v6.1.0 بازگشت داده شد.
+- [[#16471] feat: v6 - API محیط](https://github.com/vitejs/vite/pull/16471)
 
 
 
@@ -295,3 +322,8 @@ json [package.json]
     ```
 
     </details>
+
+
+## مهاجرت از نسخه v4
+
+ابتدا [راهنمای مهاجرت از نسخه v4](https://v5.vite.dev/guide/migration.html) را در مستندات Vite v5 بررسی کنید تا تغییرات مورد نیاز برای انتقال اپلیکیشن خود به Vite 5 را مشاهده کنید و سپس به تغییرات این صفحه بپردازید.
