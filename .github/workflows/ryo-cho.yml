@@ -13,14 +13,14 @@ jobs:
       - uses: vuejs-translations/ryu-cho@v1
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
-          username: mostafa-nematpour
-          email: "nematpor46@gmail.com"
+          username: github-actions
+          email: "action@github.com"
 
           upstream-repo: https://github.com/mostafa-nematpour/vite-docs-fa.git
           upstream-repo-branch: main
 
           head-repo: https://github.com/vitejs/vite
           head-repo-branch: main
-          track-from: 344642ad630d8658308dbf707ed805cb04b49d58
+          track-from: 1a2e5e6d9a6bb2531bf73be801c9778dbf39d51b
           path-starts-with: docs/
           workflow-name: ryu-cho
