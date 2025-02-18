@@ -1,6 +1,6 @@
 # ویژگی‌ها
 
-در ابتدایی‌ترین سطح، توسعه با Vite تفاوت زیادی با استفاده از یک سرور فایل استاتیک ندارد. اما Vite امکانات متعددی فراتر از ایمپورت ESM بومی ارائه می‌دهد تا از ویژگی‌های مختلفی که معمولاً در راه‌اندازی مبتنی بر باندلر دیده می‌شوند، پشتیبانی کند.
+در ابتدایی‌ترین سطح، توسعه با Vite تفاوت زیادی با استفاده از یک سرور فایل استاتیک ندارد. اما Vite امکانات بیشتری فراتر از ایمپورت ESM بومی ارائه می‌دهد تا از ویژگی‌های مختلفی که معمولاً در راه‌اندازی مبتنی بر باندلر دیده می‌شوند، پشتیبانی کند.
 
 ## حل وابستگی‌های npm و پیش‌باندل کردن
 
@@ -12,9 +12,9 @@ import { someMethod } from 'my-dep'
 
 کد بالا در مرورگر خطا ایجاد می‌کند. Vite ایمپورت ماژول‌های بدون مسیر مانند این را در تمامی فایل‌های منبع شناسایی کرده و اقدامات زیر را انجام می‌دهد:
 
-1. **[پیش‌باندل](./dep-pre-bundling):** این فرآیند سرعت بارگذاری صفحه را بهبود می‌بخشد و ماژول‌های CommonJS/UMD را به ESM تبدیل می‌کند. مرحله پیش‌باندل با استفاده از ابزار [esbuild](http://esbuild.github.io/) انجام می‌شود که زمان  زمان راه‌اندازی اولیه (cold start) ابزار Vite را به طور قابل توجهی سریع‌تر از هر باندلر جاوااسکریپتی دیگر می‌کند.
+1. **[پیش‌باندل](./dep-pre-bundling):** این فرآیند سرعت بارگذاری صفحه را بهبود می‌بخشد و ماژول‌های CommonJS/UMD را به ESM تبدیل می‌کند. مرحله پیش‌باندل (پیش بسته‌بندی) با استفاده از ابزار [esbuild](http://esbuild.github.io/) انجام می‌شود که زمان  زمان راه‌اندازی اولیه (cold start) ابزار Vite را به طور قابل توجهی سریع‌تر از هر باندلر جاوااسکریپتی دیگر می‌کند.
 
-2. بازنویسی ایمپورت‌های به آدرس‌های معتبر مانند `‎/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` تا مرورگر بتواند آنها را به درستی ایمپورت کند.
+2. بازنویسی ایمپورت‌ها به آدرس‌های معتبر مانند `‎/node_modules/.vite/deps/my-dep.js?v=f3sf2ebd` تا مرورگر بتواند آنها را به درستی ایمپورت کند.
 
 **وابستگی‌ها به‌شدت در کش ذخیره می‌شوند**
 
@@ -46,8 +46,6 @@ Vite از [esbuild](https://github.com/evanw/esbuild) برای تبدیل تای
 
 برای جلوگیری از مشکلات احتمالی مانند باندل نادرست ایمپورت فقط تایپ (type-only imports)، از سینتکس [Type-Only Imports and Export](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) استفاده کنید. به‌عنوان مثال:
 
-برای جلوگیری از مشکلات احتمالی مانند ایمپورت کردن تایپ به تنهایی (type-only imports) که به‌طور نادرست در بسته نهایی گنجانده می‌شوند، از سینتکس [Type-Only Imports and Export](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-8.html#type-only-imports-and-export) استفاده کنید. به‌عنوان مثال:
-
 ```ts
 import type { T } from 'only/types'
 export type { T }
@@ -69,41 +67,34 @@ export type { T }
 
 اگر یک وابستگی با `‎"isolatedModules": true` به خوبی کار نمی‌کند، می‌توانید از `‎"skipLibCheck": true` استفاده کنید تا به طور موقت خطاها را تا زمانی که در بالادست رفع شوند، نادیده بگیرید.
 
-
-It is because `esbuild` only performs transpilation without type information, it doesn't support certain features like const enum and implicit type-only imports.
-
-You must set `"isolatedModules": true` in your `tsconfig.json` under `compilerOptions`, so that TS will warn you against the features that do not work with isolated transpilation.
-
-If a dependency doesn't work well with `"isolatedModules": true`. You can use `"skipLibCheck": true` to temporarily suppress the errors until it is fixed upstream.
-
 #### `useDefineForClassFields`
 
-- [TypeScript documentation](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
+- [مستندات TypeScript](https://www.typescriptlang.org/tsconfig#useDefineForClassFields)
 
-The default value will be `true` if the TypeScript target is `ES2022` or newer including `ESNext`. It is consistent with the [behavior of TypeScript 4.3.2+](https://github.com/microsoft/TypeScript/pull/42663).
-Other TypeScript targets will default to `false`.
+مقدار پیش‌فرض `true` خواهد بود اگر target در تایپ‌اسکریپت `ES2022` یا جدیدتر باشد مانند `ESNext`. این با [تایپ‌اسکریپت نسخه 4.3.2 و بعد از آن](https://github.com/microsoft/TypeScript/pull/42663).
+سایر target ها در تایپ‌اسکریپت به طور پیش‌فرض `false` خواهند بود.
 
-`true` is the standard ECMAScript runtime behavior.
+`true` مطابق با استاندارد رانتایم ECMAScript است.
 
-If you are using a library that heavily relies on class fields, please be careful about the library's intended usage of it.
-While most libraries expect `"useDefineForClassFields": true`, you can explicitly set `useDefineForClassFields` to `false` if your library doesn't support it.
+اگر از کتابخانه‌ای استفاده می‌کنید که به شدت به فیلدهای کلاس وابسته است، لطفاً مطمئن شوید که کتابخانه با تنظیمات شما سازگار است.
+در حالی که بیشتر کتابخانه‌ها انتظار دارند که `‎"useDefineForClassFields": true` باشد، اگر کتابخانه شما از این ویژگی پشتیبانی نمی‌کند، می‌توانید به صراحت `useDefineForClassFields` را به `false` تنظیم کنید.
 
 #### `target`
 
-- [TypeScript documentation](https://www.typescriptlang.org/tsconfig#target)
+- [مستندات TypeScript](https://www.typescriptlang.org/tsconfig#target)
 
-Vite ignores the `target` value in the `tsconfig.json`, following the same behavior as `esbuild`.
+Vite مقدار `target` در `tsconfig.json` را نادیده می‌گیرد و از همان تنظیمات `esbuild` پیروی می‌کند.
 
-To specify the target in dev, the [`esbuild.target`](/config/shared-options.html#esbuild) option can be used, which defaults to `esnext` for minimal transpilation. In builds, the [`build.target`](/config/build-options.html#build-target) option takes higher priority over `esbuild.target` and can also be set if needed.
+برای مشخص کردن target در حالت توسعه، می‌توانید از گزینه [`esbuild.target`](/config/shared-options.html#esbuild) استفاده کنید که به طور پیش‌فرض `esnext` برای کمترین ترنسپایل تنظیم شده است. در بیلد، گزینه [`build.target`](/config/build-options.html#build-target) اولویت بالاتری نسبت به `esbuild.target` دارد و در صورت نیاز می‌توانید آن را تنظیم کنید.
 
 ::: warning `useDefineForClassFields`
 
-If `target` in `tsconfig.json` is not `ESNext` or `ES2022` or newer, or if there's no `tsconfig.json` file, `useDefineForClassFields` will default to `false` which can be problematic with the default `esbuild.target` value of `esnext`. It may transpile to [static initialization blocks](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility) which may not be supported in your browser.
+اگر `target` در `tsconfig.json` برابر با `ESNext` یا `ES2022` یا جدیدتر نباشد، یا اگر فایل `tsconfig.json` وجود نداشته باشد، مقدار پیش‌فرض `useDefineForClassFields` برابر با `false` خواهد بود که ممکن است با مقدار پیش‌فرض `esbuild.target` یعنی `esnext` مشکل‌ساز شود. این ممکن است به [static initialization blocks](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/Static_initialization_blocks#browser_compatibility) ترنسپایل شود که ممکن است مرورگر شما از آن‌ها پشتیبانی نکند.
 
-As such, it is recommended to set `target` to `ESNext` or `ES2022` or newer, or set `useDefineForClassFields` to `true` explicitly when configuring `tsconfig.json`.
+بنابراین، توصیه می‌شود که `target` را به `ESNext` یا `ES2022` یا جدیدتر تنظیم کنید، یا `useDefineForClassFields` را به صراحت در `tsconfig.json` به `true` تنظیم کنید.
 :::
 
-#### Other Compiler Options Affecting the Build Result
+#### سایر گزینه‌های کامپایلر که بر نتیجه بیلد تأثیر می‌گذارند
 
 - [`extends`](https://www.typescriptlang.org/tsconfig#extends)
 - [`importsNotUsedAsValues`](https://www.typescriptlang.org/tsconfig#importsNotUsedAsValues)
@@ -117,20 +108,20 @@ As such, it is recommended to set `target` to `ESNext` or `ES2022` or newer, or 
 - [`alwaysStrict`](https://www.typescriptlang.org/tsconfig#alwaysStrict)
 
 ::: tip `skipLibCheck`
-Vite starter templates have `"skipLibCheck": "true"` by default to avoid typechecking dependencies, as they may choose to only support specific versions and configurations of TypeScript. You can learn more at [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688).
+قالب‌های شروع Vite به طور پیش‌فرض `"skipLibCheck": "true"` دارند تا از بررسی تایپ وابستگی‌ها جلوگیری کنند، زیرا ممکن است فقط از نسخه‌ها و تنظیمات خاصی از TypeScript پشتیبانی کنند. می‌توانید اطلاعات بیشتری را در [vuejs/vue-cli#5688](https://github.com/vuejs/vue-cli/pull/5688) بیابید.
 :::
 
-### Client Types
+### تایپ‌های کلاینت
 
-Vite's default types are for its Node.js API. To shim the environment of client side code in a Vite application, add a `d.ts` declaration file:
+تایپ‌های پیش‌فرض Vite برای API مورد استفاده در Node.js آن هستند. برای شبیه‌سازی محیط کد سمت کلاینت در یک برنامه Vite، یک فایل تعریف `d.ts` اضافه کنید:
 
 ```typescript
 /// <reference types="vite/client" />
 ```
 
-::: details Using `compilerOptions.types`
+::: details استفاده از `compilerOptions.types`
 
-Alternatively, you can add `vite/client` to `compilerOptions.types` inside `tsconfig.json`:
+به طور جایگزین، می‌توانید `vite/client` را به `compilerOptions.types` در `tsconfig.json` اضافه کنید:
 
 ```json [tsconfig.json]
 {
@@ -140,29 +131,29 @@ Alternatively, you can add `vite/client` to `compilerOptions.types` inside `tsco
 }
 ```
 
-Note that if [`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types) is specified, only these packages will be included in the global scope (instead of all visible ”@types” packages).
+توجه داشته باشید که اگر [`compilerOptions.types`](https://www.typescriptlang.org/tsconfig#types) مشخص شده باشد، تنها این پکیج‌ها در محدوده سراسری گنجانده خواهند شد (به جای همه پکیج‌های قابل مشاهده `‎@types`).
 
 :::
 
-`vite/client` provides the following type shims:
+`vite/client`کار تایپ‌های زیر را فراهم می‌کند:
 
-- Asset imports (e.g. importing an `.svg` file)
-- Types for the Vite-injected [constants](./env-and-mode#env-variables) on `import.meta.env`
-- Types for the [HMR API](./api-hmr) on `import.meta.hot`
+- ایمپورت asset ها (مثلاً ایمپورت یک فایل `‎.svg`)
+- تایپ‌ها برای [ثابت‌ها](./env-and-mode#env-variables) تزریق شده توسط Vite در `import.meta.env`
+- تایپ‌ها برای [HMR API](./api-hmr) در `import.meta.hot`
 
-::: tip
-To override the default typing, add a type definition file that contains your typings. Then, add the type reference before `vite/client`.
+::: tip نکته
+برای بازنویسی تایپ‌های پیش‌فرض، یک فایل تعریف تایپ اضافه کنید که تایپ‌های شما را شامل شود. سپس، مرجع تایپ را قبل از `vite/client` اضافه کنید.
 
-For example, to make the default import of `*.svg` a React component:
+برای مثال، برای تبدیل ایمپورت پیش‌فرض `‎*.svg` به یک کامپوننت React:
 
-- `vite-env-override.d.ts` (the file that contains your typings):
+- `vite-env-override.d.ts` (فایلی که تایپ‌های شما را شامل می‌شود):
   ```ts
   declare module '*.svg' {
     const content: React.FC<React.SVGProps<SVGElement>>
     export default content
   }
   ```
-- The file containing the reference to `vite/client`:
+- فایلی که مرجع به `vite/client` را شامل می‌شود:
   ```ts
   /// <reference types="./vite-env-override.d.ts" />
   /// <reference types="vite/client" />
@@ -172,31 +163,31 @@ For example, to make the default import of `*.svg` a React component:
 
 ## HTML
 
-HTML files stand [front-and-center](/guide/#index-html-and-project-root) of a Vite project, serving as the entry points for your application, making it simple to build single-page and [multi-page applications](/guide/build.html#multi-page-app).
+فایل‌های HTML در پروژه Vite به عنوان نقاط ورودی برای برنامه شما عمل می‌کنند و ساخت برنامه‌های تک‌صفحه‌ای و [چندصفحه‌ای](/guide/build.html#multi-page-app) را ساده می‌کنند.
 
-Any HTML files in your project root can be directly accessed by its respective directory path:
+می‌توان به هر فایل HTML که در ریشه پروژه شماست، مستقیماً از طریق مسیر دایرکتوری آن دسترسی پیدا کرد:
 
-- `<root>/index.html` -> `http://localhost:5173/`
-- `<root>/about.html` -> `http://localhost:5173/about.html`
-- `<root>/blog/index.html` -> `http://localhost:5173/blog/index.html`
+- `‎<root>/index.html` -> `http://localhost:5173/‎`
+- `‎<root>/about.html` -> `http://localhost:5173/about.html`
+- `‎<root>/blog/index.html` -> `http://localhost:5173/blog/index.html`
 
-Assets referenced by HTML elements such as `<script type="module" src>` and `<link href>` are processed and bundled as part of the app. The full list of supported elements are as below:
+asset هایی که توسط عناصر HTML مانند `<script type="module" src>` و `<link href>` ارجاع داده می‌شوند، به عنوان بخشی از برنامه پردازش و بسته‌بندی می‌شوند. لیست کامل عناصر پشتیبانی شده به شرح زیر است:
 
 - `<audio src>`
 - `<embed src>`
-- `<img src>` and `<img srcset>`
+- `<img src>` و `<img srcset>`
 - `<image src>`
 - `<input src>`
-- `<link href>` and `<link imagesrcset>`
+- `<link href>` و `<link imagesrcset>`
 - `<object data>`
 - `<script type="module" src>`
-- `<source src>` and `<source srcset>`
+- `<source src>` و `<source srcset>`
 - `<track src>`
-- `<use href>` and `<use xlink:href>`
-- `<video src>` and `<video poster>`
+- `<use href>` و `<use xlink:href>`
+- `<video src>` و `<video poster>`
 - `<meta content>`
-  - Only if `name` attribute matches `msapplication-tileimage`, `msapplication-square70x70logo`, `msapplication-square150x150logo`, `msapplication-wide310x150logo`, `msapplication-square310x310logo`, `msapplication-config`, or `twitter:image`
-  - Or only if `property` attribute matches `og:image`, `og:image:url`, `og:image:secure_url`, `og:audio`, `og:audio:secure_url`, `og:video`, or `og:video:secure_url`
+  - فقط اگر ویژگی `name` با `msapplication-tileimage` ، `msapplication-square70x70logo` ، `msapplication-square150x150logo` ، `msapplication-wide310x150logo` ، `msapplication-square310x310logo` ، `msapplication-config` ، `twitter:image` مطابقت داشته باشد.
+  - یا فقط اگر ویژگی `property` با `og:image` ، `og:image:url` ، `og:image:secure_url` ، `og:audio` ، `og:audio:secure_url` ، `og:video` ، `og:video:secure_url` مطابقت داشته باشد.
 
 ```html {4-5,8-9}
 <!doctype html>
@@ -212,26 +203,26 @@ Assets referenced by HTML elements such as `<script type="module" src>` and `<li
 </html>
 ```
 
-To opt-out of HTML processing on certain elements, you can add the `vite-ignore` attribute on the element, which can be useful when referencing external assets or CDN.
+برای غیرفعال کردن پردازش HTML در برخی المنت‌ها، می‌توانید ویژگی `vite-ignore` را به عنصر اضافه کنید که می‌تواند در هنگام ارجاع به دارایی‌های خارجی یا CDN مفید باشد.
 
-## Frameworks
+## فریمورک‌ها
 
-All modern frameworks maintain integrations with Vite. Most framework plugins are maintained by each framework team, with the exception of the official Vue and React Vite plugins that are maintained in the vite org:
+تمام فریم‌ورک‌های مدرن با Vite یکپارچه‌سازی شده‌اند. بیشتر پلاگین‌های فریم‌ورک توسط تیم‌های هر فریم‌ورک نگهداری می‌شوند، به جز پلاگین‌های رسمی Vue و React Vite که توسط سازمان Vite نگهداری می‌شوند:
 
-- Vue support via [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
-- Vue JSX support via [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
-- React support via [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
-- React using SWC support via [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+- پشتیبانی از Vue از طریق [‎@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
+- پشتیبانی از Vue JSX از طریق [‎@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
+- پشتیبانی از React از طریق [‎@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
+- پشتیبانی از React با استفاده از SWC از طریق [‎@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
 
-Check out the [Plugins Guide](https://vite.dev/plugins) for more information.
+برای اطلاعات بیشتر، به [راهنمای پلاگین‌ها](https://vite.dev/plugins) مراجعه کنید.
 
 ## JSX
 
-`.jsx` and `.tsx` files are also supported out of the box. JSX transpilation is also handled via [esbuild](https://esbuild.github.io).
+فایل‌های `‎.jsx` و `‎.tsx` نیز به صورت پیش‌فرض پشتیبانی می‌شوند. ترنسپایل JSX نیز از طریق [esbuild](https://esbuild.github.io) انجام می‌شود.
 
-Your framework of choice will already configure JSX out of the box (for example, Vue users should use the official [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) plugin, which provides Vue 3 specific features including HMR, global component resolving, directives and slots).
+فریم‌ورک انتخابی شما به طور پیش‌فرض JSX را پیکربندی خواهد کرد (برای مثال، کاربران Vue باید از پلاگین رسمی [‎@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx) استفاده کنند که ویژگی‌های خاص Vue 3 از جمله HMR، حل و فصل سراسری کامپوننت‌ها، دایرکتیوها و اسلات‌ها را فراهم می‌کند).
 
-If using JSX with your own framework, custom `jsxFactory` and `jsxFragment` can be configured using the [`esbuild` option](/config/shared-options.md#esbuild). For example, the Preact plugin would use:
+اگر از JSX با فریم‌ورک خودتان استفاده می‌کنید، می‌توانید `jsxFactory` و `jsxFragment` سفارشی را با استفاده از گزینه [`esbuild`](/config/shared-options.md#esbuild) تنظیم کنید. به عنوان مثال، پلاگین Preact از این تنظیمات استفاده می‌کند:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
@@ -244,9 +235,9 @@ export default defineConfig({
 })
 ```
 
-More details in [esbuild docs](https://esbuild.github.io/content-types/#jsx).
+جزئیات بیشتر در [مستندات esbuild](https://esbuild.github.io/content-types/#jsx).
 
-You can inject the JSX helpers using `jsxInject` (which is a Vite-only option) to avoid manual imports:
+می‌توانید از `jsxInject` (که یک گزینه مخصوص Vite است) برای تزریق کمک‌کننده‌های JSX استفاده کنید تا از ایمپورت دستی جلوگیری کنید:
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'

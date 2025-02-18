@@ -263,7 +263,7 @@ export default defineConfig({
           text: 'راهنما',
           items: [
             {
-              text: 'Features',
+              text: 'ویژگی‌ها',
               link: '/guide/features'
             },
             {
@@ -287,7 +287,7 @@ export default defineConfig({
               link: '/guide/build'
             },
             {
-              text: 'Deploying a Static Site',
+              text: 'دیپلوی یک سایت استاتیک',
               link: '/guide/static-deploy'
             },
             {
@@ -315,7 +315,7 @@ export default defineConfig({
               link: '/guide/migration'
             },
             {
-              text: 'Breaking Changes',
+              text: 'تغییرات اساسی',
               link: '/changes/'
             }
           ]

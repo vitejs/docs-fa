@@ -10,8 +10,8 @@
   --vp-font-family-base: 'site-font', 'Inter var experimental', 'Inter var',
     Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
     Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif !important;
-  --vp-font-family-mono: Menlo, Monaco, Consolas, 'site-font', 'Courier New',
-    monospace !important;
+  /* --vp-font-family-mono: Menlo, Monaco, Consolas, 'site-font', 'Courier New',
+    monospace !important; */
 }
 .VPDocAsideOutline .content {
   border-right: 1px solid var(--vp-c-divider) !important;
