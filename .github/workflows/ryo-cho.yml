@@ -9,6 +9,10 @@ jobs:
   ryu-cho:
     name: Ryu Cho
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+      pull-requests: write
     steps:
       - uses: vuejs-translations/ryu-cho@v1
         with:
