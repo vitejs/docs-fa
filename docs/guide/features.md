@@ -251,23 +251,23 @@ export default defineConfig({
 
 ## CSS
 
-Importing `.css` files will inject its content to the page via a `<style>` tag with HMR support.
+ایمپورت فایل‌های `‎.css` محتوای آن‌ها را از طریق یک تگ `<style>` به صفحه اضافه می‌کند و از HMR پشتیبانی می‌کند.
 
-### `@import` Inlining and Rebasing
+### درون‌خطی کردن و بازنویسی `‎@import`
 
-Vite is pre-configured to support CSS `@import` inlining via `postcss-import`. Vite aliases are also respected for CSS `@import`. In addition, all CSS `url()` references, even if the imported files are in different directories, are always automatically rebased to ensure correctness.
+Vite به صورت پیش‌فرض برای پشتیبانی از درون‌خطی کردن `‎@import` در CSS با `postcss-import` پیکربندی شده است. همچنین، نام‌های مستعار Vite برای `‎@import` در CSS نیز رعایت می‌شوند. علاوه بر این، تمام ارجاعات `url()‎` در CSS، حتی اگر فایل‌های ایمپورت شده در دایرکتوری‌های مختلف باشند، به طور خودکار بازنویسی می‌شوند تا از صحت آن‌ها اطمینان حاصل شود.
 
-`@import` aliases and URL rebasing are also supported for Sass and Less files (see [CSS Pre-processors](#css-pre-processors)).
+نام‌های مستعار `‎@import` و بازنشانی URL برای فایل‌های Sass و Less نیز پشتیبانی می‌شوند (به [پیش‌پردازنده‌های CSS](#پیشپردازندههای-css) مراجعه کنید).
 
 ### PostCSS
 
-If the project contains valid PostCSS config (any format supported by [postcss-load-config](https://github.com/postcss/postcss-load-config), e.g. `postcss.config.js`), it will be automatically applied to all imported CSS.
+اگر پروژه شامل پیکربندی معتبر PostCSS باشد (هر فرمتی که توسط [postcss-load-config](https://github.com/postcss/postcss-load-config) پشتیبانی می‌شود، مانند `postcss.config.js`)، به طور خودکار به تمام CSS ایمپورت شده اعمال می‌شود.
 
-Note that CSS minification will run after PostCSS and will use [`build.cssTarget`](/config/build-options.md#build-csstarget) option.
+توجه داشته باشید که کوچک‌سازی CSS پس از PostCSS اجرا می‌شود و از گزینه [`build.cssTarget`](/config/build-options.md#build-csstarget) استفاده خواهد کرد.
 
-### CSS Modules
+### ماژول‌های CSS
 
-Any CSS file ending with `.module.css` is considered a [CSS modules file](https://github.com/css-modules/css-modules). Importing such a file will return the corresponding module object:
+هر فایل CSS که با `‎.module.css` ختم شود، به عنوان یک [فایل ماژول‌های CSS](https://github.com/css-modules/css-modules) در نظر گرفته می‌شود. ایمپورت چنین فایلی آبجکت ماژول مربوطه را برمی‌گرداند:
 
 ```css [example.module.css]
 .red {
@@ -282,9 +282,9 @@ import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
 
-CSS modules behavior can be configured via the [`css.modules` option](/config/shared-options.md#css-modules).
+تنظیمات ماژول‌های CSS را می‌توان از طریق گزینه [`css.modules`](/config/shared-options.md#css-modules) پیکربندی کرد.
 
-If `css.modules.localsConvention` is set to enable camelCase locals (e.g. `localsConvention: 'camelCaseOnly'`), you can also use named imports:
+اگر `css.modules.localsConvention` تنظیم شده باشد تا نام‌های محلی به صورت camelCase فعال شوند (مثلاً `localsConvention: 'camelCaseOnly'‎`)، می‌توانید از ایمپورت‌های نام‌گذاری شده نیز استفاده کنید:
 
 ```js twoslash
 import 'vite/client'
@@ -294,11 +294,11 @@ import { applyColor } from './example.module.css'
 document.getElementById('foo').className = applyColor
 ```
 
-### CSS Pre-processors
+### پیش‌پردازنده‌های CSS
 
-Because Vite targets modern browsers only, it is recommended to use native CSS variables with PostCSS plugins that implement CSSWG drafts (e.g. [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)) and author plain, future-standards-compliant CSS.
+از آنجا که Vite فقط مرورگرهای مدرن را هدف قرار می‌دهد، توصیه می‌شود از متغیرهای بومی CSS با پلاگین‌های PostCSS که پیش‌نویس‌های CSSWG را پیاده‌سازی می‌کنند (مثلاً [postcss-nesting](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-nesting)) استفاده کنید و CSS ساده و مطابق با استانداردهای آینده بنویسید.
 
-That said, Vite does provide built-in support for `.scss`, `.sass`, `.less`, `.styl` and `.stylus` files. There is no need to install Vite-specific plugins for them, but the corresponding pre-processor itself must be installed:
+با این حال، Vite پشتیبانی داخلی از فایل‌های `‎.scss` ، `‎.sass` ، `‎.less` ، `‎.styl` و `‎.stylus` را فراهم می‌کند. نیازی به نصب پلاگین‌های مخصوص Vite برای آن‌ها نیست، اما باید پیش‌پردازنده مربوطه نصب شده باشد:
 
 ```bash
 # .scss and .sass
@@ -311,50 +311,50 @@ npm add -D less
 npm add -D stylus
 ```
 
-If using Vue single file components, this also automatically enables `<style lang="sass">` et al.
+اگر از کامپوننت‌های تک‌فایلی Vue استفاده می‌کنید، این به طور خودکار `<style lang="sass"‎>` و موارد مشابه را فعال می‌کند.
 
-Vite improves `@import` resolving for Sass and Less so that Vite aliases are also respected. In addition, relative `url()` references inside imported Sass/Less files that are in different directories from the root file are also automatically rebased to ensure correctness.
+Vite بهبودهایی در حل `‎@import` برای Sass و Less ارائه می‌دهد تا نام‌های مستعار Vite نیز رعایت شوند. علاوه بر این، ارجاعات نسبی `url()‎` در فایل‌های Sass/Less ایمپورت شده که در دایرکتوری‌های مختلف از فایل ریشه قرار دارند، به طور خودکار بازنویسی می‌شوند تا از صحت آن‌ها اطمینان حاصل شود.
 
-`@import` alias and url rebasing are not supported for Stylus due to its API constraints.
+نام مستعار `‎@import` و بازنویسی URL برای Stylus به دلیل محدودیت‌های API آن پشتیبانی نمی‌شوند.
 
-You can also use CSS modules combined with pre-processors by prepending `.module` to the file extension, for example `style.module.scss`.
+همچنین می‌توانید از ماژول‌های CSS همراه با پیش‌پردازنده‌ها استفاده کنید، با اضافه کردن `‎.module` به پسوند فایل، به عنوان مثال `style.module.scss`.
 
-### Disabling CSS injection into the page
+### غیرفعال کردن تزریق CSS به صفحه
 
-The automatic injection of CSS contents can be turned off via the `?inline` query parameter. In this case, the processed CSS string is returned as the module's default export as usual, but the styles aren't injected to the page.
+تزریق خودکار محتوای CSS را می‌توان از طریق پارامتر `‎?inline` غیرفعال کرد. در این حالت، رشته CSS پردازش شده به عنوان خروجی پیش‌فرض ماژول برگردانده می‌شود، اما استایل‌ها به صفحه تزریق نمی‌شوند.
 
 ```js twoslash
 import 'vite/client'
 // ---cut---
-import './foo.css' // will be injected into the page
-import otherStyles from './bar.css?inline' // will not be injected
+import './foo.css' // به صفحه تزریق خواهد شد
+import otherStyles from './bar.css?inline' // تزریق نخواهد شد
 ```
 
-::: tip NOTE
-Default and named imports from CSS files (e.g `import style from './foo.css'`) are removed since Vite 5. Use the `?inline` query instead.
+::: tip نکته
+ایمپورت‌های پیش‌فرض و نام‌گذاری شده از فایل‌های CSS (مثلاً `import style from './foo.css'‎`) از Vite 5 حذف شده‌اند. به جای آن از کوئری `‎?inline` استفاده کنید.
 :::
 
 ### Lightning CSS
 
-Starting from Vite 4.4, there is experimental support for [Lightning CSS](https://lightningcss.dev/). You can opt into it by adding [`css.transformer: 'lightningcss'`](../config/shared-options.md#css-transformer) to your config file and install the optional [`lightningcss`](https://www.npmjs.com/package/lightningcss) dependency:
+از Vite 4.4، پشتیبانی آزمایشی برای [Lightning CSS](https://lightningcss.dev/) وجود دارد. می‌توانید با اضافه کردن [`css.transformer: 'lightningcss'‎`](../config/shared-options.md#css-transformer) به فایل پیکربندی خود و نصب وابستگی اختیاری [`lightningcss`](https://www.npmjs.com/package/lightningcss) از آن استفاده کنید:
 
 ```bash
 npm add -D lightningcss
 ```
 
-If enabled, CSS files will be processed by Lightning CSS instead of PostCSS. To configure it, you can pass Lightning CSS options to the [`css.lightningcss`](../config/shared-options.md#css-lightningcss) config option.
+اگر فعال شود، فایل‌های CSS توسط Lightning CSS به جای PostCSS پردازش خواهند شد. برای پیکربندی آن، می‌توانید گزینه‌های Lightning CSS را به گزینه پیکربندی [`css.lightningcss`](../config/shared-options.md#css-lightningcss) پاس دهید.
 
-To configure CSS Modules, you'll use [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) instead of [`css.modules`](../config/shared-options.md#css-modules) (which configures the way PostCSS handles CSS modules).
+برای پیکربندی ماژول‌های CSS، باید از [`css.lightningcss.cssModules`](https://lightningcss.dev/css-modules.html) به جای [`css.modules`](../config/shared-options.md#css-modules) استفاده کنید (که نحوه پردازش ماژول‌های CSS توسط PostCSS را پیکربندی می‌کند).
 
-By default, Vite uses esbuild to minify CSS. Lightning CSS can also be used as the CSS minifier with [`build.cssMinify: 'lightningcss'`](../config/build-options.md#build-cssminify).
+به طور پیش‌فرض، Vite از esbuild برای کوچک‌سازی CSS استفاده می‌کند. Lightning CSS نیز می‌تواند به عنوان کوچک‌ساز CSS با گزینه [`build.cssMinify: 'lightningcss'‎`](../config/build-options.md#build-cssminify) استفاده شود.
 
-::: tip NOTE
-[CSS Pre-processors](#css-pre-processors) aren't supported when using Lightning CSS.
+::: tip نکته
+[پیش‌پردازنده‌های CSS](#پیشپردازندههای-css) هنگام استفاده از Lightning CSS پشتیبانی نمی‌شوند.
 :::
 
-## Static Assets
+## assets های استاتیک
 
-Importing a static asset will return the resolved public URL when it is served:
+ایمپورت یک assets استاتیک، URL عمومی ساخته شده آن را برمی‌گرداند:
 
 ```js twoslash
 import 'vite/client'
@@ -363,41 +363,41 @@ import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-Special queries can modify how assets are loaded:
+کوئری‌های خاص می‌توانند نحوه بارگذاری assets ها را تغییر دهند:
 
 ```js twoslash
 import 'vite/client'
 // ---cut---
-// Explicitly load assets as URL
+// URL به عنوان assets بارگذاری صریح
 import assetAsURL from './asset.js?url'
 ```
 
 ```js twoslash
 import 'vite/client'
 // ---cut---
-// Load assets as strings
+// به عنوان رشته assets بارگذاری
 import assetAsString from './shader.glsl?raw'
 ```
 
 ```js twoslash
 import 'vite/client'
 // ---cut---
-// Load Web Workers
+// Web Workers بارگذاری
 import Worker from './worker.js?worker'
 ```
 
 ```js twoslash
 import 'vite/client'
 // ---cut---
-// Web Workers inlined as base64 strings at build time
+// در زمان بیلد درون‌خطی می‌شوند base64 به صورت رشته‌های Web Workers
 import InlineWorker from './worker.js?worker&inline'
 ```
 
-More details in [Static Asset Handling](./assets).
+جزئیات بیشتر در [مدیریت assets های استاتیک](./assets).
 
 ## JSON
 
-JSON files can be directly imported - named imports are also supported:
+فایل‌های JSON می‌توانند به طور مستقیم ایمپورت شوند - ایمپورت‌های نام‌گذاری شده نیز پشتیبانی می‌شوند:
 
 ```js twoslash
 import 'vite/client'
@@ -408,9 +408,9 @@ import json from './example.json'
 import { field } from './example.json'
 ```
 
-## Glob Import
+## ایمپورت Glob
 
-Vite supports importing multiple modules from the file system via the special `import.meta.glob` function:
+Vite از ایمپورت چندین ماژول از فایل-سیستم با استفاده از تابع خاص `import.meta.glob` پشتیبانی می‌کند:
 
 ```js twoslash
 import 'vite/client'
@@ -418,17 +418,17 @@ import 'vite/client'
 const modules = import.meta.glob('./dir/*.js')
 ```
 
-The above will be transformed into the following:
+کد بالا به شکل زیر تبدیل خواهد شد:
 
 ```js
-// code produced by vite
+// Vite کد تولید شده توسط
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js'),
   './dir/bar.js': () => import('./dir/bar.js'),
 }
 ```
 
-You can then iterate over the keys of the `modules` object to access the corresponding modules:
+سپس می‌توانید بر روی کلیدهای آبجکت `modules` حلقه بزنید تا به ماژول‌های مربوطه دسترسی پیدا کنید:
 
 ```js
 for (const path in modules) {
@@ -438,7 +438,7 @@ for (const path in modules) {
 }
 ```
 
-Matched files are by default lazy-loaded via dynamic import and will be split into separate chunks during build. If you'd rather import all the modules directly (e.g. relying on side-effects in these modules to be applied first), you can pass `{ eager: true }` as the second argument:
+فایل‌های پیدا شده به طور پیش‌فرض از طریق ایمپورت داینامیک به صورت lazy-loaded بارگذاری می‌شوند و در زمان بیلد به چندین chunk (بخش) جداگانه تقسیم می‌شوند. اگر ترجیح می‌دهید همه ماژول‌ها را مستقیماً ایمپورت کنید (مثلاً برای اعمال اثرات جانبی این ماژول‌ها در ابتدا)، می‌توانید `{ eager: true }` را به عنوان آرگومان دوم پاس دهید:
 
 ```js twoslash
 import 'vite/client'
@@ -446,10 +446,10 @@ import 'vite/client'
 const modules = import.meta.glob('./dir/*.js', { eager: true })
 ```
 
-The above will be transformed into the following:
+کد بالا به شکل زیر تبدیل خواهد شد:
 
 ```js
-// code produced by vite
+// Vite کد تولید شده توسط
 import * as __glob__0_0 from './dir/foo.js'
 import * as __glob__0_1 from './dir/bar.js'
 const modules = {
@@ -458,9 +458,9 @@ const modules = {
 }
 ```
 
-### Multiple Patterns
+### الگوهای متعدد
 
-The first argument can be an array of globs, for example
+آرگومان اول می‌تواند یک آرایه از glob ها باشد، برای مثال:
 
 ```js twoslash
 import 'vite/client'
@@ -468,9 +468,9 @@ import 'vite/client'
 const modules = import.meta.glob(['./dir/*.js', './another/*.js'])
 ```
 
-### Negative Patterns
+### الگوهای منفی
 
-Negative glob patterns are also supported (prefixed with `!`). To ignore some files from the result, you can add exclude glob patterns to the first argument:
+الگوهای glob منفی نیز پشتیبانی می‌شوند (با پیشوند `!`). برای نادیده گرفتن برخی فایل‌ها از نتیجه، می‌توانید الگوهای exclude را به آرگومان اول اضافه کنید:
 
 ```js twoslash
 import 'vite/client'
@@ -479,15 +479,15 @@ const modules = import.meta.glob(['./dir/*.js', '!**/bar.js'])
 ```
 
 ```js
-// code produced by vite
+// Vite کد تولید شده توسط
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js'),
 }
 ```
 
-#### Named Imports
+#### ایمپورت‌های نام‌گذاری شده
 
-It's possible to only import parts of the modules with the `import` options.
+امکان ایمپورت بخش‌هایی از ماژول‌ها با استفاده از گزینه `import` وجود دارد.
 
 ```ts twoslash
 import 'vite/client'
@@ -496,14 +496,14 @@ const modules = import.meta.glob('./dir/*.js', { import: 'setup' })
 ```
 
 ```ts
-// code produced by vite
+// Vite کد تولید شده توسط
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js').then((m) => m.setup),
   './dir/bar.js': () => import('./dir/bar.js').then((m) => m.setup),
 }
 ```
 
-When combined with `eager` it's even possible to have tree-shaking enabled for those modules.
+هنگامی که با `eager` ترکیب شود، حتی می‌توان tree-shaking را برای این ماژول‌ها فعال کرد.
 
 ```ts twoslash
 import 'vite/client'
@@ -515,7 +515,7 @@ const modules = import.meta.glob('./dir/*.js', {
 ```
 
 ```ts
-// code produced by vite:
+// Vite کد تولید شده توسط
 import { setup as __glob__0_0 } from './dir/foo.js'
 import { setup as __glob__0_1 } from './dir/bar.js'
 const modules = {
@@ -524,7 +524,7 @@ const modules = {
 }
 ```
 
-Set `import` to `default` to import the default export.
+برای ایمپورت خروجی پیش‌فرض، `import` را به `default` تنظیم کنید.
 
 ```ts twoslash
 import 'vite/client'
@@ -536,7 +536,7 @@ const modules = import.meta.glob('./dir/*.js', {
 ```
 
 ```ts
-// code produced by vite:
+// Vite کد تولید شده توسط
 import __glob__0_0 from './dir/foo.js'
 import __glob__0_1 from './dir/bar.js'
 const modules = {
@@ -545,9 +545,9 @@ const modules = {
 }
 ```
 
-#### Custom Queries
+#### کوئری‌های سفارشی
 
-You can also use the `query` option to provide queries to imports, for example, to import assets [as a string](https://vite.dev/guide/assets.html#importing-asset-as-string) or [as a url](https://vite.dev/guide/assets.html#importing-asset-as-url):
+همچنین می‌توانید از گزینه `query` برای ارائه کوئری‌ها به ایمپورت‌ها استفاده کنید، به عنوان مثال، برای ایمپورت asset ها [به عنوان رشته](https://vite.dev/guide/assets.html#importing-asset-as-string) یا [به عنوان URL](https://vite.dev/guide/assets.html#importing-asset-as-url):
 
 ```ts twoslash
 import 'vite/client'
@@ -563,7 +563,7 @@ const moduleUrls = import.meta.glob('./dir/*.svg', {
 ```
 
 ```ts
-// code produced by vite:
+// Vite کد تولید شده توسط
 const moduleStrings = {
   './dir/foo.svg': () => import('./dir/foo.js?raw').then((m) => m['default']),
   './dir/bar.svg': () => import('./dir/bar.js?raw').then((m) => m['default']),
@@ -574,7 +574,7 @@ const moduleUrls = {
 }
 ```
 
-You can also provide custom queries for other plugins to consume:
+همچنین می‌توانید کوئری‌های سفارشی برای استفاده سایر پلاگین‌ها ارائه دهید:
 
 ```ts twoslash
 import 'vite/client'
@@ -584,29 +584,29 @@ const modules = import.meta.glob('./dir/*.js', {
 })
 ```
 
-### Glob Import Caveats
+### نکات مهم درباره Glob Import
 
-Note that:
+توجه داشته باشید که:
 
-- This is a Vite-only feature and is not a web or ES standard.
-- The glob patterns are treated like import specifiers: they must be either relative (start with `./`) or absolute (start with `/`, resolved relative to project root) or an alias path (see [`resolve.alias` option](/config/shared-options.md#resolve-alias)).
-- The glob matching is done via [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby).
-- You should also be aware that all the arguments in the `import.meta.glob` must be **passed as literals**. You can NOT use variables or expressions in them.
+- این یک ویژگی مخصوص Vite است و یک استاندارد وب یا ES نیست.
+- الگوهای glob مانند مشخص‌کننده‌های ایمپورت در نظر گرفته می‌شوند: آن‌ها باید یا نسبی باشند (با `‎./` شروع شوند) یا مطلق (با `/` شروع شوند و نسبت به ریشه پروژه حل شوند) یا یک مسیر مستعار باشند (به گزینه [`resolve.alias`](/config/shared-options.md#resolve-alias) مراجعه کنید).
+- تطبیق glob از طریق [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) انجام می‌شود.
+- همچنین باید توجه داشته باشید که تمام آرگومان‌ها در `import.meta.glob` باید **به صورت ثابت** پاس داده شوند. نمی‌توانید از متغیرها یا عبارات در آن‌ها استفاده کنید.
 
-## Dynamic Import
+## ایمپورت داینامیک
 
-Similar to [glob import](#glob-import), Vite also supports dynamic import with variables.
+مشابه [glob import](#ایمپورت-glob)، ابزار Vite همچنین از ایمپورت داینامیک با متغیرها پشتیبانی می‌کند.
 
 ```ts
 const module = await import(`./dir/${file}.js`)
 ```
 
-Note that variables only represent file names one level deep. If `file` is `'foo/bar'`, the import would fail. For more advanced usage, you can use the [glob import](#glob-import) feature.
+توجه داشته باشید که متغیرها فقط نام فایل‌ها را در یک عمق نشان می‌دهند. اگر `file` برابر با `'foo/bar'` باشد، ایمپورت شکست خواهد خورد. برای استفاده پیشرفته‌تر، می‌توانید از ویژگی [glob import](#ایمپورت-glob) استفاده کنید.
 
 ## WebAssembly
 
-Pre-compiled `.wasm` files can be imported with `?init`.
-The default export will be an initialization function that returns a Promise of the [`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance):
+فایل‌های `‎.wasm` پیش‌کامپایل شده را می‌توان با `‎?init` ایمپورت کرد.
+خروجی پیش‌فرض یک تابع راه‌اندازی خواهد بود که یک Promise از [`WebAssembly.Instance`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/Instance) را برمی‌گرداند:
 
 ```js twoslash
 import 'vite/client'
@@ -618,7 +618,7 @@ init().then((instance) => {
 })
 ```
 
-The init function can also take an importObject which is passed along to [`WebAssembly.instantiate`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiate) as its second argument:
+تابع init همچنین می‌تواند یک importObject بگیرد که به عنوان آرگومان دوم به [`WebAssembly.instantiate`](https://developer.mozilla.org/en-US/docs/WebAssembly/JavaScript_interface/instantiate) پاس داده می‌شود:
 
 ```js twoslash
 import 'vite/client'
@@ -635,16 +635,16 @@ init({
 })
 ```
 
-In the production build, `.wasm` files smaller than `assetInlineLimit` will be inlined as base64 strings. Otherwise, they will be treated as a [static asset](./assets) and fetched on-demand.
+در بیلد پروداکش، فایل‌های `‎.wasm` که کوچکتر از `assetInlineLimit` هستند به صورت رشته‌های base64 درون‌خطی خواهند شد. در غیر این صورت، به عنوان یک [asset استاتیک](./assets) در نظر گرفته می‌شوند و در صورت درخواست بارگذاری خواهند شد.
 
-::: tip NOTE
-[ES Module Integration Proposal for WebAssembly](https://github.com/WebAssembly/esm-integration) is not currently supported.
-Use [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) or other community plugins to handle this.
+::: tip نکته
+[پیشنهاد یکپارچه‌سازی ماژول ES برای WebAssembly](https://github.com/WebAssembly/esm-integration) در حال حاضر پشتیبانی نمی‌شود.
+از [`vite-plugin-wasm`](https://github.com/Menci/vite-plugin-wasm) یا سایر پلاگین‌های جامعه برای مدیریت این موضوع استفاده کنید.
 :::
 
-### Accessing the WebAssembly Module
+### دسترسی به ماژول WebAssembly
 
-If you need access to the `Module` object, e.g. to instantiate it multiple times, use an [explicit URL import](./assets#explicit-url-imports) to resolve the asset, and then perform the instantiation:
+اگر نیاز به دسترسی به آبجکت `Module` دارید، مثلاً برای نمونه‌سازی چندباره آن، از یک [ایمپورت URL صریح](./assets#explicit-url-imports) برای حل و فصل asset استفاده کنید و سپس نمونه‌سازی را انجام دهید:
 
 ```js twoslash
 import 'vite/client'
@@ -661,12 +661,12 @@ const main = async () => {
 main()
 ```
 
-### Fetching the module in Node.js
+### دریافت ماژول در Node.js
 
-In SSR, the `fetch()` happening as part of the `?init` import, may fail with `TypeError: Invalid URL`.
-See the issue [Support wasm in SSR](https://github.com/vitejs/vite/issues/8882).
+در SSR، در `fetch()‎` که به عنوان بخشی از ایمپورت `‎?init` انجام می‌شود، ممکن است با خطای `TypeError: Invalid URL` مواجه شود.
+به مشکل [پشتیبانی از wasm در SSR](https://github.com/vitejs/vite/issues/8882) مراجعه کنید.
 
-Here is an alternative, assuming the project base is the current directory:
+در اینجا یک روش جایگزین آورده شده است، با فرض اینکه پایه پروژه دایرکتوری فعلی است:
 
 ```js twoslash
 import 'vite/client'
@@ -688,15 +688,15 @@ main()
 
 ## Web Workers
 
-### Import with Constructors
+### ایمپورت با سازنده‌ها (Constructors)
 
-A web worker script can be imported using [`new Worker()`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) and [`new SharedWorker()`](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/SharedWorker). Compared to the worker suffixes, this syntax leans closer to the standards and is the **recommended** way to create workers.
+یک اسکریپت web worker می‌تواند با استفاده از [`new Worker()‎`](https://developer.mozilla.org/en-US/docs/Web/API/Worker/Worker) و [`new SharedWorker()‎`](https://developer.mozilla.org/en-US/docs/Web/API/SharedWorker/SharedWorker) ایمپورت شود. در مقایسه با پسوندهای worker، این سینتکس به استانداردها نزدیک‌تر است و روش **توصیه‌شده** برای ایجاد workers است.
 
 ```ts
 const worker = new Worker(new URL('./worker.js', import.meta.url))
 ```
 
-The worker constructor also accepts options, which can be used to create "module" workers:
+سازنده Worker همچنین گزینه‌هایی را می‌پذیرد که می‌توان از آن‌ها برای ایجاد «ماژول Worker» استفاده کرد:
 
 ```ts
 const worker = new Worker(new URL('./worker.js', import.meta.url), {
@@ -704,11 +704,11 @@ const worker = new Worker(new URL('./worker.js', import.meta.url), {
 })
 ```
 
-The worker detection will only work if the `new URL()` constructor is used directly inside the `new Worker()` declaration. Additionally, all options parameters must be static values (i.e. string literals).
+شناسایی Worker تنها در صورتی کار می‌کند که سازنده `new URL()‎` به‌طور مستقیم در دستور `new Worker()‎` استفاده شده باشد. علاوه بر این، تمامی پارامترها باید مقادیر ثابتی مانند رشته‌های ثابت باشند.
 
-### Import with Query Suffixes
+### ایمپورت با پسوندهای دارای کوئری
 
-A web worker script can be directly imported by appending `?worker` or `?sharedworker` to the import request. The default export will be a custom worker constructor:
+یک اسکریپت web worker می‌تواند با اضافه کردن `‎?worker` یا `‎?sharedworker` به درخواست ایمپورت، مستقیماً ایمپورت شود. خروجی پیش‌فرض یک سازنده worker سفارشی خواهد بود:
 
 ```js twoslash
 import 'vite/client'
@@ -718,9 +718,9 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-The worker script can also use ESM `import` statements instead of `importScripts()`. **Note**: During development this relies on [browser native support](https://caniuse.com/?search=module%20worker), but for the production build it is compiled away.
+اسکریپت worker می‌تواند از دستور ESM `import` به جای `importScripts()‎` استفاده کند. **توجه**: در زمان توسعه، این موضوع به [پشتیبانی بومی مرورگر](https://caniuse.com/?search=module%20worker) متکی است، اما در زمان بیلد پروداکشن، کد ماژول‌ها کامپایل و از بین می‌رود.
 
-By default, the worker script will be emitted as a separate chunk in the production build. If you wish to inline the worker as base64 strings, add the `inline` query:
+به طور پیش‌فرض، اسکریپت worker در بیلد پروداکشن به صورت یک chunk جداگانه خروجی گرفته می‌شود. اگر می‌خواهید worker را به صورت رشته‌های base64 درون‌خطی کنید، کوئری `inline` را اضافه کنید:
 
 ```js twoslash
 import 'vite/client'
@@ -728,7 +728,7 @@ import 'vite/client'
 import MyWorker from './worker?worker&inline'
 ```
 
-If you wish to retrieve the worker as a URL, add the `url` query:
+اگر مایلید worker را به صورت یک URL دریافت کنید، کوئری `url` را اضافه کنید:
 
 ```js twoslash
 import 'vite/client'
@@ -736,63 +736,63 @@ import 'vite/client'
 import MyWorker from './worker?worker&url'
 ```
 
-See [Worker Options](/config/worker-options.md) for details on configuring the bundling of all workers.
+برای مشاهده جزییات درباره نحوه باندل شدن همه‌ی worker ها، به [گزینه‌های Worker](/config/worker-options.md) مراجعه کنید.
 
-## Content Security Policy (CSP)
+## سیاست امنیت محتوایی (CSP)
 
-To deploy CSP, certain directives or configs must be set due to Vite's internals.
+به دلیل ساختار داخلی Vite، برای استفاده از CSP باید بعضی دستورالعمل‌ها یا تنظیمات خاص اعمال شوند.
 
 ### [`'nonce-{RANDOM}'`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#nonce-base64-value)
 
-When [`html.cspNonce`](/config/shared-options#html-cspnonce) is set, Vite adds a nonce attribute with the specified value to any `<script>` and `<style>` tags, as well as `<link>` tags for stylesheets and module preloading. Additionally, when this option is set, Vite will inject a meta tag (`<meta property="csp-nonce" nonce="PLACEHOLDER" />`).
+وقتی [`html.cspNonce`](/config/shared-options#html-cspnonce) تنظیم شود، Vite یک اتریبیوت nonce با مقدار تعیین‌شده به تمام تگ‌های `<script>` و `<style>` اضافه می‌کند و همچنین تگ‌های `<link>` برای استایل‌ها و ماژول‌های preload. علاوه بر این، وقتی این گزینه تنظیم شود، Vite یک تگ متا نیز تزریق می‌کند. <br> (`‎<meta property="csp-nonce" nonce="PLACEHOLDER"‎ />‎`).
 
-The nonce value of a meta tag with `property="csp-nonce"` will be used by Vite whenever necessary during both dev and after build.
+مقدار nonce در یک تگ متا با `property="csp-nonce"‎` هنگام توسعه و پس از بیلد، در صورت نیاز توسط Vite استفاده می‌شود.
 
-:::warning
-Ensure that you replace the placeholder with a unique value for each request. This is important to prevent bypassing a resource's policy, which can otherwise be easily done.
+:::warning هشدار
+اطمینان حاصل کنید که این placeholder را برای هر درخواست با مقدار یکتایی جایگزین کنید. این کار برای جلوگیری از دور زدن سیاست امنیتی محتوا ضروری است.
 :::
 
 ### [`data:`](<https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/Sources#scheme-source:~:text=schemes%20(not%20recommended).-,data%3A,-Allows%20data%3A>)
 
-By default, during build, Vite inlines small assets as data URIs. Allowing `data:` for related directives (e.g. [`img-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src), [`font-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src)), or, disabling it by setting [`build.assetsInlineLimit: 0`](/config/build-options#build-assetsinlinelimit) is necessary.
+Vite به طور پیش‌فرض، در زمان بیلد، asset ‌های کوچک را به صورت data URIs درون‌خطی می‌کند. برای استفاده از آن در بخش‌های مرتبط (مثلاً [`img-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) و [`font-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/font-src)) باید `data:‎` مجاز باشد، یا با تنظیم [`build.assetsInlineLimit: 0`](/config/build-options#build-assetsinlinelimit) می‌توانید آن را غیرفعال کنید.
 
-:::warning
-Do not allow `data:` for [`script-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src). It will allow injection of arbitrary scripts.
+:::warning هشدار
+هرگز `data:‎` را برای [`script-src`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) مجاز نکنید. این کار امکان تزریق اسکریپت‌های دلخواه را فراهم می‌کند.
 :::
 
-## Build Optimizations
+## بهینه‌سازی بیلد
 
-> Features listed below are automatically applied as part of the build process and there is no need for explicit configuration unless you want to disable them.
+> امکانات زیر به صورت خودکار در فرآیند بیلد اعمال می‌شوند و نیازی به پیکربندی صریح ندارند، مگر در صورتی که بخواهید آن‌ها را غیرفعال کنید.
 
-### CSS Code Splitting
+### تقسیم کد CSS
 
-Vite automatically extracts the CSS used by modules in an async chunk and generates a separate file for it. The CSS file is automatically loaded via a `<link>` tag when the associated async chunk is loaded, and the async chunk is guaranteed to only be evaluated after the CSS is loaded to avoid [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.).
+Vite به صورت خودکار CSS استفاده‌شده توسط ماژول‌های موجود در یک chunk ناهمگام (chunk ناهمگام 'async chunk'، منظور بخشی از کد است که به صورت مجزا و در زمان نیاز بارگذاری می‌شود) را استخراج کرده و یک فایل جداگانه برای آن ایجاد می‌کند. این فایل CSS به صورت خودکار از طریق یک تگ `<link>` هنگام بارگیری chunk ناهمگام لود می‌شود و اطمینان حاصل می‌شود که ارزیابی chunk بعد از بارگیری کامل CSS انجام شود تا از [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.) جلوگیری شود.
 
-If you'd rather have all the CSS extracted into a single file, you can disable CSS code splitting by setting [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) to `false`.
+اگر ترجیح می‌دهید تمام CSS در یک فایل گردآوری شود، می‌توانید با تنظیم [`build.cssCodeSplit`](/config/build-options.md#build-csscodesplit) روی `false` تقسیم کد CSS را غیرفعال کنید.
 
-### Preload Directives Generation
+### تولید دستورالعمل‌های پیش‌بارگیری
 
-Vite automatically generates `<link rel="modulepreload">` directives for entry chunks and their direct imports in the built HTML.
+Vite به طور خودکار دستورالعمل‌های `<link rel="modulepreload"‎>` را برای بخش‌های ورودی و ایمپورت‌های مستقیم آن‌ها در HTML نهایی تولید می‌کند.
 
-### Async Chunk Loading Optimization
+### بهینه‌سازی بارگیری بخش‌های async
 
-In real world applications, Rollup often generates "common" chunks - code that is shared between two or more other chunks. Combined with dynamic imports, it is quite common to have the following scenario:
+در برنامه‌های دنیای واقعی، Rollup اغلب "بخش‌های مشترک" را تولید می‌کند - کدهایی که بین دو یا چند بخش دیگر به اشتراک گذاشته می‌شوند. همراه با ایمپورت‌های پویا، چنین سناریویی بسیار رایج است:
 
 <script setup>
 import graphSvg from '../images/graph.svg?raw'
 </script>
-<svg-image :svg="graphSvg" />
+<svg-image :svg="graphSvg" dir="ltr" />
 
-In the non-optimized scenarios, when async chunk `A` is imported, the browser will have to request and parse `A` before it can figure out that it also needs the common chunk `C`. This results in an extra network roundtrip:
+در سناریوهای بهینه‌نشده، وقتی بخش `A` که async هست ایمپورت می‌شود، مرورگر باید ابتدا `A` را درخواست و پردازش کند تا متوجه شود که به بخش مشترک `C` نیز نیاز دارد. این باعث یک رفت و برگشت اضافی در شبکه می‌شود:
 
 ```
 Entry ---> A ---> C
 ```
 
-Vite automatically rewrites code-split dynamic import calls with a preload step so that when `A` is requested, `C` is fetched **in parallel**:
+Vite به طور خودکار فراخوانی‌های ایمپورت پویای تقسیم‌شده کد را با یک مرحله پیش‌بارگیری بازنویسی می‌کند، به طوری که وقتی `A` درخواست می‌شود، `C` به صورت **موازی** دریافت می‌شود:
 
 ```
 Entry ---> (A + C)
 ```
 
-It is possible for `C` to have further imports, which will result in even more roundtrips in the un-optimized scenario. Vite's optimization will trace all the direct imports to completely eliminate the roundtrips regardless of import depth.
+ممکن است `C` نیز ایمپورت‌های دیگری داشته باشد که در حالت بهینه‌نشده منجر به رفت و برگشت‌های بیشتری می‌شود. بهینه‌سازی Vite تمام ایمپورت‌های مستقیم را ردیابی می‌کند تا صرف نظر از عمق ایمپورت، رفت و برگشت‌ها را به طور کامل حذف کند.
