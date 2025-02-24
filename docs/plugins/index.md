@@ -1,9 +1,7 @@
 # Plugins
 
 :::tip نکته
-
 Vite هدف دارد پشتیبانی پیش‌فرض از الگوهای رایج توسعه وب را ارائه دهد. قبل از جست‌وجو برای یافتن پلاگین‌های Vite یا پلاگین‌های سازگار با Rollup، [راهنمای ویژگی‌ها](../guide/features.md) را بررسی کنید. بسیاری از مواردی که در پروژه‌های Rollup نیاز به استفاده از پلاگین دارند، در Vite به‌صورت پیش‌فرض پوشش داده شده‌اند.
-
 :::
 
 برای کسب اطلاعات بیشتر درباره نحوه استفاده از پلاگین‌ها، بخش [استفاده از پلاگین‌ها](../guide/using-plugins) را مطالعه کنید.
@@ -32,9 +30,7 @@ Vite هدف دارد پشتیبانی پیش‌فرض از الگوهای رای
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
 
-- Replaces Babel with SWC during development. During production builds, SWC+esbuild are used when using plugins, and esbuild only otherwise. For big projects that don't require non-standard React extensions, cold start and Hot Module Replacement (HMR) can be significantly faster.
-
-در مرحله توسعه، Babel با SWC جایگزین می‌شود. در مرحله بیلد پرواکشن، اگر از پلاگین‌ها استفاده شود، SWC+esbuild به کار گرفته می‌شوند و در غیر این صورت فقط از esbuild استفاده می‌شود. برای پروژه‌های بزرگ که به اکسننشن های غیراستاندارد React نیازی ندارند، زمان راه‌اندازی اولیه (cold start) و تعویض ماژول‌ها در حین توسعه (HMR) می‌توانند به طور قابل توجهی سریع‌تر باشند.
+- در مرحله توسعه، Babel با SWC جایگزین می‌شود. در مرحله بیلد پرواکشن، اگر از پلاگین‌ها استفاده شود، SWC+esbuild به کار گرفته می‌شوند و در غیر این صورت فقط از esbuild استفاده می‌شود. برای پروژه‌های بزرگ که به اکسننشن های غیراستاندارد React نیازی ندارند، زمان راه‌اندازی اولیه (cold start) و تعویض ماژول‌ها در حین توسعه (HMR) می‌توانند به طور قابل توجهی سریع‌تر باشند.
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
@@ -45,7 +41,5 @@ Vite هدف دارد پشتیبانی پیش‌فرض از الگوهای رای
 [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) را بررسی کنید - شما همچنین می‌توانید یک درخواست PR ارسال کنید تا پلاگین‌های خود را در آنجا اضافه کنید.
 
 ## Rollup Plugins
-
-ترجمه:
 
 [پلاگین‌های Vite](../guide/api-plugin) توسعه یافته از اینترفیس پلاگین‌های Rollup هستند. برای جزئیات بیشتر، به بخش [سازگاری با پلاگین‌های Rollup](../guide/api-plugin#rollup-plugin-compatibility) مراجعه کنید.
