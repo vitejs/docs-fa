@@ -406,3 +406,86 @@ API زمان اجرای آزمایشی Vite به API جدید "Module Runner" ت
   }
 }
 ```
+
+### استفاده از `style.css` مانند Vite 5
+
+اگر ترجیح می‌دهید که همچنان از `style.css` مانند Vite 5 استفاده کنید، می‌توانید مقدار `build.lib.cssFileName: 'style'` را تنظیم کنید.
+
+## تغییرات پیشرفته
+
+تعدادی از تغییرات مهم دیگر وجود دارند که تنها بر تعداد کمی از کاربران تأثیر می‌گذارند:
+
+- **حذف وارد کردن پیش‌فرض CSS در حالت توسعه SSR**
+  - پشتیبانی از وارد کردن پیش‌فرض فایل‌های CSS در Vite 4 منسوخ شد و در Vite 5 حذف شد، اما در حالت توسعه SSR همچنان به‌طور ناخواسته پشتیبانی می‌شد. این پشتیبانی اکنون کاملاً حذف شده است.
+
+- **تغییر مقدار پیش‌فرض `build.cssMinify`**
+  - مقدار پیش‌فرض [`build.cssMinify`](/config/build-options#build-cssminify) اکنون `'esbuild'` است، حتی برای بیلدهای SSR.
+
+- **پشتیبانی از WebSocket در `server.proxy.bypass`**
+  - گزینه `server.proxy[path].bypass` اکنون برای درخواست‌های ارتقاء WebSocket نیز فراخوانی می‌شود و در این حالت، پارامتر `res` مقدار `undefined` خواهد داشت.
+
+- **افزایش حداقل نسخه پشتیبانی‌شده‌ی `terser`**
+  - حداقل نسخه‌ی `terser` برای [`build.minify: 'terser'`](/config/build-options#build-minify) به نسخه 5.16.0 ارتقا یافته است.
+
+- **بروزرسانی `@rollup/plugin-commonjs` به نسخه 28**
+  - مقدار پیش‌فرض [`commonjsOptions.strictRequires`](https://github.com/rollup/plugins/blob/master/packages/commonjs/README.md#strictrequires) اکنون `true` است (قبلاً مقدار `'auto'` بود).
+  - این تغییر ممکن است اندازه باندل‌ها را افزایش دهد اما بیلدهای قطعی‌تری را فراهم می‌کند.
+
+- **مهاجرت از `fast-glob` به `tinyglobby`**
+  - براکت‌های `{} {01..03}` و `{} {2..8..2}` دیگر در الگوهای glob پشتیبانی نمی‌شوند.
+
+- **تغییرات در `resolve.conditions` و `resolve.mainFields`**
+  - مقدار پیش‌فرض `resolve.conditions` تغییر کرده و `resolve.mainFields` دیگر برای وابستگی‌های بدون `external` در SSR اعمال نمی‌شود.
+
+- **حذف گزینه `fs.cachedChecks`**
+  - این بهینه‌سازی اختیاری به دلیل مشکلات خاص حذف شده است.
+
+      <details>
+    <summary>Click to expand example</summary>
+
+    ```ts
+    import type { Plugin, EnvironmentModuleNode } from 'vite'
+
+    function hmrReload(): Plugin {
+      return {
+        name: 'hmr-reload',
+        enforce: 'post',
+        hotUpdate: {
+          order: 'post',
+          handler({ modules, server, timestamp }) {
+            if (this.environment.name !== 'ssr') return
+
+            let hasSsrOnlyModules = false
+
+            const invalidatedModules = new Set<EnvironmentModuleNode>()
+            for (const mod of modules) {
+              if (mod.id == null) continue
+              const clientModule =
+                server.environments.client.moduleGraph.getModuleById(mod.id)
+              if (clientModule != null) continue
+
+              this.environment.moduleGraph.invalidateModule(
+                mod,
+                invalidatedModules,
+                timestamp,
+                true,
+              )
+              hasSsrOnlyModules = true
+            }
+
+            if (hasSsrOnlyModules) {
+              server.ws.send({ type: 'full-reload' })
+              return []
+            }
+          },
+        },
+      }
+    }
+    ```
+
+    </details>
+
+## مهاجرت از v4
+
+ابتدا به [راهنمای مهاجرت از Vite 4](https://v5.vite.dev/guide/migration.html) مراجعه کنید تا تغییرات لازم برای مهاجرت به Vite 5 را بررسی کنید و سپس ادامه تغییرات این صفحه را دنبال کنید.
+
