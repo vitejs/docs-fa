@@ -311,7 +311,7 @@ export default defineConfig({
               link: '/guide/performance'
             },
             {
-              text: 'Migration from v5',
+              text: 'مهاجرت از v5',
               link: '/guide/migration'
             },
             {
