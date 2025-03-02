@@ -321,10 +321,10 @@ export default defineConfig({
           ]
         },
         {
-          text: 'APIs',
+          text: 'API ها',
           items: [
             {
-              text: 'Plugin API',
+              text: 'API پلاگین',
               link: '/guide/api-plugin'
             },
             {
