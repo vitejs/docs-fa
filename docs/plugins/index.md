@@ -1,45 +1,45 @@
-# Plugins
+# پلاگین‌ها
 
-:::tip NOTE
-Vite aims to provide out-of-the-box support for common web development patterns. Before searching for a Vite or Compatible Rollup plugin, check out the [Features Guide](../guide/features.md). A lot of the cases where a plugin would be needed in a Rollup project are already covered in Vite.
+:::tip نکته
+Vite هدف دارد پشتیبانی پیش‌فرض از الگوهای رایج توسعه وب را ارائه دهد. قبل از جست‌وجو برای یافتن پلاگین‌های Vite یا پلاگین‌های سازگار با Rollup، [راهنمای ویژگی‌ها](../guide/features.md) را بررسی کنید. بسیاری از مواردی که در پروژه‌های Rollup نیاز به استفاده از پلاگین دارند، در Vite به‌صورت پیش‌فرض پوشش داده شده‌اند.
 :::
 
-Check out [Using Plugins](../guide/using-plugins) for information on how to use plugins.
+برای کسب اطلاعات بیشتر درباره نحوه استفاده از پلاگین‌ها، بخش [استفاده از پلاگین‌ها](../guide/using-plugins) را مطالعه کنید.
 
 ## Official Plugins
 
 ### [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 
-- Provides Vue 3 Single File Components support.
+- از Vue 3 Single File Components پشتیبانی می‌کند .
 
 ### [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 
-- Provides Vue 3 JSX support (via [dedicated Babel transform](https://github.com/vuejs/jsx-next)).
+- از Vue 3 JSX پشتیبانی می‌کند (با استفاده از [تبدیل اختصاصی Babel](https://github.com/vuejs/jsx-next)).
 
 ### [@vitejs/plugin-vue2](https://github.com/vitejs/vite-plugin-vue2)
 
-- Provides Vue 2.7 Single File Components support.
+- از Vue 2.7 Single File Components پشتیبانی می‌کند.
 
 ### [@vitejs/plugin-vue2-jsx](https://github.com/vitejs/vite-plugin-vue2-jsx)
 
-- Provides Vue 2.7 JSX support (via [dedicated Babel transform](https://github.com/vuejs/jsx-vue2/)).
+- از Vue 2.7 JSX پشتیبانی می‌کند (با استفاده از [تبدیل اختصاصی Babel](https://github.com/vuejs/jsx-vue2/)).
 
 ### [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
 
-- Uses esbuild and Babel, achieving fast HMR with a small package footprint and the flexibility of being able to use the Babel transform pipeline. Without additional Babel plugins, only esbuild is used during builds.
+- با استفاده از esbuild و Babeldدر نهایت HMR سریع و پکیجی کم‌حجم ارائه می‌دهد، در حالی که امکان استفاده از پایپ‌لاین تبدیل Babel را هم دارد. در فرآیند ساخت (build)، اگر پلاگین‌های اضافی Babel اضافه نشوند، تنها از esbuild استفاده می‌شود.
 
 ### [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
 
-- Replaces Babel with SWC during development. During production builds, SWC+esbuild are used when using plugins, and esbuild only otherwise. For big projects that don't require non-standard React extensions, cold start and Hot Module Replacement (HMR) can be significantly faster.
+- در مرحله توسعه، Babel با SWC جایگزین می‌شود. در مرحله بیلد پرواکشن، اگر از پلاگین‌ها استفاده شود، SWC+esbuild به کار گرفته می‌شوند و در غیر این صورت فقط از esbuild استفاده می‌شود. برای پروژه‌های بزرگ که به اکسننشن های غیراستاندارد React نیازی ندارند، زمان راه‌اندازی اولیه (cold start) و تعویض ماژول‌ها در حین توسعه (HMR) می‌توانند به طور قابل توجهی سریع‌تر باشند.
 
 ### [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy)
 
-- Provides legacy browsers support for the production build.
+- پشتیبانی از مرورگرهای قدیمی برای بیلد پرواکشن فراهم می‌کند.
 
 ## Community Plugins
 
-Check out [awesome-vite](https://github.com/vitejs/awesome-vite#plugins) - you can also submit a PR to list your plugins there.
+[awesome-vite](https://github.com/vitejs/awesome-vite#plugins) را بررسی کنید - شما همچنین می‌توانید یک درخواست PR ارسال کنید تا پلاگین‌های خود را در آنجا اضافه کنید.
 
 ## Rollup Plugins
 
-[Vite plugins](../guide/api-plugin) are an extension of Rollup's plugin interface. Check out the [Rollup Plugin Compatibility section](../guide/api-plugin#rollup-plugin-compatibility) for more information.
+[پلاگین‌های Vite](../guide/api-plugin) توسعه یافته از اینترفیس پلاگین‌های Rollup هستند. برای جزئیات بیشتر، به بخش [سازگاری با پلاگین‌های Rollup](../guide/api-plugin#rollup-plugin-compatibility) مراجعه کنید.
