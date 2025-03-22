@@ -303,7 +303,7 @@ export default defineConfig({
               link: '/guide/backend-integration'
             },
             {
-              text: 'Troubleshooting',
+              text: 'عیب‌یابی',
               link: '/guide/troubleshooting'
             },
             {

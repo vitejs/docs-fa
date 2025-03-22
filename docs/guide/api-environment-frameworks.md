@@ -1,19 +1,19 @@
-# Environment API for Frameworks
+# API محیط برای فریم‌ورک‌ها
 
-:::warning Experimental
-Environment API is experimental. We'll keep the APIs stable during Vite 6 to let the ecosystem experiment and build on top of it. We're planning to stabilize these new APIs with potential breaking changes in Vite 7.
+:::warning آزمایشی
+Environment API در حال حاضر آزمایشی است. ما این APIها را در طول نسخه Vite 6 ثابت نگه می‌داریم تا اکوسیستم بتواند آن را آزمایش کند و بر روی آن توسعه دهد. برنامه ما این است که این APIهای جدید را در Vite 7 با تغییرات احتمالی نهایی کنیم.
 
-Resources:
+منابع:
 
-- [Feedback discussion](https://github.com/vitejs/vite/discussions/16358) where we are gathering feedback about the new APIs.
-- [Environment API PR](https://github.com/vitejs/vite/pull/16471) where the new API were implemented and reviewed.
+- [بحث و گفتگو](https://github.com/vitejs/vite/discussions/16358) جایی که ما در حال جمع‌آوری نظرات درباره APIهای جدید هستیم.
+- [PR مربوط به Environment API](https://github.com/vitejs/vite/pull/16471) جایی که API جدید پیاده‌سازی و بررسی شده است.
 
-Please share your feedback with us.
+لطفاً نظرات و بازخوردهای خود را با ما به اشتراک بگذارید.
 :::
 
-## Environments and frameworks
+## محیط‌ها و فریم‌ورک‌ها
 
-The implicit `ssr` environment and other non-client environments use a `RunnableDevEnvironment` by default during dev. While this requires the runtime to be the same with the one the Vite server is running in, this works similarly with `ssrLoadModule` and allows frameworks to migrate and enable HMR for their SSR dev story. You can guard any runnable environment with an `isRunnableDevEnvironment` function.
+محیط `ssr` و سایر محیط‌های غیرکلاینت به طور پیش‌فرض در زمان توسعه از یک `RunnableDevEnvironment` استفاده می‌کنند. در حالی که این نیاز دارد که رانتایم مشابه با سرور Vite باشد، این روش مشابه با `ssrLoadModule` عمل می‌کند و به فریم‌ورک‌ها اجازه می‌دهد تا مهاجرت کرده و HMR را برای توسعه SSR خود فعال کنند. شما می‌توانید هر محیط اجرایی را با استفاده از تابع `isRunnableDevEnvironment` بررسی کنید.
 
 ```ts
 export class RunnableDevEnvironment extends DevEnvironment {
@@ -22,13 +22,13 @@ export class RunnableDevEnvironment extends DevEnvironment {
 
 class ModuleRunner {
   /**
-   * URL to execute.
-   * Accepts file path, server path, or id relative to the root.
-   * Returns an instantiated module (same as in ssrLoadModule)
+   * برای اجرا URL
+   * می‌تواند مسیر فایل، مسیر سرور، یا شناسه‌ای نسبی به ریشه را بپذیرد
+   * ssrLoadModule یک ماژول نمونه‌سازی‌شده را برمی‌گرداند مشابه
    */
   public async import(url: string): Promise<Record<string, any>>
   /**
-   * Other ModuleRunner methods...
+   * ModuleRunner سایر متدهای
    */
 }
 
@@ -37,13 +37,13 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 }
 ```
 
-:::warning
-The `runner` is evaluated eagerly when it's accessed for the first time. Beware that Vite enables source map support when the `runner` is created by calling `process.setSourceMapsEnabled` or by overriding `Error.prepareStackTrace` if it's not available.
+:::warning هشدار
+`runner` زمانی که برای اولین بار به آن دسترسی پیدا کنید، بلافاصله مقداردهی می‌شود. توجه داشته باشید که وقتی `runner` با فراخوانی `process.setSourceMapsEnabled` ساخته می‌شود یا در صورت عدم دسترسی، با جایگزین کردن `Error.prepareStackTrace`، Vite از پشتیبانی سورس مپ استفاده می‌کند.
 :::
 
-## Default `RunnableDevEnvironment`
+## محیط پیش‌فرض `RunnableDevEnvironment`
 
-Given a Vite server configured in middleware mode as described by the [SSR setup guide](/guide/ssr#setting-up-the-dev-server), let's implement the SSR middleware using the environment API. Error handling is omitted.
+با توجه به سرور Vite که مطابق [راهنمای راه‌اندازی SSR](/guide/ssr#setting-up-the-dev-server) در حالت میان‌افزار (middleware) پیکربندی شده، بیایید با استفاده از API محیط، میان‌افزار SSR را پیاده‌سازی کنیم (جزئیات مربوط به مدیریت خطا در این مثال نادیده گرفته شده است).
 
 ```js
 import fs from 'node:fs'
@@ -58,58 +58,58 @@ const server = await createServer({
   appType: 'custom',
   environments: {
     server: {
-      // by default, modules are run in the same process as the vite server
+// اجرا شده است Vite به طور پیش‌فرض، ماژول‌ها در همان فرآیندی اجرا می‌شوند که سرور
     },
   },
 })
 
-// You might need to cast this to RunnableDevEnvironment in TypeScript or
-// use isRunnableDevEnvironment to guard the access to the runner
+// تبدیل کنید RunnableDevEnvironment نیاز داشته باشید آن را به TypeScript شاید در
+// استفاده کنید runner برای بررسی دسترسی به isRunnableDevEnvironment یا از
 const environment = server.environments.node
 
 app.use('*', async (req, res, next) => {
   const url = req.originalUrl
 
-  // 1. Read index.html
+  // 1. index.html خواندن فایل
   const indexHtmlPath = path.resolve(__dirname, 'index.html')
   let template = fs.readFileSync(indexHtmlPath, 'utf-8')
 
-  // 2. Apply Vite HTML transforms. This injects the Vite HMR client,
-  //    and also applies HTML transforms from Vite plugins, e.g. global
-  //    preambles from @vitejs/plugin-react
+  // 2. Vite به HTML تبدیل‌های مربوط به
+  //    را اعمال می‌کند Vite را تزریق می‌کند و همچنین تبدیل‌های پلاگین‌های HMR Client
+  //    @vitejs/plugin-react پیش‌درآمد از
   template = await server.transformIndexHtml(url, template)
 
-  // 3. Load the server entry. import(url) automatically transforms
-  //    ESM source code to be usable in Node.js! There is no bundling
-  //    required, and provides full HMR support.
+  // 3. را ESM کد import(url) ماژول ورودی سرور را بارگیری می‌کند. متد
+  //    به صورت خودکار تبدیل می‌کند و نیاز به باندل ندارد Node.js برای استفاده در
+  //    را فراهم می‌کند HMR همچنین پشتیبانی کامل از
   const { render } = await environment.runner.import('/src/entry-server.js')
 
-  // 4. render the app HTML. This assumes entry-server.js's exported
-  //     `render` function calls appropriate framework SSR APIs,
-  //    e.g. ReactDOMServer.renderToString()
+  // 4. از render برنامه را رندر می‌کند. فرض بر این است که تابع HTML محتوای
+  //    فریم‌ورک استفاده می‌کند SSR های مربوط به API از entry-server.js
+  //    ReactDOMServer.renderToString() مانند
   const appHtml = await render(url)
 
-  // 5. Inject the app-rendered HTML into the template.
+  // 5. محتوای رندر شده را وارد قالب می‌کند
   const html = template.replace(`<!--ssr-outlet-->`, appHtml)
 
-  // 6. Send the rendered HTML back.
+  // 6. نهایی را برمی‌گرداند HTML محتوای
   res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
 })
 ```
 
-## Runtime Agnostic SSR
+## SSR بدون وابستگی به Runtime مشخص
 
-Since the `RunnableDevEnvironment` can only be used to run the code in the same runtime as the Vite server, it requires a runtime that can run the Vite Server (a runtime that is compatible with Node.js). This means that you will need to use the raw `DevEnvironment` to make it runtime agnostic.
+از آنجا که `RunnableDevEnvironment` فقط در همان رانتایم سرور Vite کد را اجرا می‌کند، این رانتایم باید قادر به اجرای سرور Vite باشد (رانتایمی سازگار با Node.js). به این معناست که برای حذف وابستگی به رانتایم مشخص، باید از `DevEnvironment` به صورت خام استفاده کنید.
 
-:::info `FetchableDevEnvironment` proposal
+:::info پیشنهاد `FetchableDevEnvironment`
 
-The initial proposal had a `run` method on the `DevEnvironment` class that would allow consumers to invoke an import on the runner side by using the `transport` option. During our testing we found out that the API was not universal enough to start recommending it. At the moment, we are looking for feedback on [the `FetchableDevEnvironment` proposal](https://github.com/vitejs/vite/discussions/18191).
+در طرح اولیه، متدی به نام `run` در کلاس `DevEnvironment` پیشنهاد شد که با استفاده از گزینه `transport`، امکان ایمپورت در بخش اجراکننده (runner) را فراهم می‌کرد. در آزمایش‌ها مشخص شد که این API به اندازه کافی فراگیر نیست تا توصیه شود. هم‌اکنون منتظر بازخورد در مورد [پیشنهاد `FetchableDevEnvironment`](https://github.com/vitejs/vite/discussions/18191) هستیم.
 
 :::
 
-`RunnableDevEnvironment` has a `runner.import` function that returns the value of the module. But this function is not available in the raw `DevEnvironment` and requires the code using the Vite's APIs and the user modules to be decoupled.
+در `RunnableDevEnvironment` متد `runner.import` وجود دارد که مقدار ماژول را برمی‌گرداند، اما در `DevEnvironment` خام در دسترس نیست و نیاز دارد کد استفاده‌کننده از APIهای Vite و ماژول‌های کاربر از یکدیگر جدا باشند.
 
-For example, the following example uses the value of the user module from the code using the Vite's APIs:
+مثال زیر، کد از ماژول کاربر در همان جایی استفاده می‌کند که از APIهای Vite نیز استفاده می‌شود:
 
 ```ts
 // code using the Vite's APIs
@@ -132,26 +132,26 @@ export function createHandler(input) {
 }
 ```
 
-If your code can run in the same runtime as the user modules (i.e., it does not rely on Node.js-specific APIs), you can use a virtual module. This approach eliminates the need to access the value from the code using Vite's APIs.
+اگر کد شما می‌تواند در همان محیط اجرایی ماژول‌های کاربر اجرا شود (یعنی به APIهای مخصوص Node.js وابسته نیست)، می‌توانید از یک ماژول مجازی استفاده کنید. این روش نیاز به دسترسی به مقدار از طریق APIهای Vite را از بین می‌برد.
 
 ```ts
-// code using the Vite's APIs
+// Vite های API کد با استفاده از
 import { createServer } from 'vite'
 
 const server = createServer({
   plugins: [
-    // a plugin that handles `virtual:entrypoint`
+    // `virtual:entrypoint` پلاگین برای رسیدگی به مسیر مجازی
     {
       name: 'virtual-module',
-      /* plugin implementation */
+      /* پیاده‌سازی پلاگین */
     },
   ],
 })
 const ssrEnvironment = server.environment.ssr
 const input = {}
 
-// use exposed functions by each environment factories that runs the code
-// check for each environment factories what they provide
+// از توابعی که توسط فکتوری‌های هر محیط فراهم می‌شوند استفاده می‌کند
+// بررسی می‌کند هر فکتوری محیط چه امکاناتی ارائه می‌دهد
 if (ssrEnvironment instanceof RunnableDevEnvironment) {
   ssrEnvironment.runner.import('virtual:entrypoint')
 } else if (ssrEnvironment instanceof CustomDevEnvironment) {
@@ -175,7 +175,7 @@ export function createHandler(input) {
 }
 ```
 
-For example, to call `transformIndexHtml` on the user module, the following plugin can be used:
+برای مثال، برای فراخوانی `transformIndexHtml` روی ماژول کاربر، می‌توان از پلاگین زیر استفاده کرد:
 
 ```ts {13-21}
 function vitePluginVirtualIndexHtml(): Plugin {
@@ -206,26 +206,26 @@ function vitePluginVirtualIndexHtml(): Plugin {
 }
 ```
 
-If your code requires Node.js APIs, you can use `hot.send` to communicate with the code that uses Vite's APIs from the user modules. However, be aware that this approach may not work the same way after the build process.
+اگر کد شما به APIهای Node.js نیاز دارد، می‌توانید برای ارتباط با کدی که از APIهای Vite در ماژول‌های کاربر استفاده می‌کند، از `hot.send` استفاده کنید. با این حال، دقت داشته باشید که پس از مرحله بیلد، این روش ممکن است همانند قبل کار نکند.
 
 ```ts
-// code using the Vite's APIs
+// Vite های API کد با استفاده از
 import { createServer } from 'vite'
 
 const server = createServer({
   plugins: [
-    // a plugin that handles `virtual:entrypoint`
+    // `virtual:entrypoint` پلاگین برای رسیدگی به مسیر مجازی
     {
       name: 'virtual-module',
-      /* plugin implementation */
+      /* پیاده‌سازی پلاگین */
     },
   ],
 })
 const ssrEnvironment = server.environment.ssr
 const input = {}
 
-// use exposed functions by each environment factories that runs the code
-// check for each environment factories what they provide
+// از توابعی که توسط فکتوری‌های هر محیط فراهم می‌شوند استفاده می‌کند
+// بررسی می‌کند هر فکتوری محیط چه امکاناتی ارائه می‌دهد
 if (ssrEnvironment instanceof RunnableDevEnvironment) {
   ssrEnvironment.runner.import('virtual:entrypoint')
 } else if (ssrEnvironment instanceof CustomDevEnvironment) {
@@ -269,11 +269,11 @@ export function createHandler(input) {
 }
 ```
 
-## Environments During Build
+## محیط‌ها در زمان بیلد
 
-In the CLI, calling `vite build` and `vite build --ssr` will still build the client only and ssr only environments for backward compatibility.
+در خط فرمان (CLI)، فراخوانی `vite build` و `vite build --ssr` همچنان به‌خاطر سازگاری با نسخه‌های قبلی فقط محیط کلاینت و محیط SSR را بیلد می‌کند.
 
-When `builder` is not `undefined` (or when calling `vite build --app`), `vite build` will opt-in into building the entire app instead. This would later on become the default in a future major. A `ViteBuilder` instance will be created (build-time equivalent to a `ViteDevServer`) to build all configured environments for production. By default the build of environments is run in series respecting the order of the `environments` record. A framework or user can further configure how the environments are built using:
+زمانی که `builder` تعریف شده باشد (یا وقتی از `vite build --app` استفاده می‌کنید)، `vite build` برای بیلد کل اپلیکیشن فعال می‌شود. این کار در نسخه مهم بعدی به صورت پیش‌فرض خواهد بود. یک نمونه از `ViteBuilder` (معادل بیلدی `ViteDevServer`) ایجاد می‌شود تا تمام محیط‌های پیکربندی‌شده را برای پروداکشن بیلد کند. به صورت پیش‌فرض، بیلد محیط‌ها به صورت سری و بر اساس ترتیب رکورد `environments` اجرا می‌شود. یک فریم‌ورک یا کاربر می‌تواند با استفاده از تنظیمات زیر مشخص کند چگونه محیط‌ها بیلد شوند:
 
 ```js
 export default {
@@ -288,6 +288,6 @@ export default {
 }
 ```
 
-## Environment Agnostic Code
+## کد بدون وابستگی مستقیم به محیط
 
-Most of the time, the current `environment` instance will be available as part of the context of the code being run so the need to access them through `server.environments` should be rare. For example, inside plugin hooks the environment is exposed as part of the `PluginContext`, so it can be accessed using `this.environment`. See [Environment API for Plugins](./api-environment-plugins.md) to learn about how to build environment aware plugins.
+اغلب اوقات، نمونه محیط فعلی به عنوان بخشی از کانتکست کدی که اجرا می‌شود در دسترس است، بنابراین نیاز به دسترسی مستقیم از طریق `server.environments` معمولاً کم است. به عنوان مثال، در هوک‌های پلاگین، محیط به عنوان بخشی از `PluginContext` در دسترس قرار می‌گیرد و می‌توانید با `this.environment` به آن دسترسی داشته باشید. برای آشنایی با نحوه ساخت پلاگین‌های آگاه به محیط، به [Environment API for Plugins](./api-environment-plugins.md) مراجعه کنید.

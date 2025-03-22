@@ -1,38 +1,38 @@
 # Environment API
 
-:::warning Experimental
-Environment API is experimental. We'll keep the APIs stable during Vite 6 to let the ecosystem experiment and build on top of it. We're planning to stabilize these new APIs with potential breaking changes in Vite 7.
+:::warning آزمایشی
+Environment API در حال حاضر آزمایشی است. ما این APIها را در طول نسخه Vite 6 ثابت نگه می‌داریم تا اکوسیستم بتواند آن را آزمایش کند و بر روی آن توسعه دهد. برنامه ما این است که این APIهای جدید را در Vite 7 با تغییرات احتمالی نهایی کنیم.
 
-Resources:
+منابع:
 
-- [Feedback discussion](https://github.com/vitejs/vite/discussions/16358) where we are gathering feedback about the new APIs.
-- [Environment API PR](https://github.com/vitejs/vite/pull/16471) where the new API were implemented and reviewed.
+- [بحث و گفتگو](https://github.com/vitejs/vite/discussions/16358) جایی که ما در حال جمع‌آوری نظرات درباره APIهای جدید هستیم.
+- [PR مربوط به Environment API](https://github.com/vitejs/vite/pull/16471) جایی که API جدید پیاده‌سازی و بررسی شده است.
 
-Please share your feedback with us.
+لطفاً نظرات و بازخوردهای خود را با ما به اشتراک بگذارید.
 :::
 
-## Formalizing Environments
+## استانداردسازی محیط‌ها
 
-Vite 6 formalizes the concept of Environments. Until Vite 5, there were two implicit Environments (`client`, and optionally `ssr`). The new Environment API allows users and framework authors to create as many environments as needed to map the way their apps work in production. This new capability required a big internal refactoring, but a lot of effort has been placed on backward compatibility. The initial goal of Vite 6 is to move the ecosystem to the new major as smoothly as possible, delaying the adoption of these new experimental APIs until enough users have migrated and frameworks and plugin authors have validated the new design.
+Vite 6 مفهوم محیط‌ها را استانداردسازی می‌کند. تا نسخه‌ی Vite 5، دو محیط پیش‌فرض وجود داشت: (`client` و در صورت نیاز `ssr`). Environment API (رابط برنامه‌نویسی محیط) جدید به کاربران و توسعه‌دهندگان فریمورک‌ها اجازه می‌دهد تا به تعداد مورد نیاز محیط ایجاد کنند و آن را با نحوه‌ی عملکرد برنامه‌هایشان در محیط پروداکشن تطبیق دهند. این قابلیت جدید نیازمند بازنگری گسترده‌ای در ساختار داخلی بود، اما تلاش زیادی برای حفظ سازگاری با نسخه‌های قبلی صورت گرفته است. هدف اولیه‌ی Vite 6 این است که اکوسیستم را به‌آرامی به نسخه‌ی جدید منتقل کند و پذیرش این APIهای آزمایشی جدید را تا زمانی که تعداد کافی از کاربران مهاجرت کرده و توسعه‌دهندگانِ فریمورک‌ها و افزونه‌ها طراحی جدید را تأیید کنند، به تعویق بیندازد.
 
-## Closing the Gap Between Build and Dev
+## کاهش فاصله بین ساخت و توسعه
 
-For a simple SPA/MPA, no new APIs around environments are exposed to the config. Internally, Vite will apply the options to a `client` environment, but it's not necessary to know of this concept when configuring Vite. The config and behavior from Vite 5 should work seamlessly here.
+برای یک SPA/MPA ساده، هیچ API جدیدی در مورد محیط‌ها به پیکربندی افزوده نشده است. از نظر داخلی، Vite گزینه‌ها را به محیط `client` اعمال خواهد کرد، اما نیازی به دانستن این مفهوم هنگام پیکربندی Vite نیست. پیکربندی و رفتار موجود در Vite 5 باید به‌طور یکپارچه در اینجا کار کند.
 
-When we move to a typical server-side rendered (SSR) app, we'll have two environments:
+هنگامی که به سمت یک اپلیکیشن معمولی رندر شده در سمت سرور (SSR) می‌رویم، دو محیط خواهیم داشت:
 
-- `client`: runs the app in the browser.
-- `server`: runs the app in node (or other server runtimes) which renders pages before sending them to the browser.
+- **`client`**: اپلیکیشن را در مرورگر اجرا می‌کند.
+- **`server`**: اپلیکیشن را در Node (یا سایر رانتایم‌ها سرور) اجرا می‌کند که صفحات را قبل از ارسال به مرورگر رندر می‌کند.
 
-In dev, Vite executes the server code in the same Node process as the Vite dev server, giving a close approximation to the production environment. However, it is also possible for servers to run in other JS runtimes, like [Cloudflare's workerd](https://github.com/cloudflare/workerd) which have different constraints. Modern apps may also run in more than two environments, e.g. a browser, a node server, and an edge server. Vite 5 didn't allow to properly represent these environments.
+در محیط توسعه (dev)، Vite کد سرور را در همان فرآیند Node که سرور توسعه Vite را اجرا می‌کند، اجرا می‌کند، که شبیه‌سازی نزدیکی به محیط پروداکشن ایجاد می‌کند. با این حال، ممکن است سرورها در رانتایم جاوااسکریپت دیگری مانند [Workerd Cloudflare](https://github.com/cloudflare/workerd) اجرا شوند که محدودیت‌های متفاوتی دارند. اپلیکیشن‌های مدرن همچنین ممکن است در بیشتر از دو محیط اجرا شوند، مثلاً یک مرورگر، یک سرور Node و یک سرور لبه. Vite 5 قادر به نمایاندن مناسب این محیط‌ها نبود.
 
-Vite 6 allows users to configure their app during build and dev to map all of its environments. During dev, a single Vite dev server can now be used to run code in multiple different environments concurrently. The app source code is still transformed by Vite dev server. On top of the shared HTTP server, middlewares, resolved config, and plugins pipeline, the Vite dev server now has a set of independent dev environments. Each of them is configured to match the production environment as closely as possible, and is connected to a dev runtime where the code is executed (for workerd, the server code can now run in miniflare locally). In the client, the browser imports and executes the code. In other environments, a module runner fetches and evaluates the transformed code.
+Vite 6 به کاربران امکان می‌دهد برنامه خود را طوری پیکربندی کنند که همه محیط‌های اجرایی آن را در فرایند توسعه و ساخت پوشش دهد. در زمان توسعه، اکنون یک سرور توسعه Vite می‌تواند همزمان کد را در چندین محیط مختلف اجرا کند. سورس کد برنامه همچنان توسط سرور توسعه Vite تبدیل می‌شود. علاوه بر سرور HTTP مشترک، میان‌افزارها، تنظیمات پردازش‌شده و زنجیره پلاگین‌ها، سرور توسعه Vite اکنون دارای مجموعه‌ای از محیط‌های توسعه مستقل است. هر محیط توسعه طوری پیکربندی شده که تا حد امکان به محیط پروداکشن شبیه باشد و به یک رانتایم توسعه متصل است که کد در آن اجرا می‌شود (برای مثال در مورد Workerd، کد سرور اکنون می‌تواند به صورت محلی در Miniflare اجرا شود). در سمت کلاینت، مرورگر کد را ایمپورت و اجرا می‌کند، و در سایر محیط‌ها، یک اجراکننده ماژول، کد تبدیل‌شده را بارگیری و ارزیابی می‌کند.
 
 ![Vite Environments](../images/vite-environments.svg)
 
-## Environments Configuration
+## پیکربندی محیط‌ها
 
-For an SPA/MPA, the configuration will look similar to Vite 5. Internally these options are used to configure the `client` environment.
+برای یک برنامه SPA/MPA، پیکربندی مشابه Vite 5 خواهد بود. به صورت داخلی، این گزینه‌ها برای پیکربندی محیط `client` استفاده می‌شوند.
 
 ```js
 export default defineConfig({
@@ -45,9 +45,9 @@ export default defineConfig({
 })
 ```
 
-This is important because we'd like to keep Vite approachable and avoid exposing new concepts until they are needed.
+این مهم است زیرا ما می‌خواهیم Vite را قابل دسترس نگه داریم و از معرفی مفاهیم جدید تا زمانی که واقعاً به آنها نیاز نباشد، خودداری کنیم.
 
-If the app is composed of several environments, then these environments can be configured explicitly with the `environments` config option.
+اگر برنامه از چندین محیط تشکیل شده باشد، این محیط‌ها می‌توانند به صورت صریح با گزینه پیکربندی `environments` تنظیم شوند.
 
 ```js
 export default {
@@ -68,9 +68,9 @@ export default {
 }
 ```
 
-When not explicitly documented, environment inherits the configured top-level config options (for example, the new `server` and `edge` environments will inherit the `build.sourcemap: false` option). A small number of top-level options, like `optimizeDeps`, only apply to the `client` environment, as they don't work well when applied as a default to server environments. The `client` environment can also be configured explicitly through `environments.client`, but we recommend to do it with the top-level options so the client config remains unchanged when adding new environments.
+اگر به صورت صریح مستند نشده باشد، هر محیط از گزینه‌های پیکربندی سطح بالا ارث می‌برد (به عنوان مثال، محیط‌های جدید `server` و `edge` گزینه `build.sourcemap: false` را به ارث می‌برند). تعداد کمی از گزینه‌های سطح بالا، مانند `optimizeDeps`، فقط برای محیط `client` اعمال می‌شوند، زیرا زمانی که به عنوان پیش‌فرض به محیط‌های سرور اعمال می‌شوند، به خوبی کار نمی‌کنند. محیط `client` همچنین می‌تواند به صورت صریح از طریق `environments.client` پیکربندی شود، اما توصیه می‌کنیم این کار را با گزینه‌های سطح بالا انجام دهید تا پیکربندی کلاینت هنگام اضافه کردن محیط‌های جدید بدون تغییر باقی بماند.
 
-The `EnvironmentOptions` interface exposes all the per-environment options. There are environment options that apply to both `build` and `dev`, like `resolve`. And there are `DevEnvironmentOptions` and `BuildEnvironmentOptions` for dev and build specific options (like `dev.warmup` or `build.outDir`). Some options like `optimizeDeps` only applies to dev, but is kept as top level instead of nested in `dev` for backward compatibility.
+رابط `EnvironmentOptions` تمام گزینه‌های مختص هر محیط را در اختیار قرار می‌دهد. برخی گزینه‌های محیطی هم برای `build` و هم برای `dev` اعمال می‌شوند، مانند `resolve`. همچنین `DevEnvironmentOptions` و `BuildEnvironmentOptions` برای گزینه‌های خاص توسعه و ساخت وجود دارند (مانند `dev.warmup` یا `build.outDir`). برخی گزینه‌ها مانند `optimizeDeps` فقط برای توسعه اعمال می‌شوند، اما برای حفظ سازگاری با نسخه‌های قبلی، به جای قرار گرفتن در `dev`، در سطح بالا نگه داشته شده‌اند.
 
 ```ts
 interface EnvironmentOptions {
@@ -83,7 +83,7 @@ interface EnvironmentOptions {
 }
 ```
 
-The `UserConfig` interface extends from the `EnvironmentOptions` interface, allowing to configure the client and defaults for other environments, configured through the `environments` option. The `client` and a server environment named `ssr` are always present during dev. This allows backward compatibility with `server.ssrLoadModule(url)` and `server.moduleGraph`. During build, the `client` environment is always present, and the `ssr` environment is only present if it is explicitly configured (using `environments.ssr` or for backward compatibility `build.ssr`). An app doesn't need to use the `ssr` name for its SSR environment, it could name it `server` for example.
+رابط `UserConfig` از رابط `EnvironmentOptions` گسترش می‌یابد، که امکان پیکربندی کلاینت و پیش‌فرض‌ها را برای سایر محیط‌ها، از طریق گزینه `environments` فراهم می‌کند. محیط `client` و یک محیط سرور با نام `ssr` همیشه در زمان توسعه حاضر هستند. این امر باعث سازگاری با نسخه‌های قبلی برای `server.ssrLoadModule(url)` و `server.moduleGraph` می‌شود. در زمان بیلد، محیط `client` همیشه وجود دارد، و محیط `ssr` تنها در صورتی وجود خواهد داشت که به صورت صریح پیکربندی شده باشد (با استفاده از `environments.ssr` یا برای سازگاری با نسخه‌های قبلی `build.ssr`). یک برنامه لزوماً نیازی به استفاده از نام `ssr` برای محیط SSR خود ندارد، می‌تواند آن را به عنوان مثال `server` نام‌گذاری کند.
 
 ```ts
 interface UserConfig extends EnvironmentOptions {
@@ -92,11 +92,11 @@ interface UserConfig extends EnvironmentOptions {
 }
 ```
 
-Note that the `ssr` top-level property is going to be deprecated once the Environment API is stable. This option has the same role as `environments`, but for the default `ssr` environment and only allowed configuring of a small set of options.
+توجه داشته باشید که ویژگی سطح بالای `ssr` پس از پایدار شدن API محیط، منسوخ خواهد شد. این گزینه نقشی مشابه با `environments` دارد، اما فقط برای محیط پیش‌فرض `ssr` است و تنها امکان پیکربندی مجموعه کوچکی از گزینه‌ها را فراهم می‌کند.
 
-## Custom Environment Instances
+## نمونه‌های محیط سفارشی
 
-Low level configuration APIs are available so runtime providers can provide environments with proper defaults for their runtimes. These environments can also spawn other processes or threads to run the modules during dev in a closer runtime to the production environment.
+APIهای پیکربندی سطح پایین در دسترس هستند تا ارائه‌دهندگان رانتایم بتوانند محیط‌هایی با پیش‌فرض‌های مناسب برای رانتایم خود فراهم کنند. این محیط‌ها همچنین می‌توانند فرآیندها یا نخ‌های دیگری را برای اجرای ماژول‌ها در زمان توسعه در یک رانتایم نزدیک‌تر به محیط تولید ایجاد کنند.
 
 ```js
 import { customEnvironment } from 'vite-environment-provider'
@@ -115,26 +115,26 @@ export default {
 }
 ```
 
-## Backward Compatibility
+## سازگاری با نسخه‌های قبلی
 
-The current Vite server API are not yet deprecated and are backward compatible with Vite 5. The new Environment API is experimental.
+APIهای سرور فعلی Vite هنوز منسوخ نشده‌اند و با Vite 5 سازگار هستند. API محیط جدید در حالت آزمایشی است.
 
-The `server.moduleGraph` returns a mixed view of the client and ssr module graphs. Backward compatible mixed module nodes will be returned from all its methods. The same scheme is used for the module nodes passed to `handleHotUpdate`.
+متد `server.moduleGraph` یک نمای ترکیبی از گراف‌های ماژول‌های کلاینت و SSR را باز می‌گرداند. نودهای ماژول ترکیبی که سازگاری با نسخه‌های قبلی دارند، از تمام متدهای این آبجکت باز می‌گردند. همین الگو برای نودهای ماژول‌هایی که به متد `handleHotUpdate` ارسال می‌شوند نیز استفاده می‌شود. به عبارت دیگر، این ویژگی به شما اجازه می‌دهد که هم ماژول‌های مرتبط با کلاینت و هم ماژول‌های مرتبط با SSR را به‌طور همزمان مدیریت کنید و نودهای مربوط به هرکدام را به‌طور یکپارچه در دسترس داشته باشید.
 
-We don't recommend switching to Environment API yet. We are aiming for a good portion of the user base to adopt Vite 6 before so plugins don't need to maintain two versions. Checkout the future breaking changes section for information on future deprecations and upgrade path:
+ما هنوز توصیه نمی‌کنیم که به API محیط تغییر دهید. هدف ما این است که بخش زیادی از کاربران قبل از این تغییرات، Vite 6 را پذیرفته و استفاده کنند تا پلاگین‌ها نیازی به نگهداری دو نسخه مختلف نداشته باشند. برای اطلاعات بیشتر در مورد تغییرات مخرب آینده و مسیر ارتقا، به بخش تغییرات مخرب آینده مراجعه کنید:
 
-- [`this.environment` in Hooks](/changes/this-environment-in-hooks)
+- [`this.environment` در Hooks](/changes/this-environment-in-hooks)
 - [HMR `hotUpdate` Plugin Hook](/changes/hotupdate-hook)
-- [Move to per-environment APIs](/changes/per-environment-apis)
-- [SSR using `ModuleRunner` API](/changes/ssr-using-modulerunner)
-- [Shared plugins during build](/changes/shared-plugins-during-build)
+- [انتقال به API‌های مخصوص هر محیط](/changes/per-environment-apis)
+- [SSR با استفاده از `ModuleRunner` API](/changes/ssr-using-modulerunner)
+- [پلاگین‌های مشترک در طول فرآیند ساخت](/changes/shared-plugins-during-build)
 
-## Target Users
+## کاربران هدف
 
-This guide provides the basic concepts about environments for end users.
+این راهنما مفاهیم پایه‌ای درباره محیط‌ها را برای کاربران نهایی ارائه می‌دهد.
 
-Plugin authors have a more consistent API available to interact with the current environment configuration. If you're building on top of Vite, the [Environment API Plugins Guide](./api-environment-plugins.md) guide describes the way extended plugin APIs available to support multiple custom environments.
+نویسندگان پلاگین‌ها یک API سازگارتر برای تعامل با پیکربندی محیط فعلی دارند. اگر شما بر روی Vite توسعه می‌دهید، راهنمای [API پلاگین‌های محیط](./api-environment-plugins.md) روش استفاده از API‌های اضافی پلاگین‌ها را توضیح می‌دهد که از محیط‌های سفارشی متعدد پشتیبانی می‌کنند.
 
-Frameworks could decide to expose environments at different levels. If you're a framework author, continue reading the [Environment API Frameworks Guide](./api-environment-frameworks) to learn about the Environment API programmatic side.
+فریم‌ورک‌ها می‌توانند تصمیم بگیرند که محیط‌ها را در سطوح مختلفی در دسترس قرار دهند. اگر شما نویسنده یک فریم‌ورک هستید، برای آشنایی با بخش برنامه‌نویسی API محیط، ادامه مطلب را در [راهنمای API محیط برای فریم‌ورک‌ها](./api-environment-frameworks) مطالعه کنید.
 
-For Runtime providers, the [Environment API Runtimes Guide](./api-environment-runtimes.md) explains how to offer custom environment to be consumed by frameworks and users.
+برای ارائه‌دهندگان رانتایم (Runtime providers)، [راهنمای API محیط برای رانتایم](./api-environment-runtimes.md) توضیح می‌دهد که چگونه می‌توان یک محیط سفارشی را برای استفاده توسط فریم‌ورک‌ها و کاربران ارائه داد.
