@@ -311,6 +311,10 @@ export default defineConfig({
               link: '/guide/performance'
             },
             {
+              text: 'Rolldown',
+              link: '/guide/rolldown',
+            },
+            {
               text: 'مهاجرت از v5',
               link: '/guide/migration'
             },

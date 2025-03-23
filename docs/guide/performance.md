@@ -122,5 +122,6 @@ export default defineConfig({
 
 استفاده از ابزارهای بومی اغلب باعث افزایش حجم نصب می‌شود و به همین دلیل به‌طور پیش‌فرض هنگام شروع یک پروژه جدید با Vite فعال نیست. اما ممکن است برای برنامه‌های بزرگتر، این هزینه ارزش داشته باشد.
 
+- از [Rolldown به‌جای Rollup و esbuild](./rolldown) استفاده کنید تا بیلد سریع‌تر باشد و بین توسعه و بیلد تجربه‌ای هماهنگ‌تر داشته باشید.
 - پشتیبانی آزمایشی از [LightningCSS](https://github.com/vitejs/vite/discussions/13835) را امتحان کنید.
 - به‌جای `‎@vitejs/plugin-react` از [`‎@vitejs/plugin-react-swc`](https://github.com/vitejs/vite-plugin-react-swc) استفاده کنید.
