@@ -1,4 +1,4 @@
-# Environment API for Runtimes
+# API محیط برای رانتایم‌ها
 
 :::warning آزمایشی
 Environment API در حال حاضر آزمایشی است. ما این APIها را در طول نسخه Vite 6 ثابت نگه می‌داریم تا اکوسیستم بتواند آن را آزمایش کند و بر روی آن توسعه دهد. برنامه ما این است که این APIهای جدید را در Vite 7 با تغییرات احتمالی نهایی کنیم.
@@ -13,7 +13,7 @@ Environment API در حال حاضر آزمایشی است. ما این APIها 
 
 ## Environment Factories
 
-Environments factories are intended to be implemented by Environment providers like Cloudflare, and not by end users. Environment factories return a `EnvironmentOptions` for the most common case of using the target runtime for both dev and build environments. The default environment options can also be set so the user doesn't need to do it.
+سازنده‌های محیط (Environment Factories) قرار است توسط فراهم‌کنندگان رانتایم (مثل Cloudflare) پیاده‌سازی شوند، نه کاربران عادی. این سازنده‌ها در ساده‌ترین حالت، یک `EnvironmentOptions` را برمی‌گردانند که از رانتایم هدف هم برای محیط توسعه و هم بیلد استفاده می‌کند. همچنین می‌توان تنظیمات پیش‌فرض محیط را به‌گونه‌ای تعیین کرد که کاربر نیازی به انجام این کار نداشته باشد.
 
 ```ts
 function createWorkerdEnvironment(
@@ -45,7 +45,7 @@ function createWorkerdEnvironment(
 }
 ```
 
-Then the config file can be written as:
+سپس می‌توان فایل پیکربندی را به شکل زیر نوشت:
 
 ```js
 import { createWorkerdEnvironment } from 'vite-environment-workerd'
@@ -66,21 +66,21 @@ export default {
 }
 ```
 
-and frameworks can use an environment with the workerd runtime to do SSR using:
+و فریم‌ورک‌ها می‌توانند برای انجام SSR از یک محیط با رانتایم workerd به این شکل استفاده کنند:
 
 ```js
 const ssrEnvironment = server.environments.ssr
 ```
 
-## Creating a New Environment Factory
+## ایجاد یک Environment Factory جدید
 
-A Vite dev server exposes two environments by default: a `client` environment and an `ssr` environment. The client environment is a browser environment by default, and the module runner is implemented by importing the virtual module `/@vite/client` to client apps. The SSR environment runs in the same Node runtime as the Vite server by default and allows application servers to be used to render requests during dev with full HMR support.
+سرور توسعه Vite به طور پیش‌فرض دو محیط را ارائه می‌دهد: محیط `client` و محیط `ssr`. محیط کلاینت به طور پیش‌فرض یک محیط مرورگر است، و اجراکننده ماژول آن با ایمپورت کردن ماژول مجازی `‎/@vite/client` در برنامه‌های کلاینت پیاده‌سازی می‌شود. محیط SSR به طور پیش‌فرض در همان رانتایم Node که سرور Vite اجرا می‌شود، اجرا می‌شود و به سرورهای برنامه اجازه می‌دهد تا درخواست‌ها را در زمان توسعه با پشتیبانی کامل از HMR رندر کنند.
 
-The transformed source code is called a module, and the relationships between the modules processed in each environment are kept in a module graph. The transformed code for these modules is sent to the runtimes associated with each environment to be executed. When a module is evaluated in the runtime, its imported modules will be requested triggering the processing of a section of the module graph.
+سورس کد تبدیل‌شده یک ماژول نامیده می‌شود و روابط بین ماژول‌های پردازش‌شده در هر محیط در یک گراف ماژول نگهداری می‌شود. کد تبدیل‌شده برای این ماژول‌ها به رانتایم‌های مرتبط با هر محیط فرستاده می‌شود تا اجرا شود. وقتی یک ماژول در رانتایم ارزیابی می‌شود، ماژول‌های ایمپورت‌شده آن درخواست می‌شوند که باعث می‌شود بخشی مرتبطی از گراف ماژول پردازش شود.
 
-A Vite Module Runner allows running any code by processing it with Vite plugins first. It is different from `server.ssrLoadModule` because the runner implementation is decoupled from the server. This allows library and framework authors to implement their layer of communication between the Vite server and the runner. The browser communicates with its corresponding environment using the server Web Socket and through HTTP requests. The Node Module runner can directly do function calls to process modules as it is running in the same process. Other environments could run modules connecting to a JS runtime like workerd, or a Worker Thread as Vitest does.
+اجرا کننده ماژول در Vite اجازه می‌دهد هر کدی را با پردازش آن توسط پلاگین‌های Vite اجرا کنید. این با `server.ssrLoadModule` متفاوت است زیرا پیاده‌سازی اجراکننده از سرور جدا شده است. این موضوع به نویسندگان کتابخانه و فریم‌ورک اجازه می‌دهد لایه ارتباطی خود را بین سرور Vite و اجراکننده پیاده‌سازی کنند. مرورگر با استفاده از Web Socket سرور و از طریق درخواست‌های HTTP با محیط مربوطه خود ارتباط برقرار می‌کند. Node Module Runner می‌تواند به طور مستقیم فراخوانی‌های تابع را برای پردازش ماژول‌ها انجام دهد زیرا در همان فرآیند اجرا می‌شود. سایر محیط‌ها می‌توانند ماژول‌ها را با اتصال به یک رانتایم JS مانند workerd، یا یک Worker Thread همانطور که Vitest انجام می‌دهد، اجرا کنند.
 
-One of the goals of this feature is to provide a customizable API to process and run code. Users can create new environment factories using the exposed primitives.
+یکی از اهداف این قابلیت، فراهم کردن یک API قابل سفارشی‌سازی برای پردازش و اجرای کد است. کاربران می‌توانند با استفاده از ابزارهای ارائه‌شده، سازنده‌های محیط جدیدی بسازند.
 
 ```ts
 import { DevEnvironment, HotChannel } from 'vite'
@@ -110,9 +110,9 @@ function createWorkerdDevEnvironment(
 
 ## `ModuleRunner`
 
-A module runner is instantiated in the target runtime. All APIs in the next section are imported from `vite/module-runner` unless stated otherwise. This export entry point is kept as lightweight as possible, only exporting the minimal needed to create module runners.
+یک اجراکننده‌ی ماژول (Module Runner) در رانتایم هدف ساخته می‌شود. تمام APIهایی که در بخش بعدی آمده‌اند، مگر در مواردی که به‌طور دیگری ذکر شده باشد، از مسیر `vite/module-runner` ایمپورت می‌شوند. این نقطه ورود در حد ممکن سبک نگه داشته شده و تنها کمترین موارد لازم را برای ساخت اجراکننده ماژول را اکسپورت می‌کند.
 
-**Type Signature:**
+**امضای تایپ:**
 
 ```ts
 export class ModuleRunner {
@@ -142,11 +142,11 @@ export class ModuleRunner {
 }
 ```
 
-The module evaluator in `ModuleRunner` is responsible for executing the code. Vite exports `ESModulesEvaluator` out of the box, it uses `new AsyncFunction` to evaluate the code. You can provide your own implementation if your JavaScript runtime doesn't support unsafe evaluation.
+ارزیاب ماژول در `ModuleRunner` مسئول اجرای کد است. Vite به صورت پیش‌فرض `ESModulesEvaluator` را اکسپورت می‌کند که از `new AsyncFunction` برای اجرای کد استفاده می‌کند. اگر رانتایم جاوااسکریپت شما از ارزیابی ناامن پشتیبانی نمی‌کند، می‌توانید پیاده‌سازی اختصاصی خود را ارائه دهید.
 
-Module runner exposes `import` method. When Vite server triggers `full-reload` HMR event, all affected modules will be re-executed. Be aware that Module Runner doesn't update `exports` object when this happens (it overrides it), you would need to run `import` or get the module from `evaluatedModules` again if you rely on having the latest `exports` object.
+اجراکننده‌ی ماژول متد `import` را ارائه می‌دهد. زمانی که سرور Vite رویداد HMR از نوع `full-reload` را اجرا می‌کند، تمام ماژول‌های تحت تأثیر دوباره اجرا خواهند شد. توجه داشته باشید که اجراکننده‌ی ماژول در این فرآیند آبجکت `exports` را به‌روزرسانی نمی‌کند، بلکه آن را بازنویسی می‌کند. بنابراین، اگر نیاز به جدیدترین مقدار `exports` دارید، باید دوباره `import` را اجرا کنید یا ماژول را از `evaluatedModules` دریافت کنید.
 
-**Example Usage:**
+**مثال استفاده:**
 
 ```js
 import { ModuleRunner, ESModulesEvaluator } from 'vite/module-runner'
@@ -212,7 +212,7 @@ interface ModuleRunnerOptions {
 
 ## `ModuleEvaluator`
 
-**Type Signature:**
+**امضای تایپ:**
 
 ```ts twoslash
 import type { ModuleRunnerContext as ModuleRunnerContextRaw } from 'vite/module-runner'
@@ -245,11 +245,11 @@ export interface ModuleEvaluator {
 }
 ```
 
-Vite exports `ESModulesEvaluator` that implements this interface by default. It uses `new AsyncFunction` to evaluate code, so if the code has inlined source map it should contain an [offset of 2 lines](https://tc39.es/ecma262/#sec-createdynamicfunction) to accommodate for new lines added. This is done automatically by the `ESModulesEvaluator`. Custom evaluators will not add additional lines.
+Vite به‌صورت پیش‌فرض `ESModulesEvaluator` را اکسپورت می‌کند که این اینترفیس را پیاده‌سازی می‌کند. این ماژول از `new AsyncFunction` برای اجرای کد استفاده می‌کند. بنابراین، اگر کد دارای سورس مپ داخلی (inlined source map) باشد، باید شامل یک [افست ۲ خطی](https://tc39.es/ecma262/#sec-createdynamicfunction) باشد تا فضای موردنیاز برای خطوط جدید اضافه‌شده را جبران کند. این کار به‌طور خودکار توسط `ESModulesEvaluator` انجام می‌شود. اما ارزیاب‌های سفارشی (Custom evaluators) خطوط اضافی را اضافه نخواهند کرد.
 
 ## `ModuleRunnerTransport`
 
-**Type Signature:**
+**امضای تایپ:**
 
 ```ts twoslash
 import type { ModuleRunnerTransportHandlers } from 'vite/module-runner'
@@ -265,9 +265,9 @@ interface ModuleRunnerTransport {
 }
 ```
 
-Transport object that communicates with the environment via an RPC or by directly calling the function. When `invoke` method is not implemented, the `send` method and `connect` method is required to be implemented. Vite will construct the `invoke` internally.
+آبجکت Transport برای ارتباط با محیط از طریق RPC یا فراخوانی مستقیم توابع استفاده می‌شود. اگر متد `invoke` پیاده‌سازی نشده باشد، باید متدهای `send` و `connect` را پیاده‌سازی کنید. در این حالت، Vite خودش متد `invoke` را ایجاد می‌کند.
 
-You need to couple it with the `HotChannel` instance on the server like in this example where module runner is created in the worker thread:
+برای این کار، باید آن را با نمونه‌ای از `HotChannel` روی سرور ترکیب کنید، مانند مثالی که در آن ماژول رانر در یک (Worker Thread) ایجاد می‌شود:
 
 ::: code-group
 
@@ -349,7 +349,7 @@ await createServer({
 
 :::
 
-A different example using an HTTP request to communicate between the runner and the server:
+یک مثال دیگر که از یک درخواست HTTP برای ارتباط بین رانر (Runner) و سرور استفاده می‌کند:
 
 ```ts
 import { ESModulesEvaluator, ModuleRunner } from 'vite/module-runner'
@@ -373,7 +373,7 @@ export const runner = new ModuleRunner(
 await runner.import('/entry.js')
 ```
 
-In this case, the `handleInvoke` method in the `NormalizedHotChannel` can be used:
+در این حالت، متد `handleInvoke` در `NormalizedHotChannel` قابل استفاده است.
 
 ```ts
 const customEnvironment = new DevEnvironment(name, config, context)
@@ -389,6 +389,6 @@ server.onRequest((request: Request) => {
 })
 ```
 
-But note that for HMR support, `send` and `connect` methods are required. The `send` method is usually called when the custom event is triggered (like, `import.meta.hot.send("my-event")`).
+اما توجه داشته باشید که برای پشتیبانی از HMR، متدهای `send` و `connect` الزامی هستند. متد `send` معمولاً زمانی فراخوانی می‌شود که یک رویداد سفارشی فعال شود (مثلاً `import.meta.hot.send("my-event")`).
 
-Vite exports `createServerHotChannel` from the main entry point to support HMR during Vite SSR.
+Vite متد `createServerHotChannel` را از نقطه ورود اصلی اکسپورت می‌کند تا از HMR در حین اجرای SSR در Vite پشتیبانی کند.
