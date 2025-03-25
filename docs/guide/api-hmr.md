@@ -1,4 +1,4 @@
-# API HMR 
+# API HMR
 
 :::tip نکته
 این API مربوط به سمت کلاینت برای HMR است. برای مدیریت به‌روزرسانی‌های HMR در پلاگین‌ها، [handleHotUpdate](./api-plugin#handlehotupdate) را ببینید.
@@ -8,7 +8,7 @@ API دستی HMR عمدتاً برای توسعه‌دهندگان فریمور�
 
 Vite سپس API دستی HMR خود را از طریق آبجکت ویژه `import.meta.hot` در دسترس قرار می‌دهد:
 
-```ts twoslash
+```ts
 import type { ModuleNamespace } from 'vite/types/hot.d.ts'
 import type {
   CustomEventName,
