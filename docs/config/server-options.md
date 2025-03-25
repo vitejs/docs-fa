@@ -1,24 +1,23 @@
-# Server Options
+# گزینه‌های سرور
 
-Unless noted, the options in this section are only applied to dev.
+مگر در مواردی که به‌صورت جداگانه ذکر شده باشد، گزینه‌های این بخش فقط در محیط توسعه (dev) اعمال می‌شوند.
 
 ## server.host
 
-- **Type:** `string | boolean`
-- **Default:** `'localhost'`
+- **نوع:** `string | boolean`
+- **پیش‌فرض:** `'localhost'`
 
-Specify which IP addresses the server should listen on.
-Set this to `0.0.0.0` or `true` to listen on all addresses, including LAN and public addresses.
+مشخص می‌کند که سرور باید به کدام آدرس‌های IP گوش دهد. برای گوش دادن به همهٔ آدرس‌ها (شامل LAN و آدرس‌های عمومی)، مقدار این گزینه را برابر `0.0.0.0` یا `true` قرار دهید.
 
-This can be set via the CLI using `--host 0.0.0.0` or `--host`.
+می‌توانید این گزینه را در خط فرمان با استفاده از `--host 0.0.0.0` یا `--host` تنظیم کنید.
 
-::: tip NOTE
+::: tip نکته
 
-There are cases when other servers might respond instead of Vite.
+مواردی وجود دارد که ممکن است سرورهای دیگر به جای Vite پاسخ دهند.
 
-The first case is when `localhost` is used. Node.js under v17 reorders the result of DNS-resolved addresses by default. When accessing `localhost`, browsers use DNS to resolve the address and that address might differ from the address which Vite is listening to. Vite prints the resolved address when it differs.
+اولین مورد وقتی است که از `localhost` استفاده می‌شود. نسخه‌های زیر ۱۷ Node.js به‌صورت پیش‌فرض نتایج آدرس‌های DNS-resolved را بازچینی می‌کنند. هنگام دسترسی به `localhost`، مرورگرها از DNS برای resolve کردن استفاده می‌کنند و این آدرس ممکن است با آدرسی که Vite به آن گوش می‌دهد متفاوت باشد. Vite در صورت وجود تفاوت، آدرس resolve شده را چاپ می‌کند.
 
-You can set [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) to disable the reordering behavior. Vite will then print the address as `localhost`.
+می‌توانید از [`dns.setDefaultResultOrder('verbatim')`](https://nodejs.org/api/dns.html#dns_dns_setdefaultresultorder_order) برای غیرفعال کردن این بازچینی استفاده کنید. در این صورت Vite آدرس را به‌صورت `localhost` چاپ خواهد کرد.
 
 ```js twoslash [vite.config.js]
 import { defineConfig } from 'vite'
@@ -27,84 +26,85 @@ import dns from 'node:dns'
 dns.setDefaultResultOrder('verbatim')
 
 export default defineConfig({
-  // omit
+  // ...
 })
 ```
 
-The second case is when wildcard hosts (e.g. `0.0.0.0`) are used. This is because servers listening on non-wildcard hosts take priority over those listening on wildcard hosts.
+مورد دوم، وقتی است که از hostهای wildcard (مانند `0.0.0.0`) استفاده می‌شود. در این حالت، سرورهایی که روی host غیر wildcard گوش می‌دهند، نسبت به سرورهایی که روی host wildcard هستند، اولویت دارند.
 
 :::
 
-::: tip Accessing the server on WSL2 from your LAN
+::: tip دسترسی به سرور از LAN در WSL2
 
-When running Vite on WSL2, it is not sufficient to set `host: true` to access the server from your LAN.
-See [the WSL document](https://learn.microsoft.com/en-us/windows/wsl/networking#accessing-a-wsl-2-distribution-from-your-local-area-network-lan) for more details.
+هنگام اجرای Vite در WSL2، تنها تنظیم `host: true` برای دسترسی به سرور از طریق شبکهٔ محلی کافی نیست.  
+برای جزئیات بیشتر، [مستندات WSL](https://learn.microsoft.com/en-us/windows/wsl/networking#accessing-a-wsl-2-distribution-from-your-local-area-network-lan) را ببینید.
 
 :::
 
 ## server.allowedHosts
 
-- **Type:** `string[] | true`
-- **Default:** `[]`
+- **نوع:** `string[] | true`
+- **پیش‌فرض:** `[]`
 
-The hostnames that Vite is allowed to respond to.
-`localhost` and domains under `.localhost` and all IP addresses are allowed by default.
-When using HTTPS, this check is skipped.
+لیست hostnameهایی که Vite مجاز به پاسخ‌گویی به آن‌ها است. به‌صورت پیش‌فرض، `localhost`، دامنه‌هایی با پسوند `.localhost` و همهٔ آدرس‌های IP مجاز هستند. هنگام استفاده از HTTPS، این بررسی انجام نمی‌شود.
 
-If a string starts with `.`, it will allow that hostname without the `.` and all subdomains under the hostname. For example, `.example.com` will allow `example.com`, `foo.example.com`, and `foo.bar.example.com`. If set to `true`, the server is allowed to respond to requests for any hosts.
+اگر یک رشته با `.` شروع شود، آن hostname (بدون `.`) و همهٔ زیر دامنه‌های آن مجاز خواهند بود. برای مثال، `.example.com` باعث مجاز شدن `example.com`، `foo.example.com` و `foo.bar.example.com` می‌شود. اگر مقدار برابر `true` قرار گیرد، سرور مجاز است به درخواست‌های هر hostی پاسخ دهد.
 
-::: details What hosts are safe to be added?
+::: details چه hostهایی برای اضافه شدن امن هستند؟
 
-Hosts that you have control over which IP addresses they resolve to are safe to add to the list of allowed hosts.
+hostهایی که شما کنترل IP مقصد آن‌ها را دارید، برای اضافه کردن امن هستند.
 
-For example, if you own a domain `vite.dev`, you can add `vite.dev` and `.vite.dev` to the list. If you don't own that domain and you cannot trust the owner of that domain, you should not add it.
+برای مثال، اگر شما صاحب دامنهٔ `vite.dev` هستید، می‌توانید `vite.dev` و `.vite.dev` را در لیست مجاز قرار دهید. اگر مالک دامنه نیستید یا به مالک آن اعتماد ندارید، نباید آن را اضافه کنید.
 
-Especially, you should never add Top-Level Domains like `.com` to the list. This is because anyone can purchase a domain like `example.com` and control the IP address it resolves to.
+به‌ویژه، **هرگز** دامنه‌های سطح بالا مانند `.com` را اضافه نکنید. چون هر کسی می‌تواند دامنه‌ای مانند `example.com` را خریداری کرده و آدرس IP آن را کنترل کند.
 
 :::
 
 ::: danger
 
-Setting `server.allowedHosts` to `true` allows any website to send requests to your dev server through DNS rebinding attacks, allowing them to download your source code and content. We recommend always using an explicit list of allowed hosts. See [GHSA-vg6x-rcgg-rjx6](https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6) for more details.
+قرار دادن مقدار `server.allowedHosts` برابر `true` باعث می‌شود که هر وب‌سایتی بتواند با استفاده از حملات DNS rebinding به سرور توسعهٔ شما درخواست ارسال کند و کد منبع و محتوای شما را دانلود کند. اکیداً توصیه می‌شود همیشه از یک لیست مشخص از hostهای مجاز استفاده کنید.  
+بیشتر بخوانید: [GHSA-vg6x-rcgg-rjx6](https://github.com/vitejs/vite/security/advisories/GHSA-vg6x-rcgg-rjx6)
 
 :::
 
-::: details Configure via environment variable
-You can set the environment variable `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` to add an additional allowed host.
+::: details پیکربندی از طریق متغیر محیطی
+
+می‌توانید از متغیر محیطی `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS` برای افزودن یک host مجاز اضافی استفاده کنید.
+
 :::
 
 ## server.port
 
-- **Type:** `number`
-- **Default:** `5173`
+- **نوع:** `number`
+- **پیش‌فرض:** `5173`
 
-Specify server port. Note if the port is already being used, Vite will automatically try the next available port so this may not be the actual port the server ends up listening on.
+شمارهٔ پورتی که سرور روی آن گوش می‌دهد. توجه داشته باشید اگر پورت قبلاً در حال استفاده باشد، Vite به‌صورت خودکار پورت بعدی موجود را امتحان می‌کند، بنابراین ممکن است پورت نهایی که سرور به آن گوش می‌دهد با پورت تعیین‌شده متفاوت باشد.
 
 ## server.strictPort
 
-- **Type:** `boolean`
+- **نوع:** `boolean`
 
-Set to `true` to exit if port is already in use, instead of automatically trying the next available port.
+اگر مقدار این گزینه برابر `true` باشد، در صورتی که پورت در حال استفاده باشد، Vite بلافاصله متوقف می‌شود و به‌جای امتحان کردن پورت بعدی، خارج می‌شود.
 
 ## server.https
 
-- **Type:** `https.ServerOptions`
+- **نوع:** `https.ServerOptions`
 
-Enable TLS + HTTP/2. Note this downgrades to TLS only when the [`server.proxy` option](#server-proxy) is also used.
+فعال‌سازی TLS + HTTP/2. توجه داشته باشید اگر گزینهٔ [`server.proxy`](#server-proxy) نیز استفاده شود، فقط TLS فعال می‌شود و HTTP/2 غیرفعال خواهد شد.
 
-The value can also be an [options object](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) passed to `https.createServer()`.
+می‌توانید یک [شیء تنظیمات](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) معتبر برای `https.createServer()` نیز ارائه دهید.
 
-A valid certificate is needed. For a basic setup, you can add [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) to the project plugins, which will automatically create and cache a self-signed certificate. But we recommend creating your own certificates.
+یک گواهی معتبر مورد نیاز است. برای تنظیم ساده، می‌توانید پلاگین [@vitejs/plugin-basic-ssl](https://github.com/vitejs/vite-plugin-basic-ssl) را به پروژه اضافه کنید تا به‌صورت خودکار یک گواهی self-signed ایجاد و کش کند. با این حال توصیه می‌شود گواهی اختصاصی خودتان را ایجاد کنید.
 
 ## server.open
 
-- **Type:** `boolean | string`
+- **نوع:** `boolean | string`
 
-Automatically open the app in the browser on server start. When the value is a string, it will be used as the URL's pathname. If you want to open the server in a specific browser you like, you can set the env `process.env.BROWSER` (e.g. `firefox`). You can also set `process.env.BROWSER_ARGS` to pass additional arguments (e.g. `--incognito`).
+باز کردن خودکار اپلیکیشن در مرورگر هنگام شروع سرور. اگر مقدار به‌صورت رشته‌ای باشد، به‌عنوان مسیر URL استفاده خواهد شد. اگر می‌خواهید سرور را در مرورگر خاصی باز کنید، می‌توانید از متغیر محیطی `process.env.BROWSER` (مثلاً `firefox`) استفاده کنید. همچنین می‌توانید `process.env.BROWSER_ARGS` را برای ارسال آرگومان‌های اضافه (مثلاً `--incognito`) تنظیم کنید.
 
-`BROWSER` and `BROWSER_ARGS` are also special environment variables you can set in the `.env` file to configure it. See [the `open` package](https://github.com/sindresorhus/open#app) for more details.
+متغیرهای `BROWSER` و `BROWSER_ARGS` را می‌توانید در فایل `.env` نیز تعریف کنید. برای اطلاعات بیشتر به [بستهٔ `open`](https://github.com/sindresorhus/open#app) مراجعه کنید.
 
-**Example:**
+**مثال:**
 
 ```js
 export default defineConfig({
@@ -116,27 +116,28 @@ export default defineConfig({
 
 ## server.proxy
 
-- **Type:** `Record<string, string | ProxyOptions>`
+- **نوع:** `Record<string, string | ProxyOptions>`
 
-Configure custom proxy rules for the dev server. Expects an object of `{ key: options }` pairs. Any requests that request path starts with that key will be proxied to that specified target. If the key starts with `^`, it will be interpreted as a `RegExp`. The `configure` option can be used to access the proxy instance. If a request matches any of the configured proxy rules, the request won't be transformed by Vite.
+پیکربندی قوانین پراکسی برای سرور توسعه. انتظار می‌رود به‌صورت یک آبجکت `{ کلید: گزینه‌ها }` باشد. هر درخواستی که مسیر آن با کلید آغاز شود، به target مشخص‌شده پراکسی می‌شود. اگر کلید با `^` شروع شود، به‌صورت `RegExp` تفسیر خواهد شد. از گزینهٔ `configure` برای دسترسی به نمونهٔ پراکسی استفاده می‌شود. اگر یک درخواست با هر یک از قوانین پراکسی مطابقت داشته باشد، دیگر توسط Vite پردازش نخواهد شد.
 
-Note that if you are using non-relative [`base`](/config/shared-options.md#base), you must prefix each key with that `base`.
+توجه داشته باشید اگر از [`base`](/config/shared-options.md#base) غیر نسبی استفاده می‌کنید، باید هر کلید را با آن `base` پیشوند دهید.
 
-Extends [`http-proxy`](https://github.com/http-party/node-http-proxy#options). Additional options are [here](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13).
+این قابلیت براساس [`http-proxy`](https://github.com/http-party/node-http-proxy#options) ساخته شده و گزینه‌های اضافی [در اینجا](https://github.com/vitejs/vite/blob/main/packages/vite/src/node/server/middlewares/proxy.ts#L13) در دسترس هستند.
 
-In some cases, you might also want to configure the underlying dev server (e.g. to add custom middlewares to the internal [connect](https://github.com/senchalabs/connect) app). In order to do that, you need to write your own [plugin](/guide/using-plugins.html) and use [configureServer](/guide/api-plugin.html#configureserver) function.
+در برخی موارد ممکن است بخواهید سرور داخلی را نیز پیکربندی کنید (مثلاً افزودن میان‌افزارهای اختصاصی به اپلیکیشن [connect](https://github.com/senchalabs/connect)). برای این منظور باید [پلاگین اختصاصی](/guide/using-plugins.html) بنویسید و از تابع [configureServer](/guide/api-plugin.html#configureserver) استفاده کنید.
 
-**Example:**
+**مثال:**
 
 ```js
 export default defineConfig({
   server: {
     proxy: {
-      // string shorthand:
+      // حالت ساده با رشته:
       // http://localhost:5173/foo
       //   -> http://localhost:4567/foo
       '/foo': 'http://localhost:4567',
-      // with options:
+
+      // با گزینه‌ها:
       // http://localhost:5173/api/bar
       //   -> http://jsonplaceholder.typicode.com/bar
       '/api': {
@@ -144,7 +145,8 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
-      // with RegExp:
+
+      // با RegExp:
       // http://localhost:5173/fallback/
       //   -> http://jsonplaceholder.typicode.com/
       '^/fallback/.*': {
@@ -152,19 +154,20 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/fallback/, ''),
       },
-      // Using the proxy instance
+
+      // استفاده از نمونهٔ پراکسی
       '/api': {
         target: 'http://jsonplaceholder.typicode.com',
         changeOrigin: true,
         configure: (proxy, options) => {
-          // proxy will be an instance of 'http-proxy'
+          // proxy یک نمونه از 'http-proxy' خواهد بود
         },
       },
-      // Proxying websockets or socket.io:
+
+      // پراکسی کردن websockets یا socket.io:
       // ws://localhost:5173/socket.io
       //   -> ws://localhost:5174/socket.io
-      // Exercise caution using `rewriteWsOrigin` as it can leave the
-      // proxying open to CSRF attacks.
+      // هنگام استفاده از `rewriteWsOrigin` احتیاط کنید زیرا ممکن است در برابر حملات CSRF آسیب‌پذیر شود.
       '/socket.io': {
         target: 'ws://localhost:5174',
         ws: true,
@@ -177,65 +180,65 @@ export default defineConfig({
 
 ## server.cors
 
-- **Type:** `boolean | CorsOptions`
-- **Default:** `{ origin: /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/ }` (allows localhost, `127.0.0.1` and `::1`)
+- **نوع:** `boolean | CorsOptions`
+- **پیش‌فرض:** `{ origin: /^https?:\/\/(?:(?:[^:]+\.)?localhost|127\.0\.0\.1|\[::1\])(?::\d+)?$/ }` (اجازه به localhost، `127.0.0.1` و `::1`)
 
-Configure CORS for the dev server. Pass an [options object](https://github.com/expressjs/cors#configuration-options) to fine tune the behavior or `true` to allow any origin.
+پیکربندی CORS برای سرور توسعه. برای تنظیم دقیق‌تر رفتار، یک [شیء گزینه‌ها](https://github.com/expressjs/cors#configuration-options) ارسال کنید یا مقدار `true` را برای اجازه به همهٔ originها قرار دهید.
 
 ::: danger
 
-Setting `server.cors` to `true` allows any website to send requests to your dev server and download your source code and content. We recommend always using an explicit list of allowed origins.
+اگر مقدار `server.cors` برابر `true` باشد، هر وب‌سایتی می‌تواند درخواست‌هایی به سرور توسعهٔ شما ارسال کند و کد منبع و محتوای شما را دانلود کند. توصیه می‌شود همیشه از یک لیست مشخص از originهای مجاز استفاده کنید.
 
 :::
 
 ## server.headers
 
-- **Type:** `OutgoingHttpHeaders`
+- **نوع:** `OutgoingHttpHeaders`
 
-Specify server response headers.
+مشخص کردن هدرهای پاسخ سرور.
 
 ## server.hmr
 
-- **Type:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
+- **نوع:** `boolean | { protocol?: string, host?: string, port?: number, path?: string, timeout?: number, overlay?: boolean, clientPort?: number, server?: Server }`
 
-Disable or configure HMR connection (in cases where the HMR websocket must use a different address from the http server).
+غیرفعال‌سازی یا پیکربندی اتصال HMR (در مواقعی که اتصال WebSocket برای HMR باید از آدرسی متفاوت نسبت به سرور HTTP استفاده کند).
 
-Set `server.hmr.overlay` to `false` to disable the server error overlay.
+برای غیرفعال کردن لایهٔ خطای سرور، مقدار `server.hmr.overlay` را برابر `false` قرار دهید.
 
-`protocol` sets the WebSocket protocol used for the HMR connection: `ws` (WebSocket) or `wss` (WebSocket Secure).
+`protocol` مشخص‌کنندهٔ پروتکل WebSocket برای اتصال HMR است: `ws` (WebSocket) یا `wss` (WebSocket امن).
 
-`clientPort` is an advanced option that overrides the port only on the client side, allowing you to serve the websocket on a different port than the client code looks for it on.
+`clientPort` گزینه‌ای پیشرفته است که فقط پورت سمت کلاینت را بازنویسی می‌کند و به شما امکان می‌دهد WebSocket را روی پورتی متفاوت از پورتی که کلاینت جست‌وجو می‌کند اجرا کنید.
 
-When `server.hmr.server` is defined, Vite will process the HMR connection requests through the provided server. If not in middleware mode, Vite will attempt to process HMR connection requests through the existing server. This can be helpful when using self-signed certificates or when you want to expose Vite over a network on a single port.
+اگر `server.hmr.server` تعریف شده باشد، Vite درخواست‌های اتصال HMR را از طریق سرور مشخص‌شده پردازش می‌کند. اگر در حالت middleware نباشد، Vite تلاش می‌کند تا این درخواست‌ها را از طریق سرور موجود پردازش کند. این گزینه هنگام استفاده از گواهی‌های self-signed یا انتشار Vite روی شبکه با یک پورت مفید است.
 
-Check out [`vite-setup-catalogue`](https://github.com/sapphi-red/vite-setup-catalogue) for some examples.
+مثال‌هایی را می‌توانید در [vite-setup-catalogue](https://github.com/sapphi-red/vite-setup-catalogue) ببینید.
 
-::: tip NOTE
+::: tip نکته
 
-With the default configuration, reverse proxies in front of Vite are expected to support proxying WebSocket. If the Vite HMR client fails to connect WebSocket, the client will fall back to connecting the WebSocket directly to the Vite HMR server bypassing the reverse proxies:
+در پیکربندی پیش‌فرض، پراکسی‌های معکوس جلوی Vite باید از پراکسی کردن WebSocket پشتیبانی کنند. اگر اتصال WebSocket کلاینت HMR با شکست مواجه شود، کلاینت تلاش می‌کند تا WebSocket را مستقیماً و بدون عبور از پراکسی‌ها به سرور HMR متصل کند:
 
 ```
-Direct websocket connection fallback. Check out https://vite.dev/config/server-options.html#server-hmr to remove the previous connection error.
+اتصال مستقیم WebSocket به‌عنوان fallback. برای حذف خطای قبلی، مستندات https://vite.dev/config/server-options.html#server-hmr را ببینید.
 ```
 
-The error that appears in the Browser when the fallback happens can be ignored. To avoid the error by directly bypassing reverse proxies, you could either:
+خطایی که هنگام fallback در مرورگر نمایش داده می‌شود قابل صرف‌نظر است. برای جلوگیری از این خطا، می‌توانید:
 
-- configure the reverse proxy to proxy WebSocket too
-- set [`server.strictPort = true`](#server-strictport) and set `server.hmr.clientPort` to the same value with `server.port`
-- set `server.hmr.port` to a different value from [`server.port`](#server-port)
+- پراکسی معکوس را طوری پیکربندی کنید که WebSocket را نیز پراکسی کند.
+- گزینهٔ [`server.strictPort = true`](#server-strictport) را فعال کرده و مقدار `server.hmr.clientPort` را با `server.port` برابر قرار دهید.
+- مقدار `server.hmr.port` را با مقدار متفاوتی از [`server.port`](#server-port) تنظیم کنید.
 
 :::
 
 ## server.warmup
 
-- **Type:** `{ clientFiles?: string[], ssrFiles?: string[] }`
-- **Related:** [Warm Up Frequently Used Files](/guide/performance.html#warm-up-frequently-used-files)
+- **نوع:** `{ clientFiles?: string[], ssrFiles?: string[] }`
+- **مرتبط:** [پیش‌گرم کردن فایل‌های پرکاربرد](/guide/performance.html#warm-up-frequently-used-files)
 
-Warm up files to transform and cache the results in advance. This improves the initial page load during server starts and prevents transform waterfalls.
+پیش‌گرم کردن فایل‌ها برای تبدیل (transform) و کش کردن نتایج از قبل. این کار زمان بارگذاری اولیهٔ صفحه در هنگام شروع سرور را بهبود می‌بخشد و از تبدیل‌های زنجیره‌ای جلوگیری می‌کند.
 
-`clientFiles` are files that are used in the client only, while `ssrFiles` are files that are used in SSR only. They accept an array of file paths or [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) patterns relative to the `root`.
+`clientFiles` فایل‌هایی هستند که فقط در کلاینت استفاده می‌شوند و `ssrFiles` فایل‌هایی هستند که فقط در SSR استفاده می‌شوند. هر دو می‌توانند آرایه‌ای از مسیر فایل یا الگوهای [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) باشند که نسبت به `root` هستند.
 
-Make sure to only add files that are frequently used to not overload the Vite dev server on startup.
+تنها فایل‌هایی را اضافه کنید که به‌طور مکرر استفاده می‌شوند تا بار اضافی روی سرور توسعه ایجاد نشود.
 
 ```js
 export default defineConfig({
@@ -250,43 +253,43 @@ export default defineConfig({
 
 ## server.watch
 
-- **Type:** `object | null`
+- **نوع:** `object | null`
 
-File system watcher options to pass on to [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api).
+گزینه‌های مربوط به پایش فایل‌ها برای ارسال به [chokidar](https://github.com/paulmillr/chokidar/tree/3.6.0#api).
 
-The Vite server watcher watches the `root` and skips the `.git/`, `node_modules/`, and Vite's `cacheDir` and `build.outDir` directories by default. When updating a watched file, Vite will apply HMR and update the page only if needed.
+پایشگر سرور Vite، دایرکتوری `root` را پایش می‌کند و به‌صورت پیش‌فرض پوشه‌های `.git/`، `node_modules/`، و دایرکتوری‌های `cacheDir` و `build.outDir` Vite را نادیده می‌گیرد. هنگام تغییر فایل، Vite فقط در صورت نیاز HMR را اعمال کرده و صفحه را به‌روزرسانی می‌کند.
 
-If set to `null`, no files will be watched. `server.watcher` will provide a compatible event emitter, but calling `add` or `unwatch` will have no effect.
+اگر مقدار این گزینه برابر `null` باشد، هیچ فایلی پایش نمی‌شود. `server.watcher` همچنان یک event emitter سازگار ارائه می‌دهد، اما متدهای `add` یا `unwatch` بی‌اثر خواهند بود.
 
-::: warning Watching files in `node_modules`
+::: warning پایش فایل‌های `node_modules`
 
-It's currently not possible to watch files and packages in `node_modules`. For further progress and workarounds, you can follow [issue #8619](https://github.com/vitejs/vite/issues/8619).
+در حال حاضر، پایش فایل‌ها و بسته‌ها در `node_modules` ممکن نیست. برای پیگیری پیشرفت و راه‌حل‌ها، [issue #8619](https://github.com/vitejs/vite/issues/8619) را دنبال کنید.
 
 :::
 
-::: warning Using Vite on Windows Subsystem for Linux (WSL) 2
+::: warning استفاده از Vite در WSL2
 
-When running Vite on WSL2, file system watching does not work when a file is edited by Windows applications (non-WSL2 process). This is due to [a WSL2 limitation](https://github.com/microsoft/WSL/issues/4739). This also applies to running on Docker with a WSL2 backend.
+در هنگام اجرای Vite در WSL2، پایش فایل‌ها زمانی کار نمی‌کند که فایل توسط برنامه‌های ویندوز (خارج از WSL2) ویرایش شده باشد. این مشکل ناشی از [محدودیت WSL2](https://github.com/microsoft/WSL/issues/4739) است. این مورد شامل اجرای Vite در Docker با backend WSL2 نیز می‌شود.
 
-To fix it, you could either:
+برای رفع آن، می‌توانید:
 
-- **Recommended**: Use WSL2 applications to edit your files.
-  - It is also recommended to move the project folder outside of a Windows filesystem. Accessing Windows filesystem from WSL2 is slow. Removing that overhead will improve performance.
-- Set `{ usePolling: true }`.
-  - Note that [`usePolling` leads to high CPU utilization](https://github.com/paulmillr/chokidar/tree/3.6.0#performance).
+- **توصیه‌شده:** از برنامه‌های WSL2 برای ویرایش فایل‌ها استفاده کنید.
+  - همچنین توصیه می‌شود پوشهٔ پروژه را خارج از فایل‌سیستم ویندوز قرار دهید. دسترسی به فایل‌سیستم ویندوز از WSL2 کند است و حذف این سربار، عملکرد را بهبود می‌بخشد.
+- گزینهٔ `{ usePolling: true }` را تنظیم کنید.
+  - توجه داشته باشید که [`usePolling` باعث مصرف زیاد CPU می‌شود](https://github.com/paulmillr/chokidar/tree/3.6.0#performance).
 
 :::
 
 ## server.middlewareMode
 
-- **Type:** `boolean`
-- **Default:** `false`
+- **نوع:** `boolean`
+- **پیش‌فرض:** `false`
 
-Create Vite server in middleware mode.
+اجرای سرور Vite در حالت middleware.
 
-- **Related:** [appType](./shared-options#apptype), [SSR - Setting Up the Dev Server](/guide/ssr#setting-up-the-dev-server)
+- **مرتبط:** [appType](./shared-options#apptype)، [SSR - راه‌اندازی سرور توسعه](/guide/ssr#setting-up-the-dev-server)
 
-- **Example:**
+- **مثال:**
 
 ```js twoslash
 import express from 'express'
@@ -295,20 +298,20 @@ import { createServer as createViteServer } from 'vite'
 async function createServer() {
   const app = express()
 
-  // Create Vite server in middleware mode
+  // ایجاد سرور Vite در حالت middleware
   const vite = await createViteServer({
     server: { middlewareMode: true },
-    // don't include Vite's default HTML handling middlewares
+    // میان‌افزارهای پیش‌فرض HTML Vite را حذف کن
     appType: 'custom',
   })
-  // Use vite's connect instance as middleware
+
+  // استفاده از میان‌افزارهای Vite
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
-    // Since `appType` is `'custom'`, should serve response here.
-    // Note: if `appType` is `'spa'` or `'mpa'`, Vite includes middlewares
-    // to handle HTML requests and 404s so user middlewares should be added
-    // before Vite's middlewares to take effect instead
+    // چون appType برابر 'custom' است، پاسخ باید اینجا ارسال شود.
+    // توجه: اگر appType برابر 'spa' یا 'mpa' باشد، Vite میان‌افزارهایی برای HTML و خطای ۴۰۴ اضافه می‌کند،
+    // بنابراین میان‌افزارهای کاربر باید قبل از میان‌افزارهای Vite قرار بگیرند.
   })
 }
 
@@ -317,40 +320,40 @@ createServer()
 
 ## server.fs.strict
 
-- **Type:** `boolean`
-- **Default:** `true` (enabled by default since Vite 2.7)
+- **نوع:** `boolean`
+- **پیش‌فرض:** `true` (از Vite 2.7 به‌صورت پیش‌فرض فعال شده)
 
-Restrict serving files outside of workspace root.
+محدودسازی ارائهٔ فایل‌ها به خارج از ریشهٔ workspace.
 
 ## server.fs.allow
 
-- **Type:** `string[]`
+- **نوع:** `string[]`
 
-Restrict files that could be served via `/@fs/`. When `server.fs.strict` is set to `true`, accessing files outside this directory list that aren't imported from an allowed file will result in a 403.
+محدودسازی فایل‌هایی که می‌توان آن‌ها را از طریق مسیر `/@fs/` ارائه کرد. زمانی که `server.fs.strict` برابر `true` باشد، دسترسی به فایل‌هایی خارج از این لیست که از فایل مجاز import نشده‌اند، منجر به خطای 403 خواهد شد.
 
-Both directories and files can be provided.
+می‌توانید هم پوشه و هم فایل مشخص کنید.
 
-Vite will search for the root of the potential workspace and use it as default. A valid workspace met the following conditions, otherwise will fall back to the [project root](/guide/#index-html-and-project-root).
+Vite تلاش می‌کند ریشهٔ workspace را پیدا کند و از آن به‌عنوان پیش‌فرض استفاده کند. یک workspace معتبر باید یکی از شرایط زیر را داشته باشد، در غیر این صورت به [ریشهٔ پروژه](/guide/#index-html-and-project-root) بازمی‌گردد:
 
-- contains `workspaces` field in `package.json`
-- contains one of the following file
+- شامل فیلد `workspaces` در `package.json` باشد
+- شامل یکی از فایل‌های زیر باشد:
   - `lerna.json`
   - `pnpm-workspace.yaml`
 
-Accepts a path to specify the custom workspace root. Could be a absolute path or a path relative to [project root](/guide/#index-html-and-project-root). For example:
+می‌توانید یک مسیر مشخص نیز ارائه دهید (مطلق یا نسبی نسبت به [ریشهٔ پروژه](/guide/#index-html-and-project-root)):
 
 ```js
 export default defineConfig({
   server: {
     fs: {
-      // Allow serving files from one level up to the project root
+      // اجازه به دسترسی از یک سطح بالاتر از ریشهٔ پروژه
       allow: ['..'],
     },
   },
 })
 ```
 
-When `server.fs.allow` is specified, the auto workspace root detection will be disabled. To extend the original behavior, a utility `searchForWorkspaceRoot` is exposed:
+هنگامی که `server.fs.allow` مشخص شده باشد، تشخیص خودکار ریشهٔ workspace غیرفعال می‌شود. برای گسترش رفتار اصلی، می‌توانید از تابع `searchForWorkspaceRoot` استفاده کنید:
 
 ```js
 import { defineConfig, searchForWorkspaceRoot } from 'vite'
@@ -359,9 +362,9 @@ export default defineConfig({
   server: {
     fs: {
       allow: [
-        // search up for workspace root
+        // جست‌وجو برای ریشهٔ workspace
         searchForWorkspaceRoot(process.cwd()),
-        // your custom rules
+        // قوانین سفارشی
         '/path/to/custom/allow_directory',
         '/path/to/custom/allow_file.demo',
       ],
@@ -372,16 +375,16 @@ export default defineConfig({
 
 ## server.fs.deny
 
-- **Type:** `string[]`
-- **Default:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
+- **نوع:** `string[]`
+- **پیش‌فرض:** `['.env', '.env.*', '*.{crt,pem}', '**/.git/**']`
 
-Blocklist for sensitive files being restricted to be served by Vite dev server. This will have higher priority than [`server.fs.allow`](#server-fs-allow). [picomatch patterns](https://github.com/micromatch/picomatch#globbing-features) are supported.
+لیست فایل‌های حساس که دسترسی به آن‌ها در سرور توسعهٔ Vite ممنوع است. این لیست اولویت بالاتری نسبت به [`server.fs.allow`](#server-fs-allow) دارد. از الگوهای [picomatch](https://github.com/micromatch/picomatch#globbing-features) پشتیبانی می‌شود.
 
 ## server.origin
 
-- **Type:** `string`
+- **نوع:** `string`
 
-Defines the origin of the generated asset URLs during development.
+مبدأ (origin) URLهایی که در زمان توسعه تولید می‌شوند را تعیین می‌کند.
 
 ```js
 export default defineConfig({
@@ -393,20 +396,19 @@ export default defineConfig({
 
 ## server.sourcemapIgnoreList
 
-- **Type:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
-- **Default:** `(sourcePath) => sourcePath.includes('node_modules')`
+- **نوع:** `false | (sourcePath: string, sourcemapPath: string) => boolean`
+- **پیش‌فرض:** `(sourcePath) => sourcePath.includes('node_modules')`
 
-Whether or not to ignore source files in the server sourcemap, used to populate the [`x_google_ignoreList` source map extension](https://developer.chrome.com/articles/x-google-ignore-list/).
+تعیین می‌کند که آیا فایل‌های منبع باید از sourcemap سرور نادیده گرفته شوند یا نه. این مقدار برای پر کردن [افزونهٔ `x_google_ignoreList`](https://developer.chrome.com/articles/x-google-ignore-list/) استفاده می‌شود.
 
-`server.sourcemapIgnoreList` is the equivalent of [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) for the dev server. A difference between the two config options is that the rollup function is called with a relative path for `sourcePath` while `server.sourcemapIgnoreList` is called with an absolute path. During dev, most modules have the map and the source in the same folder, so the relative path for `sourcePath` is the file name itself. In these cases, absolute paths makes it convenient to be used instead.
+`server.sourcemapIgnoreList` معادل [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) برای سرور توسعه است. تفاوت این دو گزینه این است که rollup از مسیر نسبی برای `sourcePath` استفاده می‌کند در حالی که `server.sourcemapIgnoreList` از مسیر مطلق استفاده می‌کند. در توسعه، بیشتر ماژول‌ها sourcemap و منبع را در یک پوشه دارند، پس مسیر مطلق مناسب‌تر است.
 
-By default, it excludes all paths containing `node_modules`. You can pass `false` to disable this behavior, or, for full control, a function that takes the source path and sourcemap path and returns whether to ignore the source path.
+به‌صورت پیش‌فرض، تمام مسیرهایی که شامل `node_modules` هستند نادیده گرفته می‌شوند. می‌توانید مقدار `false` برای غیرفعال کردن این رفتار یا یک تابع برای کنترل کامل ارائه دهید.
 
 ```js
 export default defineConfig({
   server: {
-    // This is the default value, and will add all files with node_modules
-    // in their paths to the ignore list.
+    // مقدار پیش‌فرض - تمام فایل‌های شامل node_modules در مسیرشان را نادیده می‌گیرد
     sourcemapIgnoreList(sourcePath, sourcemapPath) {
       return sourcePath.includes('node_modules')
     },
@@ -414,6 +416,6 @@ export default defineConfig({
 })
 ```
 
-::: tip Note
-[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) and [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) need to be set independently. `server.sourcemapIgnoreList` is a server only config and doesn't get its default value from the defined rollup options.
+::: tip نکته
+[`server.sourcemapIgnoreList`](#server-sourcemapignorelist) و [`build.rollupOptions.output.sourcemapIgnoreList`](https://rollupjs.org/configuration-options/#output-sourcemapignorelist) باید به‌صورت جداگانه تنظیم شوند. `server.sourcemapIgnoreList` فقط مخصوص سرور است و مقدار پیش‌فرض آن از rollup گرفته نمی‌شود.
 :::

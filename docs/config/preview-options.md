@@ -1,41 +1,41 @@
-# Preview Options
+# گزینه‌های پیش‌نمایش
 
-Unless noted, the options in this section are only applied to preview.
+مگر آنکه ذکر شده باشد، گزینه‌های این بخش فقط به پیش‌نمایش اعمال می‌شوند.
 
 ## preview.host
 
-- **Type:** `string | boolean`
-- **Default:** [`server.host`](./server-options#server-host)
+- **نوع:** `string | boolean`
+- **پیش‌فرض:** [`server.host`](./server-options#server-host)
 
-Specify which IP addresses the server should listen on.
-Set this to `0.0.0.0` or `true` to listen on all addresses, including LAN and public addresses.
+آدرس‌های IP که سرور باید به آنها گوش دهد را مشخص کنید.
+این گزینه را به `0.0.0.0` یا `true` تنظیم کنید تا بر روی همه آدرس‌ها، شامل آدرس‌های LAN و عمومی، گوش دهد.
 
-This can be set via the CLI using `--host 0.0.0.0` or `--host`.
+این گزینه را می‌توان از طریق CLI با استفاده از `--host 0.0.0.0` یا `--host` تنظیم کرد.
 
-::: tip NOTE
+::: نکته
 
-There are cases when other servers might respond instead of Vite.
-See [`server.host`](./server-options#server-host) for more details.
+در برخی موارد، ممکن است سرورهای دیگر پاسخ دهند به جای Vite.
+برای جزئیات بیشتر به [`server.host`](./server-options#server-host) مراجعه کنید.
 
 :::
 
 ## preview.allowedHosts
 
-- **Type:** `string | true`
-- **Default:** [`server.allowedHosts`](./server-options#server-allowedhosts)
+- **نوع:** `string | true`
+- **پیش‌فرض:** [`server.allowedHosts`](./server-options#server-allowedhosts)
 
-The hostnames that Vite is allowed to respond to.
+نام‌های میزبان‌هایی که Vite مجاز به پاسخ دادن به آنها است.
 
-See [`server.allowedHosts`](./server-options#server-allowedhosts) for more details.
+برای جزئیات بیشتر به [`server.allowedHosts`](./server-options#server-allowedhosts) مراجعه کنید.
 
 ## preview.port
 
-- **Type:** `number`
-- **Default:** `4173`
+- **نوع:** `number`
+- **پیش‌فرض:** `4173`
 
-Specify server port. Note if the port is already being used, Vite will automatically try the next available port so this may not be the actual port the server ends up listening on.
+پورت سرور را مشخص کنید. توجه داشته باشید که اگر پورت قبلاً استفاده شده باشد، Vite به‌طور خودکار سعی خواهد کرد از پورت بعدی استفاده کند، بنابراین این ممکن است پورت واقعی نباشد که سرور در نهایت به آن گوش می‌دهد.
 
-**Example:**
+**مثال:**
 
 ```js
 export default defineConfig({
@@ -50,49 +50,49 @@ export default defineConfig({
 
 ## preview.strictPort
 
-- **Type:** `boolean`
-- **Default:** [`server.strictPort`](./server-options#server-strictport)
+- **نوع:** `boolean`
+- **پیش‌فرض:** [`server.strictPort`](./server-options#server-strictport)
 
-Set to `true` to exit if port is already in use, instead of automatically trying the next available port.
+اگر پورت در حال حاضر در دسترس است، برای خروج از ساختار پورت به‌جای تلاش خودکار برای استفاده از پورت بعدی، آن را به `true` تنظیم کنید.
 
 ## preview.https
 
-- **Type:** `https.ServerOptions`
-- **Default:** [`server.https`](./server-options#server-https)
+- **نوع:** `https.ServerOptions`
+- **پیش‌فرض:** [`server.https`](./server-options#server-https)
 
-Enable TLS + HTTP/2. Note this downgrades to TLS only when the [`server.proxy` option](./server-options#server-proxy) is also used.
+فعال‌سازی TLS + HTTP/2. توجه کنید که این گزینه زمانی که گزینه [`server.proxy`](./server-options#server-proxy) نیز استفاده می‌شود، به TLS فقط کاهش می‌یابد.
 
-The value can also be an [options object](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) passed to `https.createServer()`.
+مقدار می‌تواند همچنین یک [شیء گزینه‌ها](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) باشد که به `https.createServer()` ارسال می‌شود.
 
 ## preview.open
 
-- **Type:** `boolean | string`
-- **Default:** [`server.open`](./server-options#server-open)
+- **نوع:** `boolean | string`
+- **پیش‌فرض:** [`server.open`](./server-options#server-open)
 
-Automatically open the app in the browser on server start. When the value is a string, it will be used as the URL's pathname. If you want to open the server in a specific browser you like, you can set the env `process.env.BROWSER` (e.g. `firefox`). You can also set `process.env.BROWSER_ARGS` to pass additional arguments (e.g. `--incognito`).
+باز کردن خودکار اپلیکیشن در مرورگر هنگام شروع سرور. وقتی مقدار آن یک رشته باشد، به‌عنوان نام مسیر URL استفاده خواهد شد. اگر می‌خواهید سرور را در مرورگر خاصی که می‌خواهید باز کنید، می‌توانید متغیر محیطی `process.env.BROWSER` را تنظیم کنید (مثلاً `firefox`). همچنین می‌توانید `process.env.BROWSER_ARGS` را برای ارسال آرگومان‌های اضافی تنظیم کنید (مثلاً `--incognito`).
 
-`BROWSER` and `BROWSER_ARGS` are also special environment variables you can set in the `.env` file to configure it. See [the `open` package](https://github.com/sindresorhus/open#app) for more details.
+`BROWSER` و `BROWSER_ARGS` همچنین متغیرهای محیطی خاصی هستند که می‌توانید در فایل `.env` تنظیم کنید. برای جزئیات بیشتر به [پکیج `open`](https://github.com/sindresorhus/open#app) مراجعه کنید.
 
 ## preview.proxy
 
-- **Type:** `Record<string, string | ProxyOptions>`
-- **Default:** [`server.proxy`](./server-options#server-proxy)
+- **نوع:** `Record<string, string | ProxyOptions>`
+- **پیش‌فرض:** [`server.proxy`](./server-options#server-proxy)
 
-Configure custom proxy rules for the preview server. Expects an object of `{ key: options }` pairs. If the key starts with `^`, it will be interpreted as a `RegExp`. The `configure` option can be used to access the proxy instance.
+پیکربندی قوانین پروکسی سفارشی برای سرور پیش‌نمایش. انتظار می‌رود یک شیء از جفت‌های `{ کلید: گزینه‌ها }` باشد. اگر کلید با `^` شروع شود، به‌عنوان `RegExp` تفسیر خواهد شد. گزینه `configure` برای دسترسی به نمونه پروکسی استفاده می‌شود.
 
-Uses [`http-proxy`](https://github.com/http-party/node-http-proxy). Full options [here](https://github.com/http-party/node-http-proxy#options).
+از [`http-proxy`](https://github.com/http-party/node-http-proxy) استفاده می‌کند. گزینه‌های کامل [اینجا](https://github.com/http-party/node-http-proxy#options) موجود است.
 
 ## preview.cors
 
-- **Type:** `boolean | CorsOptions`
-- **Default:** [`server.cors`](./server-options#server-cors)
+- **نوع:** `boolean | CorsOptions`
+- **پیش‌فرض:** [`server.cors`](./server-options#server-cors)
 
-Configure CORS for the preview server.
+پیکربندی CORS برای سرور پیش‌نمایش.
 
-See [`server.cors`](./server-options#server-cors) for more details.
+برای جزئیات بیشتر به [`server.cors`](./server-options#server-cors) مراجعه کنید.
 
 ## preview.headers
 
-- **Type:** `OutgoingHttpHeaders`
+- **نوع:** `OutgoingHttpHeaders`
 
-Specify server response headers.
+هدینگ‌های پاسخ سرور را مشخص کنید.
