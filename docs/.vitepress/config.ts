@@ -31,7 +31,7 @@ const additionalTitle = ((): string => {
     case 'main':
       return ' (main branch)'
     case 'local':
-      return ' (local)'
+      return ''
     case 'release':
       return ''
   }

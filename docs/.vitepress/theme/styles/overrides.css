@@ -34,7 +34,7 @@
 .VPNavBar .content-body {
   direction: ltr !important;
 }
-.VPNavBar.home .container {
+.VPNavBar .container {
   direction: ltr !important;
 }
 .VPNavBarTitle.has-sidebar {
