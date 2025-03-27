@@ -35,18 +35,20 @@ _۲۶ نوامبر ۲۰۲۴_
 
 امسال سرشار از رویداد بوده است. مقبولیت Vite رشد خود را با افزایش آمار دانلود هفنگی از ۷.۵ میلیون به ۱۷ میلیون، از زمان انتشار نسخه 5 Vite در سال پیش، ادامه داده‌ است. [Vitest](https://vitest.dev) نه‌ تنها مورد علاقه کاربران است، بلکه درحال شروع فرم‌دهی به یک اکوسیستم برای خودش نیز می‌باشد. برای مثال، [کتاب داستان](https://storybook.js.org) دارای قابلیت‌های تست جدیدی‌ست که توسط Vitest طراحی شده‌است.
 
-کتابخانه‌های جدید دیگری نیز به اکوسیستم Vite پیوسه‌اند. مانند [TanStack Start](https://tanstack.com/start)، [One](https://onestack.dev/)، [Ember](https://emberjs.com/) و باقی. کتابخانه‌های وب درحال نوآوری با سرعتی بیشتر و افزایشی هستند. پیشرفت‌های درحال انجام توسط گروه‌ها را در [Astro](https://astro.build/)، [Nuxt](https://nuxt.com/)، [SvelteKit](https://kit.svelte.dev/)، [Solid Start](https://www.solidjs.com/blog/introducing-solidstart)، [Qwik City](https://qwik.builder.io/qwikcity/overview/)، [RedwoodJS](https://redwoodjs.com/)، [React Router](https://reactrouter.com/) مشاهده کنید. لیست ادامه‌دار می‌باشد.
+کتابخانه‌های جدید دیگری نیز به اکوسیستم Vite پیوسه‌اند. مانند [TanStack Start](https://tanstack.com/start)، [One](https://onestack.dev/)، [Ember](https://emberjs.com/) و سایر . کتابخانه‌های وب درحال نوآوری با سرعتی بیشتر و افزایشی هستند. پیشرفت‌های درحال انجام توسط گروه‌ها را در [Astro](https://astro.build/)، [Nuxt](https://nuxt.com/)، [SvelteKit](https://kit.svelte.dev/)، [Solid Start](https://www.solidjs.com/blog/introducing-solidstart)، [Qwik City](https://qwik.builder.io/qwikcity/overview/)، [RedwoodJS](https://redwoodjs.com/)، [React Router](https://reactrouter.com/) مشاهده کنید. لیست ادامه‌دار می‌باشد.
 
 
 
-در ادامه، Vite توسط OpenAI, Google, Apple, Microsoft, NASA, Shopify, Cloudflare, GitLab, Reddit, Linear استفاده شده و در میان بسیار شرکت‌های دیگری نیز می‌باشد. ما لیستی از [شزکت‌هایی که درحال حاضر از Vite استفاده می‌کنند](https://github.com/vitejs/companies-using-vite) درست کرده‌ایم. خرسندیم که PR بسیاری از توسعه‌دهندگان را برای اضافه کردن شرکت‌شان به لیست می‌بینیم. باورش سخت است که چقدر اکوسیستمی که ما با یکدیگر ساخته‌ایم از زمانی که اولین قدم را برای آن برداشته‌ایم پیشرفت کرده است. 
+در ادامه، Vite توسط OpenAI ,Google ,Apple ,Microsoft ,NASA ,Shopify ,Cloudflare ,GitLab ,Reddit ,Linear استفاده شده و در میان بسیار شرکت‌های دیگری نیز می‌باشد. ما لیستی از [شزکت‌هایی که درحال حاضر از Vite استفاده می‌کنند](https://github.com/vitejs/companies-using-vite) درست کرده‌ایم. خرسندیم که PR بسیاری از توسعه‌دهندگان را برای اضافه کردن شرکت‌شان به لیست می‌بینیم. باورش سخت است که چقدر اکوسیستمی که ما با یکدیگر ساخته‌ایم از زمانی که اولین قدم را برای آن برداشته‌ایم پیشرفت کرده است. 
 
 
 
 ![دانلود هفتگی npm Vite](/vite6-npm-weekly-downloads.png)
 
-## Speeding up the Vite ecosystem
+## افزایش سرعت اکوسیستم Vite
 
+
+ماه گذشته، کامیونیتی برای ویرایش سوم [ViteConf](https://viteconf.org/24/replay) دور هم جمع شد، یکبار دیگر توسط [StackBlitz](https://stackblitz.com) میزبانی شد. این بزرگترین کنفرانس Vite، با نمایندگی گسترده‌ای از سازندگان اکوسیستم بود. بین سایر معرفی‌ها Evan You، [VoidZero](https://staging.voidzero.dev/posts/announcing-voidzero-inc) را معرفی کرد.
 Last month, the community gathered for the third edition of [ViteConf](https://viteconf.org/24/replay), hosted once more by [StackBlitz](https://stackblitz.com). It was the biggest Vite conference, with a broad representation of builders from the ecosystem. Among other announcements, Evan You announced [VoidZero](https://staging.voidzero.dev/posts/announcing-voidzero-inc), a company dedicated to building an open-source, high-performance, and unified development toolchain for the JavaScript ecosystem. VoidZero is behind [Rolldown](https://rolldown.rs) and [Oxc](https://oxc.rs), and their team is making significant strides, getting them rapidly ready for being adopted by Vite. Watch Evan's keynote to learn more about the next steps for Vite's rust-powered future.
 
 <YouTubeVideo videoId="EKvvptbTx6k?si=EZ-rFJn4pDW3tUvp" />
