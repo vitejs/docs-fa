@@ -39,9 +39,11 @@ _۲۶ نوامبر ۲۰۲۴_
 
 
 
-Vite is used by OpenAI, Google, Apple, Microsoft, NASA, Shopify, Cloudflare, GitLab, Reddit, Linear, among many others. Two months ago, we started a list of [companies using Vite](https://github.com/vitejs/companies-using-vite). We're happy to see many developers sending us a PR to add their companies to the list. It's hard to believe how much the ecosystem we built together has grown since Vite gave its first steps.
+در ادامه، Vite توسط OpenAI, Google, Apple, Microsoft, NASA, Shopify, Cloudflare, GitLab, Reddit, Linear استفاده شده و در میان بسیار شرکت‌های دیگری نیز می‌باشد. ما لیستی از [شزکت‌هایی که درحال حاضر از Vite استفاده می‌کنند](https://github.com/vitejs/companies-using-vite) درست کرده‌ایم. خرسندیم که PR بسیاری از توسعه‌دهندگان را برای اضافه کردن شرکت‌شان به لیست می‌بینیم. باورش سخت است که چقدر اکوسیستمی که ما با یکدیگر ساخته‌ایم از زمانی که اولین قدم را برای آن برداشته‌ایم پیشرفت کرده است. 
 
-![Vite weekly npm downloads](/vite6-npm-weekly-downloads.png)
+
+
+![دانلود هفتگی npm Vite](/vite6-npm-weekly-downloads.png)
 
 ## Speeding up the Vite ecosystem
 
