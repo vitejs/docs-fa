@@ -25,17 +25,19 @@
       محتوا: summary_large_image
 ---
 
-# Vite 6.0 منتشر شد!
+# ‌‌نسخه Vite 6.0 منتشر شد!
 
-_November 26, 2024_
+_۲۶ نوامبر ۲۰۲۴_
 
-![Vite 6 Announcement Cover Image](/og-image-announcing-vite6.png)
+![تصویری از بنر معرفی نسخه 6.0 Vite](/og-image-announcing-vite6.png)
 
-Today, we're taking another big step in Vite's story. The Vite [team](/team), [contributors](https://github.com/vitejs/vite/graphs/contributors), and ecosystem partners are excited to announce the release of Vite 6.
+امروزه، ما درحال برداشتن قدم بزرگ دیگری در داستان Vite هستیم. [تیم](/team) Vite، [همکاران آن](https://github.com/vitejs/vite/graphs/contributors) و شرکای اکوسیستم برای انتشار نسخه 6.0 Vite هیجان‌زده هستند.
 
-It has been an eventful year. Vite adoption keeps growing, with npm downloads per week jumping from 7.5 million to 17 million since the release of Vite 5 a year ago. [Vitest](https://vitest.dev) is not only being favored more by users but is also starting to form an ecosystem of its own. For example, [Storybook](https://storybook.js.org) has new testing capabilities powered by Vitest.
+امسال سرشار از رویداد بوده است. مقبولیت Vite رشد خود را با افزایش آمار دانلود هفنگی از ۷.۵ میلیون به ۱۷ میلیون، از زمان انتشار نسخه 5 Vite در سال پیش، ادامه داده‌ است. [Vitest](https://vitest.dev) نه‌ تنها مورد علاقه کاربران است، بلکه درحال شروع فرم‌دهی به یک اکوسیستم برای خودش نیز می‌باشد. برای مثال، [کتاب داستان](https://storybook.js.org) دارای قابلیت‌های تست جدیدی‌ست که توسط Vitest طراحی شده‌است.
 
-New frameworks have also joined the Vite ecosystem, including [TanStack Start](https://tanstack.com/start), [One](https://onestack.dev/), [Ember](https://emberjs.com/), and others. Web frameworks are innovating at an increasingly faster pace. You can check out the improvements folks have been doing at [Astro](https://astro.build/), [Nuxt](https://nuxt.com/), [SvelteKit](https://kit.svelte.dev/), [Solid Start](https://www.solidjs.com/blog/introducing-solidstart), [Qwik City](https://qwik.builder.io/qwikcity/overview/), [RedwoodJS](https://redwoodjs.com/), [React Router](https://reactrouter.com/), and the list goes on.
+کتابخانه‌های جدید دیگری نیز به اکوسیستم Vite پیوسه‌اند. مانند [TanStack Start](https://tanstack.com/start)، [One](https://onestack.dev/)، [Ember](https://emberjs.com/) و باقی. کتابخانه‌های وب درحال نوآوری با سرعتی بیشتر و افزایشی هستند. پیشرفت‌های درحال انجام توسط گروه‌ها را در [Astro](https://astro.build/)، [Nuxt](https://nuxt.com/)، [SvelteKit](https://kit.svelte.dev/)، [Solid Start](https://www.solidjs.com/blog/introducing-solidstart)، [Qwik City](https://qwik.builder.io/qwikcity/overview/)، [RedwoodJS](https://redwoodjs.com/)، [React Router](https://reactrouter.com/) مشاهده کنید. لیست ادامه‌دار می‌باشد.
+
+
 
 Vite is used by OpenAI, Google, Apple, Microsoft, NASA, Shopify, Cloudflare, GitLab, Reddit, Linear, among many others. Two months ago, we started a list of [companies using Vite](https://github.com/vitejs/companies-using-vite). We're happy to see many developers sending us a PR to add their companies to the list. It's hard to believe how much the ecosystem we built together has grown since Vite gave its first steps.
 
