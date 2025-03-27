@@ -1,31 +1,31 @@
 ---
-title: Vite 6.0 is out!
-author:
-  name: The Vite Team
-date: 2024-11-26
-sidebar: false
-head:
-  - - meta
-    - property: og:type
-      content: website
-  - - meta
-    - property: og:title
-      content: Announcing Vite 6
-  - - meta
-    - property: og:image
-      content: https://vite.dev/og-image-announcing-vite6.png
-  - - meta
-    - property: og:url
-      content: https://vite.dev/blog/announcing-vite6
-  - - meta
-    - property: og:description
-      content: Vite 6 Release Announcement
-  - - meta
-    - name: twitter:card
-      content: summary_large_image
+موضوع: Vite 6.0 منتشر شد!
+نویسنده:
+  نام: تیم Vite
+تاریخ: 2024-11-26
+نوار کناری: نادرست
+سر:
+  - - متا
+    - ویژگی: og:type
+      محتوا: وب‌سایت
+  - - متا
+    - ویژگی: og:title
+      محتوا: معرفی Vite 6
+  - - متا
+    - ویژگی: og:image
+      محتوا: https://vite.dev/og-image-announcing-vite6.png
+  - - متا
+    - ویژگی: og:url
+      محتوا: https://vite.dev/blog/announcing-vite6
+  - - متا
+    - ویژگی: og:description
+      محتوا: Vite 6 Release Announcement
+  - - متا
+    - نام: twitter:card
+      محتوا: summary_large_image
 ---
 
-# Vite 6.0 is out!
+# Vite 6.0 منتشر شد!
 
 _November 26, 2024_
 
