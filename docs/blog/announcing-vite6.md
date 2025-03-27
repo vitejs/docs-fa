@@ -49,7 +49,7 @@ _۲۶ نوامبر ۲۰۲۴_
 
 
 ماه گذشته، کامیونیتی برای ویرایش سوم [ViteConf](https://viteconf.org/24/replay) دور هم جمع شد، یکبار دیگر توسط [StackBlitz](https://stackblitz.com) میزبانی شد. این بزرگترین کنفرانس Vite، با نمایندگی گسترده‌ای از سازندگان اکوسیستم بود. بین سایر معرفی‌ها [VoidZero](https://staging.voidzero.dev/posts/announcing-voidzero-inc) توسط Evan You معرفی شد؛ شرکتی که به ساخت یک زنجیره ابزار توسعه منبع باز، با کارایی بالا و یکپارچه برای اکوسیستم جاوا اسکریپت اختصاص داده شده است. VoidZero پشت [Rolldown](https://rolldown.rs) و [Oxc](https://oxc.rs) است، و تیم آنها گام های مهمی برمی دارد و آنها را به سرعت برای پذیرش توسط Vite آماده می کند. با تماشای سخنرانی اصلی ایوان، در مورد مراحل بعدی آینده مبتی بر Rust برای Vite بیشتر بدانید.
-Last month, the community gathered for the third edition of [ViteConf](https://viteconf.org/24/replay), hosted once more by [StackBlitz](https://stackblitz.com). It was the biggest Vite conference, with a broad representation of builders from the ecosystem. Among other announcements, Evan You announced [VoidZero](https://staging.voidzero.dev/posts/announcing-voidzero-inc), a company dedicated to building an open-source, high-performance, and unified development toolchain for the JavaScript ecosystem. VoidZero is behind [Rolldown](https://rolldown.rs) and [Oxc](https://oxc.rs), and their team is making significant strides, getting them rapidly ready for being adopted by Vite. Watch Evan's keynote to learn more about the next steps for Vite's rust-powered future.
+
 
 <YouTubeideo videoId="EKvvptbTx6k?si=EZ-rFJn4pDW3tUvp" />
 
