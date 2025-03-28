@@ -1,24 +1,24 @@
-# Shared Plugins during Build
+# افزونه‌های مشترک در زمان ساخت
 
-::: tip Feedback
-Give us feedback at [Environment API feedback discussion](https://github.com/vitejs/vite/discussions/16358)
+::: tip بازخورد
+بازخورد خود را در [بحث بازخورد API محیط](https://github.com/vitejs/vite/discussions/16358) با ما در میان بگذارید.
 :::
 
-See [Shared plugins during build](/guide/api-environment.md#shared-plugins-during-build).
+به [افزونه‌های مشترک در زمان ساخت](/guide/api-environment.md#shared-plugins-during-build) مراجعه کنید.
 
-Affect scope: `Vite Plugin Authors`
+دامنه تأثیر: `نویسندگان افزونه‌های Vite`
 
-::: warning Future Default Change
-`builder.sharedConfigBuild` was first introduce in `v6.0`. You can set it true to check how your plugins work with a shared config. We're looking for feedback about changing the default in a future major once the plugin ecosystem is ready.
+::: warning تغییر پیش‌فرض در آینده
+`builder.sharedConfigBuild` برای اولین بار در نسخه `v6.0` معرفی شد. می‌توانید آن را روی `true` تنظیم کنید تا بررسی کنید افزونه‌هایتان با تنظیمات مشترک چگونه کار می‌کنند. ما به دنبال بازخورد درباره تغییر پیش‌فرض در یک نسخه اصلی آینده هستیم، زمانی که اکوسیستم افزونه‌ها آماده باشد.
 :::
 
-## Motivation
+## انگیزه
 
-Align dev and build plugin pipelines.
+هم‌راستا کردن خطوط لوله افزونه‌ها در زمان توسعه و ساخت.
 
-## Migration Guide
+## راهنمای مهاجرت
 
-To be able to share plugins across environments, plugin state must be keyed by the current environment. A plugin of the following form will count the number of transformed modules across all environments.
+برای به اشتراک گذاشتن افزونه‌ها بین محیط‌ها، وضعیت افزونه باید بر اساس محیط فعلی کلیدگذاری شود. افزونه‌ای به شکل زیر تعداد ماژول‌های تبدیل‌شده را در همه محیط‌ها می‌شمارد:
 
 ```js
 function CountTransformedModulesPlugin() {
@@ -38,7 +38,7 @@ function CountTransformedModulesPlugin() {
 }
 ```
 
-If we instead want to count the number of transformed modules for each environment, we need to keep a map:
+اگر بخواهیم تعداد ماژول‌های تبدیل‌شده را برای هر محیط به‌صورت جداگانه بشماریم، باید یک نقشه نگه داریم:
 
 ```js
 function PerEnvironmentCountTransformedModulesPlugin() {
@@ -59,7 +59,7 @@ function PerEnvironmentCountTransformedModulesPlugin() {
 }
 ```
 
-To simplify this pattern, Vite exports a `perEnvironmentState` helper:
+برای ساده‌سازی این الگو، Vite یک کمک‌کننده به نام `perEnvironmentState` ارائه می‌دهد:
 
 ```js
 function PerEnvironmentCountTransformedModulesPlugin() {
