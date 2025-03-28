@@ -1,39 +1,35 @@
 # گزینه‌های پیش‌نمایش
 
-مگر آنکه ذکر شده باشد، گزینه‌های این بخش فقط به پیش‌نمایش اعمال می‌شوند.
+مگر اینکه ذکر شده باشه، گزینه‌های این بخش فقط برای پیش‌نمایش اعمال می‌شن.
 
 ## preview.host
 
-- **نوع:** `string | boolean`
+- **تایپ:** `string | boolean`
 - **پیش‌فرض:** [`server.host`](./server-options#server-host)
 
-آدرس‌های IP که سرور باید به آنها گوش دهد را مشخص کنید.
-این گزینه را به `0.0.0.0` یا `true` تنظیم کنید تا بر روی همه آدرس‌ها، شامل آدرس‌های LAN و عمومی، گوش دهد.
+مشخص می‌کنه سرور باید روی کدوم آدرس‌های IP گوش کنه. با تنظیم این روی `0.0.0.0` یا `true`، سرور روی همه آدرس‌ها، از جمله شبکه محلی (LAN) و آدرس‌های عمومی، گوش می‌ده.
 
-این گزینه را می‌توان از طریق CLI با استفاده از `--host 0.0.0.0` یا `--host` تنظیم کرد.
+این می‌تونه از طریق CLI با `host 0.0.0.0--` یا `host--` تنظیم بشه.
 
-::: نکته
-
-در برخی موارد، ممکن است سرورهای دیگر پاسخ دهند به جای Vite.
-برای جزئیات بیشتر به [`server.host`](./server-options#server-host) مراجعه کنید.
-
+::: tip نکته
+بعضی وقت‌ها ممکنه سرورهای دیگه به جای Vite پاسخ بدن. برای جزئیات بیشتر به [`server.host`](./server-options#server-host) نگاه کنید.
 :::
 
 ## preview.allowedHosts
 
-- **نوع:** `string | true`
+- **تایپ:** `string | true`
 - **پیش‌فرض:** [`server.allowedHosts`](./server-options#server-allowedhosts)
 
-نام‌های میزبان‌هایی که Vite مجاز به پاسخ دادن به آنها است.
+نام‌های میزبانی که Vite اجازه داره بهشون پاسخ بده.
 
 برای جزئیات بیشتر به [`server.allowedHosts`](./server-options#server-allowedhosts) مراجعه کنید.
 
 ## preview.port
 
-- **نوع:** `number`
+- **تایپ:** `number`
 - **پیش‌فرض:** `4173`
 
-پورت سرور را مشخص کنید. توجه داشته باشید که اگر پورت قبلاً استفاده شده باشد، Vite به‌طور خودکار سعی خواهد کرد از پورت بعدی استفاده کند، بنابراین این ممکن است پورت واقعی نباشد که سرور در نهایت به آن گوش می‌دهد.
+پورت سرور رو مشخص می‌کنه. اگه پورت از قبل در حال استفاده باشه، Vite به‌طور خودکار پورت بعدی در دسترس رو امتحان می‌کنه، پس ممکنه این پورت واقعی‌ای که سرور روش گوش می‌ده نباشه.
 
 **مثال:**
 
@@ -50,49 +46,49 @@ export default defineConfig({
 
 ## preview.strictPort
 
-- **نوع:** `boolean`
+- **تایپ:** `boolean`
 - **پیش‌فرض:** [`server.strictPort`](./server-options#server-strictport)
 
-اگر پورت در حال حاضر در دسترس است، برای خروج از ساختار پورت به‌جای تلاش خودکار برای استفاده از پورت بعدی، آن را به `true` تنظیم کنید.
+اگه روی `true` تنظیم بشه، در صورتی که پورت در حال استفاده باشه، برنامه خارج می‌شه و به جای امتحان خودکار پورت بعدی، خطا می‌ده.
 
 ## preview.https
 
-- **نوع:** `https.ServerOptions`
+- **تایپ:** `https.ServerOptions`
 - **پیش‌فرض:** [`server.https`](./server-options#server-https)
 
-فعال‌سازی TLS + HTTP/2. توجه کنید که این گزینه زمانی که گزینه [`server.proxy`](./server-options#server-proxy) نیز استفاده می‌شود، به TLS فقط کاهش می‌یابد.
+TLS و HTTP/2 رو فعال می‌کنه.
 
-مقدار می‌تواند همچنین یک [شیء گزینه‌ها](https://nodejs.org/api/https.html#https_https_createserver_options_requestlistener) باشد که به `https.createServer()` ارسال می‌شود.
+برای جزئیات بیشتر به [`server.https`](./server-options#server-https) نگاه کنید.
 
 ## preview.open
 
-- **نوع:** `boolean | string`
+- **تایپ:** `boolean | string`
 - **پیش‌فرض:** [`server.open`](./server-options#server-open)
 
-باز کردن خودکار اپلیکیشن در مرورگر هنگام شروع سرور. وقتی مقدار آن یک رشته باشد، به‌عنوان نام مسیر URL استفاده خواهد شد. اگر می‌خواهید سرور را در مرورگر خاصی که می‌خواهید باز کنید، می‌توانید متغیر محیطی `process.env.BROWSER` را تنظیم کنید (مثلاً `firefox`). همچنین می‌توانید `process.env.BROWSER_ARGS` را برای ارسال آرگومان‌های اضافی تنظیم کنید (مثلاً `--incognito`).
+با شروع سرور، برنامه رو به‌طور خودکار توی مرورگر باز می‌کنه. اگه مقدار یه رشته باشه، به عنوان مسیر URL استفاده می‌شه. اگه می‌خواید سرور توی مرورگر خاصی که دوست دارید باز بشه، می‌تونید متغیر محیطی `process.env.BROWSER` رو تنظیم کنید (مثلاً `firefox`). همچنین می‌تونید با `process.env.BROWSER_ARGS` آرگومان‌های اضافی بفرستید (مثلاً `incognito--`).
 
-`BROWSER` و `BROWSER_ARGS` همچنین متغیرهای محیطی خاصی هستند که می‌توانید در فایل `.env` تنظیم کنید. برای جزئیات بیشتر به [پکیج `open`](https://github.com/sindresorhus/open#app) مراجعه کنید.
+`BROWSER` و `BROWSER_ARGS` متغیرهای محیطی خاصی هستن که می‌تونید توی فایل `env.` تنظیم‌شون کنید. برای جزئیات بیشتر به [پکیج `open`](https://github.com/sindresorhus/open#app) مراجعه کنید.
 
 ## preview.proxy
 
-- **نوع:** `Record<string, string | ProxyOptions>`
+- **تایپ:** `<Record<string, string | ProxyOptions`
 - **پیش‌فرض:** [`server.proxy`](./server-options#server-proxy)
 
-پیکربندی قوانین پروکسی سفارشی برای سرور پیش‌نمایش. انتظار می‌رود یک شیء از جفت‌های `{ کلید: گزینه‌ها }` باشد. اگر کلید با `^` شروع شود، به‌عنوان `RegExp` تفسیر خواهد شد. گزینه `configure` برای دسترسی به نمونه پروکسی استفاده می‌شود.
+قوانین پراکسی سفارشی رو برای سرور پیش‌نمایش پیکربندی می‌کنه. یه آبجکت از جفت‌های `{ key: options }` انتظار داره. اگه کلید با `^` شروع بشه، به عنوان `RegExp` تفسیر می‌شه. گزینه `configure` می‌تونه برای دسترسی به نمونه پراکسی استفاده بشه.
 
-از [`http-proxy`](https://github.com/http-party/node-http-proxy) استفاده می‌کند. گزینه‌های کامل [اینجا](https://github.com/http-party/node-http-proxy#options) موجود است.
+از [`http-proxy`](https://github.com/http-party/node-http-proxy) استفاده می‌کنه. گزینه‌های کامل رو [اینجا](https://github.com/http-party/node-http-proxy#options) ببینید.
 
 ## preview.cors
 
-- **نوع:** `boolean | CorsOptions`
+- **تایپ:** `boolean | CorsOptions`
 - **پیش‌فرض:** [`server.cors`](./server-options#server-cors)
 
-پیکربندی CORS برای سرور پیش‌نمایش.
+CORS رو برای سرور پیش‌نمایش پیکربندی می‌کنه.
 
-برای جزئیات بیشتر به [`server.cors`](./server-options#server-cors) مراجعه کنید.
+برای جزئیات بیشتر به [`server.cors`](./server-options#server-cors) نگاه کنید.
 
 ## preview.headers
 
-- **نوع:** `OutgoingHttpHeaders`
+- **تایپ:** `OutgoingHttpHeaders`
 
-هدینگ‌های پاسخ سرور را مشخص کنید.
+هدرهای پاسخ سرور رو مشخص می‌کنه.
