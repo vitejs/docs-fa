@@ -67,7 +67,7 @@ declare const __APP_VERSION__: string
 
 ## plugins
 
-- **نوع:** `[](<[]Plugin | Plugin[] | Promise<Plugin | Plugin)`
+- **تایپ:** `[](<[]Plugin | Plugin[] | Promise<Plugin | Plugin)`
 
 آرایه‌ای از پلاگین‌ها برای استفاده. پلاگین‌های falsy نادیده گرفته می‌شوند و آرایه‌های پلاگین‌ها صاف می‌شوند. اگر یک Promise برگردانده شود، قبل از اجرا رفع می‌شود. برای اطلاعات بیشتر در مورد پلاگین‌های Vite، به [API پلاگین](/guide/api-plugin) مراجعه کنید.
 
@@ -91,7 +91,7 @@ declare const __APP_VERSION__: string
 
 ## resolve.alias
 
-- **نوع:**
+- **تایپ:**
 <div dir="ltr">
 <code>'Record&lt;string, string&gt; | Array&lt;{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }&gt;'</code>
 </div>
@@ -118,7 +118,7 @@ declare const __APP_VERSION__: string
 
 ## resolve.conditions
 
-- **نوع:** `[]string`
+- **تایپ:** `[]string`
 - **پیش‌فرض:** (`defaultClientConditions`) `['module', 'browser', 'development|production']`
 
 شرایط اضافی مجاز هنگام رزولوشن [صادرات شرطی](https://nodejs.org/api/packages.html#packages_conditional_exports) از یک پکیج.
@@ -265,7 +265,7 @@ export default defineConfig({
 
 ### css.preprocessorOptions[extension].additionalData
 
-- **نوع:**
+- **تایپ:**
 <div dir="ltr">
 <code>string | ((source: string, filename: string) => (string | { content: string; map?: SourceMap }))</code>
 </div>

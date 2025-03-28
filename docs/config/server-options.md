@@ -237,7 +237,7 @@ Direct websocket connection fallback. Check out https://vite.dev/config/server-o
 
 ## server.warmup
 
-- **نوع:** `{ []clientFiles?: string[], ssrFiles?: string }`
+- **تایپ:** `{ []clientFiles?: string[], ssrFiles?: string }`
 - **مرتبط:** [گرم کردن فایل‌های پراستفاده](/guide/performance.html#warm-up-frequently-used-files)
 
 فایل‌ها رو از قبل گرم می‌کنه تا تبدیل و کش بشن. این کار بارگذاری اولیه صفحه رو موقع شروع سرور بهتر می‌کنه و از آبشار تبدیل جلوگیری می‌کنه.
