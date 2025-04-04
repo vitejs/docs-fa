@@ -373,34 +373,34 @@ export default defineConfig({
       ],
       '/config/': [
         {
-          text: 'Config',
+          text: 'کانفیگ',
           items: [
             {
-              text: 'Configuring Vite',
+              text: 'پیکربندی Vite',
               link: '/config/'
             },
             {
-              text: 'Shared Options',
+              text: 'گزینه‌های مشترک',
               link: '/config/shared-options'
             },
             {
-              text: 'Server Options',
+              text: 'گزینه‌های سرور',
               link: '/config/server-options'
             },
             {
-              text: 'Build Options',
+              text: 'گزینه‌های بیلد',
               link: '/config/build-options'
             },
             {
-              text: 'Preview Options',
+              text: 'گزینه‌های پیش‌نمایش',
               link: '/config/preview-options'
             },
             {
-              text: 'Dep Optimization Options',
+              text: 'گزینه‌های بهینه‌سازی وابستگی‌ها',
               link: '/config/dep-optimization-options'
             },
             {
-              text: 'SSR Options',
+              text: 'گزینه‌های SSR',
               link: '/config/ssr-options'
             },
             {
@@ -431,15 +431,15 @@ export default defineConfig({
               link: '/changes/hotupdate-hook'
             },
             {
-              text: 'Move to per-environment APIs',
+              text: 'انتقال به APIهای مخصوص هر محیط',
               link: '/changes/per-environment-apis'
             },
             {
-              text: 'SSR using ModuleRunner API',
+              text: 'SSR با استفاده از ModuleRunner API',
               link: '/changes/ssr-using-modulerunner'
             },
             {
-              text: 'Shared plugins during build',
+              text: 'پلاگین‌های مشترک در زمان Build',
               link: '/changes/shared-plugins-during-build'
             }
           ]

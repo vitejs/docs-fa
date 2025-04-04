@@ -8,7 +8,7 @@
 
 - **تایپ:** `[]string | string`
 
-به‌طور پیش‌فرض، Vite همه فایل‌های `.html` شما رو بررسی می‌کنه تا وابستگی‌هایی که باید پیش‌باندل بشن رو پیدا کنه (با نادیده گرفتن `__node_modules`، `build.outDir`، `__tests` و `coverage`). اگه `build.rollupOptions.input` مشخص شده باشه، Vite به جای اون، اون نقاط ورود رو بررسی می‌کنه.
+به‌طور پیش‌فرض، Vite همه فایل‌های `‎.html` شما رو بررسی می‌کنه تا وابستگی‌هایی که باید پیش‌باندل بشن رو پیدا کنه (با نادیده گرفتن `node_modules` ، `build.outDir` ، `__tests__‎` و `coverage`). اگه `build.rollupOptions.input` مشخص شده باشه، Vite به جای اون، اون نقاط ورود رو بررسی می‌کنه.
 
 اگه هیچ‌کدوم از این‌ها نیاز شما رو برآورده نکنه، می‌تونید با این گزینه نقاط ورود سفارشی رو مشخص کنید - مقدار باید یه الگوی [`tinyglobby`](https://github.com/SuperchupuDev/tinyglobby) یا آرایه‌ای از الگوها باشه که نسبت به ریشه پروژه Vite هستن. این کار حدس نقاط ورود پیش‌فرض رو بازنویسی می‌کنه. وقتی `optimizeDeps.entries` به‌صراحت تعریف بشه، فقط پوشه‌های `node_modules` و `build.outDir` به‌طور پیش‌فرض نادیده گرفته می‌شن. اگه نیاز باشه پوشه‌های دیگه هم نادیده گرفته بشن، می‌تونید از الگوی نادیده‌گرفتن با علامت `!` در ابتدای لیست نقاط ورود استفاده کنید. اگه نمی‌خواید `node_modules` و `build.outDir` نادیده گرفته بشن، می‌تونید به جای الگوهای `tinyglobby` از مسیرهای رشته‌ای دقیق استفاده کنید.
 
@@ -53,25 +53,17 @@ export default defineConfig({
 
 ## optimizeDeps.esbuildOptions
 
-- **تایپ:**
-
-<div dir="ltr">
-    <code>
-<a href="https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys">Omit</a> &lt; <a href="https://esbuild.github.io/api/#general-options">EsbuildBuildOptions</a> ,
-  | 'bundle'
-  | 'entryPoints'
-  | 'external'
-  | 'write'
-  | 'watch'
-  | 'outdir'
-  | 'outfile'
-  | 'outbase'
-  | 'outExtension'
-  | 'metafile'&gt;
-    </code>
-</div>
-
-
+- **تایپ:** [`Omit`](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys)`<`[`EsbuildBuildOptions`](https://esbuild.github.io/api/#general-options)`,
+| 'bundle'
+| 'entryPoints'
+| 'external'
+| 'write'
+| 'watch'
+| 'outdir'
+| 'outfile'
+| 'outbase'
+| 'outExtension'
+| 'metafile'>‎`
 
 گزینه‌هایی که موقع اسکن و بهینه‌سازی وابستگی‌ها به esbuild منتقل می‌شن.
 
@@ -92,20 +84,20 @@ export default defineConfig({
 - **تایپ:** `boolean`
 - **پیش‌فرض:** `true`
 
-وقتی فعال باشه، نتایج اولیه بهینه‌سازی وابستگی‌ها رو تا وقتی که همه ایمپورت‌های استاتیک موقع شروع سرد بررسی بشن نگه می‌داره. این کار از نیاز به بارگذاری مجدد کل صفحه وقتی وابستگی‌های جدید پیدا می‌شن و تکه‌های مشترک جدیدی تولید می‌کنن جلوگیری می‌کنه. اگه همه وابستگی‌ها توسط اسکنر به علاوه اونایی که توی `include` صراحتاً تعریف شدن پیدا بشن، بهتره این گزینه رو غیرفعال کنید تا مرورگر درخواست‌های بیشتری رو به‌صورت موازی پردازش کنه.
+وقتی فعال باشه، نتایج اولیه بهینه‌سازی وابستگی‌ها رو تا وقتی که همه ایمپورت‌های استاتیک موقع cold start بررسی بشن نگه می‌داره. این کار از نیاز به بارگذاری مجدد کل صفحه وقتی وابستگی‌های جدید پیدا می‌شن و تکه‌های مشترک جدیدی تولید می‌کنن جلوگیری می‌کنه. اگه همه وابستگی‌ها توسط اسکنر به علاوه اونایی که توی `include` صراحتاً تعریف شدن پیدا بشن، بهتره این گزینه رو غیرفعال کنید تا مرورگر درخواست‌های بیشتری رو به‌صورت موازی پردازش کنه.
 
 ## optimizeDeps.disabled
 
 - **منسوخ‌شده**
 - **آزمایشی:** [بازخورد بدید](https://github.com/vitejs/vite/discussions/13839)
-- **تایپ:** `boolean | 'build' | 'dev'`
+- **تایپ:** `boolean | 'build' | 'dev'‎`
 - **پیش‌فرض:** `'build'`
 
 این گزینه منسوخ شده. از Vite 5.1، پیش‌باندل کردن وابستگی‌ها موقع ساخت حذف شده. تنظیم `optimizeDeps.disabled` روی `true` یا `'dev'` بهینه‌ساز رو غیرفعال می‌کنه، و تنظیمش روی `false` یا `'build'` بهینه‌ساز رو توی توسعه فعال نگه می‌داره.
 
 برای غیرفعال کردن کامل بهینه‌ساز، از `optimizeDeps.noDiscovery: true` استفاده کنید تا کشف خودکار وابستگی‌ها رو غیرمجاز کنید و `optimizeDeps.include` رو تعریف‌نشده یا خالی بذارید.
 
-::: warning
+::: warning هشدار
 بهینه‌سازی وابستگی‌ها موقع ساخت یه ویژگی **آزمایشی** بود. پروژه‌هایی که این استراتژی رو امتحان کردن، `rollup/plugin-commonjs@` رو با استفاده از `build.commonjsOptions: { include: [] }` حذف کرده بودن. اگه این کار رو کردید، یه هشدار شما رو راهنمایی می‌کنه که دوباره فعالش کنید تا از پکیج‌های فقط CJS موقع باندل کردن پشتیبانی بشه.
 :::
 

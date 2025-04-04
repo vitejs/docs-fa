@@ -9,7 +9,7 @@
 
 پوشه ریشه پروژه (محلی که فایل `index.html` در آن قرار دارد). می‌تواند یک مسیر مطلق یا یک مسیر نسبت به پوشه کاری فعلی باشد.
 
-برای اطلاعات بیشتر، به [ریشه پروژه](/guide/#index-html-and-project-root) مراجعه کنید.
+برای اطلاعات بیشتر، به [ریشه پروژه](/guide/#index-html-و-ریشه-root-پروژه) مراجعه کنید.
 
 ## base
 
@@ -69,7 +69,7 @@ declare const __APP_VERSION__: string
 
 - **تایپ:** `[](<[]Plugin | Plugin[] | Promise<Plugin | Plugin)`
 
-آرایه‌ای از پلاگین‌ها برای استفاده. پلاگین‌های falsy نادیده گرفته می‌شوند و آرایه‌های پلاگین‌ها صاف می‌شوند. اگر یک Promise برگردانده شود، قبل از اجرا رفع می‌شود. برای اطلاعات بیشتر در مورد پلاگین‌های Vite، به [API پلاگین](/guide/api-plugin) مراجعه کنید.
+آرایه‌ای از پلاگین‌ها برای استفاده. پلاگین‌های falsy نادیده گرفته می‌شوند و آرایه‌های پلاگین‌ها به یک آرایه‌ی ساده تبدیل می‌شوند. اگر یک Promise برگردانده شود، قبل از اجرا رفع می‌شود. برای اطلاعات بیشتر در مورد پلاگین‌های Vite، به [API پلاگین](/guide/api-plugin) مراجعه کنید.
 
 ## publicDir
 
@@ -80,7 +80,7 @@ declare const __APP_VERSION__: string
 
 تنظیم `publicDir` به `false` این قابلیت را غیرفعال می‌کند.
 
-برای اطلاعات بیشتر، به [پوشه `public`](/guide/assets#the-public-directory) مراجعه کنید.
+برای اطلاعات بیشتر، به [پوشه `public`](/guide/assets.html#دایرکتوری-public) مراجعه کنید.
 
 ## cacheDir
 
@@ -91,16 +91,14 @@ declare const __APP_VERSION__: string
 
 ## resolve.alias
 
-- **تایپ:**
-<div dir="ltr">
-<code>'Record&lt;string, string&gt; | Array&lt;{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }&gt;'</code>
-</div>
+- **تایپ:** <br>
+  `Record<string, string> | Array<{ find: string | RegExp, replacement: string, customResolver?: ResolverFunction | ResolverObject }>`
 
 به `rollup/plugin-alias@` به عنوان [گزینه entries](https://github.com/rollup/plugins/tree/master/packages/alias#entries) منتقل می‌شود. می‌تواند یک آبجکت یا آرایه‌ای از جفت‌های `{ find, replacement, customResolver }` باشد.
 
 هنگام استفاده از alias برای مسیرهای سیستم فایل، همیشه از مسیرهای مطلق استفاده کنید. مقادیر alias نسبی به همان شکل استفاده می‌شوند و به مسیرهای سیستم فایل تبدیل نمی‌شوند.
 
-برای رزولوشن سفارشی پیشرفته‌تر، می‌توانید از [پلاگین‌ها](/guide/api-plugin) استفاده کنید.
+برای انجام پردازش‌های پیشرفته‌تر هنگام حل مسیرها (resolution)، می‌توان از [پلاگین‌ها](/guide/api-plugin) استفاده کرد.
 
 ::: warning استفاده با SSR
 اگر alias‌هایی را برای [وابستگی‌های خارجی SSR](/guide/ssr.md#ssr-externals) تنظیم کرده‌اید، ممکن است بخواهید پکیج‌های واقعی `node_modules` را alias کنید. هر دو [Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) و [pnpm](https://pnpm.io/aliases/) از alias کردن از طریق پیشوند `:npm` پشتیبانی می‌کنند.
@@ -110,7 +108,7 @@ declare const __APP_VERSION__: string
 
 - **تایپ:** `[]string`
 
-اگر نسخه‌های تکراری از یک وابستگی در برنامه‌تان دارید (احتمالاً به دلیل بالا کشیدن یا پکیج‌های لینک‌شده در مونوریپوها)، از این گزینه استفاده کنید تا Vite را مجبور کنید همیشه وابستگی‌های فهرست‌شده را به یک نسخه یکسان (از ریشه پروژه) رزولوش کند.
+اگر در پروژه‌ی خود چندین نسخه‌ی تکراری از یک کتابخانه یا وابستگی دارید (مثلاً به دلیل مدیریت وابستگی‌ها با hoisting یا بسته‌های لینک‌شده در یک monorepo)، می‌توانید از این گزینه استفاده کنید تا Vite همیشه فقط یک نسخه‌ی مشخص از آن کتابخانه را استفاده کند. این کار از بروز مشکلات ناسازگاری و افزایش حجم نهایی جلوگیری می‌کند، زیرا همه‌ی بخش‌های پروژه از یک نسخه‌ی مشترک استفاده خواهند کرد.
 
 ::: warning SSR + ESM
 برای ساخت‌های SSR، حذف تکرار در خروجی‌های ساخت ESM که از `build.rollupOptions.output` تنظیم شده‌اند کار نمی‌کند. راه‌حل موقت استفاده از خروجی‌های ساخت CJS است تا زمانی که ESM پشتیبانی بهتری برای بارگذاری ماژول از پلاگین‌ها داشته باشد.
@@ -119,11 +117,11 @@ declare const __APP_VERSION__: string
 ## resolve.conditions
 
 - **تایپ:** `[]string`
-- **پیش‌فرض:** (`defaultClientConditions`) `['module', 'browser', 'development|production']`
+- **پیش‌فرض:**`['module', 'browser', 'development|production']` (`defaultClientConditions`)
 
-شرایط اضافی مجاز هنگام رزولوشن [صادرات شرطی](https://nodejs.org/api/packages.html#packages_conditional_exports) از یک پکیج.
+شرایط اضافی که هنگام تعیین مسیر خروجی‌های شرطی ([Conditional Exports](https://nodejs.org/api/packages.html#packages_conditional_exports)) از یک پکیج مجاز هستند.
 
-یک پکیج با صادرات شرطی ممکن است فیلد `exports` زیر را در `package.json` خود داشته باشد:
+یک پکیج با اکسپورت‌های شرطی ممکن است فیلد `exports` زیر را در `package.json` خود داشته باشد:
 
 ```json
 {
@@ -142,8 +140,8 @@ declare const __APP_VERSION__: string
 
 توجه کنید که شرایط `import`، `require` و `default` همیشه در صورت برآورده شدن الزامات اعمال می‌شوند.
 
-::: warning رزولوشن صادرات زیرمسیر
-کلیدهای صادراتی که با "/" پایان می‌یابند توسط Node منسوخ شده‌اند و ممکن است به خوبی کار نکنند. لطفاً با نویسنده پکیج تماس بگیرید تا از [الگوهای زیرمسیر `*`](https://nodejs.org/api/packages.html#package-entry-points) استفاده کند.
+:::warning حل و فصل مسیرهای خروجی زیرمجموعه
+کلیدهای خروجی که با "/" پایان می‌یابند، توسط Node منسوخ شده‌اند و ممکن است به‌درستی کار نکنند. لطفاً از نویسنده پکیج بخواهید که به‌جای آن از الگوهای زیرمسیر `*` استفاده کند. [اطلاعات بیشتر](https://nodejs.org/api/packages.html#package-entry-points).
 :::
 
 ## resolve.mainFields
@@ -151,7 +149,7 @@ declare const __APP_VERSION__: string
 - **تایپ:** `[]string`
 - **پیش‌فرض:** (`defaultClientMainFields`) `['browser', 'module', 'jsnext:main', 'jsnext']`
 
-فهرست فیلدهایی در `package.json` که هنگام رزولوشن نقطه ورود یک پکیج امتحان می‌شوند. توجه داشته باشید که این اولویت کمتری نسبت به صادرات شرطی رزولوش‌شده از فیلد `exports` دارد: اگر نقطه ورودی با موفقیت از `exports` رزولوش شود، فیلد main نادیده گرفته می‌شود.
+فهرست فیلدهایی در `package.json` که هنگام رزولوشن نقطه ورود یک پکیج امتحان می‌شوند. توجه داشته باشید که این اولویت کمتری نسبت به اکسپورت شرطی رزولوش‌شده از فیلد `exports` دارد: اگر نقطه ورودی با موفقیت از `exports` رزولوش شود، فیلد main نادیده گرفته می‌شود.
 
 ## resolve.extensions
 
@@ -167,7 +165,8 @@ declare const __APP_VERSION__: string
 
 فعال کردن این تنظیم باعث می‌شود Vite هویت فایل را بر اساس مسیر اصلی فایل (یعنی مسیر بدون دنبال کردن symlink‌ها) به جای مسیر واقعی فایل (یعنی مسیر پس از دنبال کردن symlink‌ها) تعیین کند.
 
-- **مرتبط:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks)، [webpack#resolve.symlinks](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
+- **مرتبط:** [esbuild#preserve-symlinks](https://esbuild.github.io/api/#preserve-symlinks)،
+[webpack#resolve.symlinks](https://webpack.js.org/configuration/resolve/#resolvesymlinks)
 
 ## html.cspNonce
 
@@ -221,7 +220,7 @@ declare const __APP_VERSION__: string
 
 برای پیکربندی درون‌خطی PostCSS، فرمت مشابه `postcss.config.js` انتظار می‌رود. اما برای ویژگی `plugins`، فقط [فرمت آرایه](https://github.com/postcss/postcss-load-config/blob/main/README.md#array) قابل استفاده است.
 
-جستجو با استفاده از [postcss-load-config](https://github.com/postcss/postcss-load-config) انجام می‌شود و فقط نام‌های فایل پیکربندی پشتیبانی‌شده بارگذاری می‌شوند. فایل‌های پیکربندی خارج از ریشه workspace (یا [ریشه پروژه](/guide/#index-html-and-project-root) اگر workspace یافت نشود) به صورت پیش‌فرض جستجو نمی‌شوند. در صورت نیاز، می‌توانید یک مسیر سفارشی خارج از ریشه را برای بارگذاری فایل پیکربندی خاص مشخص کنید.
+جستجو با استفاده از [postcss-load-config](https://github.com/postcss/postcss-load-config) انجام می‌شود و فقط نام‌های فایل پیکربندی پشتیبانی‌شده بارگذاری می‌شوند. فایل‌های پیکربندی خارج از ریشه workspace (یا [ریشه پروژه](/guide/#index-html-و-ریشه-root-پروژه) اگر workspace یافت نشود) به صورت پیش‌فرض جستجو نمی‌شوند. در صورت نیاز، می‌توانید یک مسیر سفارشی خارج از ریشه را برای بارگذاری فایل پیکربندی خاص مشخص کنید.
 
 توجه داشته باشید اگر پیکربندی درون‌خطی ارائه شود، Vite برای سایر منابع پیکربندی PostCSS جستجو نمی‌کند.
 
@@ -232,7 +231,7 @@ declare const __APP_VERSION__: string
 گزینه‌هایی را برای انتقال به پیش‌پردازنده‌های CSS مشخص می‌کند. پسوندهای فایل به عنوان کلید برای گزینه‌ها استفاده می‌شوند. گزینه‌های پشتیبانی‌شده برای هر پیش‌پردازنده را می‌توان در مستندات مربوطه آنها یافت:
 
 - `sass`/`scss`:
-  - انتخاب API sass برای استفاده با `api: "modern-compiler" | "modern" | "legacy"` (پیش‌فرض `"modern-compiler"` اگر `sass-embedded` نصب شده باشد، در غیر این صورت `"modern"`) است. برای بهترین عملکرد، توصیه می‌شود از `api: "modern-compiler"` با پکیج `sass-embedded` استفاده کنید. API `"legacy"` منسوخ شده و در Vite 7 حذف خواهد شد.
+  - انتخاب API sass برای استفاده با `api: "modern-compiler" | "modern" | "legacy"‎` (پیش‌فرض `"modern-compiler"` اگر `sass-embedded` نصب شده باشد، در غیر این صورت `"modern"`) است. برای بهترین عملکرد، توصیه می‌شود از `api: "modern-compiler"‎` با پکیج `sass-embedded` استفاده کنید. API `"legacy"‎` منسوخ شده و در Vite 7 حذف خواهد شد.
   - [گزینه‌ها (مدرن)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
   - [گزینه‌ها (قدیمی)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions).
 - `less`: [گزینه‌ها](https://lesscss.org/usage/#less-options).
@@ -265,10 +264,7 @@ export default defineConfig({
 
 ### css.preprocessorOptions[extension].additionalData
 
-- **تایپ:**
-<div dir="ltr">
-<code>string | ((source: string, filename: string) => (string | { content: string; map?: SourceMap }))</code>
-</div>
+- **تایپ:**<br> `string | ((source: string, filename: string) => (string | { content: string; map?: SourceMap }))`
 
 این گزینه می‌تواند برای تزریق کد اضافی به هر محتوای استایل استفاده شود. توجه داشته باشید که اگر استایل‌های واقعی و نه فقط متغیرها را شامل شوید، این استایل‌ها در باندل نهایی تکرار خواهند شد.
 
@@ -292,7 +288,7 @@ export default defineConfig({
 - **تایپ:** `number | true`
 - **پیش‌فرض:** `0` (هیچ کارگری ایجاد نمی‌کند و درmain thread اصلی اجرا می‌شود)
 
-اگر این گزینه تنظیم شود، پیش‌پردازنده‌های CSS در صورت امکان در کارگرها اجرا می‌شوند. `true` به معنای تعداد CPUها منهای 1 است.
+اگر این گزینه تنظیم شود، پیش‌پردازنده‌های CSS در صورت امکان در worker ها اجرا می‌شوند. `true` به معنای تعداد CPUها منهای 1 است.
 
 ## css.devSourcemap
 
@@ -398,7 +394,7 @@ export default defineConfig({
 - **تایپ:** `[]string | RegExp | (string | RegExp)`
 - **مرتبط:** [مدیریت دارایی‌های استاتیک](/guide/assets)
 
-الگوهای اضافی [picomatch](https://github.com/micromatch/picomatch#globbing-features) را برای扱ش به عنوان دارایی‌های استاتیک مشخص می‌کند تا:
+الگوهای اضافی [picomatch](https://github.com/micromatch/picomatch#globbing-features) را به عنوان دارایی‌های استاتیک مشخص می‌کند تا:
 
 - هنگام ارجاع از HTML یا درخواست مستقیم از طریق `fetch` یا XHR، از خط لوله تبدیل پلاگین خارج شوند.
 
@@ -468,12 +464,12 @@ export default defineConfig({
 
 پوشه‌ای که فایل‌های `env.` از آن بارگذاری می‌شوند. می‌تواند یک مسیر مطلق یا یک مسیر نسبت به ریشه پروژه باشد.
 
-برای اطلاعات بیشتر در مورد فایل‌های محیطی، [اینجا](/guide/env-and-mode#env-files) را ببینید.
+برای اطلاعات بیشتر در مورد فایل‌های محیطی، [اینجا](/guide/env-and-mode.html#فایل‌های-%E2%80%8E-env) را ببینید.
 
 ## envPrefix
 
 - **تایپ:** `[]string | string`
-- **پیش‌فرض:** `VITE_`
+- **پیش‌فرض:** `VITE_‎`
 
 متغیرهای محیطی که با `envPrefix` شروع می‌شوند از طریق `import.meta.env` به کد منبع سمت کلاینت شما در دسترس خواهند بود.
 

@@ -8,9 +8,9 @@
 - **پیش‌فرض:** `'modules'`
 - **مرتبط:** [سازگاری با مرورگر](/guide/build#browser-compatibility)
 
-هدف سازگاری مرورگر برای باندل نهایی. مقدار پیش‌فرض یه مقدار خاص Vite هست، `'modules'`، که مرورگرهایی رو هدف می‌گیره که از [ماژول‌های ES بومی](https://caniuse.com/es6-module)، [ایمپورت دینامیک ESM بومی](https://caniuse.com/es6-module-dynamic-import) و [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) پشتیبانی می‌کنن. Vite مقدار `'modules'` رو به `['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14']` تبدیل می‌کنه.
+هدف سازگاری مرورگر برای باندل نهایی. مقدار پیش‌فرض یه مقدار خاص Vite هست، `'modules'`، که مرورگرهایی رو هدف می‌گیره که از [ماژول‌های ES بومی](https://caniuse.com/es6-module)، [ایمپورت داینامیک ESM بومی](https://caniuse.com/es6-module-dynamic-import) و [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) پشتیبانی می‌کنن. Vite مقدار `'modules'` رو به `‎[‎'es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'‎]` تبدیل می‌کنه.
 
-یه مقدار خاص دیگه `'esnext'` هست که فرض می‌کنه پشتیبانی از ایمپورت دینامیک بومی وجود داره و فقط حداقل ترنسپایل رو انجام می‌ده.
+یه مقدار خاص دیگه `'esnext'` هست که فرض می‌کنه پشتیبانی از ایمپورت داینامیک بومی وجود داره و فقط حداقل ترنسپایل رو انجام می‌ده.
 
 ترنسفورم با esbuild انجام می‌شه و مقدار باید یه [گزینه هدف esbuild](https://esbuild.github.io/api/#target) معتبر باشه. هدف‌های سفارشی می‌تونن یه نسخه ES (مثل `es2015`)، یه مرورگر با نسخه (مثل `chrome58`) یا آرایه‌ای از چند رشته هدف باشن.
 
@@ -18,14 +18,7 @@
 
 ## build.modulePreload
 
-- **تایپ:**
-
-<div dir="ltr">
-<code>
-boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }
-</code>
-</div>
-
+- **تایپ:** <br>`boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDependenciesFn }`
 - **پیش‌فرض:** `{ polyfill: true }`
 
 به‌صورت پیش‌فرض، یه [پلی‌فیل module preload](https://guybedford.com/es-module-preloading-integrity#modulepreload-polyfill) به‌صورت خودکار تزریق می‌شه. این پلی‌فیل توی ماژول پراکسی هر ورودی `index.html` تزریق می‌شه. اگه بیلد برای استفاده از یه ورودی سفارشی غیر HTML با `build.rollupOptions.input` تنظیم شده باشه، باید پلی‌فیل رو دستی تو ورودی سفارشی ایمپورت کنین:
@@ -34,11 +27,11 @@ boolean | { polyfill?: boolean, resolveDependencies?: ResolveModulePreloadDepend
 import 'vite/modulepreload-polyfill'
 ```
 
-توجه: این پلی‌فیل تو [حالت کتابخانه](/guide/build#library-mode) اعمال نمی‌شه. اگه نیاز دارین مرورگرهایی رو پشتیبانی کنین که ایمپورت دینامیک بومی ندارن، بهتره ازش تو کتابخونتون استفاده نکنین.
+توجه: این پلی‌فیل تو [حالت کتابخانه](/guide/build#library-mode) اعمال نمی‌شه. اگه نیاز دارین مرورگرهایی رو پشتیبانی کنین که ایمپورت داینامیک بومی ندارن، بهتره ازش تو کتابخونتون استفاده نکنین.
 
 با `{ polyfill: false }` می‌تونین پلی‌فیل رو غیرفعال کنین.
 
-لیست چانک‌هایی که باید برای هر ایمپورت دینامیک پیش‌بارگذاری بشن توسط Vite محاسبه می‌شه. به‌صورت پیش‌فرض، یه مسیر مطلق شامل `base` برای بارگذاری این وابستگی‌ها استفاده می‌شه. اگه `base` نسبی باشه (`''` یا `'./'`)، از `import.meta.url` تو زمان اجرا استفاده می‌شه تا از مسیرهای مطلقی که به `base` نهایی وابسته‌ان جلوگیری بشه.
+لیست چانک‌هایی که باید برای هر ایمپورت داینامیک پیش‌بارگذاری بشن توسط Vite محاسبه می‌شه. به‌صورت پیش‌فرض، یه مسیر مطلق شامل `base` برای بارگذاری این وابستگی‌ها استفاده می‌شه. اگه `base` نسبی باشه (`''` یا `'./‎'`)، از `import.meta.url` تو زمان اجرا استفاده می‌شه تا از مسیرهای مطلقی که به `base` نهایی وابسته‌ان جلوگیری بشه.
 
 پشتیبانی آزمایشی برای کنترل دقیق‌تر لیست وابستگی‌ها و مسیرهاشون با تابع `resolveDependencies` وجود داره. [نظرتون رو بدین](https://github.com/vitejs/vite/discussions/13841). این تابع باید از نوع `ResolveModulePreloadDependenciesFn` باشه:
 
@@ -53,7 +46,7 @@ type ResolveModulePreloadDependenciesFn = (
 ) => string[]
 ```
 
-تابع `resolveDependencies` برای هر ایمپورت دینامیک با لیست چانک‌هایی که بهش وابسته‌ان فراخوانی می‌شه و همین‌طور برای هر چانک ایمپورت‌شده تو فایل‌های HTML ورودی. می‌تونین یه آرایه وابستگی جدید برگردونین که فیلتر شده یا وابستگی‌های بیشتری تزریق شده و مسیرهاشون تغییر کرده باشه. مسیرهای `deps` نسبت به `build.outDir` هستن. مقدار برگشتی باید یه مسیر نسبی به `build.outDir` باشه.
+تابع `resolveDependencies` برای هر ایمپورت داینامیک با لیست چانک‌هایی که بهش وابسته‌ان فراخوانی می‌شه و همین‌طور برای هر چانک ایمپورت‌شده تو فایل‌های HTML ورودی. می‌تونین یه آرایه وابستگی جدید برگردونین که فیلتر شده یا وابستگی‌های بیشتری تزریق شده و مسیرهاشون تغییر کرده باشه. مسیرهای `deps` نسبت به `build.outDir` هستن. مقدار برگشتی باید یه مسیر نسبی به `build.outDir` باشه.
 
 ```js twoslash
 /** @type {import('vite').UserConfig} */
@@ -86,21 +79,21 @@ modulePreload: {
 - **تایپ:** `string`
 - **پیش‌فرض:** `dist`
 
-دایرکتوری خروجی رو مشخص می‌کنه (نسبت به [ریشه پروژه](/guide/#index-html-and-project-root)).
+دایرکتوری خروجی رو مشخص می‌کنه (نسبت به [ریشه پروژه](/guide/#index-html-و-ریشه-root-پروژه)).
 
 ## build.assetsDir
 
 - **تایپ:** `string`
 - **پیش‌فرض:** `assets`
 
-دایرکتوری‌ای که دارایی‌های تولیدشده توش قرار می‌گیرن رو مشخص می‌کنه (نسبت به `build.outDir`). تو [حالت کتابخانه](/guide/build#library-mode) استفاده نمی‌شه.
+دایرکتوری‌ای که asset های تولیدشده توش قرار می‌گیرن رو مشخص می‌کنه (نسبت به `build.outDir`). تو [حالت کتابخانه](/guide/build#library-mode) استفاده نمی‌شه.
 
 ## build.assetsInlineLimit
 
 - **تایپ:** `number | ((filePath: string, content: Buffer) => boolean | undefined)`
 - **پیش‌فرض:** `4096` (4 کیلوبایت)
 
-دارایی‌های ایمپورت‌شده یا ارجاع‌شده که از این حد کوچیک‌تر باشن، به‌صورت URLهای base64 اینلاین می‌شن تا درخواست‌های HTTP اضافی کم بشه. با `0` می‌تونین اینلاین کردن رو کامل غیرفعال کنین.
+asset های ایمپورت‌شده یا ارجاع‌شده که از این حد کوچیک‌تر باشن، به‌صورت URLهای base64 اینلاین می‌شن تا درخواست‌های HTTP اضافی کم بشه. با `0` می‌تونین اینلاین کردن رو کامل غیرفعال کنین.
 
 اگه یه callback بفرستین، می‌تونین یه مقدار بولین برگردونین تا اینلاین بشه یا نه. اگه چیزی برنگردونین، منطق پیش‌فرض اعمال می‌شه.
 
@@ -130,18 +123,20 @@ modulePreload: {
 
 این گزینه به کاربرها اجازه می‌ده هدف مرورگر متفاوتی برای مینیفای CSS نسبت به ترنسپایل JS تنظیم کنن.
 
-فقط وقتی باید استفاده بشه که یه مرورگر غیرمعمول رو هدف گرفتین. یه مثالش Android WeChat WebView هست که بیشتر ویژگی‌های مدرن JS رو پشتیبانی می‌کنه ولی از [نوتاسیون رنگ هگزادسیمال #RGBA در CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb_colors) نه. تو این مورد، باید `build.cssTarget` رو به `chrome61` تنظیم کنین تا Vite رنگ‌های `rgba()` رو به نوتاسیون هگزادسیمال #RGBA تبدیل نکنه.
+فقط وقتی باید استفاده بشه که یه مرورگر غیرمعمول رو هدف گرفتین. یه مثالش Android WeChat WebView هست که بیشتر ویژگی‌های مدرن JS رو پشتیبانی می‌کنه
+ولی از [نوتاسیون رنگ هگزادسیمال #RGBA در CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb_colors) نه.
+تو این مورد، باید `build.cssTarget` رو به `chrome61` تنظیم کنین تا Vite رنگ‌های `rgba()‎` رو به نوتاسیون هگزادسیمال #RGBA تبدیل نکنه.
 
 ## build.cssMinify
 
 - **تایپ:** `boolean | 'esbuild' | 'lightningcss'`
-- **پیش‌فرض:** برای کلاینت همون [`build.minify`](#build-minify)، برای SSR `'esbuild'`
+- **پیش‌فرض:** برای کلاینت همون [`build.minify`](#build-minify)، برای SSR `'esbuild'‎`
 
 این گزینه به کاربرها اجازه می‌ده مینیفای CSS رو جدا از `build.minify` تنظیم کنن، تا بتونین مینیفای JS و CSS رو جداگانه پیکربندی کنین. Vite به‌صورت پیش‌فرض از `esbuild` برای مینیفای CSS استفاده می‌کنه. با تنظیمش به `'lightningcss'` می‌تونین از [Lightning CSS](https://lightningcss.dev/minification.html) استفاده کنین. اگه انتخابش کنین، با [`css.lightningcss`](./shared-options.md#css-lightningcss) قابل پیکربندی هست.
 
 ## build.sourcemap
 
-- **تایپ:** `boolean | 'inline' | 'hidden'`
+- **تایپ:** `boolean | 'inline' | 'hidden'‎`
 - **پیش‌فرض:** `false`
 
 نقشه‌های منبع (sourcemap) رو برای تولید بسازین. اگه `true` باشه، یه فایل sourcemap جدا ساخته می‌شه. اگه `'inline'` باشه، sourcemap به‌عنوان یه data URI به فایل خروجی اضافه می‌شه. `'hidden'` مثل `true` کار می‌کنه ولی کامنت‌های sourcemap تو فایل‌های باندل‌شده حذف می‌شن.
@@ -156,25 +151,18 @@ modulePreload: {
 
 - **تایپ:** [`RollupCommonJSOptions`](https://github.com/rollup/plugins/tree/master/packages/commonjs#options)
 
-گزینه‌هایی که به [@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs) ارسال می‌شن.
+گزینه‌هایی که به [‎@rollup/plugin-commonjs](https://github.com/rollup/plugins/tree/master/packages/commonjs) ارسال می‌شن.
 
 ## build.dynamicImportVarsOptions
 
 - **تایپ:** [`RollupDynamicImportVarsOptions`](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars#options)
-- **مرتبط:** [ایمپورت دینامیک](/guide/features#dynamic-import)
+- **مرتبط:** [ایمپورت داینامیک](/guide/features#dynamic-import)
 
 گزینه‌هایی که به [@rollup/plugin-dynamic-import-vars](https://github.com/rollup/plugins/tree/master/packages/dynamic-import-vars) ارسال می‌شن.
 
 ## build.lib
 
-- **تایپ:**
-
-<div dir="ltr">
-<code>
-{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }
-</code>
-</div>
-
+- **تایپ:** `‎{ entry: string | string[] | { [entryAlias: string]: string }, name?: string, formats?: ('es' | 'cjs' | 'umd' | 'iife')[], fileName?: string | ((format: ModuleFormat, entryName: string) => string), cssFileName?: string }`
 - **مرتبط:** [حالت کتابخانه](/guide/build#library-mode)
 
 به‌عنوان یه کتابخانه بیلد کنین. `entry` لازمه چون کتابخانه نمی‌تونه از HTML به‌عنوان ورودی استفاده کنه. `name` متغیر جهانی‌ای هست که افشا می‌شه و وقتی `formats` شامل `'umd'` یا `'iife'` باشه لازمه. فرمت‌های پیش‌فرض `['es', 'umd']` هستن، یا اگه چند ورودی استفاده بشه، `['es', 'cjs']`.
@@ -205,7 +193,7 @@ export default defineConfig({
 
 آیا یه فایل manifest ساخته بشه که نگاشت اسم فایل‌های دارایی بدون هش به نسخه‌های هش‌شده‌شون رو داشته باشه، که بعدش یه فریم‌ورک سرور می‌تونه ازش برای رندر کردن لینک‌های درست دارایی‌ها استفاده کنه.
 
-اگه مقدارش یه رشته باشه، به‌عنوان مسیر فایل manifest نسبت به `build.outDir` استفاده می‌شه. اگه `true` باشه، مسیرش `.vite/manifest.json` می‌شه.
+اگه مقدارش یه رشته باشه، به‌عنوان مسیر فایل manifest نسبت به `build.outDir` استفاده می‌شه. اگه `true` باشه، مسیرش `‎.vite/manifest.json` می‌شه.
 
 ## build.ssrManifest
 
@@ -215,7 +203,7 @@ export default defineConfig({
 
 آیا یه فایل manifest برای SSR ساخته بشه که برای مشخص کردن لینک‌های استایل و دایرکتیوهای پیش‌بارگذاری دارایی تو تولید استفاده می‌شه.
 
-اگه مقدارش یه رشته باشه، به‌عنوان مسیر فایل manifest نسبت به `build.outDir` استفاده می‌شه. اگه `true` باشه، مسیرش `.vite/ssr-manifest.json` می‌شه.
+اگه مقدارش یه رشته باشه، به‌عنوان مسیر فایل manifest نسبت به `build.outDir` استفاده می‌شه. اگه `true` باشه، مسیرش `‎.vite/ssr-manifest.json` می‌شه.
 
 ## build.ssr
 
@@ -230,18 +218,18 @@ export default defineConfig({
 - **تایپ:** `boolean`
 - **پیش‌فرض:** `false`
 
-تو بیلدهای غیر کلاینت، دارایی‌های استاتیک منتشر نمی‌شن چون فرض می‌شه که به‌عنوان بخشی از بیلد کلاینت منتشر می‌شن. این گزینه به فریم‌ورک‌ها اجازه می‌ده تو بیلد محیط‌های دیگه انتشارشون رو اجباری کنن. وظیفه فریم‌ورکه که دارایی‌ها رو با یه مرحله بعد از بیلد ادغام کنه.
+تو بیلدهای غیر کلاینت، asset های استاتیک منتشر نمی‌شن چون فرض می‌شه که به‌عنوان بخشی از بیلد کلاینت منتشر می‌شن. این گزینه به فریم‌ورک‌ها اجازه می‌ده تو بیلد محیط‌های دیگه انتشارشون رو اجباری کنن. وظیفه فریم‌ورکه که دارایی‌ها رو با یه مرحله بعد از بیلد ادغام کنه.
 
 ## build.ssrEmitAssets
 
 - **تایپ:** `boolean`
 - **پیش‌فرض:** `false`
 
-تو بیلد SSR، دارایی‌های استاتیک منتشر نمی‌شن چون فرض می‌شه که به‌عنوان بخشی از بیلد کلاینت منتشر می‌شن. این گزینه به فریم‌ورک‌ها اجازه می‌ده تو هر دو بیلد کلاینت و SSR انتشارشون رو اجباری کنن. وظیفه فریم‌ورکه که دارایی‌ها رو با یه مرحله بعد از بیلد ادغام کنه. این گزینه وقتی API محیط پایدار بشه با `build.emitAssets` جایگزین می‌شه.
+تو بیلد SSR، asset های استاتیک منتشر نمی‌شن چون فرض می‌شه که به‌عنوان بخشی از بیلد کلاینت منتشر می‌شن. این گزینه به فریم‌ورک‌ها اجازه می‌ده تو هر دو بیلد کلاینت و SSR انتشارشون رو اجباری کنن. وظیفه فریم‌ورکه که دارایی‌ها رو با یه مرحله بعد از بیلد ادغام کنه. این گزینه وقتی API محیط پایدار بشه با `build.emitAssets` جایگزین می‌شه.
 
 ## build.minify
 
-- **تایپ:** `boolean | 'terser' | 'esbuild'`
+- **تایپ:** `boolean | 'terser' | 'esbuild'‎`
 - **پیش‌فرض:** `'esbuild'` برای بیلد کلاینت، `false` برای بیلد SSR
 
 با `false` مینیفای کردن رو غیرفعال کنین، یا مینیفایری که می‌خواین استفاده بشه رو مشخص کنین. پیش‌فرض [esbuild](https://github.com/evanw/esbuild) هست که 20 تا 40 برابر سریع‌تر از terser هست و فشرده‌سازیش فقط 1 تا 2 درصد ضعیف‌تره. [مقایسه‌ها](https://github.com/privatenumber/minification-benchmarks)
@@ -267,14 +255,14 @@ npm add -D terser
 - **تایپ:** `boolean`
 - **پیش‌فرض:** `true`
 
-با `false` نوشتن باندل روی دیسک رو غیرفعال کنین. بیشتر تو فراخوانی‌های برنامه‌ریزی‌شده [`build()`](/guide/api-javascript#build) استفاده می‌شه که نیاز به پردازش بیشتر باندل قبل از نوشتن روی دیسک دارن.
+با `false` نوشتن باندل روی دیسک رو غیرفعال کنین. بیشتر تو فراخوانی‌های برنامه‌ریزی‌شده [`build()‎`](/guide/api-javascript#build) استفاده می‌شه که نیاز به پردازش بیشتر باندل قبل از نوشتن روی دیسک دارن.
 
 ## build.emptyOutDir
 
 - **تایپ:** `boolean`
 - **پیش‌فرض:** `true` اگه `outDir` داخل `root` باشه
 
-به‌صورت پیش‌فرض، اگه `outDir` داخل ریشه پروژه باشه، Vite موقع بیلد اون رو خالی می‌کنه. اگه `outDir` بیرون ریشه باشه، یه هشدار می‌ده تا از حذف تصادفی فایل‌های مهم جلوگیری کنه. می‌تونین این گزینه رو صریح تنظیم کنین تا هشدار رو غیرفعال کنین. از خط فرمان هم با `--emptyOutDir` در دسترسه.
+به‌صورت پیش‌فرض، اگه `outDir` داخل ریشه پروژه باشه، Vite موقع بیلد اون رو خالی می‌کنه. اگه `outDir` بیرون ریشه باشه، یه هشدار می‌ده تا از حذف تصادفی فایل‌های مهم جلوگیری کنه. می‌تونین این گزینه رو صریح تنظیم کنین تا هشدار رو غیرفعال کنین. از خط فرمان هم با `‎--emptyOutDir` در دسترسه.
 
 ## build.copyPublicDir
 
@@ -306,5 +294,7 @@ npm add -D terser
 
 ::: warning استفاده از Vite تو WSL2
 
-بعضی وقت‌ها پایش سیستم فایل تو WSL2 کار نمی‌کنه. برای جزئیات بیشتر به [`server.watch`](./server-options.md#server-watch) نگاه کنین.
+بعضی وقت‌ها پایش سیستم فایل تو WSL2 کار نمی‌کنه.
+برای جزئیات بیشتر به [`server.watch`](./server-options.md#server-watch) نگاه کنین.
+
 :::
