@@ -348,10 +348,6 @@ npm add -D lightningcss
 
 به طور پیش‌فرض، Vite از esbuild برای کوچک‌سازی CSS استفاده می‌کند. Lightning CSS نیز می‌تواند به عنوان کوچک‌ساز CSS با گزینه [`build.cssMinify: 'lightningcss'‎`](../config/build-options.md#build-cssminify) استفاده شود.
 
-::: tip نکته
-[پیش‌پردازنده‌های CSS](#پیشپردازندههای-css) هنگام استفاده از Lightning CSS پشتیبانی نمی‌شوند.
-:::
-
 ## assets های استاتیک
 
 ایمپورت یک assets استاتیک، URL عمومی ساخته شده آن را برمی‌گرداند:

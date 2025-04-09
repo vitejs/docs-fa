@@ -4,7 +4,7 @@
 نظرات خود را در [بازخورد درباره Environment API](https://github.com/vitejs/vite/discussions/16358) با ما به اشتراک بگذارید.
 :::
 
-برای اطلاعات بیشتر به بخش [Shared plugins during build](/guide/api-environment.md#shared-plugins-during-build) مراجعه کنید.
+برای اطلاعات بیشتر به بخش [Shared plugins during build](/guide/api-environment-plugins.md#shared-plugins-during-build) مراجعه کنید.
 
 **دامنه تأثیر:** نویسندگان افزونه‌های Vite
 

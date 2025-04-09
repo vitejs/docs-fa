@@ -38,8 +38,43 @@ if (isRunnableDevEnvironment(server.environments.ssr)) {
 ```
 
 :::warning هشدار
-`runner` زمانی که برای اولین بار به آن دسترسی پیدا کنید، بلافاصله مقداردهی می‌شود. توجه داشته باشید که وقتی `runner` با فراخوانی `process.setSourceMapsEnabled` ساخته می‌شود یا در صورت عدم دسترسی، با جایگزین کردن `Error.prepareStackTrace`، Vite از پشتیبانی سورس مپ استفاده می‌کند.
+`runner` زمانی که برای اولین بار به آن دسترسی پیدا کنید، بلافاصله مقداردهی می‌شود. توجه داشته باشید که وقتی `runner` با فراخوانی `process.setSourceMapsEnabled` ساخته می‌شود یا در صورت عدم دسترسی، با جایگزین کردن `Error.prepareStackTrace` ، Vite از پشتیبانی سورس مپ استفاده می‌کند.
 :::
+
+فریم‌ورک‌هایی که از طریق [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Window/fetch) با محیط اجرای خود ارتباط برقرار می‌کنند، می‌توانند از `FetchableDevEnvironment` استفاده کنند. این کلاس روشی استاندارد برای مدیریت درخواست‌ها از طریق متد `handleRequest` فراهم می‌کند.
+
+```ts
+import {
+  createServer,
+  createFetchableDevEnvironment,
+  isFetchableDevEnvironment,
+} from 'vite'
+
+const server = await createServer({
+  server: { middlewareMode: true },
+  appType: 'custom',
+  environments: {
+    custom: {
+      dev: {
+        createEnvironment(name, config) {
+          return createFetchableDevEnvironment(name, config, {
+            handleRequest(request: Request): Promise<Response> | Response {
+              // handle Request and return a Response
+            },
+          })
+        },
+      },
+    },
+  },
+})
+
+// Any consumer of the environment API can now call `dispatchFetch`
+if (isFetchableDevEnvironment(server.environments.custom)) {
+  const response: Response = await server.environments.custom.dispatchFetch(
+    new Request('/request-to-handle'),
+  )
+}
+```
 
 ## محیط پیش‌فرض `RunnableDevEnvironment`
 
