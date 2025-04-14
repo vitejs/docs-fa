@@ -1,23 +1,23 @@
-# Worker Options
+# آپشن‌های Worker
 
-Unless noted, the options in this section are applied to all dev, build, and preview.
+آپشن‌های این بخش برای همه‌ی حالت‌های dev، build و preview اعمال می‌شوند مگر آنکه بطور مشخص ذکر شده باشد.
 
 ## worker.format
 
-- **Type:** `'es' | 'iife'`
-- **Default:** `'iife'`
+- **تایپ:** `'es' | 'iife'`
+- **مقدار پیش فرض:** `'iife'`
 
-Output format for worker bundle.
+فرمت خروجی برای باندل worker.
 
 ## worker.plugins
 
-- **Type:** [`() => (Plugin | Plugin[])[]`](./shared-options#plugins)
+- **تایپ:** [`() => (Plugin | Plugin[])[]`](./shared-options#plugins)
 
-Vite plugins that apply to the worker bundles. Note that [config.plugins](./shared-options#plugins) only applies to workers in dev, it should be configured here instead for build.
-The function should return new plugin instances as they are used in parallel rollup worker builds. As such, modifying `config.worker` options in the `config` hook will be ignored.
+پلاگین های vite که بر باندل های worker اعمال می‌شوند. توجه کنید که [config.plugins](./shared-options#plugins) فقط در حالت dev بر روی باندل های worker اعمال خواهند شد و برای حالت build باید از این گزینه استفاده کنید.
+این تابع باید نمونه‌های جدیدی از پلاگین‌ها را بازگرداند چون آن‌ها به‌صورت موازی در build های rollup اجرا می‌شوند. به همین دلیل، تغییر گزینه‌های config.worker در هوک config نادیده گرفته می‌شود.
 
 ## worker.rollupOptions
 
-- **Type:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
+- **تایپ:** [`RollupOptions`](https://rollupjs.org/configuration-options/)
 
-Rollup options to build worker bundle.
+آپشن‌های Rollup برای ساخت باندل worker.
