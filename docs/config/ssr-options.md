@@ -27,14 +27,14 @@
 ## ssr.target
 
 - **تایپ:** `'node' | 'webworker'`
-- **دیفالت:** `node`
+- **پیش‌فرض:** `node`
 
 بیلد target برای سرور SSR.
 
 ## ssr.resolve.conditions
 
 - **تایپ:** `string[]‎`
-- **دیفالت:** `['module', 'node', 'development|production']` (`defaultServerConditions`) (`['module', 'browser', 'development|production']` (`defaultClientConditions`) برای `ssr.target === 'webworker'`)
+- **پیش‌فرض:** `['module', 'node', 'development|production']` (`defaultServerConditions`) (`['module', 'browser', 'development|production']` (`defaultClientConditions`) برای `ssr.target === 'webworker'`)
 - **مرتبط:** [Resolve Conditions](./shared-options.md#resolve-conditions)
 
 این شرایط در مسیر پلاگین‌ها استفاده می‌شوند و فقط بر وابستگی‌های non-externalized در زمان ساخت SSR تأثیر می‌گذارند. برای تأثیرگذاری بر ایمپورت های externalized، از `ssr.resolve.externalConditions` استفاده کنید.
@@ -42,7 +42,7 @@
 ## ssr.resolve.externalConditions
 
 - **تایپ:** `string[]‎`
-- **دیفالت:** `['node']`
+- **پیش‌فرض:** `['node']`
 
 شرایطی که در هنگام ایمپورت SSR (شامل `ssrLoadModule`) برای وابستگی‌های مستقیم externalized (وابستگی‌های خارجی که توسط Vite ایمپورت شده‌اند) اعمال می‌شوند.
 
@@ -57,6 +57,6 @@
 ### ssr.resolve.mainFields
 
 - **تایپ:** `string[]‎`
-- **دیفالت:** `['module', 'jsnext:main', 'jsnext']`
+- **پیش‌فرض:** `['module', 'jsnext:main', 'jsnext']`
 
 فهرستی از فیلدهای `package.json` که هنگام تشخیص entry pointهای یک پکیج بررسی می‌شوند. توجه داشته باشید که این گزینه نسبت به اکسپورت شرطی که از فیلد `exports` شناسایی می‌شود,اولویت کم‌تری دارد : اگر entry point با موفقیت از `exports` تشخیص داده شود، فیلد `main` نادیده گرفته خواهد شد. این تنظیم فقط بر وابستگی‌های غیرمستقل (non-externalized) تأثیر می‌گذارد.
