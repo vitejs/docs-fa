@@ -101,7 +101,7 @@ $ npm run preview
          - name: Set up Node
            uses: actions/setup-node@v4
            with:
-             node-version: 20
+             node-version: lts/*
              cache: 'npm'
          - name: Install dependencies
            run: npm ci
@@ -130,7 +130,7 @@ $ npm run preview
 2. در root پروژه خود، یک فایل با نام `‎.gitlab-ci.yml` ایجاد کنید و محتوای زیر را به آن اضافه کنید. این فایل باعث می‌شود هر زمان که تغییراتی در محتوای پروژه ایجاد کنید، به‌طور خودکار سایت شما ساخته شده (build) و دیپلوی شود:
 
    ```yaml [.gitlab-ci.yml]
-   image: node:16.5.0
+   image: node:lts
    pages:
      stage: deploy
      cache:
