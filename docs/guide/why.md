@@ -59,8 +59,8 @@ Rollup همچنین در حال کار بر روی بهبودهای عملکرد
 
 ## Vite چگونه با سایر ابزارهای ساخت بدون باندل مقایسه می‌شود؟
 
-[WMR](https://github.com/preactjs/wmr) توسط تیم Preact ویژگی‌های مشابهی را ارائه می‌داد. API پلاگین Rollup جهانی Vite برای توسعه و بیلد از آن الهام گرفته شده است. WMR دیگر نگهداری نمی‌شود. تیم Preact اکنون Vite با [‎@preactjs/preset-vite](https://github.com/preactjs/preset-vite) را توصیه می‌کند.
+ابزار [WMR](https://github.com/preactjs/wmr) که توسط تیم Preact توسعه داده شده بود، هدفش ارائه مجموعه‌ای از قابلیت‌های مشابه با Vite بود. رابط افزونه‌ی مشترک Vite برای محیط توسعه و ساخت (build) از WMR الهام گرفته است. اما WMR دیگر پشتیبانی نمی‌شود و تیم Preact اکنون استفاده از Vite همراه با بسته‌ی [‎@preactjs/preset-vite](https://github.com/preactjs/preset-vite) را پیشنهاد می‌دهد.
 
-[Snowpack](https://www.snowpack.dev/) نیز یک سرور توسعه ESM بومی بدون باندل بود که بسیار شبیه به Vite بود. پیش‌باندل کردن وابستگی‌های Vite نیز از Snowpack v1 (اکنون [`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)) الهام گرفته شده است. Snowpack دیگر نگهداری نمی‌شود. تیم Snowpack اکنون روی [Astro](https://astro.build/) کار می‌کند، یک سازنده سایت استاتیک که توسط Vite قدرت گرفته است.
+[Snowpack](https://www.snowpack.dev/) نیز یک سرور توسعه ESM بومی بدون باندل بود که بسیار شبیه به Vite بود. پیش‌باندل کردن وابستگی‌های Vite نیز از Snowpack v1 (اکنون [`esinstall`](https://github.com/snowpackjs/snowpack/tree/main/esinstall)) الهام گرفته شده است. Snowpack دیگر نگهداری نمی‌شود. تیم Snowpack اکنون روی [Astro](https://astro.build/) کار می‌کند، یک سازنده سایت استاتیک که از Vite قدرت گرفته است.
 
-[‎@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) (قبلاً `es-dev-server`) یک پروژه عالی است و تنظیمات سرور مبتنی بر Koa در Vite 1.0 از آن الهام گرفته شده است. مجموعه ابزارهای `‎@web` به طور فعال نگهداری می‌شود و شامل بسیاری از ابزارهای عالی دیگر است که ممکن است برای کاربران Vite نیز مفید باشد.
+پروژه [‎@web/dev-server](https://modern-web.dev/docs/dev-server/overview/) (که قبلاً با نام `es-dev-server` شناخته می‌شد) یکی از پروژه‌های عالی است که معماری سرور مبتنی بر Koa در Vite نسخه 1.0 از آن الهام گرفته شده است. پروژه‌ی جامع `‎@web` به‌صورت فعال نگهداری می‌شود و شامل ابزارهای فوق‌العاده‌ی دیگری نیز هست که می‌توانند برای کاربران Vite مفید باشند.
