@@ -99,17 +99,17 @@ export function useSponsor() {
 function mapSponsors(sponsors: Sponsors) {
   return [
     {
-      tier: 'in partnership with',
+      tier: 'در همکاری با', // in partnership with
       size: 'big',
       items: viteSponsors['special'],
     },
     {
-      tier: 'Platinum Sponsors',
+      tier: 'اسپانسرهای پلاتینیوم', // Platinum Sponsors
       size: 'big',
       items: mapImgPath(sponsors['platinum']),
     },
     {
-      tier: 'Gold Sponsors',
+      tier: 'اسپانسرهای طلایی', // Gold Sponsors
       size: 'medium',
       items: [...mapImgPath(sponsors['gold']), ...viteSponsors['gold']],
     },
