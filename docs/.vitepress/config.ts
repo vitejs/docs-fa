@@ -191,25 +191,25 @@ export default defineConfig({
       {
         text: 'منابع',
         items: [
-          { text: 'Team', link: '/team' },
-          { text: 'Blog', link: '/blog' },
-          { text: 'Releases', link: '/releases' },
+          { text: 'تیم', link: '/team' },
+          { text: 'بلاگ', link: '/blog' },
+          { text: 'ریلیز ها', link: '/releases' },
           {
             items: [
               {
-                text: 'Bluesky',
+                text: 'بلواسکای',
                 link: 'https://bsky.app/profile/vite.dev'
               },
               {
-                text: 'Mastodon',
+                text: 'ماستادون',
                 link: 'https://elk.zone/m.webtoo.ls/@vite'
               },
               {
-                text: 'X',
+                text: 'ایکس',
                 link: 'https://x.com/vite_js'
               },
               {
-                text: 'Discord Chat',
+                text: 'چت دیسکورد',
                 link: 'https://chat.vite.dev'
               },
               {
