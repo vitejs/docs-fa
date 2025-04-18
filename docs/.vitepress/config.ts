@@ -293,15 +293,15 @@ export default defineConfig({
               link: '/guide/static-deploy'
             },
             {
-              text: 'متغیرهای محیطی (Env Variables) و حالت‌ها ',
+              text: 'متغیرهای محیطی (Env) و حالت‌ها ',
               link: '/guide/env-and-mode'
             },
             {
-              text: 'Server-Side Rendering (SSR)',
+              text: 'رندر سمت سرور (SSR)',
               link: '/guide/ssr'
             },
             {
-              text: 'Backend Integration',
+              text: 'یکپارچه‌سازی با بک‌اند',
               link: '/guide/backend-integration'
             },
             {
@@ -313,7 +313,7 @@ export default defineConfig({
               link: '/guide/performance'
             },
             {
-              text: 'Rolldown',
+              text: 'یکپارچه‌سازی با Rolldown',
               link: '/guide/rolldown',
             },
             {
@@ -342,7 +342,7 @@ export default defineConfig({
               link: '/guide/api-javascript'
             },
             {
-              text: 'Config Reference',
+              text: 'بخش کانفیگ',
               link: '/config/'
             }
           ]
@@ -351,23 +351,23 @@ export default defineConfig({
           text: 'Environment API',
           items: [
             {
-              text: 'Introduction',
+              text: 'مقدمه',
               link: '/guide/api-environment'
             },
             {
-              text: 'Environment Instances',
+              text: 'نمونه‌های Environment',
               link: '/guide/api-environment-instances'
             },
             {
-              text: 'Plugins',
+              text: 'پلاگین‌ها',
               link: '/guide/api-environment-plugins'
             },
             {
-              text: 'Frameworks',
+              text: 'فریمورک‌ها',
               link: '/guide/api-environment-frameworks'
             },
             {
-              text: 'Runtimes',
+              text: 'رانتایم‌ها',
               link: '/guide/api-environment-runtimes'
             }
           ]

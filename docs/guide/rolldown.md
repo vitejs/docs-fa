@@ -1,38 +1,38 @@
-# Rolldown Integration
+# یکپارچه‌سازی با Rolldown
 
-Vite is planning to integrate [Rolldown](https://rolldown.rs), a Rust-powered JavaScript bundler, to improve build performance and capabilities.
+Vite در نظر دارد برای بهبود عملکرد و بهینه‌سازی فرآیند ساخت (build)، از [Rolldown](https://rolldown.rs) استفاده کند؛ باندلری مبتنی بر Rust.
 
 <YouTubeVideo videoId="RRjfm8cMveQ" />
 
-## What is Rolldown?
+## Rolldown چیست؟
 
-Rolldown is a modern, high-performance JavaScript bundler written in Rust. It's designed as a drop-in replacement for Rollup, aiming to provide significant performance improvements while maintaining compatibility with the existing ecosystem.
+Rolldown یک باندلر مدرن و پرسرعت برای JavaScript است که با زبان Rust نوشته شده. این ابزار با هدف جایگزینی مستقیم با Rollup طراحی شده و تلاش دارد تا بدون ایجاد ناسازگاری با اکوسیستم فعلی، بهبود چشم‌گیری در عملکرد ارائه دهد.
 
-Rolldown focuses on three key principles:
+Rolldown بر سه اصل کلیدی تمرکز دارد:
 
-- **Speed**: Built with Rust for maximum performance
-- **Compatibility**: Works with existing Rollup plugins
-- **Optimization**: Comes with features that go beyond what esbuild and Rollup implement
+- **سرعت**: با استفاده از زبان Rust ساخته شده تا حداکثر کارایی را ارائه دهد
+- **سازگاری**: با افزونه‌های موجود Rollup به‌خوبی کار می‌کند
+- **بهینه‌سازی**: دارای قابلیت‌هایی است که فراتر از امکانات esbuild و Rollup عمل می‌کنند
 
-## Why Vite is Migrating to Rolldown
+## چرا Vite در حال مهاجرت به Rolldown است؟
 
-1. **Unification**: Vite currently uses esbuild for dependency pre-bundling and Rollup for production builds. Rolldown aims to unify these into a single, high-performance bundler that can be used for both purposes, reducing complexity.
+1. **یکپارچگی**: Vite در حال حاضر از esbuild برای پیش‌پردازش وابستگی‌ها و از Rollup برای ساخت نهایی استفاده می‌کند. Rolldown قصد دارد این دو مرحله را در یک باندلر واحد و پرسرعت ادغام کند تا پیچیدگی کاهش یابد.
 
-2. **Performance**: Rolldown's Rust-based implementation offers significant performance improvements over JavaScript-based bundlers. While specific benchmarks may vary by project size and complexity, early tests show promising speed increases compared to Rollup.
+2. **کارایی بالا**: پیاده‌سازی Rolldown بر پایه‌ی Rust باعث افزایش چشمگیر سرعت نسبت به باندلرهای مبتنی بر JavaScript شده است. هرچند نتایج ممکن است بسته به اندازه و پیچیدگی پروژه متفاوت باشند، اما تست‌های اولیه افزایش سرعت امیدوارکننده‌ای نسبت به Rollup نشان داده‌اند.
 
-3. **Additional Features**: Rolldown introduces features that are not available in Rollup or esbuild, such as advanced chunk splitting control, built-in HMR, and Module Federation.
+3. **قابلیت‌های بیشتر**: Rolldown امکاناتی ارائه می‌دهد که در Rollup یا esbuild وجود ندارند، مانند کنترل پیشرفته بر تقسیم چانک‌ها (chunk splitting)، HMR داخلی و پشتیبانی از Module Federation.
 
-For additional insights on the motivations behind Rolldown, see the [reasons why Rolldown is being built](https://rolldown.rs/guide/#why-rolldown).
+برای اطلاعات بیشتر درباره انگیزه‌های ساخت Rolldown، به [دلایل ساخت آن](https://rolldown.rs/guide/#why-rolldown) مراجعه کنید.
 
-## Benefits of Trying `rolldown-vite`
+## مزایای امتحان کردن `rolldown-vite`
 
-- Experience significantly faster build times, especially for larger projects
-- Provide valuable feedback to help shape the future of Vite's bundling experience
-- Prepare your projects for the eventual official Rolldown integration
+- تجربه زمان ساخت بسیار سریع‌تر، به‌ویژه در پروژه‌های بزرگ
+- مشارکت در بهبود تجربه باندلینگ Vite از طریق ارائه بازخوردهای ارزشمند
+- آماده‌سازی پروژه‌های شما برای یکپارچه‌سازی رسمی Rolldown در آینده
 
-## How to Try Rolldown
+## چگونه Rolldown را امتحان کنیم
 
-The rolldown-powered version of Vite is currently available as a separate package called `rolldown-vite`. You can try it by adding package overrides to your `package.json`:
+نسخه‌ای از Vite که با Rolldown اجرا می‌شود، در حال حاضر به‌صورت یک پکیج جداگانه به نام `rolldown-vite` در دسترس است. برای استفاده از آن، می‌توانید با استفاده از قابلیت overrides در فایل `package.json` خود، آن را جایگزین Vite فعلی کنید:
 
 :::code-group
 
@@ -72,100 +72,100 @@ The rolldown-powered version of Vite is currently available as a separate packag
 
 :::
 
-After adding these overrides, reinstall your dependencies and start your development server or build your project as usual. No further configuration changes are required.
+پس از افزودن این overrides، کافی‌ست وابستگی‌های پروژه را مجدداً نصب کرده و سرور توسعه را راه‌اندازی یا پروژه را طبق روال همیشگی build کنید. هیچ تنظیمات اضافه‌ دیگری نیاز نیست.
 
-## Known Limitations
+## محدودیت‌های شناخته‌شده
 
-While Rolldown aims to be a drop-in replacement for Rollup, there are features that are still being implemented and minor intentional behavior differences. For a comprehensive list, please refer to [this GitHub PR](https://github.com/vitejs/rolldown-vite/pull/84#issue-2903144667) which is regularly updated.
+با وجود اینکه Rolldown با هدف جایگزینی مستقیم برای Rollup توسعه یافته، هنوز برخی ویژگی‌ها در حال پیاده‌سازی هستند و تفاوت‌های رفتاری جزئی (و گاه عمده) نیز وجود دارد. برای مشاهده‌ی فهرست کامل و به‌روز این موارد، می‌توانید به [این Pull Request در GitHub](https://github.com/vitejs/rolldown-vite/pull/84#issue-2903144667) مراجعه کنید.
 
-### Option Validation Errors
+### خطاهای اعتبارسنجی آپشن‌ها (Option Validation Errors) {#option-validation-errors}
 
-Rolldown throws an error when unknown or invalid options are passed. Because some options available in Rollup are not supported by Rolldown, you may encounter errors based on the options you or the meta framework you use set. Below, you can find an an example of such an error message:
+Rolldown در صورتی که آپشن‌ای ناشناخته یا نامعتبر به آن داده شود، خطا صادر می‌کند. از آنجا که برخی از آپشن‌های موجود در Rollup در حال حاضر در Rolldown پشتیبانی نمی‌شوند، ممکن است هنگام استفاده، بسته به تنظیمات شما یا متافریموکی که استفاده می‌کنید، با خطا مواجه شوید. در ادامه نمونه‌ای از پیام چنین خطایی آمده است:
 
 > Error: Failed validate input options.
 >
 > - For the "preserveEntrySignatures". Invalid key: Expected never but received "preserveEntrySignatures".
 
-If you don't pass the option in yourself, this must be fixed by the utilized framework. You can suppress this error in the meantime by setting the `ROLLDOWN_OPTIONS_VALIDATION=loose` environment variable.
+اگر خودتان این آپشن را اضافه نکرده‌اید، این مشکل باید توسط فریمورک مورد استفاده شما اصلاح شود. در حال حاضر، برای جلوگیری از نمایش این خطا می‌توانید متغیر محیطی `ROLLDOWN_OPTIONS_VALIDATION=loose` را تنظیم کنید.
 
-## Enabling Native Plugins
+## فعال‌سازی پلاگین‌های بومی
 
-Thanks to Rolldown and Oxc, various internal Vite plugins, such as the alias or resolve plugin, have been converted to Rust. At the time of writing, using these plugins is not enabled by default, as their behavior may differ from the JavaScript versions.
+با تشکر از Rolldown و Oxc، پلاگین‌های داخلی مختلف Vite مانند پلاگین‌های alias یا resolve به زبان Rust تبدیل شده‌اند. در زمان نگارش این مطلب، استفاده از این پلاگین‌ها به طور پیش‌فرض فعال نیست، زیرا رفتار آنها ممکن است با نسخه‌های جاوااسکریپتی متفاوت باشد.
 
-To test them, you can set the `experimental.enableNativePlugin` option to `true` in your Vite config.
+برای تست این پلاگین‌ها، می‌توانید گزینه `experimental.enableNativePlugin` را در فایل کانفیگ Vite خود به مقدار `true` تنظیم کنید.
 
-## Reporting Issues
+## گزارش مشکلات
 
-Since this is an experimental integration, you may encounter issues. If you do, please report them in the [`vitejs/rolldown-vite`](https://github.com/vitejs/rolldown-vite) repository, **not the main Vite repository**.
+از آنجا که این یک ادغام آزمایشی است، ممکن است با مشکلاتی مواجه شوید. در صورت بروز هرگونه مشکل، لطفاً آن را در مخزن [`vitejs/rolldown-vite`](https://github.com/vitejs/rolldown-vite) گزارش دهید، **نه در مخزن اصلی Vite**.
 
-When [reporting issues](https://github.com/vitejs/rolldown-vite/issues/new), please follow the appropriate issue template and provide what is requested there, commonly including:
+هنگام [گزارش مشکلات](https://github.com/vitejs/rolldown-vite/issues/new)، لطفاً از الگوی مناسب استفاده کرده و موارد خواسته شده در آن را فراهم کنید، که معمولاً شامل موارد زیر است:
 
-- A minimal reproduction of the issue
-- Your environment details (OS, Node version, package manager)
-- Any relevant error messages or logs
+- یک نسخه حداقلی از مشکل
+- جزئیات محیط شما (سیستم‌عامل، نسخه Node، مدیر بسته)
+- هرگونه پیام خطا یا لاگ مرتبط
 
-For real-time discussions and troubleshooting, make sure to join the [Rolldown Discord](https://chat.rolldown.rs/).
+برای بحث و گفتگو مستقیم و رفع اشکال، حتماً به [Discord Rolldown](https://chat.rolldown.rs/) بپیوندید.
 
-## Future Plans
+## برنامه‌های آینده
 
-The `rolldown-vite` package is a temporary solution to gather feedback and stabilize the Rolldown integration. In the future, this functionality will be merged back into the main Vite repository.
+پکیج `rolldown-vite` یک راه‌حل موقتی است که برای جمع‌آوری بازخورد و تثبیت ادغام Rolldown طراحی شده است. در آینده، این قابلیت به مخزن اصلی Vite اضافه خواهد شد.
 
-We encourage you to try out `rolldown-vite` and contribute to its development through feedback and issue reports.
+ما شما را تشویق می‌کنیم که بسته `rolldown-vite` را امتحان کنید و از طریق بازخورد و گزارش مشکلات، به توسعه آن کمک کنید.
 
-In the future, we will also introduce a "Full Bundle Mode" for Vite, which will serve bundled files in production _and development mode_.
+در آینده، همچنین حالت "Full Bundle Mode" برای Vite معرفی خواهد شد که فایل‌های باندل شده را هم در حالت پروداکش و هم در _حالت توسعه_ سرویس‌دهی می‌کند.
 
-### Why introducing a Full Bundle Mode?
+### چرا حالت Full Bundle Mode معرفی می‌شود؟
 
-Vite is known for its unbundled dev server approach, which is a main reason for Vite's speed and popularity when it was first introduced. This approach was initially an experiment to see just how far we could push the boundaries of development server performance without traditional bundling.
+Vite به دلیل رویکرد سرور توسعه بدون بسته‌بندی شناخته شده است که یکی از دلایل اصلی سرعت و محبوبیت آن در زمان معرفی بود. این رویکرد در ابتدا به‌عنوان یک آزمایش برای بررسی اینکه چه‌قدر می‌توانیم مرزهای عملکرد سرور توسعه را بدون استفاده از بسته‌بندی سنتی جابجا کنیم، معرفی شد.
 
-However, as projects scale in size and complexity, two main challenges have emerged:
+با این حال، با افزایش مقیاس و پیچیدگی پروژه‌ها، دو چالش اصلی به وجود آمده است:
 
-1. **Development/Production inconsistency**: The unbundled JavaScript served in development versus the bundled production build creates different runtime behaviors. This can lead to issues that only manifest in production, making debugging more difficult.
+1. **ناسازگاری بین محیط توسعه و پروداکشن**: در حالت توسعه، جاوااسکریپت بدون بسته‌بندی ارائه می‌شود، درحالی که در پروداکشن، فایل‌ها به‌صورت بسته‌بندی‌شده هستند. این تفاوت می‌تواند منجر به بروز رفتارهای متفاوت در زمان اجرا شود؛ رفتارهایی که فقط در محیط پروداکشن ظاهر می‌شوند و اشکال‌زدایی آن‌ها را دشوار می‌کنند.
 
-2. **Performance degradation during development**: The unbundled approach results in each module being fetched separately, which creates a large number of network requests. While this has _no impact in production_, it causes significant overhead during dev server startup and when refreshing the page in development. The impact is especially noticeable in large applications where hundreds or even thousands of separate requests must be processed. These bottlenecks become even more severe when developers use network proxy, resulting in slower refresh times and degraded developer experience.
+2. **کاهش عملکرد در زمان توسعه**: رویکرد بدون بسته‌بندی باعث می‌شود هر ماژول به‌صورت جداگانه از طریق شبکه دریافت شود. این موضوع منجر به تعداد زیادی درخواست شبکه می‌شود. اگرچه در محیط پروداکشن مشکلی ایجاد نمی‌کند، اما در زمان راه‌اندازی سرور توسعه و رفرش صفحه در محیط توسعه، سربار قابل‌توجهی ایجاد می‌کند. این مشکل به‌ویژه در پروژه‌های بزرگ که صدها یا هزاران ماژول دارند، به‌شدت خود را نشان می‌دهد. اگر توسعه‌دهندگان از پراکسی شبکه هم استفاده کنند، این گلوگاه‌ها تشدید شده و تجربه توسعه را کند و ناخوشایند می‌کند.
 
-With the Rolldown integration, we have an opportunity to unify the development and production experiences while maintaining Vite's signature performance. A Full Bundle Mode would allow serving bundled files not only in production but also during development, combining the best of both worlds:
+با یکپارچه‌سازی Rolldown، این فرصت فراهم شده است تا تجربه‌های توسعه و پروداکشن را با حفظ عملکرد شاخص Vite، به یکدیگر نزدیک کنیم. «حالت بسته‌بندی کامل» (Full Bundle Mode) این امکان را فراهم می‌سازد که فایل‌های بسته‌بندی‌شده نه‌تنها در پروداکشن، بلکه در محیط توسعه نیز ارائه شوند؛ و این یعنی تلفیقی از بهترین ویژگی‌های هر دو دنیا:
 
-- Fast startup times even for large applications
-- Consistent behavior between development and production
-- Reduced network overhead on page refreshes
-- Maintained efficient HMR on top of ESM output
+- **زمان راه‌اندازی سریع حتی برای پروژه‌های بزرگ**
+- **رفتار یکنواخت بین محیط توسعه و تولید**
+- **کاهش سربار شبکه در هنگام بارگذاری مجدد صفحه**
+- **حفظ بهینگی HMR در کنار خروجی مبتنی بر ESM**
 
-When the Full Bundle Mode is introduced, it will be an opt-in feature at first. Similar to the Rolldown integration, we are aiming to make it the default after gathering feedback and ensuring stability.
+در ابتدای معرفی، حالت Full Bundle به‌صورت **اختیاری (opt-in)** فعال خواهد شد. همانند یکپارچه‌سازی Rolldown، هدف این است که پس از دریافت بازخورد و اطمینان از پایداری، به‌صورت **پیش‌فرض** فعال شود.
 
-## Plugin / Framework authors guide
+## راهنمای نویسندگان افزونه‌ها و فریم‌ورک‌ها
 
-::: tip
-This section is mostly relevant for plugin and framework authors. If you are a user, you can skip this section.
+::: tip نکته
+این بخش بیشتر برای نویسندگان افزونه‌ها و سازندگان فریم‌ورک‌ها کاربرد دارد. اگر شما صرفاً یک کاربر نهایی هستید، می‌توانید از خواندن این بخش صرف‌نظر کنید.
 :::
 
-### Overview of Major Changes
+### مروری بر تغییرات مهم
 
-- Rolldown is used for build (Rollup was used before)
-- Rolldown is used for the optimizer (esbuild was used before)
-- CommonJS support is handled by Rolldown (@rollup/plugin-commonjs was used before)
-- Oxc is used for syntax lowering (esbuild was used before)
-- Lightning CSS is used for CSS minification by default (esbuild was used before)
-- Oxc minifier is used for JS minification by default (esbuild was used before)
-- Rolldown is used for bundling the config (esbuild was used before)
+- از Rolldown به‌جای Rollup برای فرایند build استفاده می‌شود.
+- موتور بهینه‌سازی (optimizer) اکنون Rolldown است (قبلاً esbuild بود).
+- پشتیبانی از CommonJS اکنون توسط Rolldown انجام می‌شود (قبلاً از ‎@rollup/plugin-commonjs استفاده می‌شد).
+- برای پایین آوردن سطح سینتکس (syntax lowering) از Oxc استفاده می‌شود (قبلاً esbuild انجام می‌داد).
+- فشرده‌سازی CSS به‌صورت پیش‌فرض با Lightning CSS انجام می‌شود (قبلاً esbuild بود).
+- فشرده‌سازی جاوااسکریپت نیز اکنون به‌طور پیش‌فرض با Oxc minifier انجام می‌شود (به‌جای esbuild).
+- برای باندل کردن فایل پیکربندی Vite نیز Rolldown به‌جای esbuild استفاده شده است.
 
-### Detecting `rolldown-vite`
+### شناسایی `rolldown-vite` {#detecting-rolldown-vite}
 
-::: warning
-In most cases, you don't need to detect whether your plugin runs with `rolldown-vite` or `vite` and you should aim for consistent behavior across both, without conditional branching.
+::: warning هشدار
+در بیشتر موارد، نیازی نیست بررسی کنید که آیا پلاگین شما با `rolldown-vite` اجرا می‌شود یا با Vite معمولی؛ بهتر است در هر دو حالت، رفتار یکسانی داشته باشید و از شرط‌گذاری در کد خودداری کنید.
 :::
 
-In case you need different behavior with `rolldown-vite`, you have two ways to detect if `rolldown-vite` is used:
+اگر لازم است در صورت استفاده از `rolldown-vite` رفتار متفاوتی داشته باشید، دو راه برای شناسایی آن وجود دارد:
 
-Checking the existence of `this.meta.rolldownVersion`:
+بررسی وجود ویژگی `this.meta.rolldownVersion`:
 
 ```js
 const plugin = {
   resolveId() {
     if (this.meta.rolldownVersion) {
-      // logic for rolldown-vite
+      // rolldown-vite کد برای
     } else {
-      // logic for rollup-vite
+      // rollup-vite کد برای
     }
   },
 }
@@ -173,38 +173,38 @@ const plugin = {
 
 <br>
 
-Checking the existence of the `rolldownVersion` export:
+بررسی وجود `rolldownVersion`:
 
 ```js
 import * as vite from 'vite'
 
 if (vite.rolldownVersion) {
-  // logic for rolldown-vite
+  // rolldown-vite کد برای
 } else {
-  // logic for rollup-vite
+  // rollup-vite کد برای
 }
 ```
 
-If you have `vite` as a dependency (not a peer dependency), the `rolldownVersion` export is useful as it can be used from anywhere in your code.
+اگر `vite` را به‌عنوان یک وابستگی (نه وابستگی همتا / peer dependency) دارید، `rolldownVersion` مفید است زیرا می‌توان آن را از هر جای کدتان استفاده کنید.
 
-### Ignoring option validation in Rolldown
+### نادیده گرفتن اعتبارسنجی آپشن‌ها در Rolldown
 
-As [mentioned above](#option-validation-errors), Rolldown throws an error when unknown or invalid options are passed.
+همان‌طور که [در بالا اشاره شد](#option-validation-errors)، Rolldown زمانی که آپشن‌های ناشناس یا نامعتبری به آن داده شود، خطا می‌دهد.
 
-This can be fixed by conditionally passing the option by checking whether it's running with `rolldown-vite` as [shown above](#detecting-rolldown-vite).
+این مشکل را می‌توان با ارسال شرطی آپشن، بسته به اینکه آیا پروژه با `rolldown-vite` اجرا می‌شود یا نه، حل کرد (همان‌طور که [در بالا نشان داده شد](#detecting-rolldown-vite)).
 
-Suppressing the error by setting the `ROLLDOWN_OPTIONS_VALIDATION=loose` environment variable also works in this case.
-However, keep in mind that you will **eventually need to stop passing the options not supported by Rolldown**.
+همچنین می‌توانید با تنظیم متغیر محیطی `ROLLDOWN_OPTIONS_VALIDATION=loose`، این خطا را موقتاً نادیده بگیرید.
+با این حال، توجه داشته باشید که در **نهایت باید از ارسال آپشن‌هایی که توسط Rolldown پشتیبانی نمی‌شوند، خودداری کنید**.
 
-### `transformWithEsbuild` requires `esbuild` to be installed separately
+### `transformWithEsbuild` نیاز دارد که `esbuild` به‌صورت جداگانه نصب شده باشد
 
-A similar function called `transformWithOxc`, which uses Oxc instead of `esbuild`, is exported from `rolldown-vite`.
+تابعی مشابه با نام `transformWithOxc`، که به‌جای `esbuild` از Oxc استفاده می‌کند، از بسته‌ی `rolldown-vite` صادر (export) شده است.
 
-### Compatibility layer for `esbuild` options
+### لایه‌ی سازگاری برای آپشن‌های `esbuild`
 
-Rolldown-Vite has a compatibility layer to convert options for `esbuild` to the respective Oxc or `rolldown` ones. As tested in [the ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci/blob/rolldown-vite/README-temp.md), this works in many cases, including simple `esbuild` plugins.
-That said, **we'll be removing the `esbuild` options support in the future** and encourage you to try the corresponding Oxc or `rolldown` options.
-You can get the options set by the compatibility layer from the `configResolved` hook.
+پکیج Rolldown-Vite یک لایه‌ی سازگاری برای تبدیل آپشن‌های مربوط به `esbuild` به آپشن‌های معادل در Oxc یا `rolldown` دارد. همان‌طور که در [ecosystem-ci](https://github.com/vitejs/vite-ecosystem-ci/blob/rolldown-vite/README-temp.md) تست شده، این قابلیت در بسیاری از موارد، از جمله افزونه‌های ساده‌ی `esbuild`، به‌خوبی کار می‌کند.
+با این حال، **پشتیبانی از آپشن‌های `esbuild` در آینده حذف خواهد شد** و به شما توصیه می‌شود از آپشن‌های متناظر در Oxc یا `rolldown` استفاده کنید.
+می‌توانید آپشن‌هایی را که توسط این لایه‌ی سازگاری تنظیم شده‌اند، از طریق هوک `configResolved` دریافت کنید.
 
 ```js
 const plugin = {
@@ -215,14 +215,14 @@ const plugin = {
 },
 ```
 
-### Hook filter feature
+### قابلیت فیلتر هوک (Hook Filter)
 
-Rolldown introduced a [hook filter feature](https://rolldown.rs/guide/plugin-development#plugin-hook-filters) to reduce the communication overhead the between Rust and JavaScript runtimes. By using this feature you can make your plugin more performant.
-This is also supported by Rollup 4.38.0+ and Vite 6.3.0+. To make your plugin backward compatible with the older versions, make sure to also run the filter inside the hook handlers.
+Rolldown قابلیتی به نام [فیلتر هوک](https://rolldown.rs/guide/plugin-development#plugin-hook-filters) معرفی کرده است که هدف آن کاهش سربار ارتباطی بین محیط‌های اجرایی Rust و JavaScript است. با استفاده از این ویژگی، می‌توانید پلاگین خود را کارآمدتر کنید.
+این قابلیت همچنین از نسخه‌ی 4.38.0 به بعد در Rollup و از نسخه‌ی 6.3.0 به بعد در Vite پشتیبانی می‌شود. برای اینکه پلاگین شما با نسخه‌های قدیمی‌تر نیز سازگار باقی بماند، توصیه می‌شود فیلتر را علاوه بر تعریف اولیه، درون بدنه‌ی هوک‌ها نیز اجرا کنید.
 
-### Converting content to JavaScript in `load` or `transform` hooks
+### تبدیل محتوا به JavaScript در هوک‌های `load` یا `transform`
 
-If you are converting the content to JavaScript from other types in `load` or `transform` hooks, you may need to add `moduleType: 'js'` to the returned value.
+اگر در هوک‌های `load` یا `transform` محتوایی را از انواع دیگر به JavaScript تبدیل می‌کنید، ممکن است نیاز باشد ویژگی `moduleType: 'js'‎` را به مقدار بازگشتی اضافه کنید. این کار به Rolldown یا Vite کمک می‌کند تا نوع ماژول را به‌درستی تشخیص داده و پردازش لازم را انجام دهد. در غیر این صورت، ممکن است محتوا به‌عنوان نوعی غیر از JavaScript در نظر گرفته شود و باعث خطا یا رفتارهای پیش‌بینی‌نشده شود.
 
 ```js
 const plugin = {
@@ -239,4 +239,4 @@ const plugin = {
 }
 ```
 
-This is because [Rolldown supports non-JavaScript modules](https://rolldown.rs/guide/in-depth/module-types) and infers the module type from extensions unless specified. Note that `rolldown-vite` does not support ModuleTypes in dev.
+این به این دلیل است که [Rolldown از ماژول‌هایی غیر از JavaScript نیز پشتیبانی می‌کند](https://rolldown.rs/guide/in-depth/module-types) و نوع ماژول را معمولاً بر اساس پسوند فایل تشخیص می‌دهد، مگر اینکه صراحتاً مشخص شده باشد. توجه داشته باشید که در حالت توسعه (development)، `rolldown-vite` از ویژگی ModuleTypes پشتیبانی نمی‌کند. بنابراین، اگر نوع فایل به‌طور دقیق تعیین نشود، ممکن است رفتار نادرستی رخ دهد.
