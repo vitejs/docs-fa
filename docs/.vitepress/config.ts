@@ -5,6 +5,8 @@ import {
   groupIconMdPlugin,
   groupIconVitePlugin
 } from 'vitepress-plugin-group-icons'
+import llmstxt from 'vitepress-plugin-llms'
+import type { PluginOption } from 'vite'
 import { buildEnd } from './buildEnd.config'
 
 const ogDescription = 'ابزار نسل بعدی فرانت‌اند'
@@ -130,6 +132,7 @@ export default defineConfig({
 
   locales: {
     root: { label: 'فارسی' },
+    en: { label: 'English', link: 'https://vite.dev' },
     zh: { label: '简体中文', link: 'https://cn.vite.dev' },
     ja: { label: '日本語', link: 'https://ja.vite.dev' },
     es: { label: 'Español', link: 'https://es.vite.dev' },
@@ -189,25 +192,25 @@ export default defineConfig({
       {
         text: 'منابع',
         items: [
-          { text: 'Team', link: '/team' },
-          { text: 'Blog', link: '/blog' },
-          { text: 'Releases', link: '/releases' },
+          { text: 'تیم', link: '/team' },
+          { text: 'بلاگ', link: '/blog' },
+          { text: 'ریلیز ها', link: '/releases' },
           {
             items: [
               {
-                text: 'Bluesky',
+                text: 'بلواسکای',
                 link: 'https://bsky.app/profile/vite.dev'
               },
               {
-                text: 'Mastodon',
+                text: 'ماستادون',
                 link: 'https://elk.zone/m.webtoo.ls/@vite'
               },
               {
-                text: 'X',
+                text: 'ایکس',
                 link: 'https://x.com/vite_js'
               },
               {
-                text: 'Discord Chat',
+                text: 'چت دیسکورد',
                 link: 'https://chat.vite.dev'
               },
               {
@@ -291,15 +294,15 @@ export default defineConfig({
               link: '/guide/static-deploy'
             },
             {
-              text: 'متغیرهای محیطی (Env Variables) و حالت‌ها ',
+              text: 'متغیرهای محیطی (Env) و حالت‌ها ',
               link: '/guide/env-and-mode'
             },
             {
-              text: 'Server-Side Rendering (SSR)',
+              text: 'رندر سمت سرور (SSR)',
               link: '/guide/ssr'
             },
             {
-              text: 'Backend Integration',
+              text: 'یکپارچه‌سازی با بک‌اند',
               link: '/guide/backend-integration'
             },
             {
@@ -311,7 +314,7 @@ export default defineConfig({
               link: '/guide/performance'
             },
             {
-              text: 'Rolldown',
+              text: 'یکپارچه‌سازی با Rolldown',
               link: '/guide/rolldown',
             },
             {
@@ -340,7 +343,7 @@ export default defineConfig({
               link: '/guide/api-javascript'
             },
             {
-              text: 'Config Reference',
+              text: 'بخش کانفیگ',
               link: '/config/'
             }
           ]
@@ -349,23 +352,23 @@ export default defineConfig({
           text: 'Environment API',
           items: [
             {
-              text: 'Introduction',
+              text: 'مقدمه',
               link: '/guide/api-environment'
             },
             {
-              text: 'Environment Instances',
+              text: 'نمونه‌های Environment',
               link: '/guide/api-environment-instances'
             },
             {
-              text: 'Plugins',
+              text: 'پلاگین‌ها',
               link: '/guide/api-environment-plugins'
             },
             {
-              text: 'Frameworks',
+              text: 'فریمورک‌ها',
               link: '/guide/api-environment-frameworks'
             },
             {
-              text: 'Runtimes',
+              text: 'رانتایم‌ها',
               link: '/guide/api-environment-runtimes'
             }
           ]
@@ -373,34 +376,34 @@ export default defineConfig({
       ],
       '/config/': [
         {
-          text: 'Config',
+          text: 'کانفیگ',
           items: [
             {
-              text: 'Configuring Vite',
+              text: 'پیکربندی Vite',
               link: '/config/'
             },
             {
-              text: 'Shared Options',
+              text: 'گزینه‌های مشترک',
               link: '/config/shared-options'
             },
             {
-              text: 'Server Options',
+              text: 'گزینه‌های سرور',
               link: '/config/server-options'
             },
             {
-              text: 'Build Options',
+              text: 'گزینه‌های بیلد',
               link: '/config/build-options'
             },
             {
-              text: 'Preview Options',
+              text: 'گزینه‌های پیش‌نمایش',
               link: '/config/preview-options'
             },
             {
-              text: 'Dep Optimization Options',
+              text: 'گزینه‌های بهینه‌سازی وابستگی‌ها',
               link: '/config/dep-optimization-options'
             },
             {
-              text: 'SSR Options',
+              text: 'گزینه‌های SSR',
               link: '/config/ssr-options'
             },
             {
@@ -431,15 +434,15 @@ export default defineConfig({
               link: '/changes/hotupdate-hook'
             },
             {
-              text: 'Move to per-environment APIs',
+              text: 'انتقال به APIهای مخصوص هر محیط',
               link: '/changes/per-environment-apis'
             },
             {
-              text: 'SSR using ModuleRunner API',
+              text: 'SSR با استفاده از ModuleRunner API',
               link: '/changes/ssr-using-modulerunner'
             },
             {
-              text: 'Shared plugins during build',
+              text: 'پلاگین‌های مشترک در زمان Build',
               link: '/changes/shared-plugins-during-build'
             }
           ]
@@ -479,7 +482,26 @@ export default defineConfig({
           firebase: 'vscode-icons:file-type-firebase',
           '.gitlab-ci.yml': 'vscode-icons:file-type-gitlab'
         }
-      })
+      }),
+      llmstxt({
+        ignoreFiles: ['blog/*', 'blog.md', 'index.md', 'team.md'],
+        description: 'The Build Tool for the Web',
+        details: `\
+- 💡 Instant Server Start
+- ⚡️ Lightning Fast HMR
+- 🛠️ Rich Features
+- 📦 Optimized Build
+- 🔩 Universal Plugin Interface
+- 🔑 Fully Typed APIs
+
+Vite is a new breed of frontend build tooling that significantly improves the frontend development experience. It consists of two major parts:
+
+- A dev server that serves your source files over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), with [rich built-in features](https://vite.dev/guide/features.md) and astonishingly fast [Hot Module Replacement (HMR)](https://vite.dev/guide/features.md#hot-module-replacement).
+
+- A [build command](https://vite.dev/guide/build.md) that bundles your code with [Rollup](https://rollupjs.org), pre-configured to output highly optimized static assets for production.
+
+In addition, Vite is highly extensible via its [Plugin API](https://vite.dev/guide/api-plugin.md) and [JavaScript API](https://vite.dev/guide/api-javascript.md) with full typing support.`,
+      }) as PluginOption,
     ],
     optimizeDeps: {
       include: [

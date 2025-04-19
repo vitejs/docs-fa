@@ -108,9 +108,15 @@ VITE_BAR=bar
 ```typescript [vite-env.d.ts]
 /// <reference types="vite/client" />
 
+interface ViteTypeOptions {
+  // کنید (strict) رو سخت‌گیرانه ImportMetaEnv با اضافه کردن این خط، می‌تونید تایپ
+  // تا از استفاده کلیدهای ناشناس جلوگیری بشه
+  // strictImportMetaEnv: unknown
+}
+
 interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string
-  // more env variables...
+  // env بقیه متغیرهای
 }
 
 interface ImportMeta {

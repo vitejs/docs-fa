@@ -1,41 +1,37 @@
-# Preview Options
+# گزینه‌های پیش‌نمایش
 
-Unless noted, the options in this section are only applied to preview.
+مگر اینکه ذکر شده باشه، گزینه‌های این بخش فقط برای پیش‌نمایش اعمال می‌شن.
 
 ## preview.host
 
-- **Type:** `string | boolean`
-- **Default:** [`server.host`](./server-options#server-host)
+- **تایپ:** `string | boolean`
+- **پیش‌فرض:** [`server.host`](./server-options#server-host)
 
-Specify which IP addresses the server should listen on.
-Set this to `0.0.0.0` or `true` to listen on all addresses, including LAN and public addresses.
+مشخص می‌کنه سرور باید روی کدوم آدرس‌های IP گوش کنه. با تنظیم این روی `0.0.0.0` یا `true`، سرور روی همه آدرس‌ها، از جمله شبکه محلی (LAN) و آدرس‌های عمومی، گوش می‌ده.
 
-This can be set via the CLI using `--host 0.0.0.0` or `--host`.
+این می‌تونه از طریق CLI با `host 0.0.0.0--` یا `host--` تنظیم بشه.
 
-::: tip NOTE
-
-There are cases when other servers might respond instead of Vite.
-See [`server.host`](./server-options#server-host) for more details.
-
+::: tip نکته
+بعضی وقت‌ها ممکنه سرورهای دیگه به جای Vite پاسخ بدن. برای جزئیات بیشتر به [`server.host`](./server-options#server-host) نگاه کنید.
 :::
 
 ## preview.allowedHosts
 
-- **Type:** `string | true`
-- **Default:** [`server.allowedHosts`](./server-options#server-allowedhosts)
+- **تایپ:** `string | true`
+- **پیش‌فرض:** [`server.allowedHosts`](./server-options#server-allowedhosts)
 
-The hostnames that Vite is allowed to respond to.
+نام‌های میزبانی که Vite اجازه داره بهشون پاسخ بده.
 
-See [`server.allowedHosts`](./server-options#server-allowedhosts) for more details.
+برای جزئیات بیشتر به [`server.allowedHosts`](./server-options#server-allowedhosts) مراجعه کنید.
 
 ## preview.port
 
-- **Type:** `number`
-- **Default:** `4173`
+- **تایپ:** `number`
+- **پیش‌فرض:** `4173`
 
-Specify server port. Note if the port is already being used, Vite will automatically try the next available port so this may not be the actual port the server ends up listening on.
+پورت سرور رو مشخص می‌کنه. اگه پورت از قبل در حال استفاده باشه، Vite به‌طور خودکار پورت بعدی در دسترس رو امتحان می‌کنه، پس ممکنه این پورت واقعی‌ای که سرور روش گوش می‌ده نباشه.
 
-**Example:**
+**مثال:**
 
 ```js
 export default defineConfig({
@@ -50,49 +46,49 @@ export default defineConfig({
 
 ## preview.strictPort
 
-- **Type:** `boolean`
-- **Default:** [`server.strictPort`](./server-options#server-strictport)
+- **تایپ:** `boolean`
+- **پیش‌فرض:** [`server.strictPort`](./server-options#server-strictport)
 
-Set to `true` to exit if port is already in use, instead of automatically trying the next available port.
+اگه روی `true` تنظیم بشه، در صورتی که پورت در حال استفاده باشه، برنامه خارج می‌شه و به جای امتحان خودکار پورت بعدی، خطا می‌ده.
 
 ## preview.https
 
-- **Type:** `https.ServerOptions`
-- **Default:** [`server.https`](./server-options#server-https)
+- **تایپ:** `https.ServerOptions`
+- **پیش‌فرض:** [`server.https`](./server-options#server-https)
 
-Enable TLS + HTTP/2.
+TLS و HTTP/2 رو فعال می‌کنه.
 
-See [`server.https`](./server-options#server-https) for more details.
+برای جزئیات بیشتر به [`server.https`](./server-options#server-https) نگاه کنید.
 
 ## preview.open
 
-- **Type:** `boolean | string`
-- **Default:** [`server.open`](./server-options#server-open)
+- **تایپ:** `boolean | string`
+- **پیش‌فرض:** [`server.open`](./server-options#server-open)
 
-Automatically open the app in the browser on server start. When the value is a string, it will be used as the URL's pathname. If you want to open the server in a specific browser you like, you can set the env `process.env.BROWSER` (e.g. `firefox`). You can also set `process.env.BROWSER_ARGS` to pass additional arguments (e.g. `--incognito`).
+با شروع سرور، برنامه رو به‌طور خودکار توی مرورگر باز می‌کنه. اگه مقدار یه رشته باشه، به عنوان مسیر URL استفاده می‌شه. اگه می‌خواید سرور توی مرورگر خاصی که دوست دارید باز بشه، می‌تونید متغیر محیطی `process.env.BROWSER` رو تنظیم کنید (مثلاً `firefox`). همچنین می‌تونید با `process.env.BROWSER_ARGS` آرگومان‌های اضافی بفرستید (مثلاً `incognito--`).
 
-`BROWSER` and `BROWSER_ARGS` are also special environment variables you can set in the `.env` file to configure it. See [the `open` package](https://github.com/sindresorhus/open#app) for more details.
+`BROWSER` و `BROWSER_ARGS` متغیرهای محیطی خاصی هستن که می‌تونید توی فایل `env.` تنظیم‌شون کنید. برای جزئیات بیشتر به [پکیج `open`](https://github.com/sindresorhus/open#app) مراجعه کنید.
 
 ## preview.proxy
 
-- **Type:** `Record<string, string | ProxyOptions>`
-- **Default:** [`server.proxy`](./server-options#server-proxy)
+- **تایپ:** `<Record<string, string | ProxyOptions`
+- **پیش‌فرض:** [`server.proxy`](./server-options#server-proxy)
 
-Configure custom proxy rules for the preview server. Expects an object of `{ key: options }` pairs. If the key starts with `^`, it will be interpreted as a `RegExp`. The `configure` option can be used to access the proxy instance.
+قوانین پراکسی سفارشی رو برای سرور پیش‌نمایش پیکربندی می‌کنه. یه آبجکت از جفت‌های `‎{ key: options }` انتظار داره. اگه کلید با `^` شروع بشه، به عنوان `RegExp` تفسیر می‌شه. گزینه `configure` می‌تونه برای دسترسی به نمونه پراکسی استفاده بشه.
 
-Uses [`http-proxy`](https://github.com/http-party/node-http-proxy). Full options [here](https://github.com/http-party/node-http-proxy#options).
+از [`http-proxy`](https://github.com/http-party/node-http-proxy) استفاده می‌کنه. گزینه‌های کامل رو [اینجا](https://github.com/http-party/node-http-proxy#options) ببینید.
 
 ## preview.cors
 
-- **Type:** `boolean | CorsOptions`
-- **Default:** [`server.cors`](./server-options#server-cors)
+- **تایپ:** `boolean | CorsOptions`
+- **پیش‌فرض:** [`server.cors`](./server-options#server-cors)
 
-Configure CORS for the preview server.
+CORS رو برای سرور پیش‌نمایش پیکربندی می‌کنه.
 
-See [`server.cors`](./server-options#server-cors) for more details.
+برای جزئیات بیشتر به [`server.cors`](./server-options#server-cors) نگاه کنید.
 
 ## preview.headers
 
-- **Type:** `OutgoingHttpHeaders`
+- **تایپ:** `OutgoingHttpHeaders`
 
-Specify server response headers.
+هدرهای پاسخ سرور رو مشخص می‌کنه.

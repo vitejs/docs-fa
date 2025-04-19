@@ -1,36 +1,36 @@
 ---
-title: Configuring Vite
+title: پیکربندی Vite
 ---
 
-# Configuring Vite
+# پیکربندی Vite
 
-When running `vite` from the command line, Vite will automatically try to resolve a config file named `vite.config.js` inside [project root](/guide/#index-html-and-project-root) (other JS and TS extensions are also supported).
+هنگام اجرای `vite` از خط فرمان، Vite به‌طور خودکار تلاش می‌کند تا فایلی با نام `vite.config.js` را در [ریشه پروژه](/guide/#index-html-و-ریشه-root-پروژه) پیدا کند (پسوندهای دیگر JS و TS نیز پشتیبانی می‌شوند).
 
-The most basic config file looks like this:
+ساده‌ترین فایل پیکربندی به این شکل است:
 
 ```js [vite.config.js]
 export default {
-  // config options
+  // گزینه‌های پیکربندی
 }
 ```
 
-Note Vite supports using ES modules syntax in the config file even if the project is not using native Node ESM, e.g. `type: "module"` in `package.json`. In this case, the config file is auto pre-processed before load.
+Vite از سینتکس ماژول‌های ES در فایل پیکربندی پشتیبانی می‌کند، حتی اگر پروژه از ESM بومی Node استفاده نکند، مثلاً `"type: "module` در `package.json` نباشد. در این حالت، فایل پیکربندی پیش از بارگذاری به‌طور خودکار پیش‌پردازش می‌شود.
 
-You can also explicitly specify a config file to use with the `--config` CLI option (resolved relative to `cwd`):
+همچنین می‌توانید با استفاده از گزینه `config--` در CLI، فایل پیکربندی خاصی را مشخص کنید (فایل با توجه به مسیر کاری جاری (`cwd`) تفسیر و خوانده می‌شود):
 
 ```bash
 vite --config my-config.js
 ```
 
-::: tip CONFIG LOADING
-By default, Vite uses `esbuild` to bundle the config into a temporary file and load it. This may cause issues when importing TypeScript files in a monorepo. If you encounter any issues with this approach, you can specify `--configLoader runner` to use the [module runner](/guide/api-environment-runtimes.html#modulerunner) instead, which will not create a temporary config and will transform any files on the fly. Note that module runner doesn't support CJS in config files, but external CJS packages should work as usual.
+::: tip بارگذاری پیکربندی
+به‌طور پیش‌فرض، Vite از `esbuild` برای باندل کردن پیکربندی به یک فایل موقت و بارگذاری آن استفاده می‌کند. این ممکن است در مونوریپوها هنگام ایمپورت فایل‌های TypeScript مشکل ایجاد کند. اگر با این روش مشکلی داشتید، می‌توانید با `configLoader runner--` از [module runner](/guide/api-environment-runtimes.html#modulerunner) استفاده کنید که فایل موقتی ایجاد نمی‌کند و فایل‌ها را در لحظه تبدیل می‌کند. توجه کنید که module runner از CJS در فایل‌های پیکربندی پشتیبانی نمی‌کند، اما پکیج‌های خارجی CJS باید به‌طور عادی کار کنند.
 
-Alternatively, if you're using an environment that supports TypeScript (e.g. `node --experimental-strip-types`), or if you're only writing plain JavaScript, you can specify `--configLoader native` to use the environment's native runtime to load the config file. Note that updates to modules imported by the config file are not detected and hence would not auto-restart the Vite server.
+همچنین، اگر از محیطی استفاده می‌کنید که TypeScript را پشتیبانی می‌کند (مثلاً `node --experimental-strip-types`) یا فقط جاوااسکریپت ساده می‌نویسید، می‌توانید با `configLoader native--` از ران‌تایم بومی محیط برای بارگذاری فایل پیکربندی استفاده کنید. توجه داشته باشید که تغییرات در ماژول‌های ایمپورت‌شده توسط فایل پیکربندی تشخیص داده نمی‌شوند و سرور Vite به‌طور خودکار ری‌استارت نمی‌شود.
 :::
 
-## Config Intellisense
+## هوشمندی پیکربندی (Intellisense)
 
-Since Vite ships with TypeScript typings, you can leverage your IDE's intellisense with jsdoc type hints:
+از آنجا که Vite با تایپ‌های TypeScript ارائه می‌شود، می‌توانید از هوشمندی IDE خود با استفاده از نکات تایپ jsdoc بهره ببرید:
 
 ```js
 /** @type {import('vite').UserConfig} */
@@ -39,7 +39,7 @@ export default {
 }
 ```
 
-Alternatively, you can use the `defineConfig` helper which should provide intellisense without the need for jsdoc annotations:
+یا می‌توانید از تابع کمکی `defineConfig` استفاده کنید که بدون نیاز به توضیحات jsdoc، هوشمندی را فراهم می‌کند:
 
 ```js
 import { defineConfig } from 'vite'
@@ -49,7 +49,7 @@ export default defineConfig({
 })
 ```
 
-Vite also supports TypeScript config files. You can use `vite.config.ts` with the `defineConfig` helper function above, or with the `satisfies` operator:
+Vite همچنین از فایل‌های پیکربندی TypeScript پشتیبانی می‌کند. می‌توانید از `vite.config.ts` با تابع کمکی `defineConfig` یا عملگر `satisfies` استفاده کنید:
 
 ```ts
 import type { UserConfig } from 'vite'
@@ -59,9 +59,9 @@ export default {
 } satisfies UserConfig
 ```
 
-## Conditional Config
+## پیکربندی شرطی
 
-If the config needs to conditionally determine options based on the command (`serve` or `build`), the [mode](/guide/env-and-mode#modes) being used, if it's an SSR build (`isSsrBuild`), or is previewing the build (`isPreview`), it can export a function instead:
+اگر پیکربندی نیاز به تعیین شرطی گزینه‌ها بر اساس دستور (`serve` یا `build`)، [حالت](/guide/env-and-mode#modes) استفاده‌شده، ساخت SSR (`isSsrBuild`) یا پیش‌نمایش ساخت (`isPreview`) داشته باشد، می‌تواند به جای آبجکت، یک تابع صادر کند:
 
 ```js twoslash
 import { defineConfig } from 'vite'
@@ -69,24 +69,24 @@ import { defineConfig } from 'vite'
 export default defineConfig(({ command, mode, isSsrBuild, isPreview }) => {
   if (command === 'serve') {
     return {
-      // dev specific config
+      // پیکربندی خاص توسعه
     }
   } else {
     // command === 'build'
     return {
-      // build specific config
+      // پیکربندی خاص ساخت
     }
   }
 })
 ```
 
-It is important to note that in Vite's API the `command` value is `serve` during dev (in the cli [`vite`](/guide/cli#vite), `vite dev`, and `vite serve` are aliases), and `build` when building for production ([`vite build`](/guide/cli#vite-build)).
+در API Vite، مقدار `command` در طول توسعه `serve` است (همچنین در CLI نام‌های مستعار [`vite`](/guide/cli#vite) و `vite dev` و `vite serve` را داریم) و هنگام ساخت برای تولید، `build` است ([`vite build`](/guide/cli#vite-build)).
 
-`isSsrBuild` and `isPreview` are additional optional flags to differentiate the kind of `build` and `serve` commands respectively. Some tools that load the Vite config may not support these flags and will pass `undefined` instead. Hence, it's recommended to use explicit comparison against `true` and `false`.
+`isSsrBuild` و `isPreview` پرچم‌های اختیاری اضافی برای تمایز نوع دستورهای `build` و `serve` هستند. برخی ابزارهایی که پیکربندی Vite را بارگذاری می‌کنند ممکن است از این پرچم‌ها پشتیبانی نکنند و به جای آن `undefined` ارسال کنند. بنابراین توصیه می‌شود از مقایسه صریح با `true` و `false` استفاده کنید.
 
-## Async Config
+## پیکربندی ناهمگام
 
-If the config needs to call async functions, it can export an async function instead. And this async function can also be passed through `defineConfig` for improved intellisense support:
+اگر پیکربندی نیاز به فراخوانی توابع ناهمگام داشته باشد، می‌تواند یک تابع ناهمگام صادر کند. این تابع ناهمگام همچنین می‌تواند از طریق `defineConfig` برای پشتیبانی بهتر از هوشمندی منتقل شود:
 
 ```js twoslash
 import { defineConfig } from 'vite'
@@ -94,27 +94,27 @@ import { defineConfig } from 'vite'
 export default defineConfig(async ({ command, mode }) => {
   const data = await asyncFunction()
   return {
-    // vite config
+    // vite پیکربندی
   }
 })
 ```
 
-## Using Environment Variables in Config
+## استفاده از متغیرهای محیطی در پیکربندی
 
-Environmental Variables can be obtained from `process.env` as usual.
+متغیرهای محیطی به‌طور معمول از `process.env` قابل دسترسی هستند.
 
-Note that Vite doesn't load `.env` files by default as the files to load can only be determined after evaluating the Vite config, for example, the `root` and `envDir` options affect the loading behaviour. However, you can use the exported `loadEnv` helper to load the specific `.env` file if needed.
+توجه داشته باشید که Vite به‌طور پیش‌فرض فایل‌های `‎.env` را بارگذاری نمی‌کند، زیرا فایل‌های قابل بارگذاری تنها پس از ارزیابی پیکربندی Vite مشخص می‌شوند، مثلاً گزینه‌های `root` و `envDir` بر رفتار بارگذاری تأثیر می‌گذارند. با این حال، می‌توانید از تابع کمکی صادرشده `loadEnv` برای بارگذاری فایل `env.` خاص در صورت نیاز استفاده کنید.
 
 ```js twoslash
 import { defineConfig, loadEnv } from 'vite'
 
 export default defineConfig(({ mode }) => {
-  // Load env file based on `mode` in the current working directory.
-  // Set the third parameter to '' to load all env regardless of the
-  // `VITE_` prefix.
+  // .در دایرکتوری کاری جاری بارگذاری کن `mode` را بر اساس env فایل
+  // ،`VITE_` ها بدون توجه به پیشوند env برای بارگذاری همه
+  // .پارامتر سوم را به '' تنظیم کن
   const env = loadEnv(mode, process.cwd(), '')
   return {
-    // vite config
+    // پیکربندی vite
     define: {
       __APP_ENV__: JSON.stringify(env.APP_ENV),
     },
@@ -122,9 +122,9 @@ export default defineConfig(({ mode }) => {
 })
 ```
 
-## Debugging the Config File on VS Code
+## دیباگ کردن فایل پیکربندی در VS Code
 
-With the default `--configLoader bundle` behavior, Vite writes the generated temporary configuration file to the `node_modules/.vite-temp` folder and a file not found error will occur when setting breakpoint debugging in the Vite config file. To fix the issue, add the following configuration to `.vscode/settings.json`:
+وقتی از رفتار پیش‌فرض `configLoader bundle--`استفاده می‌شه، Vite فایل پیکربندی موقتی تولیدشده را در پوشه `node_modules/.vite-temp` می‌نویسد و هنگام تنظیم نقاط توقف برای دیباگ در فایل پیکربندی Vite، خطای "فایل پیدا نشد" رخ می‌دهد. برای رفع این مشکل، پیکربندی زیر را به `vscode/settings.json.` اضافه کنید:
 
 ```json
 {
