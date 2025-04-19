@@ -32,11 +32,11 @@ server.printUrls()
 server.bindCLIShortcuts({ print: true })
 ```
 
-::: tip NOTE
+:::tip 
 هنگام استفاده از `createServer` و `ساختن` در یک فرآیند Node.js، هر دو عملکرد برای عملکرد صحیح به `process.env.NODE_ENV` متکی هستند، که به گزینه پیکربندی `حالت` نیز بستگی دارد. برای جلوگیری از رفتار متناقض، `process.env.NODE_ENV` یا `حالت` دو API را روی `توسعه (development)` تنظیم کنید. در غیر این صورت، می توانید یک فرآیند فرزند (child) برای اجرای API ها به طور جداگانه ایجاد کنید.
 :::
 
-::: tip نکته
+:::tip نکته
 زمانی که از [حالت میدلور (middleware mode)](/config/server-options.html#server-middlewaremode) به همراه [پیکربندی پراکسی برای WebSocket](/config/server-options.html#server-proxy) استفاده می‌کنید، باید **سرور HTTP والد** (parent http server) را در گزینه‌ی `middlewareMode` مشخص کنید تا پروکسی به‌درستی به سرور متصل شود.
 <details>
 <summary>مثال</summary>
@@ -324,7 +324,7 @@ function mergeConfig(
 
 دو پیکربندی Vite را به‌طور عمیق با هم ترکیب می‌کند. مقدار `isRoot` نمایانگر سطحی است که در پیکربندی Vite در حال ترکیب آن هستید. به‌عنوان مثال، اگر در حال ترکیب دو گزینه `build` هستید، مقدار آن را `false` قرار دهید.
 
-::: tip نکته
+:::tip نکته
 تابع `mergeConfig` تنها پیکربندی‌هایی که به‌صورت شیء (object) هستند را می‌پذیرد. اگر پیکربندی شما به‌صورت تابع callback است، باید آن را قبل از ارسال به `mergeConfig` فراخوانی کنید.
 
 شما می‌توانید از کمک‌تابع `defineConfig` برای ترکیب یک پیکربندی به‌صورت callback با یک پیکربندی دیگر استفاده کنید:
