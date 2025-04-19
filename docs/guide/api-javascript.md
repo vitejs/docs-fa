@@ -32,7 +32,7 @@ server.printUrls()
 server.bindCLIShortcuts({ print: true })
 ```
 
-::: tip نکته
+::: tip NOTE
 هنگام استفاده از `createServer` و `ساختن` در یک فرآیند Node.js، هر دو عملکرد برای عملکرد صحیح به `process.env.NODE_ENV` متکی هستند، که به گزینه پیکربندی `حالت` نیز بستگی دارد. برای جلوگیری از رفتار متناقض، `process.env.NODE_ENV` یا `حالت` دو API را روی `توسعه (development)` تنظیم کنید. در غیر این صورت، می توانید یک فرآیند فرزند (child) برای اجرای API ها به طور جداگانه ایجاد کنید.
 :::
 
