@@ -1,16 +1,16 @@
 # ‌رابط برنامه‌نویسی اپلیکیشن (API) جاوا اسکریپت
 
-رابط‌های برنامه‌نویسی اپلیکیشن جاوا اسکریپت در Vite به طور کامل نوشته شده اند. همچنین توصیه می شود از TypeScript استفاده کنید. (و یا بررسی نوع JS را در VS Code فعال و از هوش و اعتبارسنجی استفاده کنید).
+رابط‌های جاوااسکریپت در Vite به‌طور کامل تایپ شده‌اند (typed) و توصیه می‌شود برای بهره‌مندی از قابلیت‌هایی مانند IntelliSense و اعتبارسنجی (validation)، از TypeScript استفاده کنید یا بررسی تایپ (type checking) را در VS Code برای فایل‌های JS فعال نمایید.
 
 ## تابع `createServer`
 
-**نشان گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 async function createServer(inlineConfig?: InlineConfig): Promise<ViteDevServer>
 ```
 
-**مثال از استفاده:**
+**مثال استفاده:**
 
 ```ts twoslash
 import { fileURLToPath } from 'node:url'
@@ -32,12 +32,13 @@ server.printUrls()
 server.bindCLIShortcuts({ print: true })
 ```
 
-:::tip 
-هنگام استفاده از `createServer` و `ساختن` در یک فرآیند Node.js، هر دو عملکرد برای عملکرد صحیح به `process.env.NODE_ENV` متکی هستند، که به گزینه پیکربندی `حالت` نیز بستگی دارد. برای جلوگیری از رفتار متناقض، `process.env.NODE_ENV` یا `حالت` دو API را روی `توسعه (development)` تنظیم کنید. در غیر این صورت، می توانید یک فرآیند فرزند (child) برای اجرای API ها به طور جداگانه ایجاد کنید.
+:::tip نکته
+هنگامی که از `createServer` و `build` در یک پردازش (process) مشترک Node.js استفاده می‌کنید، هر دو تابع برای عملکرد صحیح به مقدار `process.env.NODE_ENV` وابسته هستند، که این مقدار نیز به گزینه‌ی پیکربندی `mode` بستگی دارد. برای جلوگیری از بروز رفتارهای متناقض، مقدار `process.env.NODE_ENV` یا `mode` در هر دو API را روی `development` تنظیم کنید. در غیر این صورت، می‌توانید با ایجاد یک پردازش فرزند (child process) این دو API را به‌صورت جداگانه اجرا کنید.
 :::
 
 :::tip نکته
 زمانی که از [حالت میدلور (middleware mode)](/config/server-options.html#server-middlewaremode) به همراه [پیکربندی پراکسی برای WebSocket](/config/server-options.html#server-proxy) استفاده می‌کنید، باید **سرور HTTP والد** (parent http server) را در گزینه‌ی `middlewareMode` مشخص کنید تا پروکسی به‌درستی به سرور متصل شود.
+
 <details>
 <summary>مثال</summary>
 
@@ -71,26 +72,20 @@ parentServer.use(vite.middlewares)
 </details>
 :::
 
-## `کانفیگ درون خطی (InlineConfig)`
+## کانفیگ درون خطی (`InlineConfig`)
 
 رابط `InlineConfig` نسخه‌ای توسعه‌یافته از `UserConfig` است که چند ویژگی اضافی دارد:
 
 - `کانفیگ‌فایل (configFile)`: مشخص می‌کند از کدام فایل پیکربندی استفاده شود. اگر تنظیم نشود، Vite به‌صورت خودکار به‌دنبال فایل پیکربندی در ریشه پروژه می‌گردد. برای غیرفعال کردن این رفتار، مقدار آن را `false` قرار دهید.
 
-- و `envFile`: برای غیرفعال کردن بارگذاری فایل‌های `.env`، مقدار این گزینه را `false` قرار دهید.
-
-- `configFile`: specify config file to use. If not set, Vite will try to automatically resolve one from project root. Set to `false` to disable auto resolving.
-
-## `پیکربندی درست شده (ResolvedConfig)`
+## پیکربندی درست شده (`ResolvedConfig`)
 
 رابط `ResolvedConfig` شامل تمام ویژگی‌های `UserConfig` است، با این تفاوت که بیشتر این ویژگی‌ها **به‌طور کامل resolve شده و مقداردهی شده‌اند** (undefined نیستند). همچنین شامل ابزارهایی (utilities) مانند موارد زیر نیز می‌شود:
 
+- `تابع config.assetsInclude`: تابعی برای بررسی اینکه آیا یک `id` به‌عنوان یک asset در نظر گرفته می‌شود یا نه.
+- `تابع config.logger`: آبجکت لاگر داخلی Vite (برای ثبت و نمایش پیام‌ها و گزارش‌ها در طول اجرا).
 
-
-- `تابع config.assetsInclude`: تابعی برای بررسی اینکه آیا یک `id` به‌عنوان یک asset (دارایی) در نظر گرفته می‌شود یا نه..
-- `تابع config.logger`: شی (object) لاگر داخلی Vite (برای ثبت و نمایش پیام‌ها و گزارش‌ها در طول اجرا).
-
-## `اینتر فیس ViteDevServer `
+## اینتر فیس `ViteDevServer`
 
 ```ts
 interface ViteDevServer {
@@ -197,13 +192,13 @@ interface ViteDevServer {
 }
 ```
 
-:::اطلاعات
-تابع `waitForRequestsIdle` به‌عنوان یک راه‌حل اضطراری طراحی شده است تا تجربه توسعه (DX) را برای ویژگی‌هایی که نمی‌توانند با طبیعت درخواستی سرور توسعه Vite پیاده‌سازی شوند، بهبود بخشد. این تابع می‌تواند در زمان راه‌اندازی توسط ابزارهایی مانند Tailwind استفاده شود تا تولید کلاس‌های CSS اپلیکیشن تا زمانی که کد اپلیکیشن دیده نشده است به تعویق بیفتد و از تغییرات ناگهانی استایل جلوگیری کند. زمانی که این تابع در یک هوک بارگذاری یا تبدیل استفاده می‌شود و از سرور پیش‌فرض HTTP1 استفاده می‌شود، یکی از شش کانال HTTP مسدود خواهد شد تا زمانی که سرور تمام واردات استاتیک را پردازش کند. بهینه‌ساز وابستگی‌های Vite هم‌اکنون از این تابع برای جلوگیری از بارگذاری مجدد کامل صفحه در صورت کمبود وابستگی‌ها استفاده می‌کند و بارگذاری وابستگی‌های پیش‌بسته را تا زمانی که تمام وابستگی‌های وارداتی از منابع واردات استاتیک جمع‌آوری شوند، به تأخیر می‌اندازد. ممکن است Vite در نسخه‌های اصلی آینده استراتژی متفاوتی اتخاذ کند و به‌طور پیش‌فرض مقدار `optimizeDeps.crawlUntilStaticImports: false` را تنظیم کند تا از تاثیر منفی عملکرد در برنامه‌های بزرگ در هنگام راه‌اندازی سرد (cold start) جلوگیری کند.
+:::info اطلاعات
+تابع `waitForRequestsIdle` به‌عنوان یک راه‌حل اضطراری طراحی شده است تا تجربه توسعه (DX) را برای ویژگی‌هایی که نمی‌توانند با طبیعت درخواستی سرور توسعه Vite پیاده‌سازی شوند، بهبود بخشد. این تابع می‌تواند در زمان راه‌اندازی توسط ابزارهایی مانند Tailwind استفاده شود تا تولید کلاس‌های CSS اپلیکیشن تا زمانی که کد اپلیکیشن دیده نشده است به تعویق بیفتد و از تغییرات ناگهانی استایل جلوگیری کند. زمانی که این تابع در یک هوک بارگذاری یا تبدیل استفاده می‌شود و از سرور پیش‌فرض HTTP1 استفاده می‌شود، یکی از شش کانال HTTP مسدود خواهد شد تا زمانی که سرور تمام ایمپورت‌های استاتیک را پردازش کند. بهینه‌ساز وابستگی‌های Vite هم‌اکنون از این تابع برای جلوگیری از بارگذاری مجدد کامل صفحه در صورت کمبود وابستگی‌ها استفاده می‌کند و بارگذاری وابستگی‌های پیش‌بسته را تا زمانی که تمام وابستگی‌های ایمپورتی از منابع ایمپورت استاتیک جمع‌آوری شوند، به تأخیر می‌اندازد. ممکن است Vite در نسخه‌های اصلی آینده استراتژی متفاوتی اتخاذ کند و به‌طور پیش‌فرض مقدار `optimizeDeps.crawlUntilStaticImports: false` را تنظیم کند تا از تاثیر منفی عملکرد در برنامه‌های بزرگ در هنگام راه‌اندازی سرد (cold start) جلوگیری کند.
 :::
 
-## `ساخت`
+## `build`
 
-**نشان‌ذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 async function build(
@@ -211,7 +206,7 @@ async function build(
 ): Promise<RollupOutput | RollupOutput[]>
 ```
 
-**مثال از استفاده:**
+**مثال استفاده:**
 
 ```ts twoslash [vite.config.js]
 import path from 'node:path'
@@ -231,15 +226,15 @@ await build({
 })
 ```
 
-## `پیش‌نمایش`
+## `preview`
 
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 async function preview(inlineConfig?: InlineConfig): Promise<PreviewServer>
 ```
 
-**مثال از استفاده:**
+**مثال استفاده:**
 
 ```ts twoslash
 import { preview } from 'vite'
@@ -256,7 +251,7 @@ previewServer.printUrls()
 previewServer.bindCLIShortcuts({ print: true })
 ```
 
-## `اینترفیس PreviewServer`
+## اینترفیس `PreviewServer`
 
 ```ts
 interface PreviewServer {
@@ -293,9 +288,9 @@ interface PreviewServer {
 }
 ```
 
-## `تابع resolveConfig`
+## تابع `resolveConfig`
 
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 async function resolveConfig(
@@ -307,11 +302,11 @@ async function resolveConfig(
 ): Promise<ResolvedConfig>
 ```
 
-The `command` value is `serve` in dev and preview, and `build` in build.
+مقدار `command` در حالت توسعه (dev) و پیش‌نمایش (preview)، برابر با `serve` است و در حالت ساخت (build)، برابر با `build` می‌باشد.
 
-## `تابع mergeConfig`
+## تابع `mergeConfig`
 
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 function mergeConfig(
@@ -323,11 +318,10 @@ function mergeConfig(
 
 دو پیکربندی Vite را به‌طور عمیق با هم ترکیب می‌کند. مقدار `isRoot` نمایانگر سطحی است که در پیکربندی Vite در حال ترکیب آن هستید. به‌عنوان مثال، اگر در حال ترکیب دو گزینه `build` هستید، مقدار آن را `false` قرار دهید.
 
-:::tip
+:::tip نکته
+تابع `mergeConfig` تنها پیکربندی‌هایی که به‌صورت آبجکت هستند را می‌پذیرد. اگر پیکربندی شما به‌صورت تابع callback است، باید آن را قبل از ارسال به `mergeConfig` فراخوانی کنید.
 
-تابع `mergeConfig` تنها پیکربندی‌هایی که به‌صورت شیء (object) هستند را می‌پذیرد. اگر پیکربندی شما به‌صورت تابع callback است، باید آن را قبل از ارسال به `mergeConfig` فراخوانی کنید.
-
-شما می‌توانید از کمک‌تابع `defineConfig` برای ترکیب یک پیکربندی به‌صورت callback با یک پیکربندی دیگر استفاده کنید:
+شما می‌توانید از تابع‌کمکی `defineConfig` برای ترکیب یک پیکربندی به‌صورت callback با یک پیکربندی دیگر استفاده کنید:
 
 ```ts twoslash
 import {
@@ -347,9 +341,9 @@ export default defineConfig((configEnv) =>
 
 :::
 
-## `تابع searchForWorkspaceRoot`
+## تابع `searchForWorkspaceRoot`
 
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 function searchForWorkspaceRoot(
@@ -360,16 +354,16 @@ function searchForWorkspaceRoot(
 
 **مرتبط:** [server.fs.allow](/config/server-options.md#server-fs-allow)
 
-جستجوی ریشه‌ی پتانسیل workspace، اگر شرایط زیر برقرار باشد انجام می‌شود، در غیر این صورت به `root` برمی‌گردد:
+ریشه‌ی workspace احتمالی را جست‌وجو کن اگر شرایط زیر برقرار باشند؛ در غیر این صورت، به مقدار `root` بازمی‌گردد:
 
 - وجود فیلد `workspaces` در فایل `package.json`
 - وجود یکی از فایل‌های زیر:
-  - `فایل lerna.json`
-  - `و یا فایل pnpm-workspace.yaml`
+  - فایل `lerna.json`
+  - و یا فایل `pnpm-workspace.yaml`
 
-## `تابع loadEnv`
+## تابع `loadEnv`
 
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 function loadEnv(
@@ -379,13 +373,13 @@ function loadEnv(
 ): Record<string, string>
 ```
 
-**مرتبط:** [`.env` Files](./env-and-mode.md#env-files)
+**مرتبط:** [`‎.env` Files](./env-and-mode.md#env-files)
 
-فایل‌های `.env` را درون دایرکتوری `envDir` بارگذاری کنید؛ به‌طور پیش‌فرض، فقط متغیرهای محیطی با پیشوند `VITE_` بارگذاری می‌شوند، مگر اینکه پیشوندها (`prefixes`) تغییر داده شوند.
+فایل‌های `‎.env` را درون دایرکتوری `envDir` بارگذاری کنید؛ به‌طور پیش‌فرض، فقط متغیرهای محیطی با پیشوند `VITE_‎` بارگذاری می‌شوند، مگر اینکه پیشوندها (`prefixes`) تغییر داده شوند.
 
-## `تابع normalizePath`
+## تابع `normalizePath`
 
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 function normalizePath(id: string): string
@@ -393,12 +387,11 @@ function normalizePath(id: string): string
 
 **مرتبط:** [Path Normalization](./api-plugin.md#path-normalization)
 
-مسیری را برای همکاری بین افزونه‌های Vite (plugins) عادی می کند. 
-
+مسیر (path) را نرمال‌سازی می‌کند تا بین افزونه‌های Vite قابل تعامل باشد.
 
 ## `transformWithEsbuild`
 
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 async function transformWithEsbuild(
@@ -408,12 +401,12 @@ async function transformWithEsbuild(
   inMap?: object,
 ): Promise<ESBuildTransformResult>
 ```
+
 تبدیل JavaScript یا TypeScript با استفاده از esbuild. این کار برای افزونه‌هایی مفید است که ترجیح می‌دهند با فرآیند تبدیل داخلی Vite هماهنگ باشند.
 
+## تابع `loadConfigFromFile`
 
-## `تابع loadConfigFromFile`
-
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 async function loadConfigFromFile(
@@ -428,13 +421,14 @@ async function loadConfigFromFile(
   dependencies: string[]
 } | null>
 ```
+
 بارگذاری دستی فایل تنظیمات Vite با استفاده از esbuild.
 
-## `تابع preprocessCSS`
+## تابع `preprocessCSS`
 
-- **تجربی:** [Give Feedback](https://github.com/vitejs/vite/discussions/13815)
+- **آزمایشی:** [Give Feedback](https://github.com/vitejs/vite/discussions/13815)
 
-**نشان‌گذاری تایپ:**
+**امضای تایپ:**
 
 ```ts
 async function preprocessCSS(
@@ -451,8 +445,8 @@ interface PreprocessCSSResult {
 }
 ```
 
-پیش‌پردازش فایل‌های `.css`، `.scss`، `.sass`، `.less`، `.styl` و `.stylus` به CSS ساده، به‌طوری‌که بتوان آن را در مرورگرها استفاده کرد یا توسط ابزارهای دیگر پردازش کرد. مشابه [پشتیبانی داخلی از پیش‌پردازش CSS](/guide/features#css-pre-processors)، پیش‌پردازش‌گر مربوطه باید به‌صورت جداگانه نصب شده باشد تا قابل استفاده باشد.
+پیش‌پردازش فایل‌های `‎.css` ، `‎.scss` ، `‎.sass` ، `‎.less` ، `‎.styl` و `‎.stylus` به CSS ساده، به‌طوری‌که بتوان آن را در مرورگرها استفاده کرد یا توسط ابزارهای دیگر پردازش کرد. مشابه [پشتیبانی داخلی از پیش‌پردازش CSS](/guide/features#css-pre-processors)، پیش‌پردازش‌گر مربوطه باید به‌صورت جداگانه نصب شده باشد تا قابل استفاده باشد.
 
-پیش‌پردازش‌گر مورد استفاده از روی پسوند `filename` تشخیص داده می‌شود. اگر نام فایل با `.module.{ext}` به پایان برسد، به‌عنوان یک [CSS module](https://github.com/css-modules/css-modules) در نظر گرفته می‌شود و نتیجه‌ی بازگشتی شامل یک شیء `modules` خواهد بود که نام کلاس‌های اصلی را به نام‌های تبدیل‌شده نگاشت می‌کند.
+پیش‌پردازش‌گر مورد استفاده از روی پسوند `filename` تشخیص داده می‌شود. اگر نام فایل با `‎.module.{ext}` به پایان برسد، به‌عنوان یک [CSS module](https://github.com/css-modules/css-modules) در نظر گرفته می‌شود و نتیجه‌ی بازگشتی شامل یک آبجکت `modules` خواهد بود که نام کلاس‌های اصلی را به نام‌های تبدیل‌شده نگاشت می‌کند.
 
-توجه داشته باشید که پیش‌پردازش، آدرس‌های موجود در `url()` یا `image-set()` را resolve نخواهد کرد.
+توجه داشته باشید که پیش‌پردازش، آدرس‌های موجود در `url()‎` یا `image-set()‎` را resolve نخواهد کرد.
