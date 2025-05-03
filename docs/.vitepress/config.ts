@@ -286,7 +286,7 @@ export default defineConfig({
               link: '/guide/assets',
             },
             {
-              text: 'Building for Production',
+              text: 'ساخت برای محیط پروداکشن',
               link: '/guide/build'
             },
             {
