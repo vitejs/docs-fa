@@ -377,6 +377,12 @@ export default defineConfig({
 
 لیست سیاه برای فایل‌های حساسی که سرور توسعه Vite نمی‌تونه ارائه‌شون کنه. این نسبت به [`server.fs.allow`](#server-fs-allow) اولویت بالاتری داره. الگوهای [picomatch](https://github.com/micromatch/picomatch#globbing-features) پشتیبانی می‌شن.
 
+::: tip نکته
+
+فهرست مسدودسازی برای [دایرکتوری عمومی (public)](/guide/assets.md#the-public-directory) اعمال نمی‌شود. تمام فایل‌های موجود در دایرکتوری عمومی بدون هیچ‌گونه فیلترسازی ارائه می‌شوند، چرا که در هنگام ساخت (build) به‌صورت مستقیم در دایرکتوری خروجی کپی می‌شوند.
+
+:::
+
 ## server.origin
 
 - **تایپ:** `string`

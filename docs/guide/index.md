@@ -65,6 +65,10 @@ $ pnpm create vite
 $ bun create vite
 ```
 
+```bash [Deno]
+$ deno init --npm vite
+```
+
 :::
 
 سپس مراحل را دنبال کنید!
@@ -88,6 +92,10 @@ $ pnpm create vite my-vue-app --template vue
 
 ```bash [Bun]
 $ bun create vite my-vue-app --template vue
+```
+
+```bash [Deno]
+$ deno init --npm vite my-vue-app --template vue
 ```
 
 :::
@@ -134,6 +142,10 @@ $ pnpm add -D vite
 $ bun add -D vite
 ```
 
+```bash [Deno]
+$ deno add -D npm:vite
+```
+
 :::
 
 و یک فایل `index.html` به شکل زیر ایجاد کنید:
@@ -160,6 +172,10 @@ $ pnpm vite
 
 ```bash [Bun]
 $ bunx vite
+```
+
+```bash [Deno]
+$ deno run -A npm:vite
 ```
 
 :::

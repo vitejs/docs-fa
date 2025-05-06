@@ -63,7 +63,7 @@ if (import.meta.env.SSR) {
 
 ## راه‌اندازی سرور توسعه (Dev Server)
 
-وقتی دارید یک برنامه SSR می‌سازید، احتمالاً می‌خواهید کنترل کامل روی سرور اصلی‌تان داشته باشید و Vite را از محیط پروداکشن (production) جدا کنید. به همین دلیل، توصیه می‌شود از Vite در حالت middleware استفاده کنید. در ادامه یک نمونه با [Express](https://expressjs.com/) (نسخه ۴) آورده شده است:
+وقتی دارید یک برنامه SSR می‌سازید، احتمالاً می‌خواهید کنترل کامل روی سرور اصلی‌تان داشته باشید و Vite را از محیط پروداکشن (production) جدا کنید. به همین دلیل، توصیه می‌شود از Vite در حالت middleware استفاده کنید. در ادامه یک نمونه با [Express](https://expressjs.com/) آورده شده است:
 
 ```js{15-18} twoslash [server.js]
 import fs from 'node:fs'
@@ -93,7 +93,7 @@ async function createServer() {
   // مورد زیر حتی پس از راه‌اندازی مجدد معتبر است
   app.use(vite.middlewares)
 
-  app.use('*', async (req, res) => {
+  app.use('*all', async (req, res) => {
     // را سرو می‌کنیم - در ادامه به این موضوع خواهیم پرداخت index.html فایل
   })
 
@@ -119,7 +119,7 @@ var app
 var vite
 
 // ---cut---
-app.use('*', async (req, res, next) => {
+app.use('*all', async (req, res, next) => {
   const url = req.originalUrl
 
   try {
