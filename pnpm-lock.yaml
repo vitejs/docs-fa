@@ -28,8 +28,8 @@ importers:
         specifier: 22.15.11
         version: 22.15.11
       '@types/react':
-        specifier: ^18.3.5
-        version: 18.3.20
+        specifier: ^19.0.0
+        version: 19.1.3
       feed:
         specifier: ^4.2.2
         version: 4.2.2
@@ -37,17 +37,17 @@ importers:
         specifier: ^3.12.5
         version: 3.13.0
       react:
-        specifier: ^18.3.1
-        version: 18.3.1
+        specifier: ^19.0.0
+        version: 19.1.0
       react-dom:
-        specifier: ^18.3.1
-        version: 18.3.1(react@18.3.1)
+        specifier: ^19.0.0
+        version: 19.1.0(react@19.1.0)
       vite:
         specifier: ^6.0.7
         version: 6.3.4(@types/node@22.15.11)
       vitepress:
         specifier: ^1.6.3
-        version: 1.6.3(@algolia/client-search@5.24.0)(@types/node@22.15.11)(@types/react@18.3.20)(postcss@8.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.3)(typescript@5.6.3)
+        version: 1.6.3(@algolia/client-search@5.24.0)(@types/node@22.15.11)(@types/react@19.1.3)(postcss@8.5.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(search-insights@2.17.3)(typescript@5.6.3)
       vitepress-plugin-group-icons:
         specifier: ^1.3.5
         version: 1.5.2
@@ -714,17 +714,14 @@ packages:
   '@types/node@22.15.11':
     resolution: {integrity: sha512-rlyK0vuU7VLEYQfXuC7QTFxDvkb6tKhDI7wR4r6ZzM0k8BJd44W0jxo6xmUjqSs4AlYmiYfLJU2f0pAG/FtCRw==}
 
-  '@types/prop-types@15.7.14':
-    resolution: {integrity: sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==}
-
   '@types/qs@6.9.18':
     resolution: {integrity: sha512-kK7dgTYDyGqS+e2Q4aK9X3D7q234CIZ1Bv0q/7Z5IwRDoADNU81xXJK/YVyLbLTZCoIwUoDoffFeF+p/eIklAA==}
 
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
 
-  '@types/react@18.3.20':
-    resolution: {integrity: sha512-IPaCZN7PShZK/3t6Q87pfTkRm6oLTd4vztyoj+cbHUF1g3FfVb2tFIL79uCRKEfv16AhqDMBywP2VW3KIZUvcg==}
+  '@types/react@19.1.3':
+    resolution: {integrity: sha512-dLWQ+Z0CkIvK1J8+wrDPwGxEYFA4RAyHoZPxHVGspYmFVnwGSNT24cGIhFJrtfRnWVuW8X7NO52gCXmhkVUWGQ==}
 
   '@types/send@0.17.4':
     resolution: {integrity: sha512-x2EM6TJOybec7c52BX0ZspPodMsQUd5L6PRwOunVyVUhXiBSKf3AezDL8Dgvgt5o0UfKNfuA0eMLr2wLT4AiBA==}
@@ -1095,9 +1092,6 @@ packages:
     resolution: {integrity: sha512-ZhMwEosbFJkA0YhFnNDgTM4ZxDRsS6HqTo7qsZM08fehyRYIYa0yHu5R6mgo1n/8MgaPBXiPimPD77baVFYg+A==}
     engines: {node: '>=12.13'}
 
-  js-tokens@4.0.0:
-    resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
-
   js-yaml@3.14.1:
     resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
     hasBin: true
@@ -1115,10 +1109,6 @@ packages:
 
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
-
-  loose-envify@1.4.0:
-    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
-    hasBin: true
 
   magic-string@0.30.13:
     resolution: {integrity: sha512-8rYBO+MsWkgjDSOvLomYnzhdwEG51olQ4zL5KXnNJWV5MNmrb4rTZdrtkhxjnD/QyZUqR/Z/XDsUs/4ej2nx0g==}
@@ -1320,13 +1310,13 @@ packages:
   quansync@0.2.10:
     resolution: {integrity: sha512-t41VRkMYbkHyCYmOvx/6URnN80H7k4X0lLdBMGsz+maAwrJQYB1djpV6vHrQIBE0WBSGqhtEHrK9U3DWWH8v7A==}
 
-  react-dom@18.3.1:
-    resolution: {integrity: sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==}
+  react-dom@19.1.0:
+    resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
     peerDependencies:
-      react: ^18.3.1
+      react: ^19.1.0
 
-  react@18.3.1:
-    resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
+  react@19.1.0:
+    resolution: {integrity: sha512-FS+XFBNvn3GTAWq26joslQgWNoFu08F4kl0J4CgdNKADkdSGXQyTCnKteIAJy96Br6YbpEU1LSzV5dYtjMkMDg==}
     engines: {node: '>=0.10.0'}
 
   regex-recursion@5.1.1:
@@ -1371,8 +1361,8 @@ packages:
   sax@1.4.1:
     resolution: {integrity: sha512-+aWOz7yVScEGoKNd4PA10LZ8sk0A/z5+nXQG5giUO5rprX9jgYsTdov9qCchZiPIZezbZH+jRut8nPodFAX4Jg==}
 
-  scheduler@0.23.2:
-    resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
+  scheduler@0.26.0:
+    resolution: {integrity: sha512-NlHwttCI/l5gCPR3D1nNXtWABUmBwvZpEQiD4IXSbIDq8BzLIK/7Ir5gTFSGZDUu37K5cMNp0hFtzO38sC7gWA==}
 
   search-insights@2.17.3:
     resolution: {integrity: sha512-RQPdCYTa8A68uM2jwxoY842xDhvx3E5LFL1LxvxCNMev4o5mLuokczhzjAgGwUZBAmOKZknArSxLKmXtIi2AxQ==}
@@ -1765,9 +1755,9 @@ snapshots:
 
   '@docsearch/css@3.8.2': {}
 
-  '@docsearch/js@3.8.2(@algolia/client-search@5.24.0)(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.3)':
+  '@docsearch/js@3.8.2(@algolia/client-search@5.24.0)(@types/react@19.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(search-insights@2.17.3)':
     dependencies:
-      '@docsearch/react': 3.8.2(@algolia/client-search@5.24.0)(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.3)
+      '@docsearch/react': 3.8.2(@algolia/client-search@5.24.0)(@types/react@19.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(search-insights@2.17.3)
       preact: 10.24.3
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -1776,16 +1766,16 @@ snapshots:
       - react-dom
       - search-insights
 
-  '@docsearch/react@3.8.2(@algolia/client-search@5.24.0)(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.3)':
+  '@docsearch/react@3.8.2(@algolia/client-search@5.24.0)(@types/react@19.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(search-insights@2.17.3)':
     dependencies:
       '@algolia/autocomplete-core': 1.17.7(@algolia/client-search@5.24.0)(algoliasearch@5.14.2)(search-insights@2.17.3)
       '@algolia/autocomplete-preset-algolia': 1.17.7(@algolia/client-search@5.24.0)(algoliasearch@5.14.2)
       '@docsearch/css': 3.8.2
       algoliasearch: 5.14.2
     optionalDependencies:
-      '@types/react': 18.3.20
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
+      '@types/react': 19.1.3
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
       search-insights: 2.17.3
     transitivePeerDependencies:
       - '@algolia/client-search'
@@ -2188,15 +2178,12 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/prop-types@15.7.14': {}
-
   '@types/qs@6.9.18': {}
 
   '@types/range-parser@1.2.7': {}
 
-  '@types/react@18.3.20':
+  '@types/react@19.1.3':
     dependencies:
-      '@types/prop-types': 15.7.14
       csstype: 3.1.3
 
   '@types/send@0.17.4':
@@ -2603,8 +2590,6 @@ snapshots:
 
   is-what@4.1.16: {}
 
-  js-tokens@4.0.0: {}
-
   js-yaml@3.14.1:
     dependencies:
       argparse: 1.0.10
@@ -2621,10 +2606,6 @@ snapshots:
       quansync: 0.2.10
 
   longest-streak@3.1.0: {}
-
-  loose-envify@1.4.0:
-    dependencies:
-      js-tokens: 4.0.0
 
   magic-string@0.30.13:
     dependencies:
@@ -2984,15 +2965,12 @@ snapshots:
 
   quansync@0.2.10: {}
 
-  react-dom@18.3.1(react@18.3.1):
+  react-dom@19.1.0(react@19.1.0):
     dependencies:
-      loose-envify: 1.4.0
-      react: 18.3.1
-      scheduler: 0.23.2
+      react: 19.1.0
+      scheduler: 0.26.0
 
-  react@18.3.1:
-    dependencies:
-      loose-envify: 1.4.0
+  react@19.1.0: {}
 
   regex-recursion@5.1.1:
     dependencies:
@@ -3078,9 +3056,7 @@ snapshots:
 
   sax@1.4.1: {}
 
-  scheduler@0.23.2:
-    dependencies:
-      loose-envify: 1.4.0
+  scheduler@0.26.0: {}
 
   search-insights@2.17.3: {}
 
@@ -3274,10 +3250,10 @@ snapshots:
       - '@75lb/nature'
       - supports-color
 
-  vitepress@1.6.3(@algolia/client-search@5.24.0)(@types/node@22.15.11)(@types/react@18.3.20)(postcss@8.5.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.3)(typescript@5.6.3):
+  vitepress@1.6.3(@algolia/client-search@5.24.0)(@types/node@22.15.11)(@types/react@19.1.3)(postcss@8.5.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(search-insights@2.17.3)(typescript@5.6.3):
     dependencies:
       '@docsearch/css': 3.8.2
-      '@docsearch/js': 3.8.2(@algolia/client-search@5.24.0)(@types/react@18.3.20)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(search-insights@2.17.3)
+      '@docsearch/js': 3.8.2(@algolia/client-search@5.24.0)(@types/react@19.1.3)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(search-insights@2.17.3)
       '@iconify-json/simple-icons': 1.2.22
       '@shikijs/core': 2.2.0
       '@shikijs/transformers': 2.2.0
