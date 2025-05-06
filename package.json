@@ -45,7 +45,7 @@
     "@types/node": "22.15.11",
     "@types/react": "^19.0.0",
     "@type-challenges/utils": "^0.1.1",
-    "feed": "^4.2.2",
+    "feed": "^5.0.0",
     "gsap": "^3.12.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
