@@ -32,7 +32,7 @@ importers:
         version: 19.1.4
       feed:
         specifier: ^5.0.0
-        version: 5.0.0
+        version: 5.0.1
       gsap:
         specifier: ^3.12.5
         version: 3.13.0
@@ -1023,8 +1023,8 @@ packages:
       picomatch:
         optional: true
 
-  feed@5.0.0:
-    resolution: {integrity: sha512-b+xl8kQ/bxInBKTe3GLCGDFU45kFiDSIEEdDUAUGGThN1Jqpx+7uFb95NEPjI1JAjXy2iEFPzxHsK2rIEyJibw==}
+  feed@5.0.1:
+    resolution: {integrity: sha512-kOveKLHucVZ6RI91bdWAts9O0L1N2mGzRGVCDQPRnHh4HmgqLdN66Cp/5dMeJZGn/qnBslWliwX37FEBq8DCIA==}
     engines: {node: '>=20', pnpm: '>=10'}
 
   floating-vue@5.2.2:
@@ -2530,7 +2530,7 @@ snapshots:
     optionalDependencies:
       picomatch: 4.0.2
 
-  feed@5.0.0:
+  feed@5.0.1:
     dependencies:
       xml-js: 1.6.11
 
