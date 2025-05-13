@@ -45,7 +45,7 @@
 }
 .vp-doc .header-anchor {
   left: auto !important;
-  right: -28px;
+  right: -20px;
 }
 .VPNavBar .content-body {
   direction: ltr !important;
@@ -90,9 +90,20 @@
   .VPNavBarMenu {
     flex-direction: row-reverse;
   }
+  .vp-doc .header-anchor {
+    right: -28px;
+  }
 }
 @media (min-width: 1280px) {
   .VPDoc .container {
     flex-direction: row-reverse;
   }
+}
+
+.VPLocalNav .container {
+  direction: ltr !important;
+}
+
+.VPLocalNavOutlineDropdown .items {
+  direction: rtl !important;
 }
