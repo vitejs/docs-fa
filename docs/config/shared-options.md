@@ -227,9 +227,8 @@ declare const __APP_VERSION__: string
 گزینه‌هایی را برای انتقال به پیش‌پردازنده‌های CSS مشخص می‌کند. پسوندهای فایل به عنوان کلید برای گزینه‌ها استفاده می‌شوند. گزینه‌های پشتیبانی‌شده برای هر پیش‌پردازنده را می‌توان در مستندات مربوطه آنها یافت:
 
 - `sass`/`scss`:
-  - انتخاب API sass برای استفاده با `api: "modern-compiler" | "modern" | "legacy"‎` (پیش‌فرض `"modern-compiler"` اگر `sass-embedded` نصب شده باشد، در غیر این صورت `"modern"`) است. برای بهترین عملکرد، توصیه می‌شود از `api: "modern-compiler"‎` با پکیج `sass-embedded` استفاده کنید. API `"legacy"‎` منسوخ شده و در Vite 7 حذف خواهد شد.
-  - [گزینه‌ها (مدرن)](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
-  - [گزینه‌ها (قدیمی)](https://sass-lang.com/documentation/js-api/interfaces/LegacyStringOptions).
+  - انتخاب API sass برای استفاده با `api: "modern-compiler" | "modern"‎` (پیش‌فرض `"modern-compiler"` اگر `sass-embedded` نصب شده باشد، در غیر این صورت `"modern"`) است. برای بهترین عملکرد، توصیه می‌شود از `api: "modern-compiler"‎` با پکیج `sass-embedded` استفاده کنید.
+  - [گزینه‌ها](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
 - `less`: [گزینه‌ها](https://lesscss.org/usage/#less-options).
 - `styl`/`stylus`: فقط [`define`](https://stylus-lang.com/docs/js.html#define-name-node) پشتیبانی می‌شود که می‌تواند به صورت یک آبجکت منتقل شود.
 
@@ -248,7 +247,7 @@ export default defineConfig({
         },
       },
       scss: {
-        api: 'modern-compiler', // یا "modern"، "legacy"
+        api: 'modern-compiler', // "modern" یا
         importers: [
           // ...
         ],

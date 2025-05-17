@@ -18,7 +18,7 @@
 
 ## راهنمای مهاجرت
 
-برای انجام یک مهاجرت سریع در پلاگین‌های موجود، آرگومان `options.ssr` را با `this.environment.name !== 'client'` در هوک‌های `resolveId`، `load` و `transform` جایگزین کنید:
+برای انجام یک مهاجرت سریع در پلاگین‌های موجود، آرگومان `options.ssr` را با `this.environment.config.consumer === 'server'` در هوک‌های `resolveId`، `load` و `transform` جایگزین کنید:
 
 ```ts
 import { Plugin } from 'vite'
@@ -28,7 +28,7 @@ export function myPlugin(): Plugin {
     name: 'my-plugin',
     resolveId(id, importer, options) {
       const isSSR = options.ssr // [!code --]
-      const isSSR = this.environment.name !== 'client' // [!code ++]
+      const isSSR = this.environment.config.consumer === 'server' // [!code ++]
 
       if (isSSR) {
         // منطق خاص SSR
