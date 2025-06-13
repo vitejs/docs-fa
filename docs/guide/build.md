@@ -4,14 +4,15 @@
 
 ## سازگاری با مرورگرها
 
-به طور پیش‌فرض، بسته تولیدشده برای پشتیبانی از جاوااسکریپت مدرن تنظیم شده است، از جمله [ماژول‌های ES بومی](https://caniuse.com/es6-module)، [ایمپورت پویای ESM بومی](https://caniuse.com/es6-module-dynamic-import)، [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta)، [ادغام تهی](https://caniuse.com/mdn-javascript_operators_nullish_coalescing) و [BigInt](https://caniuse.com/bigint). محدوده پشتیبانی پیش‌فرض مرورگرها به شرح زیر است:
+به‌صورت پیش‌فرض، بسته تولید (production bundle) فرض می‌کند که مرورگر مدرن و رایجی استفاده می‌شود که در [Baseline](https://web-platform-dx.github.io/web-features/) (قابل‌دسترس به‌طور گسترده) قرار دارد.
+محدوده پیش‌فرض پشتیبانی مرورگرها به شرح زیر است:
 
-<!-- برای اطلاعات بیشتر، ثابت `ESBUILD_MODULES_TARGET` را جستجو کنید -->
+<!-- Search for the `ESBUILD_BASELINE_WIDELY_AVAILABLE_TARGET` constant for more information -->
 
-- Chrome >=87
-- Firefox >=78
-- Safari >=14
-- Edge >=88
+- Chrome >=107
+- Edge >=107
+- Firefox >=104
+- Safari >=16
 
 می‌توانید هدف‌های سفارشی را از طریق [گزینه تنظیمات `build.target`](/config/build-options.md#build-target) مشخص کنید، که پایین‌ترین هدف `es2015` است. اگر هدف پایین‌تری تنظیم شود، Vite همچنان به حداقل محدوده پشتیبانی مرورگرها نیاز دارد، زیرا به [ایمپورت پویای ESM بومی](https://caniuse.com/es6-module-dynamic-import) و [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) وابسته است:
 

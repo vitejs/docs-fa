@@ -227,7 +227,7 @@ declare const __APP_VERSION__: string
 گزینه‌هایی را برای انتقال به پیش‌پردازنده‌های CSS مشخص می‌کند. پسوندهای فایل به عنوان کلید برای گزینه‌ها استفاده می‌شوند. گزینه‌های پشتیبانی‌شده برای هر پیش‌پردازنده را می‌توان در مستندات مربوطه آنها یافت:
 
 - `sass`/`scss`:
-  - انتخاب API sass برای استفاده با `api: "modern-compiler" | "modern"‎` (پیش‌فرض `"modern-compiler"` اگر `sass-embedded` نصب شده باشد، در غیر این صورت `"modern"`) است. برای بهترین عملکرد، توصیه می‌شود از `api: "modern-compiler"‎` با پکیج `sass-embedded` استفاده کنید.
+  - اگر پکیج `sass-embedded` نصب شده باشد، از آن استفاده می‌کند؛ در غیر این صورت از `sass` معمولی استفاده می‌شود. برای عملکرد بهتر، توصیه می‌شود پکیج `sass-embedded` را نصب کنید.
   - [گزینه‌ها](https://sass-lang.com/documentation/js-api/interfaces/stringoptions/)
 - `less`: [گزینه‌ها](https://lesscss.org/usage/#less-options).
 - `styl`/`stylus`: فقط [`define`](https://stylus-lang.com/docs/js.html#define-name-node) پشتیبانی می‌شود که می‌تواند به صورت یک آبجکت منتقل شود.
@@ -247,7 +247,6 @@ export default defineConfig({
         },
       },
       scss: {
-        api: 'modern-compiler', // "modern" یا
         importers: [
           // ...
         ],
@@ -279,11 +278,12 @@ export default defineConfig({
 
 ## css.preprocessorMaxWorkers
 
-- **آزمایشی:** [بازخورد دهید](https://github.com/vitejs/vite/discussions/15835)
 - **تایپ:** `number | true`
-- **پیش‌فرض:** `0` (هیچ کارگری ایجاد نمی‌کند و درmain thread اصلی اجرا می‌شود)
+- **پیش‌فرض:** `true`
 
-اگر این گزینه تنظیم شود، پیش‌پردازنده‌های CSS در صورت امکان در worker ها اجرا می‌شوند. `true` به معنای تعداد CPUها منهای 1 است.
+تعداد حداکثری رشته‌های پردازشی (threads) که پیش‌پردازنده‌های CSS می‌توانند استفاده کنند را مشخص می‌کند. اگر مقدار `true` باشد، به این معنی است که از حداکثر تعداد هسته‌های CPU منهای یک استفاده خواهد شد. اگر مقدار `0` تنظیم شود، Vite هیچ پردازشگری ایجاد نمی‌کند و پیش‌پردازنده‌ها را در نخ اصلی (main thread) اجرا خواهد کرد.
+
+بسته به تنظیمات پیش‌پردازنده، ممکن است Vite حتی اگر این گزینه روی `0` تنظیم نشده باشد، باز هم پیش‌پردازنده‌ها را در نخ اصلی اجرا کند.
 
 ## css.devSourcemap
 

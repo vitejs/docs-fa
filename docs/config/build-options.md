@@ -5,10 +5,10 @@
 ## build.target
 
 - **تایپ:** `[]string | string`
-- **پیش‌فرض:** `'modules'`
+- **پیش‌فرض:** `'baseline-widely-available'`
 - **مرتبط:** [سازگاری با مرورگر](/guide/build#browser-compatibility)
 
-هدف سازگاری مرورگر برای باندل نهایی. مقدار پیش‌فرض یه مقدار خاص Vite هست، `'modules'`، که مرورگرهایی رو هدف می‌گیره که از [ماژول‌های ES بومی](https://caniuse.com/es6-module)، [ایمپورت داینامیک ESM بومی](https://caniuse.com/es6-module-dynamic-import) و [`import.meta`](https://caniuse.com/mdn-javascript_operators_import_meta) پشتیبانی می‌کنن. Vite مقدار `'modules'` رو به `‎[‎'es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'‎]` تبدیل می‌کنه.
+هدف سازگاری مرورگر برای باندل نهایی. مقدار پیش‌فرض یک مقدار خاص در Vite به نام `'baseline-widely-available'` است که مرورگرهایی را هدف می‌گیرد که در [Baseline – Widely Available](https://web-platform-dx.github.io/web-features/) در تاریخ ۱ مه ۲۰۲۵ گنجانده شده‌اند. به طور مشخص، این مقدار شامل مرورگرهای ‎`['chrome107', 'edge107', 'firefox104', 'safari16']`‎ است.
 
 یه مقدار خاص دیگه `'esnext'` هست که فرض می‌کنه پشتیبانی از ایمپورت داینامیک بومی وجود داره و فقط حداقل ترنسپایل رو انجام می‌ده.
 
