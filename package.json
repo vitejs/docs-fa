@@ -49,7 +49,7 @@
     "gsap": "^3.12.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "vite": "^6.0.7",
+    "vite": "^7.0.0",
     "vitepress": "^1.6.3",
     "vitepress-plugin-group-icons": "^1.3.5",
     "vitepress-plugin-llms": "^1.1.0",
