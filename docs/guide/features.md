@@ -153,7 +153,7 @@ Vite مقدار `target` در `tsconfig.json` را نادیده می‌گیرد 
     export default content
   }
   ```
-- فایلی که مرجع به `vite/client` را شامل می‌شود:
+- فایلی که مرجع به `vite/client` را شامل می‌شود (در حالت نرمال `vite-env.d.ts`):
   ```ts
   /// <reference types="./vite-env-override.d.ts" />
   /// <reference types="vite/client" />
@@ -212,7 +212,7 @@ asset هایی که توسط عناصر HTML مانند `<script type="module" s
 - پشتیبانی از Vue از طریق [‎@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue)
 - پشتیبانی از Vue JSX از طریق [‎@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue-jsx)
 - پشتیبانی از React از طریق [‎@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react)
-- پشتیبانی از React با استفاده از SWC از طریق [‎@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc)
+- پشتیبانی از React با استفاده از SWC از طریق [‎@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react-swc)
 
 برای اطلاعات بیشتر، به [راهنمای پلاگین‌ها](https://vite.dev/plugins) مراجعه کنید.
 
@@ -579,6 +579,32 @@ const modules = import.meta.glob('./dir/*.js', {
   query: { foo: 'bar', bar: true },
 })
 ```
+
+#### مسیر پایه (Base Path)
+
+می‌توانید از آپشن `base` برای تعیین مسیر پایه‌ی ایمپورت‌ها استفاده کنید:
+
+```ts twoslash
+import 'vite/client'
+// ---cut---
+const modulesWithBase = import.meta.glob('./**/*.js', {
+  base: './base',
+})
+```
+
+```ts
+// تولید می‌شود Vite کدی که توسط
+const modulesWithBase = {
+  './dir/foo.js': () => import('./base/dir/foo.js'),
+  './dir/bar.js': () => import('./base/dir/bar.js'),
+}
+```
+
+آپشن `base` فقط می‌تواند یک مسیر پوشه باشد که یا نسبت به فایل فراخوان (importer) تعریف شده، یا به صورت مطلق نسبت به ریشه‌ی پروژه باشد. استفاده از aliasها و ماژول‌های مجازی (virtual modules) پشتیبانی نمی‌شود.
+
+فقط الگوهای مسیری (globs) که به صورت نسبی تعریف شده‌اند، نسبت به مسیر پایه‌ی تعیین‌شده تفسیر می‌شوند.
+
+در نهایت، کلیدهای ماژول تولیدشده طوری تغییر می‌کنند که نسبت به مسیر پایه باشند، اگر گزینه‌ی `base` مشخص شده باشد.
 
 ### نکات مهم درباره Glob Import
 

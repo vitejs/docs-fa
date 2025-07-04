@@ -37,7 +37,7 @@ Rolldown بر سه اصل کلیدی تمرکز دارد:
 ```json
 {
   "dependencies": {
-    "vite": "^6.0.0" // [!code --]
+    "vite": "^7.0.0" // [!code --]
     "vite": "npm:rolldown-vite@latest" // [!code ++]
   }
 }
@@ -89,15 +89,51 @@ Rolldown بر سه اصل کلیدی تمرکز دارد:
 
 با وجود اینکه Rolldown با هدف جایگزینی مستقیم برای Rollup توسعه یافته، هنوز برخی ویژگی‌ها در حال پیاده‌سازی هستند و تفاوت‌های رفتاری جزئی (و گاه عمده) نیز وجود دارد. برای مشاهده‌ی فهرست کامل و به‌روز این موارد، می‌توانید به [این Pull Request در GitHub](https://github.com/vitejs/rolldown-vite/pull/84#issue-2903144667) مراجعه کنید.
 
-### خطاهای اعتبارسنجی آپشن‌ها (Option Validation Errors) {#option-validation-errors}
+### هشدارهای اعتبارسنجی آپشن‌ها (Option Validation Warnings) {#option-validation-warnings}
 
-Rolldown در صورتی که آپشن‌ای ناشناخته یا نامعتبر به آن داده شود، خطا صادر می‌کند. از آنجا که برخی از آپشن‌های موجود در Rollup در حال حاضر در Rolldown پشتیبانی نمی‌شوند، ممکن است هنگام استفاده، بسته به تنظیمات شما یا متافریموکی که استفاده می‌کنید، با خطا مواجه شوید. در ادامه نمونه‌ای از پیام چنین خطایی آمده است:
+Rolldown در صورتی که آپشن‌ای ناشناخته یا نامعتبر به آن داده شود، هشدار نمایش می‌دهد. از آنجا که برخی از آپشن‌های موجود در Rollup در حال حاضر در Rolldown پشتیبانی نمی‌شوند، ممکن است هنگام استفاده، بسته به تنظیمات شما یا متافریموکی که استفاده می‌کنید، با هشدار مواجه شوید. در ادامه نمونه‌ای از پیام چنین هشدارd آمده است:
 
-> Error: Failed validate input options.
+> Warning validate output options.
 >
-> - For the "preserveEntrySignatures". Invalid key: Expected never but received "preserveEntrySignatures".
+> - For the "generatedCode". Invalid key: Expected never but received "generatedCode".
 
-اگر خودتان این آپشن را اضافه نکرده‌اید، این مشکل باید توسط فریمورک مورد استفاده شما اصلاح شود. در حال حاضر، برای جلوگیری از نمایش این خطا می‌توانید متغیر محیطی `ROLLDOWN_OPTIONS_VALIDATION=loose` را تنظیم کنید.
+اگر خودتان این آپشن را اضافه نکرده‌اید، این مشکل باید توسط فریمورک مورد استفاده شما اصلاح شود.
+
+### تفاوت‌های API
+
+#### از `manualChunks` به `advancedChunks`
+
+در Rolldown آپشن `manualChunks` که در Rollup وجود داشت، پشتیبانی نمی‌شود. در عوض Rolldown آپشن دقیق‌تر و قابل تنظیم‌تری به نام [`advancedChunks`](https://rolldown.rs/guide/in-depth/advanced-chunks#advanced-chunks) ارائه می‌دهد، که بیشتر شبیه به تنظیمات `splitChunk` در webpack است.
+
+```js
+// (Rollup) کانفیگ قدیمی
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (/\/react(?:-dom)?/.test(id)) {
+            return 'vendor'
+          }
+        }
+      }
+    }
+  }
+}
+
+// (Rolldown) کانفیگ جدید
+export default {
+  build: {
+    rollupOptions: {
+      output: {
+        advancedChunks: {
+          groups: [{ name: 'vendor', test: /\/react(?:-dom)?// }]
+        }
+      }
+    }
+  }
+}
+```
 
 ## عملکرد (Performance)
 
@@ -108,6 +144,12 @@ Rolldown در صورتی که آپشن‌ای ناشناخته یا نامعتب
 با تشکر از Rolldown و Oxc، پلاگین‌های داخلی مختلف Vite مانند پلاگین‌های alias یا resolve به زبان Rust تبدیل شده‌اند. در زمان نگارش این مطلب، استفاده از این پلاگین‌ها به طور پیش‌فرض فعال نیست، زیرا رفتار آنها ممکن است با نسخه‌های جاوااسکریپتی متفاوت باشد.
 
 برای تست این پلاگین‌ها، می‌توانید گزینه `experimental.enableNativePlugin` را در فایل کانفیگ Vite خود به مقدار `true` تنظیم کنید.
+
+### ‎`@vitejs/plugin-react-oxc`
+
+اگر از ‎`@vitejs/plugin-react` یا ‎`@vitejs/plugin-react-swc` استفاده می‌کنید، می‌توانید به پلاگین ‎`@vitejs/plugin-react-oxc` تغییر دهید. این پلاگین به جای Babel یا SWC ، از Oxc برای قابلیت fast-refresh در React استفاده می‌کند. این پلاگین به‌گونه‌ای طراحی شده که بدون نیاز به تغییرات زیاد، جایگزینی مستقیم (drop-in replacement) برای پلاگین‌های قبلی باشد و عملکرد ساخت (build) را بهبود دهد. همچنین با معماری داخلی `rolldown-vite` سازگارتر است.
+
+توجه داشته باشید که تنها در صورتی می‌توانید به ‎`@vitejs/plugin-react-oxc` مهاجرت کنید که از هیچ پلاگین Babel یا SWC استفاده نکنید (از جمله کامپایلر React) یا تنظیمات SWC را تغییر (mutate) نداده باشید.
 
 ### بسته‌بندی‌کننده‌ی `withFilter`
 
@@ -126,7 +168,7 @@ export default defineConfig({
       svgr({
         /*...*/
       }),
-      { load: { id: /\.svg?react$/ } },
+      { load: { id: /\.svg\?react$/ } },
     ),
   ],
 })
@@ -215,6 +257,12 @@ const plugin = {
 }
 ```
 
+::: tip نکته
+
+از نسخه‌ی ۷.۰.۰ به بعد، `this.meta` در تمام هوک‌ها در Vite در دسترس است. در نسخه‌های قبلی، `this.meta` در هوک‌های اختصاصی Vite مانند هوک `config` در دسترس نبود.
+
+:::
+
 <br>
 
 بررسی وجود `rolldownVersion`:
@@ -233,16 +281,15 @@ if (vite.rolldownVersion) {
 
 ### نادیده گرفتن اعتبارسنجی آپشن‌ها در Rolldown
 
-همان‌طور که [در بالا اشاره شد](#option-validation-errors)، Rolldown زمانی که آپشن‌های ناشناس یا نامعتبری به آن داده شود، خطا می‌دهد.
+همان‌طور که [در بالا اشاره شد](#option-validation-warnings)، Rolldown زمانی که آپشن‌های ناشناس یا نامعتبری به آن داده شود، هشدار می‌دهد.
 
 این مشکل را می‌توان با ارسال شرطی آپشن، بسته به اینکه آیا پروژه با `rolldown-vite` اجرا می‌شود یا نه، حل کرد (همان‌طور که [در بالا نشان داده شد](#detecting-rolldown-vite)).
 
-همچنین می‌توانید با تنظیم متغیر محیطی `ROLLDOWN_OPTIONS_VALIDATION=loose`، این خطا را موقتاً نادیده بگیرید.
-با این حال، توجه داشته باشید که در **نهایت باید از ارسال آپشن‌هایی که توسط Rolldown پشتیبانی نمی‌شوند، خودداری کنید**.
+### `transformWithEsbuild` نیاز به نصب جداگانه‌ی `esbuild` دارد
 
-### `transformWithEsbuild` نیاز دارد که `esbuild` به‌صورت جداگانه نصب شده باشد
+از آنجا که Vite دیگر خودش از `esbuild` استفاده نمی‌کند، اکنون `esbuild` به‌عنوان یک وابستگی هم‌سطح اختیاری (optional peer dependency) در نظر گرفته می‌شود. بنابراین اگر پلاگین شما از `transformWithEsbuild` استفاده می‌کند، یا باید خود پلاگین `esbuild` را در وابستگی‌هایش اضافه کند، یا کاربر باید آن را به صورت دستی نصب کند.
 
-تابعی مشابه با نام `transformWithOxc`، که به‌جای `esbuild` از Oxc استفاده می‌کند، از بسته‌ی `rolldown-vite` صادر (export) شده است.
+مهاجرت پیشنهادی این است که از تابع جدید `transformWithOxc` استفاده کنید که به جای `esbuild` از **Oxc** بهره می‌برد.
 
 ### لایه‌ی سازگاری برای آپشن‌های `esbuild`
 
@@ -264,6 +311,12 @@ const plugin = {
 Rolldown قابلیتی به نام [فیلتر هوک](https://rolldown.rs/guide/plugin-development#plugin-hook-filters) معرفی کرده است که هدف آن کاهش سربار ارتباطی بین محیط‌های اجرایی Rust و JavaScript است. با استفاده از این ویژگی، می‌توانید پلاگین خود را کارآمدتر کنید.
 این قابلیت همچنین از نسخه‌ی 4.38.0 به بعد در Rollup و از نسخه‌ی 6.3.0 به بعد در Vite پشتیبانی می‌شود. برای اینکه پلاگین شما با نسخه‌های قدیمی‌تر نیز سازگار باقی بماند، توصیه می‌شود فیلتر را علاوه بر تعریف اولیه، درون بدنه‌ی هوک‌ها نیز اجرا کنید.
 
+::: tip نکته
+
+پکیج [‎`@rolldown/pluginutils`](https://www.npmjs.com/package/@rolldown/pluginutils) برخی ابزارهای کمکی (utilities) برای فیلتر کردن هوک‌ها فراهم می‌کند، مانند توابع `exactRegex` و `prefixRegex`.
+
+:::
+
 ### تبدیل محتوا به JavaScript در هوک‌های `load` یا `transform`
 
 اگر در هوک‌های `load` یا `transform` محتوایی را از انواع دیگر به JavaScript تبدیل می‌کنید، ممکن است نیاز باشد ویژگی `moduleType: 'js'‎` را به مقدار بازگشتی اضافه کنید. این کار به Rolldown یا Vite کمک می‌کند تا نوع ماژول را به‌درستی تشخیص داده و پردازش لازم را انجام دهد. در غیر این صورت، ممکن است محتوا به‌عنوان نوعی غیر از JavaScript در نظر گرفته شود و باعث خطا یا رفتارهای پیش‌بینی‌نشده شود.
@@ -283,4 +336,4 @@ const plugin = {
 }
 ```
 
-این به این دلیل است که [Rolldown از ماژول‌هایی غیر از JavaScript نیز پشتیبانی می‌کند](https://rolldown.rs/guide/in-depth/module-types) و نوع ماژول را معمولاً بر اساس پسوند فایل تشخیص می‌دهد، مگر اینکه صراحتاً مشخص شده باشد. توجه داشته باشید که در حالت توسعه (development)، `rolldown-vite` از ویژگی ModuleTypes پشتیبانی نمی‌کند. بنابراین، اگر نوع فایل به‌طور دقیق تعیین نشود، ممکن است رفتار نادرستی رخ دهد.
+این به این دلیل است که [Rolldown از ماژول‌هایی غیر از JavaScript نیز پشتیبانی می‌کند](https://rolldown.rs/guide/in-depth/module-types) و نوع ماژول را معمولاً بر اساس پسوند فایل تشخیص می‌دهد، مگر اینکه صراحتاً مشخص شده باشد.

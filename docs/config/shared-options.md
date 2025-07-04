@@ -54,7 +54,7 @@ export default defineConfig({
 ```
 
 ::: tip نکته
-برای کاربران TypeScript، مطمئن شوید که اعلان‌های تایپ را در فایل `env.d.ts` یا `vite-env.d.ts` اضافه کرده‌اید تا بررسی تایپ و Intellisense داشته باشید.
+برای کاربران TypeScript، مطمئن شوید که اعلان‌های تایپ را در فایل `vite-env.d.ts` اضافه کرده‌اید تا بررسی تایپ و Intellisense داشته باشید.
 
 مثال:
 

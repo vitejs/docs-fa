@@ -1,7 +1,7 @@
 # استفاده از نمونه‌های `Environment`
 
-:::warning آزمایشی
-Environment API در حال حاضر آزمایشی است. ما این APIها را در طول نسخه Vite 6 ثابت نگه می‌داریم تا اکوسیستم بتواند آن را آزمایش کند و بر روی آن توسعه دهد. برنامه ما این است که این APIهای جدید را در Vite 7 با تغییرات احتمالی نهایی کنیم.
+:::warning Experimental
+رابط Environment API هنوز در مرحله‌ی آزمایشی (experimental) هست. با این حال، ما تلاش می‌کنیم بین نسخه‌های اصلی (major) پایداری این APIها را حفظ کنیم تا جامعه‌ی توسعه‌دهندگان بتوانند با آن‌ها کار کرده و تجربیات خود را بر اساس آن‌ها توسعه دهند. ما قصد داریم این APIهای جدید را در یکی از نسخه‌های اصلی آینده به حالت پایدار (stable) برسانیم. البته ممکن است در این فرآیند تغییرات شکننده (breaking changes) نیز اعمال شود، اما این کار زمانی انجام خواهد شد که پروژه‌ها و کتابخانه‌های وابسته فرصت کافی برای آزمایش و ارزیابی این قابلیت‌های جدید را داشته باشند.
 
 منابع:
 
@@ -19,8 +19,8 @@ Environment API در حال حاضر آزمایشی است. ما این APIها 
 // دریافت کنید configureServer سرور را ایجاد کنید یا آن را از هوک
 const server = await createServer(/* options */)
 
-const environment = server.environments.client
-environment.transformRequest(url)
+const clientEnvironment = server.environments.client
+clientEnvironment.transformRequest(url)
 console.log(server.environments.ssr.moduleGraph)
 ```
 
@@ -186,7 +186,7 @@ export class EnvironmentModuleGraph {
   invalidateModule(
     mod: EnvironmentModuleNode,
     seen: Set<EnvironmentModuleNode> = new Set(),
-    timestamp: number = Date.now(),
+    timestamp: number = monotonicDateNow(),
     isHmr: boolean = false,
   ): void
 

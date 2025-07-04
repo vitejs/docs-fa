@@ -41,6 +41,10 @@ const additionalTitle = ((): string => {
 const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
   const oldVersions: DefaultTheme.NavItemWithLink[] = [
     {
+      text: 'Vite 6 Docs',
+      link: 'https://v6.vite.dev',
+    },
+    {
       text: 'Vite 5 Docs',
       link: 'https://v5.vite.dev'
     },
@@ -63,7 +67,7 @@ const versionLinks = ((): DefaultTheme.NavItemWithLink[] => {
     case 'local':
       return [
         {
-          text: 'Vite 6 Docs (release)',
+          text: 'Vite 7 Docs (release)',
           link: 'https://vite.dev'
         },
         ...oldVersions
@@ -319,7 +323,7 @@ export default defineConfig({
               link: '/guide/rolldown',
             },
             {
-              text: 'مهاجرت از v5',
+              text: 'مهاجرت از v6',
               link: '/guide/migration'
             },
             {
@@ -416,22 +420,22 @@ export default defineConfig({
       ],
       '/changes/': [
         {
-          text: 'Breaking Changes',
+          text: 'تغییرات اساسی',
           link: '/changes/'
         },
         {
-          text: 'Current',
+          text: 'جاری',
           items: []
         },
         {
-          text: 'Future',
+          text: 'آینده',
           items: [
             {
-              text: 'this.environment in Hooks',
+              text: 'this.environment در هوک‌ها',
               link: '/changes/this-environment-in-hooks'
             },
             {
-              text: 'HMR hotUpdate Plugin Hook',
+              text: 'هوک پلاگین hotUpdate برای HMR',
               link: '/changes/hotupdate-hook'
             },
             {
@@ -449,7 +453,7 @@ export default defineConfig({
           ]
         },
         {
-          text: 'Past',
+          text: 'گذشته',
           items: []
         }
       ]
@@ -471,6 +475,8 @@ export default defineConfig({
     return pageData
   },
   markdown: {
+    // languages used for twoslash and jsdocs in twoslash
+    languages: ['ts', 'js', 'json'],
     codeTransformers: [transformerTwoslash()],
     config(md) {
       md.use(groupIconMdPlugin)

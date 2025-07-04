@@ -9,7 +9,7 @@
 دامنه تأثیر: `نویسندگان افزونه‌های Vite`
 
 ::: warning منسوخ شدن در آینده
-نمونه `Environment` برای اولین بار در نسخه `v6.0` معرفی شد. منسوخ شدن `server.moduleGraph` و سایر متدهایی که اکنون در محیط‌ها قرار دارند، برای نسخه `v7.0` برنامه‌ریزی شده است. هنوز توصیه نمی‌کنیم از متدهای سرور فاصله بگیرید. برای شناسایی استفاده خود، این موارد را در تنظیمات Vite خود تنظیم کنید:
+نمونه `Environment` برای اولین بار در نسخه `v6.0` معرفی شد. منسوخ شدن `server.moduleGraph` و سایر متدهایی که اکنون در محیط‌ها قرار دارند، برای یکی از نسخه‌های اصلی (major) آینده برنامه‌ریزی شده است. هنوز توصیه نمی‌کنیم از متدهای سرور فاصله بگیرید. برای شناسایی استفاده خود، این موارد را در تنظیمات Vite خود تنظیم کنید:
 
 ```ts
 future: {
@@ -28,6 +28,6 @@ future: {
 
 ## راهنمای مهاجرت
 
-- `server.moduleGraph` -> [`environment.moduleGraph`](/guide/api-environment#separate-module-graphs)
+- `server.moduleGraph` -> [`environment.moduleGraph`](/guide/api-environment-instances#separate-module-graphs)
 - `server.transformRequest(url, ssr)` -> `environment.transformRequest(url)`
 - `server.warmupRequest(url, ssr)` -> `environment.warmupRequest(url)`
